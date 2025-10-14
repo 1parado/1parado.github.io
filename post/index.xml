@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Posts on Example Site</title>
+        <title>Posts on Paradox’s Blog</title>
         <link>https://1parado.github.io/post/</link>
-        <description>Recent content in Posts on Example Site</description>
+        <description>Recent content in Posts on Paradox’s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
-        <copyright>Example Person</copyright>
+        <copyright>Paradox29</copyright>
         <lastBuildDate>Tue, 14 Oct 2025 16:23:16 +0800</lastBuildDate><atom:link href="https://1parado.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Test</title>
         <link>https://1parado.github.io/p/test/</link>
         <pubDate>Tue, 14 Oct 2025 16:23:16 +0800</pubDate>
         
         <guid>https://1parado.github.io/p/test/</guid>
-        <description>&lt;p&gt;你好哇&lt;/p&gt;
+        <description>&lt;p&gt;你好哇,May！ 很高兴遇见你。&lt;/p&gt;
 </description>
         </item>
         <item>
