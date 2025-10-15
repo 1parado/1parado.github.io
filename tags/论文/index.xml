@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>论文 on Paradox’s Blog</title>
+        <link>https://1parado.github.io/tags/%E8%AE%BA%E6%96%87/</link>
+        <description>Recent content in 论文 on Paradox’s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>Paradox29</copyright>
+        <lastBuildDate>Wed, 15 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://1parado.github.io/tags/%E8%AE%BA%E6%96%87/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>科研小白写论文</title>
+        <link>https://1parado.github.io/p/%E7%A7%91%E7%A0%94%E5%B0%8F%E7%99%BD%E5%86%99%E8%AE%BA%E6%96%87/</link>
+        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/%E7%A7%91%E7%A0%94%E5%B0%8F%E7%99%BD%E5%86%99%E8%AE%BA%E6%96%87/</guid>
+        <description>&lt;hr&gt;
+&lt;p&gt;找论文的一些网站&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;谷歌学术&lt;/li&gt;
+&lt;li&gt;Web of science&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;用于论文写作的一些工具&lt;/p&gt;
+&lt;p&gt;overleaf&lt;/p&gt;
+&lt;p&gt;好用的网站：表格转latex格式
+&lt;a class=&#34;link&#34; href=&#34;https://tablesgenerator.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://tablesgenerator.com/&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

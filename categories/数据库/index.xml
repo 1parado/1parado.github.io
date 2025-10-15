@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>数据库 on Paradox’s Blog</title>
+        <link>https://1parado.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+        <description>Recent content in 数据库 on Paradox’s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>Paradox29</copyright>
+        <lastBuildDate>Wed, 15 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://1parado.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Mysql 常见面试题</title>
+        <link>https://1parado.github.io/p/mysql-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
+        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/mysql-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
+        <description>&lt;p&gt;参考链接：https://javaguide.cn/database/mysql/mysql-questions-01.html&lt;/p&gt;
+&lt;h2 id=&#34;-目录&#34;&gt;📚 目录
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%bb%8b%e7%bb%8d&#34; &gt;介绍&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%ae%89%e8%a3%85&#34; &gt;安装&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%bd%bf%e7%94%a8%e6%96%b9%e6%b3%95&#34; &gt;使用方法&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81&#34; &gt;示例代码&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e6%88%aa%e5%9b%be&#34; &gt;截图&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e8%ae%b8%e5%8f%af%e8%af%81&#34; &gt;许可证&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;介绍&#34;&gt;介绍
+&lt;/h2&gt;&lt;p&gt;这是一个示例项目，用于演示 Markdown 的写法。&lt;br&gt;
+你可以在这里添加项目简介、功能说明或使用目的。&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

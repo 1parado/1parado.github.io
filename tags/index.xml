@@ -7,7 +7,47 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Tue, 14 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://1parado.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 15 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://1parado.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Mysql</title>
+        <link>https://1parado.github.io/tags/mysql/</link>
+        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/mysql/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Overleaf</title>
+        <link>https://1parado.github.io/tags/overleaf/</link>
+        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/overleaf/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Redis</title>
+        <link>https://1parado.github.io/tags/redis/</link>
+        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/redis/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>SpringBoot</title>
+        <link>https://1parado.github.io/tags/springboot/</link>
+        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/springboot/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>论文</title>
+        <link>https://1parado.github.io/tags/%E8%AE%BA%E6%96%87/</link>
+        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/%E8%AE%BA%E6%96%87/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Hugo</title>
         <link>https://1parado.github.io/tags/hugo/</link>
         <pubDate>Tue, 14 Oct 2025 00:00:00 +0000</pubDate>
@@ -21,62 +61,6 @@
         <pubDate>Tue, 14 Oct 2025 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/tags/%E6%B5%8B%E8%AF%95/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Css</title>
-        <link>https://1parado.github.io/tags/css/</link>
-        <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/tags/css/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Html</title>
-        <link>https://1parado.github.io/tags/html/</link>
-        <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/tags/html/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Markdown</title>
-        <link>https://1parado.github.io/tags/markdown/</link>
-        <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/tags/markdown/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Themes</title>
-        <link>https://1parado.github.io/tags/themes/</link>
-        <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/tags/themes/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Tag With Whitespaces</title>
-        <link>https://1parado.github.io/tags/tag-with-whitespaces/</link>
-        <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/tags/tag-with-whitespaces/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Text</title>
-        <link>https://1parado.github.io/tags/text/</link>
-        <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/tags/text/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Emoji</title>
-        <link>https://1parado.github.io/tags/emoji/</link>
-        <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/tags/emoji/</guid>
         <description></description>
         </item>
         
