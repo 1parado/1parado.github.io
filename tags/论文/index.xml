@@ -13,67 +13,75 @@
         <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/p/%E7%A7%91%E7%A0%94%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/</guid>
-        <description>&lt;hr&gt;
-&lt;p&gt;⚫##找论文的一些网站（有些网站要翻墙）&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Google scholar⭐⭐⭐⭐⭐：https://scholar.google.com/?hl=zh-cn
-可以配合谷歌插件Easy scholar直接显示期刊的等级和影响因子 &lt;a class=&#34;link&#34; href=&#34;https://www.easyscholar.cc/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://www.easyscholar.cc/&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Web of science⭐⭐⭐：https://www.webofscience.com/&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Sciencedirect⭐⭐⭐：https://www.sciencedirect.com/&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Ieeexplore⭐⭐⭐: &lt;a class=&#34;link&#34; href=&#34;https://ieeexplore.ieee.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://ieeexplore.ieee.org/&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Arxiv预印的期刊，文章比较新但可能有小错误⭐⭐：https://arxiv.org/&lt;/p&gt;
-&lt;/li&gt;
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/img2.png&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;h1 id=&#34;-找论文的一些网站有些网站要翻墙&#34;&gt;⚫ 找论文的一些网站（有些网站要翻墙）
+&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://scholar.google.com/?hl=zh-cn&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Google scholar⭐⭐⭐⭐⭐：&lt;/a&gt;
+可以配合谷歌插件&lt;a class=&#34;link&#34; href=&#34;https://www.easyscholar.cc/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Easy scholar&lt;/a&gt;直接显示期刊的等级和影响因子&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;6.CNKI 中文知网⭐⭐： &lt;a class=&#34;link&#34; href=&#34;https://kns.cnki.net/kns8s/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://kns.cnki.net/kns8s/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;⚫##文献管理工具：
-Zotero + 翻译插件 ：https://blog.csdn.net/xiaoningaijishu/article/details/151042814&lt;/p&gt;
+&lt;p&gt;2.&lt;a class=&#34;link&#34; href=&#34;https://www.webofscience.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Web of science⭐⭐⭐&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;3.&lt;a class=&#34;link&#34; href=&#34;https://www.sciencedirect.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Sciencedirect⭐⭐⭐&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;4.&lt;a class=&#34;link&#34; href=&#34;https://ieeexplore.ieee.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Ieeexplore⭐⭐⭐&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;5.&lt;a class=&#34;link&#34; href=&#34;https://arxiv.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Arxiv⭐⭐&lt;/a&gt;预印的期刊，文章比较新但可能有小错误&lt;/p&gt;
+&lt;p&gt;6.&lt;a class=&#34;link&#34; href=&#34;https://kns.cnki.net/kns8s/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CNKI 中文知网⭐⭐&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;-文献管理工具&#34;&gt;⚫ 文献管理工具：
+&lt;/h2&gt;&lt;p&gt;Zotero + 翻译插件: &lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/xiaoningaijishu/article/details/151042814&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/xiaoningaijishu/article/details/151042814&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Ima腾讯推出的个人知识库（英文不好的强烈推荐！）把论文上传到知识库中，然后全局翻译，翻译的很准确，而且可以根据知识库进行提问。&lt;/p&gt;
-&lt;p&gt;小绿鲸（我没用过，看师兄用过）：https://www.xljsci.com/&lt;/p&gt;
-&lt;p&gt;⚫##笔记软件：
-Notion，Obsidian，Ima，Typora, Cherry studio&amp;hellip;推荐Obisidian 轻量化（但其实没有做笔记的习惯的话不下载也可以）&lt;/p&gt;
-&lt;p&gt;⚫##用于论文写作的一些工具&lt;/p&gt;
-&lt;p&gt;overleaf是一款在线编写latex格式的论文写作软件，可以配合浏览器插件Grammarly检查语法错误 &lt;a class=&#34;link&#34; href=&#34;https://app.grammarly.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;p&gt;小绿鲸（我没用过，看师兄用过）: &lt;a class=&#34;link&#34; href=&#34;https://www.xljsci.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.xljsci.com/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;-笔记软件&#34;&gt;⚫ 笔记软件：
+&lt;/h2&gt;&lt;p&gt;Notion，Obsidian，Ima，Typora, Cherry studio&amp;hellip;推荐Obisidian 轻量化（但其实没有做笔记的习惯的话不下载也可以）&lt;/p&gt;
+&lt;h2 id=&#34;-用于论文写作的一些工具&#34;&gt;⚫ 用于论文写作的一些工具
+&lt;/h2&gt;&lt;p&gt;overleaf是一款在线编写latex格式的论文写作软件，可以配合浏览器插件Grammarly检查语法错误 &lt;a class=&#34;link&#34; href=&#34;https://app.grammarly.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://app.grammarly.com/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;overleaf模板：https://cn.overleaf.com/latex/templates 点 Journal Article 找对应的论文模板格式下载压缩包 导入到overleaf即可编写操作&lt;/p&gt;
-&lt;p&gt;习惯用Vs code的可以在vscode中下载overleaf的插件 直接在vscode中编写也可： &lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/29808221714&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://zhuanlan.zhihu.com/p/29808221714&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;⚫##好用的网站：&lt;/p&gt;
-&lt;p&gt;表转latex格式
+&lt;p&gt;overleaf模板: &lt;a class=&#34;link&#34; href=&#34;https://cn.overleaf.com/latex/templates&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://cn.overleaf.com/latex/templates&lt;/a&gt; 点 Journal Article 找对应的论文模板格式下载压缩包 导入到overleaf即可编写操作&lt;/p&gt;
+&lt;p&gt;习惯用Vs code的可以在vscode中下载overleaf的插件 直接在vscode中编写也可:https://zhuanlan.zhihu.com/p/29808221714&lt;/p&gt;
+&lt;h2 id=&#34;-好用的网站&#34;&gt;⚫ 好用的网站：
+&lt;/h2&gt;&lt;p&gt;表转latex格式
 &lt;a class=&#34;link&#34; href=&#34;https://tablesgenerator.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://tablesgenerator.com/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;latex公式在线编写：
 &lt;a class=&#34;link&#34; href=&#34;https://www.latexlive.com/home&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://www.latexlive.com/home&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Canva做汇报ppt：https://www.canva.cn/&lt;/p&gt;
-&lt;p&gt;Boardmix做思维导图：https://boardmix.cn/app/home&lt;/p&gt;
-&lt;p&gt;Processon：做流程图： &lt;a class=&#34;link&#34; href=&#34;https://www.processon.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;p&gt;Canva做汇报ppt: &lt;a class=&#34;link&#34; href=&#34;https://www.canva.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.canva.cn/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Boardmix做思维导图: &lt;a class=&#34;link&#34; href=&#34;https://boardmix.cn/app/home&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://boardmix.cn/app/home&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Processon做流程图: &lt;a class=&#34;link&#34; href=&#34;https://www.processon.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://www.processon.com/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Vison也可以画流程图，可以导出矢量图.svg格式，适合放在文章里面做流程图：&lt;/p&gt;
-&lt;p&gt;⚫##AI工具：
-我常用的ai就是下面这些，主推GPT和Grok，其他的可以在论文写作的时候，优化论文表达的时候用。【小技巧：可以自己写中文初稿，然后让gpt翻译成英文，再截图让gpt生成latex格式，直接复制到overleaf里即可，英文好的话直接用英文写也可以】&lt;/p&gt;
-&lt;p&gt;1.chatgpt：https://chatgpt.com/&lt;/p&gt;
-&lt;p&gt;2.grok：https://grok.com/&lt;/p&gt;
-&lt;p&gt;3.kimi：https://www.kimi.com/&lt;/p&gt;
-&lt;p&gt;4.deepseek：https://chat.deepseek.com/
-&lt;img src=&#34;https://1parado.github.io/image-1.png&#34;
+&lt;p&gt;Vison也可以画流程图，可以导出矢量图.svg格式，适合放在文章里面做流程图:https://blog.csdn.net/laowangpython/article/details/147465427&lt;/p&gt;
+&lt;h2 id=&#34;-ai工具&#34;&gt;⚫ AI工具：
+&lt;/h2&gt;&lt;p&gt;我常用的ai就是下面这些，主推GPT和Grok，其他的可以在论文写作的时候，优化论文表达的时候用。【小技巧：可以自己写中文初稿，然后让gpt翻译成英文，再截图让gpt生成latex格式，直接复制到overleaf里即可，英文好的话直接用英文写也可以】&lt;/p&gt;
+&lt;p&gt;1.chatgpt: &lt;a class=&#34;link&#34; href=&#34;https://chatgpt.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://chatgpt.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2.grok: &lt;a class=&#34;link&#34; href=&#34;https://grok.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://grok.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;3.kimi: &lt;a class=&#34;link&#34; href=&#34;https://www.kimi.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.kimi.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;4.deepseek: &lt;a class=&#34;link&#34; href=&#34;https://chat.deepseek.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://chat.deepseek.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/image-1.png&#34;
 	
 	
 	
 	loading=&#34;lazy&#34;
 	
-		alt=&#34;alt text&#34;
+		alt=&#34;AI工具&#34;
 	
 	
 &gt;&lt;/p&gt;
