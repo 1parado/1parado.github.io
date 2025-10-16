@@ -7,12 +7,20 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Wed, 15 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://1parado.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 16 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://1parado.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Java</title>
         <link>https://1parado.github.io/categories/java/</link>
-        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
+        <pubDate>Thu, 16 Oct 2025 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/categories/java/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>科研</title>
+        <link>https://1parado.github.io/categories/%E7%A7%91%E7%A0%94/</link>
+        <pubDate>Thu, 16 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/categories/%E7%A7%91%E7%A0%94/</guid>
         <description></description>
         </item>
         <item>
@@ -21,14 +29,6 @@
         <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>科研</title>
-        <link>https://1parado.github.io/categories/%E7%A7%91%E7%A0%94/</link>
-        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/categories/%E7%A7%91%E7%A0%94/</guid>
         <description></description>
         </item>
         <item>

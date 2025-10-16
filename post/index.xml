@@ -7,45 +7,43 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Wed, 15 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://1parado.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Mysql 常见面试题</title>
-        <link>https://1parado.github.io/p/mysql-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
-        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
+        <lastBuildDate>Thu, 16 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://1parado.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>RuoYi框架</title>
+        <link>https://1parado.github.io/p/ruoyi%E6%A1%86%E6%9E%B6/</link>
+        <pubDate>Thu, 16 Oct 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://1parado.github.io/p/mysql-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
-        <description>&lt;p&gt;参考链接：https://javaguide.cn/database/mysql/mysql-questions-01.html&lt;/p&gt;
-&lt;h2 id=&#34;-目录&#34;&gt;📚 目录
-&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%bb%8b%e7%bb%8d&#34; &gt;介绍&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%ae%89%e8%a3%85&#34; &gt;安装&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%bd%bf%e7%94%a8%e6%96%b9%e6%b3%95&#34; &gt;使用方法&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81&#34; &gt;示例代码&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e6%88%aa%e5%9b%be&#34; &gt;截图&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e8%ae%b8%e5%8f%af%e8%af%81&#34; &gt;许可证&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;介绍&#34;&gt;介绍
-&lt;/h2&gt;&lt;p&gt;这是一个示例项目，用于演示 Markdown 的写法。&lt;br&gt;
-你可以在这里添加项目简介、功能说明或使用目的。&lt;/p&gt;
-&lt;hr&gt;
-</description>
-        </item>
-        <item>
-        <title>仿教务系统</title>
-        <link>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</link>
-        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</guid>
-        <description>&lt;p&gt;2025.10.15
-这是创建的
-&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/1parado_repo.github.io/blob/main/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;思维导图&lt;/a&gt;&lt;/p&gt;
+        <guid>https://1parado.github.io/p/ruoyi%E6%A1%86%E6%9E%B6/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/img2.png&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;RuoYi-Vue-Pro: &lt;a class=&#34;link&#34; href=&#34;https://doc.iocoder.cn/quick-start/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://doc.iocoder.cn/quick-start/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;后端版本:我下载的mini版本的，只有一些简单的功能，其中的一些功能是受限的 &lt;a class=&#34;link&#34; href=&#34;https://github.com/YunaiV/ruoyi-vue-pro&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/YunaiV/ruoyi-vue-pro&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;前端版本：Vue3 + element-plus 版本
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/yudaocode/yudao-ui-admin-vue3/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/yudaocode/yudao-ui-admin-vue3/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/image.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;运行截图&#34;
+	
+	
+&gt;
+按照RuoYi配置文档一步一步来其实挺好搭建的，主要是要先配置环境。&lt;/p&gt;
 </description>
         </item>
         <item>
         <title>科研论文写作</title>
         <link>https://1parado.github.io/p/%E7%A7%91%E7%A0%94%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/</link>
-        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
+        <pubDate>Thu, 16 Oct 2025 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/p/%E7%A7%91%E7%A0%94%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/</guid>
         <description>&lt;style&gt;
@@ -124,6 +122,41 @@
 先确定研究方向，然后读最新的几篇综述（最好选英文文献，中文也可以），然后找一篇感觉能复现出来的文章进行复现（可以发邮件给作者看看能不能要到源码，最好多问几个，真的有人愿意给的/用AI帮忙），然后在该文章的基础上想一下有没有可以新增的点（看论文的未来展望/和其他论文模型进行融合），一篇好的论文需要天时地利人和，EI会议随便写，好多都是论文A的模块 + 论文B的模块整合到一起得到自己的创新模型。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;以我们组的研究方向为例：&lt;strong&gt;网络弹性量化（Cyber resilience quantification）&lt;/strong&gt;，在文献搜索网站上面搜关键词，然后读几篇综述，大致了解一下网络弹性评估包括车联网，信息关键基础设施网络，电网，无人机集群网络&amp;hellip;.本来是研究车联网的，然后组会汇报两次无人机相关文章，莫名其妙研究方向变成无人机了，也算找到了研究领域:&lt;strong&gt;无人机集群网络弹性评估&lt;/strong&gt;。然后读无人机集群网络弹性评估的文章，暑假开始，老师让复现文章，刚开始一直没复现出来，联系好多文章作者要源码，最后有一个学长给了我他的部分代码，然后复现他的这篇文章，在他的文章基础上加了一些模块解决了一些现有研究领域没有解决的问题。（文章还没发，不敢把论文放网上）满打满算两个多月写一篇EI是够用的。&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>Mysql 常见面试题</title>
+        <link>https://1parado.github.io/p/mysql-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
+        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/mysql-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
+        <description>&lt;p&gt;参考链接：https://javaguide.cn/database/mysql/mysql-questions-01.html&lt;/p&gt;
+&lt;h2 id=&#34;-目录&#34;&gt;📚 目录
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%bb%8b%e7%bb%8d&#34; &gt;介绍&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%ae%89%e8%a3%85&#34; &gt;安装&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%bd%bf%e7%94%a8%e6%96%b9%e6%b3%95&#34; &gt;使用方法&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81&#34; &gt;示例代码&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e6%88%aa%e5%9b%be&#34; &gt;截图&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e8%ae%b8%e5%8f%af%e8%af%81&#34; &gt;许可证&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;介绍&#34;&gt;介绍
+&lt;/h2&gt;&lt;p&gt;这是一个示例项目，用于演示 Markdown 的写法。&lt;br&gt;
+你可以在这里添加项目简介、功能说明或使用目的。&lt;/p&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
+        <title>仿教务系统</title>
+        <link>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</link>
+        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</guid>
+        <description>&lt;p&gt;2025.10.15
+这是创建的
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/1parado_repo.github.io/blob/main/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;思维导图&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
