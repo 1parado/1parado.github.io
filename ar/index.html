@@ -7,7 +7,7 @@
 
 <link rel='canonical' href='https://1parado.github.io/ar/'>
 
-<link rel="stylesheet" href="/scss/style.min.1addd7ce5a0524bca0a0aa7ae3d1f57bb2b0f5519f8ad1675ab423f052677f65.css"><meta property='og:title' content="موقع تجريبي">
+<link rel="stylesheet" href="/scss/style.min.ec0275f9efc7477560607f9610e0eeb6ebb5e53a8dcbdd5591f1ea2ee0b3c273.css"><meta property='og:title' content="موقع تجريبي">
 <meta property='og:description' content="وصف تجريبي">
 <meta property='og:url' content='https://1parado.github.io/ar/'>
 <meta property='og:site_name' content='موقع تجريبي'>
@@ -1488,6 +1488,16 @@
     
     
     
+    
+<div class="welcome">
+  <p style="font-size: 2rem; text-align: center; font-weight: bold">
+    <span class="shake">👋</span>
+    <span class="jump-text1" > Welcome</span>
+    <span class="jump-text2"> To </span>
+    <span class="jump-text3" style="color:#e99312">Paradox</span><span class="jump-text8" style="color:#e99312">'s</span>
+    <span class="jump-text9" style="color:#e99312">Blog</span>
+  </p>
+</div>
 
     <section class="article-list">
         
@@ -1500,11 +1510,40 @@
         
         2025 Paradox29
     </section>
-    
+    <section class="wordcount">本站总字数：0 字
+
+</section>
     <section class="powerby">
-        مبني باستخدام <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        قالب <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> مصمم من <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        
     </section>
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+    <span id="busuanzi_container_site_pv" style='display:none'> 本站总访问量 <span id="busuanzi_value_site_pv"></span> 次 </span>·
+    <span id="busuanzi_container_site_uv" style='display:none'> 总访客数 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+<script language="javascript"> 
+    var now = new Date();
+    function createtime(){
+        now.setTime(now.getTime()+250); 
+        var grt= new Date("2025/10/15 00:00:00"); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+        minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+
+        document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"
+    }
+    setInterval("createtime()",250); 
+</script> 
+
 </footer>
 
             </main>

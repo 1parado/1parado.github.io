@@ -15,7 +15,7 @@
         <guid>https://1parado.github.io/p/ruoyi%E6%A1%86%E6%9E%B6/</guid>
         <description>&lt;style&gt;
   body {
-    background: url(&#39;/img/img2.png&#39;) no-repeat center top;
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
     background-size: cover;
     background-attachment: fixed;
   }
@@ -46,7 +46,14 @@
         <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</guid>
-        <description>&lt;p&gt;2025.10.15
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;2025.10.15
 这是创建的
 &lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/1parado_repo.github.io/blob/main/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;思维导图&lt;/a&gt;&lt;/p&gt;

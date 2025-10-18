@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="记录一下创建个人博客的过程。欢迎阅读！\n用到的工具：Github Page + Hugo\n参考链接： https://bright9911.github.io/\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="\r记录一下创建个人博客的过程。欢迎阅读！\n用到的工具：Github Page + Hugo\n参考链接： https://bright9911.github.io/\n">
 <title>GitHub page &#43; hugo 搭建一个专属于自己的个人博客</title>
 
 <link rel='canonical' href='https://1parado.github.io/p/github-page--hugo-%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%B8%93%E5%B1%9E%E4%BA%8E%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/'>
 
-<link rel="stylesheet" href="/scss/style.min.1addd7ce5a0524bca0a0aa7ae3d1f57bb2b0f5519f8ad1675ab423f052677f65.css"><meta property='og:title' content="GitHub page + hugo 搭建一个专属于自己的个人博客">
-<meta property='og:description' content="记录一下创建个人博客的过程。欢迎阅读！\n用到的工具：Github Page + Hugo\n参考链接： https://bright9911.github.io/\n">
+<link rel="stylesheet" href="/scss/style.min.ec0275f9efc7477560607f9610e0eeb6ebb5e53a8dcbdd5591f1ea2ee0b3c273.css"><meta property='og:title' content="GitHub page + hugo 搭建一个专属于自己的个人博客">
+<meta property='og:description' content="\r记录一下创建个人博客的过程。欢迎阅读！\n用到的工具：Github Page + Hugo\n参考链接： https://bright9911.github.io/\n">
 <meta property='og:url' content='https://1parado.github.io/p/github-page--hugo-%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%B8%93%E5%B1%9E%E4%BA%8E%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/'>
 <meta property='og:site_name' content='Paradox’s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='测试' /><meta property='article:tag' content='Hugo' /><meta property='article:published_time' content='2025-10-14T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-14T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="GitHub page + hugo 搭建一个专属于自己的个人博客">
-<meta name="twitter:description" content="记录一下创建个人博客的过程。欢迎阅读！\n用到的工具：Github Page + Hugo\n参考链接： https://bright9911.github.io/\n">
+<meta name="twitter:description" content="\r记录一下创建个人博客的过程。欢迎阅读！\n用到的工具：Github Page + Hugo\n参考链接： https://bright9911.github.io/\n">
     </head>
     <body class="
     article-page
@@ -278,7 +278,7 @@
     
     <header class="article-category">
         
-            <a href="/categories/%E5%8D%9A%E5%AE%A2/" >
+            <a href="/categories/%E5%8D%9A%E5%AE%A2/" style="background-color: #2a9d8f; color: #fff;">
                 博客
             </a>
         
@@ -339,7 +339,14 @@
     <section class="article-content">
     
     
-    <p>记录一下创建个人博客的过程。欢迎阅读！</p>
+    <style>
+  body {
+    background: url('/img/background.jpg') no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+</style>
+<p>记录一下创建个人博客的过程。欢迎阅读！</p>
 <p>用到的工具：Github Page + Hugo</p>
 <p>参考链接：
 <a class="link" href="https://bright9911.github.io/"  target="_blank" rel="noopener"
@@ -436,11 +443,40 @@
         
         2025 Paradox29
     </section>
-    
+    <section class="wordcount">本站总字数：668 字
+
+</section>
     <section class="powerby">
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        
     </section>
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+    <span id="busuanzi_container_site_pv" style='display:none'> 本站总访问量 <span id="busuanzi_value_site_pv"></span> 次 </span>·
+    <span id="busuanzi_container_site_uv" style='display:none'> 总访客数 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+<script language="javascript"> 
+    var now = new Date();
+    function createtime(){
+        now.setTime(now.getTime()+250); 
+        var grt= new Date("2025/10/15 00:00:00"); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+        minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+
+        document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"
+    }
+    setInterval("createtime()",250); 
+</script> 
+
 </footer>
 
 

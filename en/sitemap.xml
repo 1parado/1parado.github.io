@@ -102,11 +102,37 @@
     <loc>https://1parado.github.io/tags/%E8%AE%BA%E6%96%87/</loc>
     <lastmod>2025-10-16T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://1parado.github.io/about/</loc>
+    <lastmod>2025-10-15T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://1parado.github.io/zh-cn/%E5%85%B3%E4%BA%8E/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://1parado.github.io/about/"
+                />
+  </url><url>
     <loc>https://1parado.github.io/tags/mysql/</loc>
     <lastmod>2025-10-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://1parado.github.io/p/mysql-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</loc>
     <lastmod>2025-10-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://1parado.github.io/page/</loc>
+    <lastmod>2025-10-15T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://1parado.github.io/zh-cn/page/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://1parado.github.io/page/"
+                />
   </url><url>
     <loc>https://1parado.github.io/tags/redis/</loc>
     <lastmod>2025-10-15T00:00:00+00:00</lastmod>
@@ -135,46 +161,8 @@
     <loc>https://1parado.github.io/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://1parado.github.io/page/</loc>
-    <lastmod>2020-10-09T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://1parado.github.io/zh-cn/page/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://1parado.github.io/page/"
-                />
-  </url><url>
-    <loc>https://1parado.github.io/about/</loc>
-    <lastmod>2020-10-09T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://1parado.github.io/zh-cn/%E5%85%B3%E4%BA%8E/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://1parado.github.io/about/"
-                />
-  </url><url>
     <loc>https://1parado.github.io/links/</loc>
   </url><url>
     <loc>https://1parado.github.io/search/</loc>
-  </url><url>
-    <loc>https://1parado.github.io/categories/test/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://1parado.github.io/zh-cn/categories/test/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://1parado.github.io/categories/test/"
-                />
   </url>
 </urlset>

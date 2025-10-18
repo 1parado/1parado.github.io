@@ -15,7 +15,7 @@
         <guid>https://1parado.github.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/</guid>
         <description>&lt;style&gt;
   body {
-    background: url(&#39;/img/img2.png&#39;) no-repeat center top;
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
     background-size: cover;
     background-attachment: fixed;
   }
@@ -205,7 +205,7 @@
         <guid>https://1parado.github.io/p/ruoyi%E6%A1%86%E6%9E%B6/</guid>
         <description>&lt;style&gt;
   body {
-    background: url(&#39;/img/img2.png&#39;) no-repeat center top;
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
     background-size: cover;
     background-attachment: fixed;
   }

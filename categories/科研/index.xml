@@ -15,7 +15,7 @@
         <guid>https://1parado.github.io/p/%E7%A7%91%E7%A0%94%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/</guid>
         <description>&lt;style&gt;
   body {
-    background: url(&#39;/img/img2.png&#39;) no-repeat center top;
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
     background-size: cover;
     background-attachment: fixed;
   }

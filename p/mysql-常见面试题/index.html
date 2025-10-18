@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://1parado.github.io/p/mysql-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/'>
 
-<link rel="stylesheet" href="/scss/style.min.1addd7ce5a0524bca0a0aa7ae3d1f57bb2b0f5519f8ad1675ab423f052677f65.css"><meta property='og:title' content="Mysql 常见面试题">
+<link rel="stylesheet" href="/scss/style.min.ec0275f9efc7477560607f9610e0eeb6ebb5e53a8dcbdd5591f1ea2ee0b3c273.css"><meta property='og:title' content="Mysql 常见面试题">
 <meta property='og:description' content="Javaguide常见面试题自学">
 <meta property='og:url' content='https://1parado.github.io/p/mysql-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/'>
 <meta property='og:site_name' content='Paradox’s Blog'>
@@ -290,8 +290,7 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#-目录">📚 目录</a></li>
-    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#-数据库基础">📚 数据库基础</a></li>
   </ol>
 </nav>
         </div>
@@ -310,7 +309,7 @@
     
     <header class="article-category">
         
-            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" >
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="background-color: #2a9d8f; color: #fff;">
                 数据库
             </a>
         
@@ -375,21 +374,140 @@
     <section class="article-content">
     
     
-    <p>参考链接：https://javaguide.cn/database/mysql/mysql-questions-01.html</p>
-<h2 id="-目录">📚 目录
-</h2><ol>
-<li><a class="link" href="#%e4%bb%8b%e7%bb%8d" >介绍</a></li>
-<li><a class="link" href="#%e5%ae%89%e8%a3%85" >安装</a></li>
-<li><a class="link" href="#%e4%bd%bf%e7%94%a8%e6%96%b9%e6%b3%95" >使用方法</a></li>
-<li><a class="link" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81" >示例代码</a></li>
-<li><a class="link" href="#%e6%88%aa%e5%9b%be" >截图</a></li>
-<li><a class="link" href="#%e8%ae%b8%e5%8f%af%e8%af%81" >许可证</a></li>
+    <style>
+  body {
+    background: url('/img/background.jpg') no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+</style>
+<p>参考链接：https://javaguide.cn/database/mysql/mysql-questions-01.html</p>
+<h2 id="-数据库基础">📚 数据库基础
+</h2><p>ER图 提供<strong>实体</strong>（方块） <strong>属性</strong>（椭圆）和<strong>联系</strong>（菱形）的方法 关系：1对1，1对多，多对多&hellip; 在创建项目之前应该先构建好数据库 并且绘制ER图来理清数据之间的关系。</p>
+<hr>
+<p>数据库范式：1NF（属性不可再分）,2NF（在 1NF 的基础之上，消除了非主属性对于码的部分函数依赖）,3NF（在 2NF 的基础之上，消除了非主属性对于码的传递函数依赖），BCNF（在3NF的基础上 去除属性见不必要的函数依赖）</p>
+<hr>
+<p>主键：唯一标识一个元组（行）不重复不为空，一个表只有一个主键</p>
+<p>外键：与其他表建立联系 外键是另外一个表的主键 可以重复可以为空 一个表可以有多个外键</p>
+<p>一般不推荐外键：1.增加了复杂性 2.增加了维护外键的工作量 3.对数据库分表不友好</p>
+<p>外键的好处：1.保证数据一致性和完整性 2.级联操作简单</p>
+<hr>
+<p>drop 删除表结构 turncate 清空表数据 delete使用where限定删除某一行数据/清空表数据</p>
+<p>执行速度drop&gt; turncate &gt;delete</p>
+<p>数据库设计：需求分析-ER图-ER图转为表-选取数据库和存储结构-编程测试试和运行-运行和维护</p>
+<hr>
+<p>关系型数据库:如 mysql 支持事务的四大属性：ACID属性（原子性，一致性，隔离性，持久性）</p>
+<p>非关系型数据库: 如redis 天生支持分布式，数据冗余和数据分片等特性，旨在提供可扩展的高可用高性能数据存储解决方案。非关系型数据库比较灵活，性能高，可扩展性强</p>
+<hr>
+<p>字符集：GBK,ASCII,UTF8&hellip;  MySQL8.0默认字符集utf8mb4</p>
+<hr>
+<p>DDL数据定义语言: <strong>定义数据库对象</strong> CREATE、ALTER、DROP</p>
+<p>DML数据操纵语言 : <strong>访问数据</strong>，因此其语法都是以<strong>读写数据库</strong>为主 CRUD</p>
+<p>DCL数据控制语言 : <strong>控制用户的访问权限</strong> 授予权限GRANT、收回权限REVOKE</p>
+<p>TCL事务控制语言：<strong>管理数据库中的事务</strong> , 提交事务commit 回滚事务 rollback</p>
+<hr>
+<p><strong>索引⭐</strong>【面试被问到了】</p>
+<p><strong>索引是一种用于快速查询和检索数据的数据结构，其本质可以看成是一种排序好的数据结构</strong></p>
+<p>分为：唯一索引 主键索引 聚集索引 哈希索引</p>
+<p><a class="link" href="https://javaguide.cn/database/mysql/mysql-index.html"  target="_blank" rel="noopener"
+    >https://javaguide.cn/database/mysql/mysql-index.html</a></p>
+<hr>
+<p>sql（结构化查询语言） 语法常见面试总结可以去牛客上看 也可以刷力扣上的sql 题 这里我就不着重看了 之后刷sql题的时候再看</p>
+<hr>
+<p>容易混淆的点：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>Decimal</th>
+          <th>可以存精确的小数</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Float / Double</td>
+          <td>只能存近似的小数</td>
+      </tr>
+  </tbody>
+</table></div>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>DateTime</th>
+          <th>没有时区信息 八字节存储</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>TimeStamp</td>
+          <td>和时区有关 四字节存储</td>
+      </tr>
+  </tbody>
+</table></div>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>Null</th>
+          <th>1.null表示缺失的值 2.任何值与null比较结果都是null 3.有些聚合函数忽略null</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>“ ”</td>
+          <td>1.空字符串 2.“ ” 可以进行比较，如 “ ” = “ ”结果为true 3. 聚合函数不忽略</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<p>MySQL执行流程：</p>
+<ol>
+<li>连接器（进行身份验证）</li>
+<li>分析器（进行词法分析 和 语法分析）</li>
+<li>优化器（按照MySQL认为最优的方案执行）</li>
+<li>执行器（执行语句 从存储引擎返回数据）</li>
+<li>**存储引擎⭐（InnoDB、MyISAM、Memory 等多种存储引擎。InnoDB 是 MySQL 的默认存储引擎，只有InnoDB支持事务）</li>
 </ol>
+<p>存储引擎采用<strong>插件式架构</strong> ，<strong>基于表结构而不是数据库</strong></p>
 <hr>
-<h2 id="介绍">介绍
-</h2><p>这是一个示例项目，用于演示 Markdown 的写法。<br>
-你可以在这里添加项目简介、功能说明或使用目的。</p>
+<p>MySQL 日志⭐</p>
+<p>常见的日志分类:错误日志，查询日志，<strong>慢查询日志</strong>（可以结合 <code>EXPLAIN</code> 分析查询执行计划，优化索引或 SQL 结构，可用于性能优化），二进制日志（主从复制），回滚日志，重做日志（保证事务的持久性）&hellip;</p>
 <hr>
+<p>MySQL事务：逻辑上的一组操作要么都执行要么都不执行。事务分为扁平事务（最简单的情况），嵌套事务，分布式事务&hellip; 事务的四大属性ACID. 事务的目的就是为了保证数据的一致性。</p>
+<p>并发事务带来的问题：脏读，不可重复读，幻读，丢失修改（四种问题基本概念是什么？如何解决？）</p>
+<p>并发事务的控制方式：</p>
+<ol>
+<li>锁，通过读写锁来显式控制共享资源 分为表级锁（对整表加的锁）和行级锁（对索引字段加的锁），MyISAM 仅仅支持表级锁，InnoDB两者均支持。无论是表级锁和行级锁都存在共享锁S和排他锁X。意向锁可以来快速判断是否可以对某个表使用表锁，从而有了意向共享锁IS和意向排他锁IX</li>
+<li>MVCC（多版本并发控制）即对一份数据会存储多个版本，通过事务的可见性来保证事务能看到自己应该看到的版本。</li>
+</ol>
+<p>事务隔离级别（级别越高，数据一致性越好，但并发性能可能越低）：1.读未提交 2.读已提交 3.可重复读（MySQL默认的隔离级别） 4.可串行化。 MySQL 的隔离级别基于锁和 MVCC 机制共同实现的</p>
+<hr>
+<p>当前读和快照读</p>
+<p>当前读 = 当前最新数据 + 会加锁 → “最新、可能被阻塞”</p>
+<p>快照读 = 事务快照 + 不加锁 → “旧版本、不会被阻塞”</p>
+<hr>
+<p><strong>MySQL调优⭐</strong></p>
+<p><a class="link" href="https://javaguide.cn/database/mysql/mysql-high-performance-optimization-specification-recommendations.html"  target="_blank" rel="noopener"
+    >https://javaguide.cn/database/mysql/mysql-high-performance-optimization-specification-recommendations.html</a></p>
+<hr>
+<p>MySQL可以存文件（文件转为二进制文件存入MySQL），但是影响数据库性能占用太多存储空间。可以用云服务厂商提供的对象存储如OSS&hellip;也可以用MinIO开源项目实习分布式文件服务。</p>
+<p><a class="link" href="https://www.51cto.com/article/716978.html"  target="_blank" rel="noopener"
+    >https://www.51cto.com/article/716978.html</a></p>
+<hr>
+<p>MySQL性能优化：慢查询日志找 SQL → Explain 看执行计划（分析性能） → 索引优化/表结构优化&hellip; → 锁和 IO 分析 → SQL 重写 → 测试验证</p>
+<hr>
+<p>读写分离：<strong>读写分离主要是为了将对数据库的读写操作分散到不同的数据库节点上。</strong> 这样的话，就能够小幅提升写性能，大幅提升读性能。</p>
+<p>如何实现：主数据库和从数据库数据实时同步（<strong>主从复制</strong>），写请求交给主数据库处理，读数据库交给从数据库处理。</p>
+<blockquote>
+<p>主从复制：主数据库的数据变化写入二进制日志，从库链接主库，主库创建I/O线程发送二进制日志给从库，从库将二进制日志写入中继日志（Relay log）然后从库的sql线程读取中继日志实现主从数据实时同步（可能会发生主从同步延迟）</p></blockquote>
+<p>第一种实现方式：代理方式</p>
+<p>在应用和数据中间加了一个代理层。应用程序所有的数据请求都交给代理层处理，代理层负责分离读写请求，将它们路由到对应的数据库中。</p>
+<p>第二种实现方式：组件方式</p>
+<p>引入第三方组件来帮助我们读写请求。</p>
+<hr>
+<p>分库分表：如果一张表的存储数据量太大就要分库分表。分库分为水平分库（按照数据划分，行划分）和垂直分库（按照业务划分，属性划分）分表与分库同理。分库分表之后需要解决事务问题，分布式id问题，join操作问题</p>
+<hr>
+<p>冷热数据：热数据是指<strong>经常被访问和修改且需要快速访问的数据</strong>，冷数据是指<strong>不经常访问，对当前项目价值较低，但需要长期保存的数据</strong>。可以按照时间和访问频率划分。</p>
+<hr>
+<p><strong>延时双删</strong>⭐【面试被问到了】（保证数据一致性）：首先删除redis中的缓存数据，然后更新数据库中的数据，让当前线程休眠一段时间，唤醒之后再次删除redis的缓存数据。</p>
 
 </section>
 
@@ -480,11 +598,40 @@
         
         2025 Paradox29
     </section>
-    
+    <section class="wordcount">本站总字数：668 字
+
+</section>
     <section class="powerby">
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        
     </section>
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+    <span id="busuanzi_container_site_pv" style='display:none'> 本站总访问量 <span id="busuanzi_value_site_pv"></span> 次 </span>·
+    <span id="busuanzi_container_site_uv" style='display:none'> 总访客数 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+<script language="javascript"> 
+    var now = new Date();
+    function createtime(){
+        now.setTime(now.getTime()+250); 
+        var grt= new Date("2025/10/15 00:00:00"); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+        minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+
+        document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"
+    }
+    setInterval("createtime()",250); 
+</script> 
+
 </footer>
 
 

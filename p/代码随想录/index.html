@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://1parado.github.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/'>
 
-<link rel="stylesheet" href="/scss/style.min.1addd7ce5a0524bca0a0aa7ae3d1f57bb2b0f5519f8ad1675ab423f052677f65.css"><meta property='og:title' content="代码随想录">
+<link rel="stylesheet" href="/scss/style.min.ec0275f9efc7477560607f9610e0eeb6ebb5e53a8dcbdd5591f1ea2ee0b3c273.css"><meta property='og:title' content="代码随想录">
 <meta property='og:description' content="\r数组 二分查找 1.https://leetcode.cn/problems/binary-search/description/ 用时：4.33 解题思路：数组有序 返回下标（查找元素）&ndash;&gt; 二分法 这里采用左闭右闭区间[low,high]所以while判断的时候是low &lt;= high\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 int low = 0; int high = nums.length - 1; int mid = (low + high)/2; // int mid = low + （high - low）/ 2；防止溢出 while(low &lt;= high){ if(nums[mid] == target){ return mid; }else if(nums[mid] &gt; target){ high = mid - 1; class Solution { public int searc mid = (low + high)/2; }else{ low = mid + 1; mid = (low + high)/2; } } return -1; } } 2.https://leetcode.cn/problems/search-insert-position/description/ 用时：15.54 犯的问题：粗心把high初始化的时候设置成nums.length了，2，3，4情况返回值应该是high+1（要想明白为什么是high+1）\n">
 <meta property='og:url' content='https://1parado.github.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/'>
 <meta property='og:site_name' content='Paradox’s Blog'>
@@ -310,7 +310,7 @@
     
     <header class="article-category">
         
-            <a href="/categories/%E7%AE%97%E6%B3%95/" >
+            <a href="/categories/%E7%AE%97%E6%B3%95/" style="background-color: #2a9d8f; color: #fff;">
                 算法
             </a>
         
@@ -373,7 +373,7 @@
     
     <style>
   body {
-    background: url('/img/img2.png') no-repeat center top;
+    background: url('/img/background.jpg') no-repeat center top;
     background-size: cover;
     background-attachment: fixed;
   }
@@ -645,11 +645,40 @@
         
         2025 Paradox29
     </section>
-    
+    <section class="wordcount">本站总字数：668 字
+
+</section>
     <section class="powerby">
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        
     </section>
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+    <span id="busuanzi_container_site_pv" style='display:none'> 本站总访问量 <span id="busuanzi_value_site_pv"></span> 次 </span>·
+    <span id="busuanzi_container_site_uv" style='display:none'> 总访客数 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+<script language="javascript"> 
+    var now = new Date();
+    function createtime(){
+        now.setTime(now.getTime()+250); 
+        var grt= new Date("2025/10/15 00:00:00"); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+        minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+
+        document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"
+    }
+    setInterval("createtime()",250); 
+</script> 
+
 </footer>
 
 

@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://1parado.github.io/p/%E7%A7%91%E7%A0%94%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/'>
 
-<link rel="stylesheet" href="/scss/style.min.1addd7ce5a0524bca0a0aa7ae3d1f57bb2b0f5519f8ad1675ab423f052677f65.css"><meta property='og:title' content="科研论文写作">
+<link rel="stylesheet" href="/scss/style.min.ec0275f9efc7477560607f9610e0eeb6ebb5e53a8dcbdd5591f1ea2ee0b3c273.css"><meta property='og:title' content="科研论文写作">
 <meta property='og:description' content="\r⚫ 找论文的一些网站（有些网站要翻墙） Google scholar⭐⭐⭐⭐⭐： 可以配合谷歌插件Easy scholar直接显示期刊的等级和影响因子 2.Web of science⭐⭐⭐\n3.Sciencedirect⭐⭐⭐\n4.Ieeexplore⭐⭐⭐\n5.Arxiv⭐⭐预印的期刊，文章比较新但可能有小错误\n6.CNKI 中文知网⭐⭐\n⚫ 文献管理工具： Zotero + 翻译插件: https://blog.csdn.net/xiaoningaijishu/article/details/151042814\nIma腾讯推出的个人知识库（英文不好的强烈推荐！）把论文上传到知识库中，然后全局翻译，翻译的很准确，而且可以根据知识库进行提问。\n小绿鲸（我没用过，看师兄用过）: https://www.xljsci.com/\n⚫ 笔记软件： Notion，Obsidian，Ima，Typora, Cherry studio&hellip;推荐Obisidian 轻量化（但其实没有做笔记的习惯的话不下载也可以）\n⚫ 用于论文写作的一些工具 overleaf是一款在线编写latex格式的论文写作软件，可以配合浏览器插件Grammarly检查语法错误 https://app.grammarly.com/\noverleaf模板: https://cn.overleaf.com/latex/templates 点 Journal Article 找对应的论文模板格式下载压缩包 导入到overleaf即可编写操作\n习惯用Vs code的可以在vscode中下载overleaf的插件 直接在vscode中编写也可:https://zhuanlan.zhihu.com/p/29808221714\n⚫ 好用的网站： 表转latex格式 https://tablesgenerator.com/\nlatex公式在线编写： https://www.latexlive.com/home\nCanva做汇报ppt: https://www.canva.cn/\n">
 <meta property='og:url' content='https://1parado.github.io/p/%E7%A7%91%E7%A0%94%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/'>
 <meta property='og:site_name' content='Paradox’s Blog'>
@@ -313,7 +313,7 @@
     
     <header class="article-category">
         
-            <a href="/categories/%E7%A7%91%E7%A0%94/" >
+            <a href="/categories/%E7%A7%91%E7%A0%94/" style="background-color: #2a9d8f; color: #fff;">
                 科研
             </a>
         
@@ -376,7 +376,7 @@
     
     <style>
   body {
-    background: url('/img/img2.png') no-repeat center top;
+    background: url('/img/background.jpg') no-repeat center top;
     background-size: cover;
     background-attachment: fixed;
   }
@@ -542,11 +542,40 @@
         
         2025 Paradox29
     </section>
-    
+    <section class="wordcount">本站总字数：668 字
+
+</section>
     <section class="powerby">
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        
     </section>
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+    <span id="busuanzi_container_site_pv" style='display:none'> 本站总访问量 <span id="busuanzi_value_site_pv"></span> 次 </span>·
+    <span id="busuanzi_container_site_uv" style='display:none'> 总访客数 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+<script language="javascript"> 
+    var now = new Date();
+    function createtime(){
+        now.setTime(now.getTime()+250); 
+        var grt= new Date("2025/10/15 00:00:00"); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+        minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+
+        document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"
+    }
+    setInterval("createtime()",250); 
+</script> 
+
 </footer>
 
 
