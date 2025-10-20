@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>SpringBoot on Paradox’s Blog</title>
-        <link>https://1parado.github.io/tags/springboot/</link>
-        <description>Recent content in SpringBoot on Paradox’s Blog</description>
+        <title>实习 on Paradox’s Blog</title>
+        <link>https://1parado.github.io/categories/%E5%AE%9E%E4%B9%A0/</link>
+        <description>Recent content in 实习 on Paradox’s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Mon, 20 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://1parado.github.io/tags/springboot/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 20 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://1parado.github.io/categories/%E5%AE%9E%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>实习经历</title>
         <link>https://1parado.github.io/p/%E5%AE%9E%E4%B9%A0%E7%BB%8F%E5%8E%86/</link>
         <pubDate>Mon, 20 Oct 2025 00:00:00 +0000</pubDate>
@@ -44,25 +44,6 @@
 	
 	
 &gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>仿教务系统</title>
-        <link>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</link>
-        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</guid>
-        <description>&lt;style&gt;
-  body {
-    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-&lt;/style&gt;
-&lt;p&gt;2025.10.15
-这是创建的
-&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/1parado_repo.github.io/blob/main/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;思维导图&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         

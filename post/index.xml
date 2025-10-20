@@ -7,12 +7,12 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Fri, 17 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://1parado.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>代码随想录</title>
-        <link>https://1parado.github.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/</link>
-        <pubDate>Fri, 17 Oct 2025 00:00:00 +0000</pubDate>
+        <lastBuildDate>Mon, 20 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://1parado.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>实习经历</title>
+        <link>https://1parado.github.io/p/%E5%AE%9E%E4%B9%A0%E7%BB%8F%E5%8E%86/</link>
+        <pubDate>Mon, 20 Oct 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://1parado.github.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/</guid>
+        <guid>https://1parado.github.io/p/%E5%AE%9E%E4%B9%A0%E7%BB%8F%E5%8E%86/</guid>
         <description>&lt;style&gt;
   body {
     background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
@@ -20,8 +20,85 @@
     background-attachment: fixed;
   }
 &lt;/style&gt;
-&lt;h2 id=&#34;基础知识hello-算法&#34;&gt;基础知识（hello 算法）
-&lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.hello-algo.com/chapter_array_and_linkedlist/array/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;p&gt;&amp;mdash;2025.10.20&lt;/p&gt;
+&lt;p&gt;今天是去实习的第一天 新手上班感觉憋不住笑啊（摸鱼的一天） 王哥给我两个压缩包文件让我先看懂公司代码的逻辑是怎么写的 确实到了公司才知道还有好多东西不知道的 纸上学来终觉浅 今天我甚至手忙脚乱到sql脚本都不知道在哪里执行了&amp;hellip; 明天估计要开始慢慢干活了吧 要写一个任务管理模块 王哥说今晚他把数据库和脚手架创建好 明天我可以先自己尝试了 我觉得还挺好的吧 这个实习 而且合同上面签的也是学生出去学习为主 学校有事情 提前七天告知公司就可以了 Nice！
+今天学到的东西：1.sql脚本执行 2.cmd中输ifconfig查看本机ip 3.关闭快速开机能减少运行内存的使用
+附图两张：
+&lt;img src=&#34;https://1parado.github.io/img/shixi1.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;实习工位&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/shixi2.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;串串香&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Redis 常见面试题</title>
+        <link>https://1parado.github.io/p/redis-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
+        <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/redis-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;参考链接：
+&lt;a class=&#34;link&#34; href=&#34;https://javaguide.cn/database/redis/redis-questions-01.html#%E4%BB%80%E4%B9%88%E6%98%AF-redis&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://javaguide.cn/database/redis/redis-questions-01.html#%E4%BB%80%E4%B9%88%E6%98%AF-redis&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Redis是NoSQL数据库，是一种内存数据库。读写速度很快，经常用于分布式缓存方向，存储的是key-value对数据。Redis支持事务，持久化，lua脚本&amp;hellip;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;可以试一下&lt;a class=&#34;link&#34; href=&#34;https://onecompiler.com/redis&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;在线编译器&lt;/a&gt;写一下redis命令 简单易上手 easy~&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Redis为什么速度快：1.纯内存操作（纳秒级），传统的数据库需要读写磁盘（毫秒级） 2.高效的I/O模型。3.优化的内部数据结构4.简洁高效的通信协议（RESP）. redis适合做缓存不适合做主数据库，因为内存成本高，且redis虽然支持数据持久化但是有数据丢失风险。
+其他的分布式缓存：Tendis,KeyDB&amp;hellip;&lt;/p&gt;
+&lt;p&gt;选择Redis的原因：1.访问速度快（基于内存） 2.高并发 3. 功能全面（可以作缓存，可以用于分布式锁，限流，消息队列，延时队列&amp;hellip;）&lt;/p&gt;
+&lt;p&gt;常见的缓存读写策略：https://javaguide.cn/database/redis/3-commonly-used-cache-read-and-write-strategies.html&lt;/p&gt;
+&lt;p&gt;Redis 应用【2025.10.20】&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;缓存&lt;/li&gt;
+&lt;li&gt;分布式锁 Redission&lt;/li&gt;
+&lt;li&gt;做限流工具 Redis+LUA脚本 RRateLimiter实现分布式限流即基于Lua脚本+令牌桶算法&lt;/li&gt;
+&lt;li&gt;做消息队列 Redis的Stream类型的数据结构更适合做消息队列（但一般用中间件）&lt;/li&gt;
+&lt;li&gt;做延时队列 内置了延时队列 基于Sorted Set实现&lt;/li&gt;
+&lt;li&gt;分布式session 利用String或Hash数据结构存储session数据&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Redis可以实现全文搜索引擎功能 需要借助RedisSearch（一个基于Redis的搜索引擎模块）：性能更优秀 较低内存占用实现快速索引。&lt;/p&gt;
+&lt;p&gt;延时任务（红包过期自动退还）:实现方式：1. redis过期事件监听（不推荐） 2. redission内置的延时队列 减少了丢消息的可能，消息不存在重复消费问题&lt;/p&gt;
+&lt;p&gt;redis常见的数据类型：String、List、Set、ZSet、Hash&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>代码随想录(长期更新)</title>
+        <link>https://1parado.github.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0/</link>
+        <pubDate>Fri, 17 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;基础知识（hello 算法）&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.hello-algo.com/chapter_array_and_linkedlist/array/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://www.hello-algo.com/chapter_array_and_linkedlist/array/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;数组&lt;/em&gt;：数组元素存储在&lt;strong&gt;连续的内存空间&lt;/strong&gt;中，如果知道数组首地址和某个元素的索引，查找数据很简单，时间复杂度低O(1)，在数组中插入和删除需要移动元素，所以时间复杂度有点高O(N)。数组（静态）的长度是不可变的（ArrayList动态数组，长度未知的数组），如果扩容数组则重新建立一个更大的数组，复制旧数组的元素到新数组中。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -508,7 +585,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/move-zeroes/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;p&gt;date: 2025-10-19&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/move-zeroes/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;283. 移动零 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -671,15 +749,17 @@
     &gt;59. 螺旋矩阵 II - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;主要是考察边界条件的判断&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;区间和: 可以用sum数组保存前n项和 如果想计算下标2-5的区间和 可以通过前5项和-前二项和&lt;img src=&#34;D:%5chugo_extended_withdeploy_0.151.0_windows-amd64%5ctest%5ccontent%5cpost%5c%e7%ae%97%e6%b3%95%5cimage1.png&#34;
+&lt;p&gt;区间和: 可以用sum数组保存前n项和 如果想计算下标2-5的区间和 可以通过前5项和-前二项和&lt;img src=&#34;https://1parado.github.io/img/%e5%8c%ba%e9%97%b4%e6%b1%82%e5%92%8c1.png&#34;
 	
 	
 	
 	loading=&#34;lazy&#34;
 	
+		alt=&#34;代码随想录总结&#34;
+	
 	
 &gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;D:%5chugo_extended_withdeploy_0.151.0_windows-amd64%5ctest%5ccontent%5cpost%5c%e7%ae%97%e6%b3%95%5c%e6%95%b0%e7%bb%84%e6%80%bb%e7%bb%93.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e6%95%b0%e7%bb%84%e6%80%bb%e7%bb%93.png&#34;
 	
 	
 	
@@ -689,6 +769,81 @@
 	
 	
 &gt;&lt;/p&gt;
+&lt;h1 id=&#34;链表&#34;&gt;链表
+&lt;/h1&gt;&lt;p&gt;&amp;mdash;2025.10.20&lt;/p&gt;
+&lt;p&gt;链表节点类&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Java&#34; data-lang=&#34;Java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ListNode&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;     &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;     &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ListNode&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;     &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ListNode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;     &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ListNode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;     &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ListNode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ListNode&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;链表删除节点 直接让next指针被删除节点的下一个节点即可 Java有自己的回收机制 被删除的节点会自动回收&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关于链表的Java语法都忘完了&lt;/strong&gt; 删除元素就是 current.next = current.next.next; 还需要注意什么时候创建的是节点 什么时候创建的是指针&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/remove-linked-list-elements/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;203. 移除链表元素 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-gdscript3&#34; data-lang=&#34;gdscript3&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Solution&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ListNode&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;removeElements&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ListNode&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;ne&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;o&#34;&gt;//&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;设置一个虚拟头节点&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;这样就让头节点的操作变成普通操作了&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;ListNode&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vir&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ListNode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;vir&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;next&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;//&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;让&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;var指向head节点&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;o&#34;&gt;//&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;遍历整个链表&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;有等于&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val值的删除&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;（即让&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;next&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;ListNode&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cur&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;while&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cur&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;next&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;null&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cur&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;cur&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;next&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cur&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                 &lt;span class=&#34;n&#34;&gt;cur&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cur&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;           
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vir&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/design-linked-list/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;707. 设计链表 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;没思路&lt;/p&gt;
+&lt;p&gt;反转链表（也不会 算法好难！！！）&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -824,36 +979,27 @@
 &lt;p&gt;参考链接：https://javaguide.cn/database/mysql/mysql-questions-01.html&lt;/p&gt;
 &lt;h2 id=&#34;-数据库基础&#34;&gt;📚 数据库基础
 &lt;/h2&gt;&lt;p&gt;ER图 提供&lt;strong&gt;实体&lt;/strong&gt;（方块） &lt;strong&gt;属性&lt;/strong&gt;（椭圆）和&lt;strong&gt;联系&lt;/strong&gt;（菱形）的方法 关系：1对1，1对多，多对多&amp;hellip; 在创建项目之前应该先构建好数据库 并且绘制ER图来理清数据之间的关系。&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;数据库范式：1NF（属性不可再分）,2NF（在 1NF 的基础之上，消除了非主属性对于码的部分函数依赖）,3NF（在 2NF 的基础之上，消除了非主属性对于码的传递函数依赖），BCNF（在3NF的基础上 去除属性见不必要的函数依赖）&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;主键：唯一标识一个元组（行）不重复不为空，一个表只有一个主键&lt;/p&gt;
 &lt;p&gt;外键：与其他表建立联系 外键是另外一个表的主键 可以重复可以为空 一个表可以有多个外键&lt;/p&gt;
 &lt;p&gt;一般不推荐外键：1.增加了复杂性 2.增加了维护外键的工作量 3.对数据库分表不友好&lt;/p&gt;
 &lt;p&gt;外键的好处：1.保证数据一致性和完整性 2.级联操作简单&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;drop 删除表结构 turncate 清空表数据 delete使用where限定删除某一行数据/清空表数据&lt;/p&gt;
 &lt;p&gt;执行速度drop&amp;gt; turncate &amp;gt;delete&lt;/p&gt;
 &lt;p&gt;数据库设计：需求分析-ER图-ER图转为表-选取数据库和存储结构-编程测试试和运行-运行和维护&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;关系型数据库:如 mysql 支持事务的四大属性：ACID属性（原子性，一致性，隔离性，持久性）&lt;/p&gt;
 &lt;p&gt;非关系型数据库: 如redis 天生支持分布式，数据冗余和数据分片等特性，旨在提供可扩展的高可用高性能数据存储解决方案。非关系型数据库比较灵活，性能高，可扩展性强&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;字符集：GBK,ASCII,UTF8&amp;hellip;  MySQL8.0默认字符集utf8mb4&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;DDL数据定义语言: &lt;strong&gt;定义数据库对象&lt;/strong&gt; CREATE、ALTER、DROP&lt;/p&gt;
 &lt;p&gt;DML数据操纵语言 : &lt;strong&gt;访问数据&lt;/strong&gt;，因此其语法都是以&lt;strong&gt;读写数据库&lt;/strong&gt;为主 CRUD&lt;/p&gt;
 &lt;p&gt;DCL数据控制语言 : &lt;strong&gt;控制用户的访问权限&lt;/strong&gt; 授予权限GRANT、收回权限REVOKE&lt;/p&gt;
 &lt;p&gt;TCL事务控制语言：&lt;strong&gt;管理数据库中的事务&lt;/strong&gt; , 提交事务commit 回滚事务 rollback&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;索引⭐&lt;/strong&gt;【面试被问到了】&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;索引是一种用于快速查询和检索数据的数据结构，其本质可以看成是一种排序好的数据结构&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;分为：唯一索引 主键索引 聚集索引 哈希索引&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://javaguide.cn/database/mysql/mysql-index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://javaguide.cn/database/mysql/mysql-index.html&lt;/a&gt;&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;sql（结构化查询语言） 语法常见面试总结可以去牛客上看 也可以刷力扣上的sql 题 这里我就不着重看了 之后刷sql题的时候再看&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;容易混淆的点：&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
@@ -897,7 +1043,6 @@
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;hr&gt;
 &lt;p&gt;MySQL执行流程：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;连接器（进行身份验证）&lt;/li&gt;
@@ -907,10 +1052,8 @@
 &lt;li&gt;**存储引擎⭐（InnoDB、MyISAM、Memory 等多种存储引擎。InnoDB 是 MySQL 的默认存储引擎，只有InnoDB支持事务）&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;存储引擎采用&lt;strong&gt;插件式架构&lt;/strong&gt; ，&lt;strong&gt;基于表结构而不是数据库&lt;/strong&gt;&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;MySQL 日志⭐&lt;/p&gt;
 &lt;p&gt;常见的日志分类:错误日志，查询日志，&lt;strong&gt;慢查询日志&lt;/strong&gt;（可以结合 &lt;code&gt;EXPLAIN&lt;/code&gt; 分析查询执行计划，优化索引或 SQL 结构，可用于性能优化），二进制日志（主从复制），回滚日志，重做日志（保证事务的持久性）&amp;hellip;&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;MySQL事务：逻辑上的一组操作要么都执行要么都不执行。事务分为扁平事务（最简单的情况），嵌套事务，分布式事务&amp;hellip; 事务的四大属性ACID. 事务的目的就是为了保证数据的一致性。&lt;/p&gt;
 &lt;p&gt;并发事务带来的问题：脏读，不可重复读，幻读，丢失修改（四种问题基本概念是什么？如何解决？）&lt;/p&gt;
 &lt;p&gt;并发事务的控制方式：&lt;/p&gt;
@@ -919,21 +1062,16 @@
 &lt;li&gt;MVCC（多版本并发控制）即对一份数据会存储多个版本，通过事务的可见性来保证事务能看到自己应该看到的版本。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;事务隔离级别（级别越高，数据一致性越好，但并发性能可能越低）：1.读未提交 2.读已提交 3.可重复读（MySQL默认的隔离级别） 4.可串行化。 MySQL 的隔离级别基于锁和 MVCC 机制共同实现的&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;当前读和快照读&lt;/p&gt;
 &lt;p&gt;当前读 = 当前最新数据 + 会加锁 → “最新、可能被阻塞”&lt;/p&gt;
 &lt;p&gt;快照读 = 事务快照 + 不加锁 → “旧版本、不会被阻塞”&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;MySQL调优⭐&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://javaguide.cn/database/mysql/mysql-high-performance-optimization-specification-recommendations.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://javaguide.cn/database/mysql/mysql-high-performance-optimization-specification-recommendations.html&lt;/a&gt;&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;MySQL可以存文件（文件转为二进制文件存入MySQL），但是影响数据库性能占用太多存储空间。可以用云服务厂商提供的对象存储如OSS&amp;hellip;也可以用MinIO开源项目实习分布式文件服务。&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51cto.com/article/716978.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://www.51cto.com/article/716978.html&lt;/a&gt;&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;MySQL性能优化：慢查询日志找 SQL → Explain 看执行计划（分析性能） → 索引优化/表结构优化&amp;hellip; → 锁和 IO 分析 → SQL 重写 → 测试验证&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;读写分离：&lt;strong&gt;读写分离主要是为了将对数据库的读写操作分散到不同的数据库节点上。&lt;/strong&gt; 这样的话，就能够小幅提升写性能，大幅提升读性能。&lt;/p&gt;
 &lt;p&gt;如何实现：主数据库和从数据库数据实时同步（&lt;strong&gt;主从复制&lt;/strong&gt;），写请求交给主数据库处理，读数据库交给从数据库处理。&lt;/p&gt;
 &lt;blockquote&gt;
@@ -942,12 +1080,31 @@
 &lt;p&gt;在应用和数据中间加了一个代理层。应用程序所有的数据请求都交给代理层处理，代理层负责分离读写请求，将它们路由到对应的数据库中。&lt;/p&gt;
 &lt;p&gt;第二种实现方式：组件方式&lt;/p&gt;
 &lt;p&gt;引入第三方组件来帮助我们读写请求。&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;分库分表：如果一张表的存储数据量太大就要分库分表。分库分为水平分库（按照数据划分，行划分）和垂直分库（按照业务划分，属性划分）分表与分库同理。分库分表之后需要解决事务问题，分布式id问题，join操作问题&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;冷热数据：热数据是指&lt;strong&gt;经常被访问和修改且需要快速访问的数据&lt;/strong&gt;，冷数据是指&lt;strong&gt;不经常访问，对当前项目价值较低，但需要长期保存的数据&lt;/strong&gt;。可以按照时间和访问频率划分。&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;延时双删&lt;/strong&gt;⭐【面试被问到了】（保证数据一致性）：首先删除redis中的缓存数据，然后更新数据库中的数据，让当前线程休眠一段时间，唤醒之后再次删除redis的缓存数据。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;2025.10.19&lt;/p&gt;
+&lt;h2 id=&#34;mysql高性能优化规范建议总结了解即可&#34;&gt;MySQL高性能优化规范建议总结（了解即可）
+&lt;/h2&gt;&lt;p&gt;数据库命名要规范 所有表使用InnooDB存储引擎 数据库和表的字符集统一使用utf8 单个表的数据量大小尽量在500万之内，再大可以考虑分库分表。对于日期类型用Datatime或timestamp 不要用字符串存储。可以通过查询MySQL的慢查询日志发现需要进行优化的sql语句。对于超100万行的批量操作（插入，更新，删除）要分批多次进行操作，因为大批量操作可能会造成主从延迟。&lt;/p&gt;
+&lt;h2 id=&#34;重点重新看一下&#34;&gt;重点【重新看一下】
+&lt;/h2&gt;&lt;p&gt;索引：索引是一种用于快速查询和检索数据的数据结构，其本质可以看成是一种排序好的数据结构。常见的索引结构：B-Tree索引、B+树索引、Hash索引、红黑树索引&amp;hellip; &lt;strong&gt;InnoDB和MyISAM都选择B+树作为索引结构.&lt;/strong&gt;
+索引的优缺点：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;优点：1.查询速度快减少磁盘I/O次数 2.保证数据的一致性（唯一索引）3.可以加快排序和分组&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;缺点：创建和维护耗时，占用存储空间,当数据量太小的时候全表扫描速度会比索引快。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;索引：
+1.按照数据结构分类：B-Tree索引、B+树索引、Hash索引、红黑树索引&amp;hellip;
+2.按照底层存储方式分类：聚集索引和非聚集索引
+3.应用维度分类：主键索引，唯一索引，普通索引，覆盖索引&lt;/p&gt;
+&lt;p&gt;B数和B+树的区别：1. B树的每个节点都存了key和data，B+树的data只存在叶子节点。非叶子节点仅存在key，可以让B+树更低，磁盘I/O操作次数更少。2. B+树所有叶子构成有序链表按照主键排序遍历全部记录 支持范围查找。&lt;/p&gt;
+&lt;p&gt;主键索引：一个表只有一个主键索引，主键索引不能为null，不能重复。如果设计表的时候没有符合的字段（唯一且不为null），InnoDB会自动创建一个自增字段作为主键索引。&lt;/p&gt;
+&lt;p&gt;EXPLAIN 分析执行计划 通过查询优化器对语句进行分析 找出最优的查询方法 并显示对应的信息&lt;/p&gt;
+&lt;p&gt;MySQL三大日志：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;二进制日志（Binary log）：记录了所有对数据库的DDL和DML操作。可以用于数据备份，主从复制&lt;/li&gt;
+&lt;/ol&gt;
 </description>
         </item>
         <item>

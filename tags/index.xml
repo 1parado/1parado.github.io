@@ -7,12 +7,28 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Fri, 17 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://1parado.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 20 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://1parado.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Java</title>
         <link>https://1parado.github.io/tags/java/</link>
-        <pubDate>Fri, 17 Oct 2025 00:00:00 +0000</pubDate>
+        <pubDate>Mon, 20 Oct 2025 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/tags/java/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>SpringBoot</title>
+        <link>https://1parado.github.io/tags/springboot/</link>
+        <pubDate>Mon, 20 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/springboot/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Redis</title>
+        <link>https://1parado.github.io/tags/redis/</link>
+        <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/redis/</guid>
         <description></description>
         </item>
         <item>
@@ -53,22 +69,6 @@
         <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/tags/mysql/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Redis</title>
-        <link>https://1parado.github.io/tags/redis/</link>
-        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/tags/redis/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>SpringBoot</title>
-        <link>https://1parado.github.io/tags/springboot/</link>
-        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/tags/springboot/</guid>
         <description></description>
         </item>
         <item>
