@@ -7,10 +7,26 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Mon, 20 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://1parado.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 20 Oct 2025 22:52:52 +0800</lastBuildDate><atom:link href="https://1parado.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Java</title>
+        <link>https://1parado.github.io/categories/java/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/categories/java/</guid>
+        <description>&lt;img src="https://1parado.github.io/categories/java/hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg" alt="Featured image of post Java" /&gt;</description>
+        </item>
+        <item>
+        <title>博客</title>
+        <link>https://1parado.github.io/categories/%E5%8D%9A%E5%AE%A2/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/categories/%E5%8D%9A%E5%AE%A2/</guid>
+        <description>&lt;img src="https://1parado.github.io/categories/%E5%8D%9A%E5%AE%A2/lgiqtfixp43.jpg" alt="Featured image of post 博客" /&gt;</description>
+        </item>
+        <item>
         <title>实习</title>
         <link>https://1parado.github.io/categories/%E5%AE%9E%E4%B9%A0/</link>
-        <pubDate>Mon, 20 Oct 2025 00:00:00 +0000</pubDate>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/categories/%E5%AE%9E%E4%B9%A0/</guid>
         <description>&lt;img src="https://1parado.github.io/categories/%E5%AE%9E%E4%B9%A0/R.jpg" alt="Featured image of post 实习" /&gt;</description>
@@ -18,42 +34,26 @@
         <item>
         <title>数据库</title>
         <link>https://1parado.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
-        <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
         <description>&lt;img src="https://1parado.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/ficgfogldm4.jpg" alt="Featured image of post 数据库" /&gt;</description>
         </item>
         <item>
-        <title>算法</title>
-        <link>https://1parado.github.io/categories/%E7%AE%97%E6%B3%95/</link>
-        <pubDate>Fri, 17 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/categories/%E7%AE%97%E6%B3%95/</guid>
-        <description>&lt;img src="https://1parado.github.io/categories/%E7%AE%97%E6%B3%95/n4eaa3aiswb.jpg" alt="Featured image of post 算法" /&gt;</description>
-        </item>
-        <item>
-        <title>Java</title>
-        <link>https://1parado.github.io/categories/java/</link>
-        <pubDate>Thu, 16 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/categories/java/</guid>
-        <description>&lt;img src="https://1parado.github.io/categories/java/hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg" alt="Featured image of post Java" /&gt;</description>
-        </item>
-        <item>
         <title>科研</title>
         <link>https://1parado.github.io/categories/%E7%A7%91%E7%A0%94/</link>
-        <pubDate>Thu, 16 Oct 2025 00:00:00 +0000</pubDate>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/categories/%E7%A7%91%E7%A0%94/</guid>
         <description>&lt;img src="https://1parado.github.io/categories/%E7%A7%91%E7%A0%94/hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg" alt="Featured image of post 科研" /&gt;</description>
         </item>
         <item>
-        <title>博客</title>
-        <link>https://1parado.github.io/categories/%E5%8D%9A%E5%AE%A2/</link>
-        <pubDate>Tue, 14 Oct 2025 00:00:00 +0000</pubDate>
+        <title>算法</title>
+        <link>https://1parado.github.io/categories/%E7%AE%97%E6%B3%95/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://1parado.github.io/categories/%E5%8D%9A%E5%AE%A2/</guid>
-        <description>&lt;img src="https://1parado.github.io/categories/%E5%8D%9A%E5%AE%A2/lgiqtfixp43.jpg" alt="Featured image of post 博客" /&gt;</description>
+        <guid>https://1parado.github.io/categories/%E7%AE%97%E6%B3%95/</guid>
+        <description>&lt;img src="https://1parado.github.io/categories/%E7%AE%97%E6%B3%95/n4eaa3aiswb.jpg" alt="Featured image of post 算法" /&gt;</description>
         </item>
         
     </channel>
