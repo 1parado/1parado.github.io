@@ -356,7 +356,7 @@
 
 
                 <time class="article-time--reading">
-                    7 minute read
+                    8 minute read
                 </time>
             </div>
         
@@ -1097,35 +1097,239 @@
 </span><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
-</span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">class</span> <span class="n">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">ListNode</span> <span class="n">removeElements</span><span class="p">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="p">,</span> <span class="ne">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="o">//</span><span class="err">设置一个虚拟头节点</span> <span class="err">这样就让头节点的操作变成普通操作了</span>
-</span></span><span class="line"><span class="cl">        <span class="n">ListNode</span> <span class="n">vir</span> <span class="o">=</span> <span class="n">new</span> <span class="n">ListNode</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">vir</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span> <span class="o">//</span> <span class="err">让</span><span class="n">var指向head节点</span>
-</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="err">遍历整个链表</span> <span class="err">有等于</span><span class="n">val值的删除</span><span class="err">（即让</span><span class="n">a</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span><span class="err">）</span>
-</span></span><span class="line"><span class="cl">        <span class="n">ListNode</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">vir</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="n">next</span> <span class="o">!=</span> <span class="n">null</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">val</span> <span class="o">==</span> <span class="n">val</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">                <span class="n">cur</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">                 <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">           
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">vir</span><span class="o">.</span><span class="n">next</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    public ListNode removeElements(ListNode head, int val) {
+</span></span><span class="line"><span class="cl">        // 设置一个虚拟头节点vir     以及一个当前指针cur用来遍历
+</span></span><span class="line"><span class="cl">        ListNode vir = new ListNode();
+</span></span><span class="line"><span class="cl">        vir.next = head; //vir放在head前面作为虚拟头节点
+</span></span><span class="line"><span class="cl">        ListNode cur = vir; // cur指针指向当前遍历的节点
+</span></span><span class="line"><span class="cl">        while(cur.next!=null){ //考虑清除循环终止条件 当cur遍历到最后一个节点 即cur.next == null 时终止循环
+</span></span><span class="line"><span class="cl">            if(cur.next.val == val){
+</span></span><span class="line"><span class="cl">                cur.next = cur.next.next; //如果cur指向的节点值为val 则移除
+</span></span><span class="line"><span class="cl">            }else{
+</span></span><span class="line"><span class="cl">                cur = cur.next; // 移动cur到下一个节点
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        } 
+</span></span><span class="line"><span class="cl">        // 返回值难以确定时 考虑极端情况试试
+</span></span><span class="line"><span class="cl">        // 当首节点为val时 就会被删除 所以vir.next是正确的 而不是head
+</span></span><span class="line"><span class="cl">        return vir.next;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><a class="link" href="https://leetcode.cn/problems/design-linked-list/"  target="_blank" rel="noopener"
     >707. 设计链表 - 力扣（LeetCode）</a></p>
-<p>没思路</p>
-<p>反转链表（也不会 算法好难！！！）</p>
-
+<p>在链表类中还需要设置链表的size 和 head 以及初始化链表 最关键的就在于如何初始化 如何循环 以及如何结束循环</p>
+<p>2025.10.21</p>
+<p><a class="link" href="https://leetcode.cn/problems/reverse-linked-list/"  target="_blank" rel="noopener"
+    >206. 反转链表 - 力扣</a></p>
+<p>反转链表（也不会 算法好难！！！&ndash;果然还是安静的时候写算法题有效果）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    public ListNode reverseList(ListNode head) {
+</span></span><span class="line"><span class="cl">        // 双指针
+</span></span><span class="line"><span class="cl">        ListNode cur = head; // 当前节点指针
+</span></span><span class="line"><span class="cl">        ListNode pre = null; // 当前节点指针的前一个节点
+</span></span><span class="line"><span class="cl">        // （我想的太多了 我想着如果转换方向之后 后一个节点就找不到了 可以用临时temp记录一下就好了啊！）
+</span></span><span class="line"><span class="cl">        while(cur != null){
+</span></span><span class="line"><span class="cl">            ListNode temp = cur.next; // 记录一下当前节点的下一个节点的位置
+</span></span><span class="line"><span class="cl">            cur.next = pre;
+</span></span><span class="line"><span class="cl">            pre = cur; // 然后让pre向后移动 即指向cur
+</span></span><span class="line"><span class="cl">            cur = temp; // 让cur指向temp
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return pre;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><a class="link" href="https://leetcode.cn/problems/swap-nodes-in-pairs/"  target="_blank" rel="noopener"
+    >24. 两两交换链表中的节点 - 力扣（LeetCode）</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">//我想的是设置一个flag 来判断是否需要交换 然后用一个temp表示cur节点的后一个节点 用于交换 即在循环体中 1.temp = cur.next临时保存
+</span></span><span class="line"><span class="cl">// 2.cur.next-&gt;temp.next 3. temp.next-&gt;cur 但是有错误！！！ 2-1-3-5   4-3-5  
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    public ListNode swapPairs(ListNode head) {
+</span></span><span class="line"><span class="cl">       
+</span></span><span class="line"><span class="cl">        if(head == null || head.next ==null){ // 链表为空/链表中只有一个元素
+</span></span><span class="line"><span class="cl">            return head;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        // 这个代码是错误的 结果是2-1-3-5   4-3-5  
+</span></span><span class="line"><span class="cl">        ListNode cur = head;
+</span></span><span class="line"><span class="cl">        while(cur.next !=null ){
+</span></span><span class="line"><span class="cl">            ListNode temp = cur.next; // 这是用temp记录后一个节点不行 试试用temp记录pre
+</span></span><span class="line"><span class="cl">            cur.next=temp.next;
+</span></span><span class="line"><span class="cl">            temp.next=cur;
+</span></span><span class="line"><span class="cl">            cur = cur.next;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return cur;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>错误代码2：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    public ListNode swapPairs(ListNode head) {
+</span></span><span class="line"><span class="cl">       
+</span></span><span class="line"><span class="cl">        if(head == null || head.next ==null){ // 链表为空/链表中只有一个元素
+</span></span><span class="line"><span class="cl">            return head;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ListNode vir = new ListNode();
+</span></span><span class="line"><span class="cl">        vir.next = head;
+</span></span><span class="line"><span class="cl">        ListNode cur = head;
+</span></span><span class="line"><span class="cl">        ListNode pre = vir;
+</span></span><span class="line"><span class="cl">        while(cur.next !=null &amp;&amp; cur.next.next!=null){ 
+</span></span><span class="line"><span class="cl">          pre.next = cur.next;
+</span></span><span class="line"><span class="cl">          cur.next = cur.next.next;
+</span></span><span class="line"><span class="cl">          pre.next.next = cur;
+</span></span><span class="line"><span class="cl">          pre = pre.next;
+</span></span><span class="line"><span class="cl">          cur = cur.next;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return vir.next;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><a class="link" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/"  target="_blank" rel="noopener"
+    >19 删除倒数第N个节点</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 解题思路（Mine）：先找到这个节点是正数第几个位置 然后找到其前置节点 进行删除操作 
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    public ListNode removeNthFromEnd(ListNode head, int n) {
+</span></span><span class="line"><span class="cl">        ListNode vir = new ListNode();
+</span></span><span class="line"><span class="cl">        vir.next = head;
+</span></span><span class="line"><span class="cl">        ListNode cur = vir;
+</span></span><span class="line"><span class="cl">        int size = 0;
+</span></span><span class="line"><span class="cl">        // 遍历一遍得到链表的size
+</span></span><span class="line"><span class="cl">        while(cur.next != null){
+</span></span><span class="line"><span class="cl">            size++;
+</span></span><span class="line"><span class="cl">            cur = cur.next;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        int z = size - n + 2; //倒数第n是正数第size - n + 1 这里的z = size - n + 1是其前节点
+</span></span><span class="line"><span class="cl">        ListNode vir2 = new ListNode();
+</span></span><span class="line"><span class="cl">        vir2.next = head;
+</span></span><span class="line"><span class="cl">        ListNode cur2 = vir2;
+</span></span><span class="line"><span class="cl">        int count = 1; // 要注意这里的count是从1开始的 是指链表中的第几个节点
+</span></span><span class="line"><span class="cl">        while(cur2.next != null){
+</span></span><span class="line"><span class="cl">            count++;
+</span></span><span class="line"><span class="cl">            if(count == z){
+</span></span><span class="line"><span class="cl">                cur2.next = cur2.next.next;
+</span></span><span class="line"><span class="cl">                return vir2.next;
+</span></span><span class="line"><span class="cl">            }  
+</span></span><span class="line"><span class="cl">            cur2 = cur2.next;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return vir2.next;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 
@@ -1224,7 +1428,7 @@ function setGiscusTheme(theme) {
         2025 Paradox29
     </section>
 
-    <section class="wordcount">本站总字数：29.6k 字
+    <section class="wordcount">本站总字数：39.6k 字
 </section>
     <section class="powerby">
         
