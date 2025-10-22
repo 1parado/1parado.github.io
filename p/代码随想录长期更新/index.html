@@ -10,7 +10,7 @@
 <meta property='og:description' content="\r基础知识（hello 算法）\nhttps://www.hello-algo.com/chapter_array_and_linkedlist/array/\n数组：数组元素存储在连续的内存空间中，如果知道数组首地址和某个元素的索引，查找数据很简单，时间复杂度低O(1)，在数组中插入和删除需要移动元素，所以时间复杂度有点高O(N)。数组（静态）的长度是不可变的（ArrayList动态数组，长度未知的数组），如果扩容数组则重新建立一个更大的数组，复制旧数组的元素到新数组中。\n1 2 // 数组初始化 int[] nums = {1,2,3} or int[] nums = new int[3]; 链表：如果数组很大 内存无法提供这么大的连续空间 则可以使用链表这种数据结构。【value,*】， *指针指向下一个节点的内存地址。链表的尾节点指向null。\n1 2 3 4 5 6 初始化链表 节点1 -&gt; 节点2 // 初始化节点 n0 = listNode(1) n1 = listNode(2) // 构建节点之间的引用 n0.next = n1 链表的插入和删除很简单，只需要改变引用即可O（1），但是查询数据的时候，需要从头节点向后遍历直到目标节点O(N)。\n数组和链表采用了相反的存储策略（一个连续，一个不需要连续），因此各种性质和操作效率都呈对立特点。\n链表的种类：单向链表，双向链表，环形链表\n1 2 3 4 5 6 7 /* 双向链表节点类 */ class ListNode { int val; // 节点值 ListNode next; // 指向后继节点的引用 ListNode prev; // 指向前驱节点的引用 ListNode(int x) { val = x; } // 构造函数 } 列表：元素的有序集合，可以基于数组和链表实现。数组实现的列表是一个有长度限制的列表，因此可以用动态数组来实现列表。列表本质是数组，查找元素很快O（1），插入和删除元素O(N). 列表可以拼接。关于列表的数据结构怎么设计的可以看源码。\n">
 <meta property='og:url' content='https://1parado.github.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0/'>
 <meta property='og:site_name' content='Paradox’s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='算法' /><meta property='article:published_time' content='2025-10-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-21T10:56:55&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='算法' /><meta property='article:published_time' content='2025-10-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-22T08:26:00&#43;08:00'/>
 <meta name="twitter:title" content="代码随想录(长期更新)">
 <meta name="twitter:description" content="\r基础知识（hello 算法）\nhttps://www.hello-algo.com/chapter_array_and_linkedlist/array/\n数组：数组元素存储在连续的内存空间中，如果知道数组首地址和某个元素的索引，查找数据很简单，时间复杂度低O(1)，在数组中插入和删除需要移动元素，所以时间复杂度有点高O(N)。数组（静态）的长度是不可变的（ArrayList动态数组，长度未知的数组），如果扩容数组则重新建立一个更大的数组，复制旧数组的元素到新数组中。\n1 2 // 数组初始化 int[] nums = {1,2,3} or int[] nums = new int[3]; 链表：如果数组很大 内存无法提供这么大的连续空间 则可以使用链表这种数据结构。【value,*】， *指针指向下一个节点的内存地址。链表的尾节点指向null。\n1 2 3 4 5 6 初始化链表 节点1 -&gt; 节点2 // 初始化节点 n0 = listNode(1) n1 = listNode(2) // 构建节点之间的引用 n0.next = n1 链表的插入和删除很简单，只需要改变引用即可O（1），但是查询数据的时候，需要从头节点向后遍历直到目标节点O(N)。\n数组和链表采用了相反的存储策略（一个连续，一个不需要连续），因此各种性质和操作效率都呈对立特点。\n链表的种类：单向链表，双向链表，环形链表\n1 2 3 4 5 6 7 /* 双向链表节点类 */ class ListNode { int val; // 节点值 ListNode next; // 指向后继节点的引用 ListNode prev; // 指向前驱节点的引用 ListNode(int x) { val = x; } // 构造函数 } 列表：元素的有序集合，可以基于数组和链表实现。数组实现的列表是一个有长度限制的列表，因此可以用动态数组来实现列表。列表本质是数组，查找元素很快O（1），插入和删除元素O(N). 列表可以拼接。关于列表的数据结构怎么设计的可以看源码。\n">
     </head>
@@ -356,7 +356,7 @@
 
 
                 <time class="article-time--reading">
-                    8 minute read
+                    10 minute read
                 </time>
             </div>
         
@@ -365,6 +365,7 @@
 
     
 </div>
+
 
 </header>
 
@@ -492,7 +493,7 @@
 </ol>
 <h1 id="数组">数组
 </h1><h2 id="二分查找">二分查找
-</h2><p>二分查找是一种基于分治法策略的高校搜索算法，利用数据的有序性，每轮缩小范围直到找到目标或者找不到目标。即给指针low和high分别设置搜索目标，目标可能是一个值，也可能是一个范围，最终他们要么找到目标终止循环，要么越过边界终止循环</p>
+</h2><p>二分查找是一种基于分治法策略的高效搜索算法，利用数据的有序性，每轮缩小范围直到找到目标或者找不到目标。即给指针low和high分别设置搜索目标，目标可能是一个值，也可能是一个范围，最终他们要么找到目标终止循环，要么越过边界终止循环</p>
 <p>二分查找的优点：时间效率高O（logN），不需要额外的空间【哈希算法以空间换时间】</p>
 <p>二分查找的局限性：仅适合<strong>有序数组</strong>（不要想着先对无序数组排序再用二分查找，因为排序的时间复杂度就已经很高了），不能对链表进行二分查找，不适合数据经常变化的数组。</p>
 <p>1.<a class="link" href="https://leetcode.cn/problems/binary-search/description/"  target="_blank" rel="noopener"
@@ -1263,7 +1264,8 @@
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><a class="link" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/"  target="_blank" rel="noopener"
+</div><p>正确代码：</p>
+<p><a class="link" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/"  target="_blank" rel="noopener"
     >19 删除倒数第N个节点</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1329,7 +1331,124 @@
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
+</div><p><a class="link" href="https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/description/"  target="_blank" rel="noopener"
+    >面试题02.07链表相交</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 第一种方法（Mine），第二种方法用双指针
+</span></span><span class="line"><span class="cl">public class Solution {
+</span></span><span class="line"><span class="cl">    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+</span></span><span class="line"><span class="cl">        // 需要让长链先走 然后同步移动 看是否有节点相交
+</span></span><span class="line"><span class="cl">        int A_size = 0; // A链表的长度
+</span></span><span class="line"><span class="cl">        int B_size = 0; // B链表的长度
+</span></span><span class="line"><span class="cl">        ListNode A_cur = headA;
+</span></span><span class="line"><span class="cl">        ListNode B_cur = headB;
+</span></span><span class="line"><span class="cl">        if(headA == null || headB==null){
+</span></span><span class="line"><span class="cl">            return null;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        while(A_cur != null){ //在计算链表长度的时候 循环条件里面是cur 不是cur.next
+</span></span><span class="line"><span class="cl">            A_size++; 
+</span></span><span class="line"><span class="cl">            A_cur = A_cur.next;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        while(B_cur != null){
+</span></span><span class="line"><span class="cl">            B_size++; 
+</span></span><span class="line"><span class="cl">            B_cur = B_cur.next;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        // 我想的是计算出A和B的长度差（用绝对值Math.abs(),但是这样还是区分不了哪个长哪个短）
+</span></span><span class="line"><span class="cl">        // int length = Math.abs(A_size,B_size);
+</span></span><span class="line"><span class="cl">        int length = 0;
+</span></span><span class="line"><span class="cl">        ListNode slow = null; // 指向长链表的头节点
+</span></span><span class="line"><span class="cl">        ListNode quick = null; // 指向短链表的头节点
+</span></span><span class="line"><span class="cl">        if(A_size - B_size &gt;= 0){
+</span></span><span class="line"><span class="cl">            length = A_size - B_size;
+</span></span><span class="line"><span class="cl">            quick = headA;
+</span></span><span class="line"><span class="cl">            slow = headB;
+</span></span><span class="line"><span class="cl">        }else{
+</span></span><span class="line"><span class="cl">            length = -1 * (A_size - B_size);
+</span></span><span class="line"><span class="cl">            quick = headB;
+</span></span><span class="line"><span class="cl">            slow = headA;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        // 将长链表的指针和短链表的指针同步
+</span></span><span class="line"><span class="cl">        while(length &gt; 0){
+</span></span><span class="line"><span class="cl">            quick = quick.next;
+</span></span><span class="line"><span class="cl">            length--;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        while(quick != null){  
+</span></span><span class="line"><span class="cl">            // 注意这里不是quick.next 如果是这样 首节点都没有比较 如果设置了虚拟节点可以是vir.next
+</span></span><span class="line"><span class="cl">            if(quick == slow){
+</span></span><span class="line"><span class="cl">                return quick;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            quick = quick.next;
+</span></span><span class="line"><span class="cl">            slow = slow.next;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return null;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
+</div><p><a class="link" href="https://leetcode.cn/problems/linked-list-cycle-ii/"  target="_blank" rel="noopener"
+    >142 环形链表ii</a>
+如何判断一个链表中是否有环？ 快慢指针 fast 每次走两步 slow 每次走一步 最终会在环内相遇 fast会追上slow 因为在环内fast相当于每次都逼近slow一个节点
+难点在于如何确定哪个节点是入环点！</p>
+<p>【注意：链表中有些题目没有看别人优秀的题解 有些甚至都没做出来 显然下次遇到了 脑子里首先弹出来的还是自己不成熟的想法 没有形成一个自己的解题逻辑 这是不对的！应该吸收别人的思想为己所用】</p>
+<h1 id="hash-表">Hash 表
+</h1><p>哈希表可以快速判断一个元素是否出现在集合里 key-func（key）-value，但可能出现哈希冲突 不同的key映射到同一个value，解决方法：拉链法和线性探测法。 常见的哈希结构：数组，集合set，map。空间换时间。<strong>当遇到需要判断一个元素是否出现过 就要想到哈希法</strong></p>
+<p><a class="link" href="https://leetcode.cn/problems/valid-anagram/description/"  target="_blank" rel="noopener"
+    >242.有效的字母异位词</a></p>
+
 </section>
 
 
@@ -1366,7 +1485,7 @@
 
 
         <span>
-            Last updated on Oct 21, 2025 10:56 CST
+            Last updated on Oct 22, 2025 08:26 CST
         </span>
     </section></footer>
 
@@ -1377,6 +1496,28 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E5%8A%9B%E6%89%A3hot100/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">力扣hot100</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
@@ -1440,7 +1581,7 @@ function setGiscusTheme(theme) {
         2025 Paradox29
     </section>
 
-    <section class="wordcount">本站总字数：40.3k 字
+    <section class="wordcount">本站总字数：49.4k 字
 </section>
     <section class="powerby">
         
