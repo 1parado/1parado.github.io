@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="title: 实现一个本地翻译器 description: 有些内容需要保密不能发布到网上进行翻译 因此创建一个简单的本地翻译器 date: 2025-10-22 categories: [&ldquo;Java&rdquo;] tags: [&ldquo;SpringBoot&rdquo;,&ldquo;ollama&rdquo;] 对于某些需要隐私保护的文件或者内容不太适合用在线翻译软件，因此可以在自己电脑上实现一个翻译器\n首先看一下百度翻译的页面包括好多功能，文本翻译，图片翻译&hellip; 今天先简单实现一下文本翻译 对于一个翻译系统其实很简单 只要前端点击翻译按钮 后端能返回响应结果即可 关键在于如何返回正确的结果 这里我先创建了一个翻译器V1 用于测试前后端联动是否可以打通\n如果想要识别语言并且返回正确结果 可以有两种方法 一种是调用厂家的API 一种是调用大模型，提供prompt让大模型当你的翻译官即可\n可以在百度翻译开放平台获取API和密钥\n可以在TranslationService中调用API实现调用接口进行翻译\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 package com.example.translation.service; import org.springframework.stereotype.Service; import java.net.URLEncoder; import java.nio.charset.StandardCharsets; import java.security.MessageDigest; import java.util.UUID; import java.io.BufferedReader; import java.io.InputStreamReader; import java.net.HttpURLConnection; import java.net.URL; @Service public class TranslationService { // 替换为你自己的百度翻译 AppID 和密钥 private static final String APP_ID = &#34;你的AppID&#34;; private static final String SECURITY_KEY = &#34;你的密钥&#34;; public String translate(String text, String targetLang) { try { String from = &#34;auto&#34;; String to = getBaiduLangCode(targetLang); String salt = UUID.randomUUID().toString(); String sign = md5(APP_ID + text + salt + SECURITY_KEY); String encodedText = URLEncoder.encode(text, StandardCharsets.UTF_8); String urlStr = String.format( &#34;https://fanyi-api.baidu.com/api/trans/vip/translate?q=%s&amp;from=%s&amp;to=%s&amp;appid=%s&amp;salt=%s&amp;sign=%s&#34;, encodedText, from, to, APP_ID, salt, sign); URL url = new URL(urlStr); HttpURLConnection conn = (HttpURLConnection) url.openConnection(); conn.setRequestMethod(&#34;GET&#34;); conn.connect(); BufferedReader reader = new BufferedReader( new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8)); StringBuilder result = new StringBuilder(); String line; while ((line = reader.readLine()) != null) { result.append(line); } reader.close(); conn.disconnect(); // 简单解析返回内容 String res = result.toString(); int start = res.indexOf(&#34;\\&#34;dst\\&#34;:\\&#34;&#34;); if (start &gt; 0) { int end = res.indexOf(&#34;\\&#34;}&#34;, start); return res.substring(start + 7, end).replace(&#34;\\\\n&#34;, &#34;\\n&#34;).replace(&#34;\\\\u&#34;, &#34;u&#34;); } return &#34;翻译失败：&#34; + res; } catch (Exception e) { e.printStackTrace(); return &#34;翻译错误：&#34; + e.getMessage(); } } private String getBaiduLangCode(String target) { return switch (target.toLowerCase()) { case &#34;english&#34; -&gt; &#34;en&#34;; case &#34;japanese&#34; -&gt; &#34;jp&#34;; case &#34;korean&#34; -&gt; &#34;kor&#34;; case &#34;french&#34; -&gt; &#34;fra&#34;; case &#34;german&#34; -&gt; &#34;de&#34;; default -&gt; &#34;en&#34;; }; } private String md5(String input) throws Exception { MessageDigest md = MessageDigest.getInstance(&#34;MD5&#34;); byte[] array = md.digest(input.getBytes(StandardCharsets.UTF_8)); StringBuilder sb = new StringBuilder(); for (byte b : array) { sb.append(String.format(&#34;%02x&#34;, b &amp; 0xff)); } return sb.toString(); } } 由于我电脑上面下载的有Ollama 所以我选择调用本地大模型的接口服务 实现翻译功能 我电脑上下载的有大模型了，不知道的同学可以输入ollama list 看一下本地已经下载了哪些模型 打开Windows终端 输入命令 ollama run qwen2:0.5b\n">
-<title></title>
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="有些内容需要保密不能发布到网上进行翻译 因此创建一个简单的本地翻译器">
+<title>实现一个本地翻译器</title>
 
-<link rel='canonical' href='http://localhost:1313/p/'>
+<link rel='canonical' href='https://1parado.github.io/p/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%9C%AC%E5%9C%B0%E7%BF%BB%E8%AF%91%E5%99%A8/'>
 
-<link rel="stylesheet" href="/scss/style.min.ec0275f9efc7477560607f9610e0eeb6ebb5e53a8dcbdd5591f1ea2ee0b3c273.css"><meta property='og:title' content="">
-<meta property='og:description' content="title: 实现一个本地翻译器 description: 有些内容需要保密不能发布到网上进行翻译 因此创建一个简单的本地翻译器 date: 2025-10-22 categories: [&ldquo;Java&rdquo;] tags: [&ldquo;SpringBoot&rdquo;,&ldquo;ollama&rdquo;] 对于某些需要隐私保护的文件或者内容不太适合用在线翻译软件，因此可以在自己电脑上实现一个翻译器\n首先看一下百度翻译的页面包括好多功能，文本翻译，图片翻译&hellip; 今天先简单实现一下文本翻译 对于一个翻译系统其实很简单 只要前端点击翻译按钮 后端能返回响应结果即可 关键在于如何返回正确的结果 这里我先创建了一个翻译器V1 用于测试前后端联动是否可以打通\n如果想要识别语言并且返回正确结果 可以有两种方法 一种是调用厂家的API 一种是调用大模型，提供prompt让大模型当你的翻译官即可\n可以在百度翻译开放平台获取API和密钥\n可以在TranslationService中调用API实现调用接口进行翻译\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 package com.example.translation.service; import org.springframework.stereotype.Service; import java.net.URLEncoder; import java.nio.charset.StandardCharsets; import java.security.MessageDigest; import java.util.UUID; import java.io.BufferedReader; import java.io.InputStreamReader; import java.net.HttpURLConnection; import java.net.URL; @Service public class TranslationService { // 替换为你自己的百度翻译 AppID 和密钥 private static final String APP_ID = &#34;你的AppID&#34;; private static final String SECURITY_KEY = &#34;你的密钥&#34;; public String translate(String text, String targetLang) { try { String from = &#34;auto&#34;; String to = getBaiduLangCode(targetLang); String salt = UUID.randomUUID().toString(); String sign = md5(APP_ID + text + salt + SECURITY_KEY); String encodedText = URLEncoder.encode(text, StandardCharsets.UTF_8); String urlStr = String.format( &#34;https://fanyi-api.baidu.com/api/trans/vip/translate?q=%s&amp;from=%s&amp;to=%s&amp;appid=%s&amp;salt=%s&amp;sign=%s&#34;, encodedText, from, to, APP_ID, salt, sign); URL url = new URL(urlStr); HttpURLConnection conn = (HttpURLConnection) url.openConnection(); conn.setRequestMethod(&#34;GET&#34;); conn.connect(); BufferedReader reader = new BufferedReader( new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8)); StringBuilder result = new StringBuilder(); String line; while ((line = reader.readLine()) != null) { result.append(line); } reader.close(); conn.disconnect(); // 简单解析返回内容 String res = result.toString(); int start = res.indexOf(&#34;\\&#34;dst\\&#34;:\\&#34;&#34;); if (start &gt; 0) { int end = res.indexOf(&#34;\\&#34;}&#34;, start); return res.substring(start + 7, end).replace(&#34;\\\\n&#34;, &#34;\\n&#34;).replace(&#34;\\\\u&#34;, &#34;u&#34;); } return &#34;翻译失败：&#34; + res; } catch (Exception e) { e.printStackTrace(); return &#34;翻译错误：&#34; + e.getMessage(); } } private String getBaiduLangCode(String target) { return switch (target.toLowerCase()) { case &#34;english&#34; -&gt; &#34;en&#34;; case &#34;japanese&#34; -&gt; &#34;jp&#34;; case &#34;korean&#34; -&gt; &#34;kor&#34;; case &#34;french&#34; -&gt; &#34;fra&#34;; case &#34;german&#34; -&gt; &#34;de&#34;; default -&gt; &#34;en&#34;; }; } private String md5(String input) throws Exception { MessageDigest md = MessageDigest.getInstance(&#34;MD5&#34;); byte[] array = md.digest(input.getBytes(StandardCharsets.UTF_8)); StringBuilder sb = new StringBuilder(); for (byte b : array) { sb.append(String.format(&#34;%02x&#34;, b &amp; 0xff)); } return sb.toString(); } } 由于我电脑上面下载的有Ollama 所以我选择调用本地大模型的接口服务 实现翻译功能 我电脑上下载的有大模型了，不知道的同学可以输入ollama list 看一下本地已经下载了哪些模型 打开Windows终端 输入命令 ollama run qwen2:0.5b\n">
-<meta property='og:url' content='http://localhost:1313/p/'>
+<link rel="stylesheet" href="/scss/style.min.ec0275f9efc7477560607f9610e0eeb6ebb5e53a8dcbdd5591f1ea2ee0b3c273.css"><meta property='og:title' content="实现一个本地翻译器">
+<meta property='og:description' content="有些内容需要保密不能发布到网上进行翻译 因此创建一个简单的本地翻译器">
+<meta property='og:url' content='https://1parado.github.io/p/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%9C%AC%E5%9C%B0%E7%BF%BB%E8%AF%91%E5%99%A8/'>
 <meta property='og:site_name' content='Paradox’s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:modified_time' content='2025-10-22T21:38:12&#43;08:00'/>
-<meta name="twitter:title" content="">
-<meta name="twitter:description" content="title: 实现一个本地翻译器 description: 有些内容需要保密不能发布到网上进行翻译 因此创建一个简单的本地翻译器 date: 2025-10-22 categories: [&ldquo;Java&rdquo;] tags: [&ldquo;SpringBoot&rdquo;,&ldquo;ollama&rdquo;] 对于某些需要隐私保护的文件或者内容不太适合用在线翻译软件，因此可以在自己电脑上实现一个翻译器\n首先看一下百度翻译的页面包括好多功能，文本翻译，图片翻译&hellip; 今天先简单实现一下文本翻译 对于一个翻译系统其实很简单 只要前端点击翻译按钮 后端能返回响应结果即可 关键在于如何返回正确的结果 这里我先创建了一个翻译器V1 用于测试前后端联动是否可以打通\n如果想要识别语言并且返回正确结果 可以有两种方法 一种是调用厂家的API 一种是调用大模型，提供prompt让大模型当你的翻译官即可\n可以在百度翻译开放平台获取API和密钥\n可以在TranslationService中调用API实现调用接口进行翻译\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 package com.example.translation.service; import org.springframework.stereotype.Service; import java.net.URLEncoder; import java.nio.charset.StandardCharsets; import java.security.MessageDigest; import java.util.UUID; import java.io.BufferedReader; import java.io.InputStreamReader; import java.net.HttpURLConnection; import java.net.URL; @Service public class TranslationService { // 替换为你自己的百度翻译 AppID 和密钥 private static final String APP_ID = &#34;你的AppID&#34;; private static final String SECURITY_KEY = &#34;你的密钥&#34;; public String translate(String text, String targetLang) { try { String from = &#34;auto&#34;; String to = getBaiduLangCode(targetLang); String salt = UUID.randomUUID().toString(); String sign = md5(APP_ID + text + salt + SECURITY_KEY); String encodedText = URLEncoder.encode(text, StandardCharsets.UTF_8); String urlStr = String.format( &#34;https://fanyi-api.baidu.com/api/trans/vip/translate?q=%s&amp;from=%s&amp;to=%s&amp;appid=%s&amp;salt=%s&amp;sign=%s&#34;, encodedText, from, to, APP_ID, salt, sign); URL url = new URL(urlStr); HttpURLConnection conn = (HttpURLConnection) url.openConnection(); conn.setRequestMethod(&#34;GET&#34;); conn.connect(); BufferedReader reader = new BufferedReader( new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8)); StringBuilder result = new StringBuilder(); String line; while ((line = reader.readLine()) != null) { result.append(line); } reader.close(); conn.disconnect(); // 简单解析返回内容 String res = result.toString(); int start = res.indexOf(&#34;\\&#34;dst\\&#34;:\\&#34;&#34;); if (start &gt; 0) { int end = res.indexOf(&#34;\\&#34;}&#34;, start); return res.substring(start + 7, end).replace(&#34;\\\\n&#34;, &#34;\\n&#34;).replace(&#34;\\\\u&#34;, &#34;u&#34;); } return &#34;翻译失败：&#34; + res; } catch (Exception e) { e.printStackTrace(); return &#34;翻译错误：&#34; + e.getMessage(); } } private String getBaiduLangCode(String target) { return switch (target.toLowerCase()) { case &#34;english&#34; -&gt; &#34;en&#34;; case &#34;japanese&#34; -&gt; &#34;jp&#34;; case &#34;korean&#34; -&gt; &#34;kor&#34;; case &#34;french&#34; -&gt; &#34;fra&#34;; case &#34;german&#34; -&gt; &#34;de&#34;; default -&gt; &#34;en&#34;; }; } private String md5(String input) throws Exception { MessageDigest md = MessageDigest.getInstance(&#34;MD5&#34;); byte[] array = md.digest(input.getBytes(StandardCharsets.UTF_8)); StringBuilder sb = new StringBuilder(); for (byte b : array) { sb.append(String.format(&#34;%02x&#34;, b &amp; 0xff)); } return sb.toString(); } } 由于我电脑上面下载的有Ollama 所以我选择调用本地大模型的接口服务 实现翻译功能 我电脑上下载的有大模型了，不知道的同学可以输入ollama list 看一下本地已经下载了哪些模型 打开Windows终端 输入命令 ollama run qwen2:0.5b\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SpringBoot' /><meta property='article:tag' content='ollama' /><meta property='article:published_time' content='2025-10-22T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-22T21:48:48&#43;08:00'/>
+<meta name="twitter:title" content="实现一个本地翻译器">
+<meta name="twitter:description" content="有些内容需要保密不能发布到网上进行翻译 因此创建一个简单的本地翻译器">
     </head>
     <body class="
     article-page
@@ -231,11 +231,11 @@
 
                             <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
                                 
-                                    <option value="http://localhost:1313/" selected>English</option>
+                                    <option value="https://1parado.github.io/" selected>English</option>
                                 
-                                    <option value="http://localhost:1313/zh-cn/" >中文</option>
+                                    <option value="https://1parado.github.io/zh-cn/" >中文</option>
                                 
-                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                    <option value="https://1parado.github.io/ar/" >عربي</option>
                                 
                             </select>
                         </li>
@@ -268,42 +268,7 @@
     </ol>
 </aside>
 
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#tags-springbootollama">title: 实现一个本地翻译器
-description: 有些内容需要保密不能发布到网上进行翻译 因此创建一个简单的本地翻译器
-date: 2025-10-22
-categories: [&ldquo;Java&rdquo;]
-tags: [&ldquo;SpringBoot&rdquo;,&ldquo;ollama&rdquo;]</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
+    
 
             <main class="main full-width">
     <article class="main-article">
@@ -311,12 +276,24 @@ tags: [&ldquo;SpringBoot&rdquo;,&ldquo;ollama&rdquo;]</a></li>
 
     <div class="article-details">
     
+    <header class="article-category">
+        
+            <a href="/categories/java/" style="background-color: #2a9d8f; color: #fff;">
+                Java
+            </a>
+        
+    </header>
+    
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/"></a>
+            <a href="/p/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%9C%AC%E5%9C%B0%E7%BF%BB%E8%AF%91%E5%99%A8/">实现一个本地翻译器</a>
         </h2>
     
+        
+        <h3 class="article-subtitle">
+            有些内容需要保密不能发布到网上进行翻译 因此创建一个简单的本地翻译器
+        </h3>
         
     </div>
 
@@ -325,6 +302,19 @@ tags: [&ldquo;SpringBoot&rdquo;,&ldquo;ollama&rdquo;]</a></li>
     
     
     <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Oct 22, 2025</time>
+            </div>
         
 
         
@@ -354,12 +344,7 @@ tags: [&ldquo;SpringBoot&rdquo;,&ldquo;ollama&rdquo;]</a></li>
     <section class="article-content">
     
     
-    <h2 id="tags-springbootollama">title: 实现一个本地翻译器
-description: 有些内容需要保密不能发布到网上进行翻译 因此创建一个简单的本地翻译器
-date: 2025-10-22
-categories: [&ldquo;Java&rdquo;]
-tags: [&ldquo;SpringBoot&rdquo;,&ldquo;ollama&rdquo;]
-</h2><style>
+    <style>
   body {
     background: url('/img/background.jpg') no-repeat center top;
     background-size: cover;
@@ -565,7 +550,7 @@ tags: [&ldquo;SpringBoot&rdquo;,&ldquo;ollama&rdquo;]
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>由于我电脑上面下载的有Ollama 所以我选择调用本地大模型的接口服务 实现翻译功能 我电脑上下载的有大模型了，不知道的同学可以输入ollama list 看一下本地已经下载了哪些模型
+</div><p>由于我电脑上面下载的有Ollama 所以我选择调用本地大模型的接口服务 实现翻译功能 不知道的同学可以下载一下ollama 然后下载一个模型 建议qwen:0.5b 即可 其他模型占用内存太大 输入ollama list 看一下本地已经下载了哪些模型
 打开Windows终端 输入命令 ollama run qwen2:0.5b</p>
 <p><img src="/img/ollama%e5%91%bd%e4%bb%a4.png"
 	
@@ -586,8 +571,8 @@ tags: [&ldquo;SpringBoot&rdquo;,&ldquo;ollama&rdquo;]
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">body</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;model&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;qwen2:0.5b&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">body</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;prompt&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;请将以下文本翻译成英文：&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">text</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">body</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;model&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;qwen2:0.5b&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">body</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;prompt&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;请将以下文本翻译成英文：&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">text</span><span class="p">);</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>接下来启动服务 看一下效果
@@ -602,7 +587,7 @@ tags: [&ldquo;SpringBoot&rdquo;,&ldquo;ollama&rdquo;]
 	
 ></p>
 <blockquote>
-<p>在运行的时候 我的8080端口号被占用了 可以换一个端口号 也可以将启动的服务关闭 这里我选择关闭现有服务 然后重新启动 监听8080端口</p></blockquote>
+<p>遇到的问题：在运行的时候 我的8080端口号被占用了 可以换一个端口号 也可以将启动的服务关闭 这里我选择关闭现有服务 然后重新启动 监听8080端口</p></blockquote>
 <p><img src="/img/%e5%85%b3%e9%97%ad%e7%9b%91%e5%90%ac8080%e7%ab%af%e5%8f%a3%e7%9a%84%e8%bf%9b%e7%a8%8b.png"
 	
 	
@@ -619,6 +604,14 @@ tags: [&ldquo;SpringBoot&rdquo;,&ldquo;ollama&rdquo;]
 
     <footer class="article-footer">
     
+    <section class="article-tags">
+        
+            <a href="/tags/springboot/">SpringBoot</a>
+        
+            <a href="/tags/ollama/">Ollama</a>
+        
+    </section>
+
 
     
     <section class="article-copyright">
@@ -642,7 +635,7 @@ tags: [&ldquo;SpringBoot&rdquo;,&ldquo;ollama&rdquo;]
 
 
         <span>
-            Last updated on Oct 22, 2025 21:38 CST
+            Last updated on Oct 22, 2025 21:48 CST
         </span>
     </section></footer>
 
@@ -653,6 +646,54 @@ tags: [&ldquo;SpringBoot&rdquo;,&ldquo;ollama&rdquo;]
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%8F%E6%84%9F%E8%AF%8D%E6%A3%80%E6%B5%8B/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">如何实现一个简单的敏感词检测</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">仿教务系统</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/ruoyi%E6%A1%86%E6%9E%B6/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">RuoYi框架</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
@@ -716,7 +757,7 @@ function setGiscusTheme(theme) {
         2025 Paradox29
     </section>
 
-    <section class="wordcount">本站总字数：57.9k 字
+    <section class="wordcount">本站总字数：57.7k 字
 </section>
     <section class="powerby">
         
@@ -836,7 +877,7 @@ function setGiscusTheme(theme) {
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.d786ec1aec5ee31b2bdc9530dac1c548566ba695299b055d7eb937d0bd02c872.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
@@ -850,7 +891,7 @@ function setGiscusTheme(theme) {
 </script>
 <style>
   body {
-    background: url(http://localhost:1313/background/background.jpg) no-repeat center top;
+    background: url(https://1parado.github.io/background/background.jpg) no-repeat center top;
     background-size: cover;
     background-attachment: fixed;
   }
@@ -865,7 +906,7 @@ function setGiscusTheme(theme) {
         cursor: pointer;
         width: 30px;
         height: 30px;
-        background-image: url(http://localhost:1313/icons/backTop.svg);
+        background-image: url(https://1parado.github.io/icons/backTop.svg);
     }
 </style>
 
