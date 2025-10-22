@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Tue, 21 Oct 2025 17:08:25 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 22 Oct 2025 16:46:33 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Redis 常见面试题</title>
         <link>https://1parado.github.io/p/redis-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
         <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
@@ -251,8 +251,9 @@ Admin端新增抢课信息
 &gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;2025.10.22&lt;/p&gt;
 &lt;h2 id=&#34;论坛模块&#34;&gt;论坛模块
-&lt;/h2&gt;&lt;p&gt;对于论坛模块，学生可以发帖评价课程，教师不能发帖，两者都可以进行评论回复交流&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%ae%ba%e5%9d%9b%e4%b8%bb%e9%a1%b5.png&#34;
+&lt;/h2&gt;&lt;p&gt;对于论坛模块，学生可以发帖评价课程，教师不能发帖，两者都可以进行评论回复交流
+论坛主页展示一些帖子和热门榜单（Redis缓存）【这都是些简单的增删改查】
+&lt;img src=&#34;https://1parado.github.io/img/%e8%ae%ba%e5%9d%9b%e4%b8%bb%e9%a1%b5.png&#34;
 	
 	
 	
@@ -292,6 +293,9 @@ Admin端新增抢课信息
 	
 	
 &gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;想到了一个小玩意，在用户进行发布帖子和进行评论的时候，进行敏感词检查。如果内容中包含敏感词 就弹出提示。实现起来挺简单的，让Java后端负责业务逻辑，python负责机器学习，python运行在本地端口，两者通过http进行通信。
+详情请看这篇文章&lt;/p&gt;&lt;/blockquote&gt;
 </description>
         </item>
         
