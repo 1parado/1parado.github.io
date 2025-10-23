@@ -1116,8 +1116,8 @@
 &lt;blockquote&gt;
 &lt;p&gt;3.LinkedHashMap 是 HashMap 的子类，它维护了一个双向链表，用于记录键值对的插入顺序或访问顺序&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;当需要查询一个元素是否出现过，或者一个元素是否在集合里&amp;mdash;&amp;gt;哈希法。用空间换时间，可以用数组、set、map&amp;hellip;做哈希法&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&#34;两数之和&#34;&gt;两数之和 &lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/two-sum&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://leetcode.cn/problems/two-sum&lt;/a&gt;
+&lt;h2 id=&#34;两数之和&#34;&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/two-sum&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;两数之和&lt;/a&gt;
 &lt;/h2&gt;&lt;p&gt;题解1. 双重循环
 题解2. 哈希法 Map（key，value）
 （我想的一个是双重循环，一个是排序比较，但是注意审题，排序之后下标都变了肯定不对！）
@@ -1168,8 +1168,8 @@ class Solution {
 
     }
 } --&gt;
-&lt;h2 id=&#34;移动零&#34;&gt;移动零  &lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/move-zeroes/description/?envType=study-plan-v2&amp;amp;envId=top-100-liked&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://leetcode.cn/problems/move-zeroes/description/?envType=study-plan-v2&amp;envId=top-100-liked&lt;/a&gt;
+&lt;h2 id=&#34;移动零&#34;&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/move-zeroes/description/?envType=study-plan-v2&amp;amp;envId=top-100-liked&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;移动零&lt;/a&gt;
 &lt;/h2&gt;&lt;p&gt;class Solution {
 public void moveZeroes(int[] nums) {
 int[] res = new int[];
@@ -1411,6 +1411,23 @@ return res;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;二分查找&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&amp;mdash;2025.10.23
+今天换了一种刷题的策略 不按照分类做了 直接按照题单顺序来做 我觉得简单题其实难度还好 中等难度的题我就A不出来了 主要还是在于我的数据结构基础掌握的不是很牢固 今天刷题的时候遇到的问题：&lt;/p&gt;
+&lt;p&gt;1.hashmap怎么初始化 hashmap的操作 hashMap怎么遍历 怎么获得key 怎么获得value&lt;/p&gt;
+&lt;p&gt;2.动态数组ArrayList怎么创建 ArrayList的常见操作&lt;/p&gt;
+&lt;p&gt;3.位运算 异或运算符^，异或运算的性质  &amp;ndash;相同为0，不同为1 任意数与0异或，结果仍是它本身。与运算 &amp;amp;&lt;/p&gt;
+&lt;p&gt;4.数组内置排序：Arrays.sort( )&lt;/p&gt;
+&lt;p&gt;5.Java支持十进制数字直接进行逻辑运算（计算的时候是按照二进制进行计算的）
+&lt;img src=&#34;https://1parado.github.io/img/%e5%8a%9b%e6%89%a31023.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;力扣1023&#34;
 	
 	
 &gt;&lt;/p&gt;
