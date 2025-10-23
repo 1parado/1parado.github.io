@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Thu, 23 Oct 2025 21:48:27 +0800</lastBuildDate><atom:link href="https://1parado.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 23 Oct 2025 23:53:25 +0800</lastBuildDate><atom:link href="https://1parado.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>自然语言转SQL语句实现增删改查操作</title>
         <link>https://1parado.github.io/p/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E8%BD%ACsql%E8%AF%AD%E5%8F%A5%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/</link>
         <pubDate>Thu, 23 Oct 2025 00:00:00 +0000</pubDate>
@@ -796,7 +796,8 @@ Java中现在主流的ORM框架包括：&lt;/p&gt;
     background-attachment: fixed;
   }
 &lt;/style&gt;
-&lt;p&gt;参考链接：
+&lt;h2 id=&#34;2025-10-19&#34;&gt;2025-10-19
+&lt;/h2&gt;&lt;p&gt;参考链接：
 &lt;a class=&#34;link&#34; href=&#34;https://javaguide.cn/database/redis/redis-questions-01.html#%E4%BB%80%E4%B9%88%E6%98%AF-redis&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://javaguide.cn/database/redis/redis-questions-01.html#%E4%BB%80%E4%B9%88%E6%98%AF-redis&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Redis是NoSQL数据库，是一种内存数据库。读写速度很快，经常用于分布式缓存方向，存储的是key-value对数据。Redis支持事务，持久化，lua脚本&amp;hellip;&lt;/p&gt;
@@ -807,7 +808,8 @@ Java中现在主流的ORM框架包括：&lt;/p&gt;
 其他的分布式缓存：Tendis,KeyDB&amp;hellip;&lt;/p&gt;
 &lt;p&gt;选择Redis的原因：1.访问速度快（基于内存） 2.高并发 3. 功能全面（可以作缓存，可以用于分布式锁，限流，消息队列，延时队列&amp;hellip;）&lt;/p&gt;
 &lt;p&gt;常见的缓存读写策略：https://javaguide.cn/database/redis/3-commonly-used-cache-read-and-write-strategies.html&lt;/p&gt;
-&lt;p&gt;Redis 应用【2025.10.20】&lt;/p&gt;
+&lt;h2 id=&#34;2025-10-20&#34;&gt;2025-10-20
+&lt;/h2&gt;&lt;p&gt;Redis 应用&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;缓存&lt;/li&gt;
 &lt;li&gt;分布式锁 Redission&lt;/li&gt;
@@ -818,7 +820,43 @@ Java中现在主流的ORM框架包括：&lt;/p&gt;
 &lt;/ol&gt;
 &lt;p&gt;Redis可以实现全文搜索引擎功能 需要借助RedisSearch（一个基于Redis的搜索引擎模块）：性能更优秀 较低内存占用实现快速索引。&lt;/p&gt;
 &lt;p&gt;延时任务（红包过期自动退还）:实现方式：1. redis过期事件监听（不推荐） 2. redission内置的延时队列 减少了丢消息的可能，消息不存在重复消费问题&lt;/p&gt;
-&lt;p&gt;redis常见的数据类型：String、List、Set、ZSet、Hash&lt;/p&gt;
+&lt;p&gt;redis常见的数据类型：String、List、Set、ZSet、Hash 三种特殊数据类型：HyperLogLog（基数统计）、Bitmap （位图）、Geospatial (地理位置)&lt;/p&gt;
+&lt;h2 id=&#34;2025-10-21&#34;&gt;2025-10-21
+&lt;/h2&gt;&lt;h3 id=&#34;redis持久化机制&#34;&gt;Redis持久化机制：
+&lt;/h3&gt;&lt;p&gt;redis支持三种持久化：
+&lt;strong&gt;1.快照RDB，2.只追加文件AOF， 3.RDB和AOF混合持久化&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;1.RDB持久化 创建快照获取存储在内存种数据在某个时间点的副本 创建快照之后 可以对快照备份 可以创建副本（Redis主从结构） RDB是redis默认的持久化方式&lt;/p&gt;
+&lt;p&gt;RDB创建快照 save：同步保存操作 会阻塞Redis主线程 bgsave 用子进程执行 不会阻塞Redis主线程&lt;/p&gt;
+&lt;p&gt;2.AOF持久化 实时性更好 开启AOF持久化之后每次执行改变redis数据的命令 redis就会将该命令写入AOF缓冲区 然后再写入到AOF文件&lt;/p&gt;
+&lt;p&gt;AOF流程：所有的写命令追加到AOF缓冲区
+文件写入：将AOF缓冲区的数据写入到AOF文件中
+文件同步： AOF缓冲区根据对应的持久化方式向硬盘做同步操作
+文件重写：AOF越来越大 需要定期对AOF文件重写
+重启加载：redis重启时 可以加载AOF文件进行数据恢复&lt;/p&gt;
+&lt;p&gt;redis有三种不同的AOF持久化方式（区别在于同步AOF文件的时机不同 即刷盘时机不同）：
+1.appendfsync always
+2.appendfsync everyseconds
+3.appendfsync no&lt;/p&gt;
+&lt;p&gt;一般的关系型数据库是在执行命令前记录日志 AOF持久化机制是在执行命令之后记录日志：优点：可以避免额外开销 不会阻塞当前执行的命令 缺点：可能会造成修改丢失 可能会阻塞后续其他命令&lt;/p&gt;
+&lt;p&gt;AOF重写（当AOF文件越来越大 进行AOF重写即压缩AOF文件） Redis将AOF重写程序放在子进程执行 避免造成对redis正常处理命令请求造成影响。&lt;/p&gt;
+&lt;p&gt;Redis单线程模式和多线程模式：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对于读写命令来说，Redis 一直是单线程模型。不过，在 Redis 4.0 版本之后引入了多线程来执行一些大键值对的异步删除操作，Redis 6.0 版本之后引入了多线程来处理网络请求（提高网络 IO 读写性能）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;redis内存管理&#34;&gt;Redis内存管理
+&lt;/h3&gt;&lt;p&gt;保存的缓存数据会有一个过期时间 如果不设置过期时间 可能会出现OOM内存溢出问题
+expire key 60 // 在60s后key过期
+setex key 60 value // 数据在 60s 后过期（对于字符串类型）
+ttl key //查看数据还有多久过期
+过期时间还可以用于业务场景中如登录token，验证码&amp;hellip;&lt;/p&gt;
+&lt;p&gt;redis通过&lt;strong&gt;过期字典&lt;/strong&gt;保存数据过期的时间，过期字典的key指向redis的某个key 过期字典的值指向key的过期时间 在查询key的时候 redis会首先检查一下key是否过期 即在过期字典中查找key是否存在 存在的话 进行过期删除&lt;/p&gt;
+&lt;p&gt;redis过期删除策略包括：
+惰性删除（取出key时进行检查），定期删除（周期性的抽查一些key），延迟队列（将设置过期时间的key放入延迟队列 到期后删除key），定时删除（数据过期立马删除）
+Redis 采用的是&lt;strong&gt;定期删除+惰性删除&lt;/strong&gt;结合的策略 由于定期删除是周期性的随机抽查一些数据，抽查的数据数量由expire.c决定 默认为20 定期删除的频率由hz决定 默认为10 表示每秒执行10次尝试&lt;/p&gt;
+&lt;p&gt;大量的key集中过期（缓存雪崩）造成的后果：请求延迟增加 内存占用过高，为了避免这种情况，key的过期时间尽量随机 并开启lazy free机制（异步删除过期key 不会阻塞主线程的运行）&lt;/p&gt;
+&lt;p&gt;Redis 的内存淘汰策略（6种）：
+Redis 的内存淘汰策略只有在运行内存达到了配置的最大内存阈值时才会触发，这个阈值是通过 redis.conf 的 maxmemory 参数来定义的&lt;/p&gt;
+&lt;p&gt;明天该看这个了 &lt;a class=&#34;link&#34; href=&#34;https://javaguide.cn/database/redis/redis-questions-02.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;常见面试总结下&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
