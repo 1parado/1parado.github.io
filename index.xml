@@ -139,7 +139,16 @@ Java中现在主流的ORM框架包括：&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;在entity包创建实体 Hibernate可以通过实体类自动生成表结构
-&lt;a class=&#34;link&#34; href=&#34;./img/Hibernate%e6%a1%86%e6%9e%b6.png&#34; &gt;Hibernate框架&lt;/a&gt;&lt;/p&gt;
+&lt;img src=&#34;https://1parado.github.io/img/Hibernate%e6%a1%86%e6%9e%b6.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Hibernate框架&#34;
+	
+	
+&gt;&lt;/p&gt;
 &lt;p&gt;参考&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/unbelievevc/article/details/132096074&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Hibernate的执行过程&lt;/a&gt;，简单说明一下Hibernate的执行过程&lt;/p&gt;
 &lt;blockquote&gt;
@@ -179,12 +188,48 @@ Java中现在主流的ORM框架包括：&lt;/p&gt;
 &lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;遇到的问题2：调用的本地模型是qwen2:0.5b 他太逊了（其实是我prompt没给对）刚开始一直不能将文本语言转为正确的SQL语句 后面换了几次prompt才能正常运行。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;运行页面：
-第一次查询失败 因为我犯蠢了 没将ollama启动
-&lt;a class=&#34;link&#34; href=&#34;./img/nltodb%e6%9f%a5%e8%af%a2%e5%a4%b1%e8%b4%a51.png&#34; &gt;nltodb查询失败1&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;./img/nltodb%e6%9f%a5%e8%af%a2%e6%88%90%e5%8a%9f.png&#34; &gt;nltodb查询成功&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;./img/nltodb%e7%b2%be%e5%87%86%e6%9f%a5%e8%af%a2.png&#34; &gt;nltodb精准查询&lt;/a&gt;
-用英文操作其实也是阔以的 因为输入的文本都是传入给本地大模型了 他会给你正确的sql语句 正确的操作数据库
-&lt;a class=&#34;link&#34; href=&#34;./img/nltodb%e8%8b%b1%e6%96%87%e6%9f%a5%e8%af%a2.png&#34; &gt;nltodb英文查询&lt;/a&gt;&lt;/p&gt;
+第一次查询失败 因为我犯蠢了 没将ollama启动&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e6%9f%a5%e8%af%a2%e5%a4%b1%e8%b4%a51.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;nltodb查询失败1&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e6%9f%a5%e8%af%a2%e6%88%90%e5%8a%9f.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;nltodb查询成功&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e7%b2%be%e5%87%86%e6%9f%a5%e8%af%a2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;nltodb精准查询&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;用英文操作其实也是阔以的 因为输入的文本都是传入给本地大模型了 他会给你正确的sql语句 正确的操作数据库&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e8%8b%b1%e6%96%87%e6%9f%a5%e8%af%a2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;nltodb英文查询&#34;
+	
+	
+&gt;&lt;/p&gt;
 &lt;p&gt;现在这个系统只是实现了查询功能 其他增删改操作实现起来跟查询操作大同小异 所以通过自然语言操作数据库是可行的并且有益于降低数据操作的门槛 GitHub上有好多优秀的开源项目 这里我就不一一列举了 总之 这个系统只是一个简单的MCP数据库的基本实现。&lt;/p&gt;
 &lt;p&gt;项目源码地址：https://github.com/1parado/MCP-Database&lt;/p&gt;
 </description>
