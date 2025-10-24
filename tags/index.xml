@@ -7,7 +7,15 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Thu, 23 Oct 2025 23:53:25 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 24 Oct 2025 10:34:32 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Redis</title>
+        <link>https://1parado.github.io/tags/redis/</link>
+        <pubDate>Fri, 24 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/redis/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Ollama</title>
         <link>https://1parado.github.io/tags/ollama/</link>
         <pubDate>Thu, 23 Oct 2025 00:00:00 +0000</pubDate>
@@ -37,14 +45,6 @@
         <pubDate>Mon, 20 Oct 2025 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/tags/java/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Redis</title>
-        <link>https://1parado.github.io/tags/redis/</link>
-        <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/tags/redis/</guid>
         <description></description>
         </item>
         <item>

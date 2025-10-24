@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="\r参考：如何从零开始手写一个Redis\n2025.10.24 如何实现固定缓存大小 HashMap，ConcurrentHashMap可以作为缓存使用 但HashMap本身不是线程安全的 但是作为基础的Java集合 不管是HashMap还是ConcurrentHashMap本身不具备自动的数据淘汰机制，这样可能会导致OOM（内存溢出）\n淘汰机制：FIFO（先进缓存先被淘汰）,LRU（最近最少使用）,LFU（最近最少频率使用），从左往右命中率越来越高，成本也越来越高\n对于加了淘汰机制的HashMap仍然存在几个问题：锁竞争激烈，不支持过期时间，不知此自动刷新，于是出现了Guava Caffeine&hellip;\n引导类：是指在框架或应用程序中负责启动和初始化的核心类。Springboot中引导类即Application为后缀的类 对于该项目 配置了一个缓存引导类CacheBS方便用户使用\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 @Test public void helloTest() { ICache&lt;String, String&gt; cache = CacheBs.&lt;String,String&gt;newInstance() .size(2) .build(); cache.put(&#34;1&#34;, &#34;1&#34;); cache.put(&#34;2&#34;, &#34;2&#34;); cache.put(&#34;3&#34;, &#34;3&#34;); // 1从缓存中出来 3进去 cache.put(&#34;4&#34;, &#34;4&#34;); // 2从缓存中出来 4进去 Assert.assertEquals(2, cache.size()); // 测试cache的大小是否为2 不相同则测试不通过 System.out.println(cache.keySet()); } ">
+<title>手写一个Redis</title>
+
+<link rel='canonical' href='https://1parado.github.io/p/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAredis/'>
+
+<link rel="stylesheet" href="/scss/style.min.ec0275f9efc7477560607f9610e0eeb6ebb5e53a8dcbdd5591f1ea2ee0b3c273.css"><meta property='og:title' content="手写一个Redis">
+<meta property='og:description' content="\r参考：如何从零开始手写一个Redis\n2025.10.24 如何实现固定缓存大小 HashMap，ConcurrentHashMap可以作为缓存使用 但HashMap本身不是线程安全的 但是作为基础的Java集合 不管是HashMap还是ConcurrentHashMap本身不具备自动的数据淘汰机制，这样可能会导致OOM（内存溢出）\n淘汰机制：FIFO（先进缓存先被淘汰）,LRU（最近最少使用）,LFU（最近最少频率使用），从左往右命中率越来越高，成本也越来越高\n对于加了淘汰机制的HashMap仍然存在几个问题：锁竞争激烈，不支持过期时间，不知此自动刷新，于是出现了Guava Caffeine&hellip;\n引导类：是指在框架或应用程序中负责启动和初始化的核心类。Springboot中引导类即Application为后缀的类 对于该项目 配置了一个缓存引导类CacheBS方便用户使用\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 @Test public void helloTest() { ICache&lt;String, String&gt; cache = CacheBs.&lt;String,String&gt;newInstance() .size(2) .build(); cache.put(&#34;1&#34;, &#34;1&#34;); cache.put(&#34;2&#34;, &#34;2&#34;); cache.put(&#34;3&#34;, &#34;3&#34;); // 1从缓存中出来 3进去 cache.put(&#34;4&#34;, &#34;4&#34;); // 2从缓存中出来 4进去 Assert.assertEquals(2, cache.size()); // 测试cache的大小是否为2 不相同则测试不通过 System.out.println(cache.keySet()); } ">
+<meta property='og:url' content='https://1parado.github.io/p/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAredis/'>
+<meta property='og:site_name' content='Paradox’s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Redis' /><meta property='article:published_time' content='2025-10-24T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-24T10:34:32&#43;08:00'/>
+<meta name="twitter:title" content="手写一个Redis">
+<meta name="twitter:description" content="\r参考：如何从零开始手写一个Redis\n2025.10.24 如何实现固定缓存大小 HashMap，ConcurrentHashMap可以作为缓存使用 但HashMap本身不是线程安全的 但是作为基础的Java集合 不管是HashMap还是ConcurrentHashMap本身不具备自动的数据淘汰机制，这样可能会导致OOM（内存溢出）\n淘汰机制：FIFO（先进缓存先被淘汰）,LRU（最近最少使用）,LFU（最近最少频率使用），从左往右命中率越来越高，成本也越来越高\n对于加了淘汰机制的HashMap仍然存在几个问题：锁竞争激烈，不支持过期时间，不知此自动刷新，于是出现了Guava Caffeine&hellip;\n引导类：是指在框架或应用程序中负责启动和初始化的核心类。Springboot中引导类即Application为后缀的类 对于该项目 配置了一个缓存引导类CacheBS方便用户使用\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 @Test public void helloTest() { ICache&lt;String, String&gt; cache = CacheBs.&lt;String,String&gt;newInstance() .size(2) .build(); cache.put(&#34;1&#34;, &#34;1&#34;); cache.put(&#34;2&#34;, &#34;2&#34;); cache.put(&#34;3&#34;, &#34;3&#34;); // 1从缓存中出来 3进去 cache.put(&#34;4&#34;, &#34;4&#34;); // 2从缓存中出来 4进去 Assert.assertEquals(2, cache.size()); // 测试cache的大小是否为2 不相同则测试不通过 System.out.println(cache.keySet()); } ">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_704d6f3f7ea7c980.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Paradox’s Blog</a></h1>
+            <h2 class="site-description">Welcome！</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://1parado.github.io/" selected>English</option>
+                                
+                                    <option value="https://1parado.github.io/zh-cn/" >中文</option>
+                                
+                                    <option value="https://1parado.github.io/ar/" >عربي</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#20251024">2025.10.24</a>
+      <ol>
+        <li><a href="#如何实现固定缓存大小">如何实现固定缓存大小</a></li>
+        <li><a href="#实现过期时间expire">实现过期时间expire</a></li>
+        <li><a href="#实现内存数据重启不丢失">实现内存数据重启不丢失</a></li>
+        <li><a href="#添加监听器">添加监听器</a></li>
+        <li><a href="#lru-缓存淘汰">LRU 缓存淘汰</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="background-color: #2a9d8f; color: #fff;">
+                数据库
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAredis/">手写一个Redis</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Oct 24, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    1 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <style>
+  body {
+    background: url('/img/background.jpg') no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+</style>
+<p>参考：<a class="link" href="https://github.com/houbb/cache?tab=readme-ov-file"  target="_blank" rel="noopener"
+    >如何从零开始手写一个Redis</a></p>
+<h2 id="20251024">2025.10.24
+</h2><h3 id="如何实现固定缓存大小">如何实现固定缓存大小
+</h3><p>HashMap，ConcurrentHashMap可以作为缓存使用 但HashMap本身不是线程安全的 但是作为基础的Java集合 不管是HashMap还是ConcurrentHashMap本身不具备自动的数据淘汰机制，这样可能会导致OOM（内存溢出）</p>
+<p>淘汰机制：FIFO（先进缓存先被淘汰）,LRU（最近最少使用）,LFU（最近最少频率使用），从左往右命中率越来越高，成本也越来越高</p>
+<p>对于加了淘汰机制的HashMap仍然存在几个问题：锁竞争激烈，不支持过期时间，不知此自动刷新，于是出现了Guava Caffeine&hellip;</p>
+<blockquote>
+<p>引导类：是指在框架或应用程序中负责启动和初始化的核心类。Springboot中引导类即Application为后缀的类 对于该项目 配置了一个缓存引导类CacheBS方便用户使用</p></blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">helloTest</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">ICache</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CacheBs</span><span class="p">.</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">String</span><span class="o">&gt;</span><span class="n">newInstance</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">size</span><span class="p">(</span><span class="n">2</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">cache</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;1&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">cache</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;2&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;2&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">cache</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;3&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;3&#34;</span><span class="p">);</span><span class="w"> </span><span class="c1">// 1从缓存中出来 3进去</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">cache</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;4&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;4&#34;</span><span class="p">);</span><span class="w"> </span><span class="c1">// 2从缓存中出来 4进去</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertEquals</span><span class="p">(</span><span class="n">2</span><span class="p">,</span><span class="w"> </span><span class="n">cache</span><span class="p">.</span><span class="na">size</span><span class="p">());</span><span class="w"> </span><span class="c1">// 测试cache的大小是否为2 不相同则测试不通过</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">cache</span><span class="p">.</span><span class="na">keySet</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/%e5%85%88%e8%bf%9b%e5%85%88%e5%87%ba%e7%bc%93%e5%ad%98%e6%b5%8b%e8%af%95%e6%88%90%e5%8a%9f.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="先进先出测试"
+	
+	
+></p>
+<h3 id="实现过期时间expire">实现过期时间expire
+</h3><p>Redis中的expire可以用于验证码失效，登录token失效等业务场景&hellip; 设计一个cacheExpire接口 可以计算多久之后过期</p>
+<p>过期的实现原理：可以通过一个定时任务比如一秒钟一次轮询，一次清理10个数据，直到将过期的信息清空。可以将过期数据存入到map中 key对应过期的数据 value对应过期时间。在这里定义了一个单线程 用来执行清空任务，清空任务执行的过程即遍历map中的key 判断value是否过期，为了避免单词执行时间太久 所以设置一个单次清空最大数量限制。</p>
+<p>定时任务优化：可以通过排序Map快速判断哪些过期数据需要清理，即让过期时间作为key，让相同过期时间的数据放入列表中作为value。</p>
+<p>由于我们采用了定时轮询的方式 所以有时候数据可能清理不及时 当访问数据的时候可能访问到脏数据。因此引入了惰性删除，当用到某个数据的时候 才对数据进行删除判断操作。</p>
+<p>具体实现：在用到某些数据之前 先对数据进行刷新操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">expireTest</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">ICache</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CacheBs</span><span class="p">.</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">String</span><span class="o">&gt;</span><span class="n">newInstance</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">size</span><span class="p">(</span><span class="n">3</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">cache</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;1&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">cache</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;2&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;2&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">cache</span><span class="p">.</span><span class="na">expireAt</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">now</span><span class="o">+</span><span class="n">40</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertEquals</span><span class="p">(</span><span class="n">2</span><span class="p">,</span><span class="w"> </span><span class="n">cache</span><span class="p">.</span><span class="na">size</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 沉睡 50S，让其过期</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">MILLISECONDS</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">50</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertEquals</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="w"> </span><span class="n">cache</span><span class="p">.</span><span class="na">size</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">cache</span><span class="p">.</span><span class="na">keySet</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/%e5%ae%9e%e7%8e%b0%e8%bf%87%e6%9c%9f%e6%97%b6%e9%97%b4.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="实现过期时间"
+	
+	
+></p>
+<h3 id="实现内存数据重启不丢失">实现内存数据重启不丢失
+</h3><p>由于我们的数据是放在内存中的 如何保证重启之后数据还在？（Redis持久化）</p>
+<p>Redis的持久化机制包括三种：RDB(快照)，AOF（只追加文件），混合策略.</p>
+<p>这里我们先实现<strong>RDB快照模式</strong>，我们可以在缓存启动的时候，可以通过指定初始化加载的信息，从而实现数据持久化。现在我们需要知道如何将缓存中的内容持久化到文件或数据库中？，知道这些信息，就可以在重启之后加载这些信息，来保证数据不丢失了。对于导出的文件来说还有很多细节，比如文件的压缩，CRC校验&hellip;</p>
+<p><img src="/img/%e9%87%8d%e5%90%af%e6%95%b0%e6%8d%ae%e4%b8%8d%e4%b8%a2%e5%a4%b1.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="重启数据不丢失"
+	
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">persistRdbTest</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">ICache</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CacheBs</span><span class="p">.</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">String</span><span class="o">&gt;</span><span class="n">newInstance</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">load</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MyCacheLoad</span><span class="p">())</span><span class="w"> </span><span class="c1">// 指定持久化策略</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">persist</span><span class="p">(</span><span class="n">CachePersists</span><span class="p">.</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="n">dbJson</span><span class="p">(</span><span class="s">&#34;1.rdb&#34;</span><span class="p">))</span><span class="w"> </span><span class="c1">// 传入文件</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertEquals</span><span class="p">(</span><span class="n">2</span><span class="p">,</span><span class="w"> </span><span class="n">cache</span><span class="p">.</span><span class="na">size</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">2</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>AOF模式</strong>：RDB模式将缓存内容全部持久化比较耗时， AOF模式针对修改内容的指令，将指令<strong>顺序添加</strong>到文件中，因此AOF的实时性更好，顺序写避免了IO的随机写问题。</p>
+<p><img src="/img/AOF%e6%8c%81%e4%b9%85%e5%8c%96.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="AOF持久化"
+	
+	
+></p>
+<h3 id="添加监听器">添加监听器
+</h3><ol>
+<li>
+<p>删除监听器：我们之前已经实现expire 是对用户透明的（用户感知不到），并且当内存满了的时候，Redis会进行内存淘汰（evict 淘汰），这对用户来说也是透明的  如果用户想获取到这些信息，可以通过添加监听器实现。即在删除的位置调用监听器即可。</p>
+</li>
+<li>
+<p>慢操作监听器：redis 中会存储慢操作的相关日志信息（参数包括：耗时阈值，最多存储多少条慢日志记录） 所有我们可以对于所有的操作记录操作耗时 如果耗时超过用户设置的阈值 调用慢操作监听器</p>
+</li>
+<li>
+<p>自定义监听器&hellip;</p>
+</li>
+</ol>
+<p><img src="/img/%e7%bc%93%e5%ad%98%e5%88%a0%e9%99%a4%e6%97%a5%e5%bf%97.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="缓存删除日志"
+	
+	
+></p>
+<h3 id="lru-缓存淘汰">LRU 缓存淘汰
+</h3>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/redis/">Redis</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            Last updated on Oct 24, 2025 10:34 CST
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/redis-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Redis 常见面试题</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mysql-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Mysql 常见面试题</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div id="giscus_thread"></div>
+<script
+    src="https://giscus.app/client.js"
+    data-repo=""
+    data-repo-id=""
+    data-category=""
+    data-category-id=""
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+</script>
+
+<script>
+function setGiscusTheme(theme) {
+    const giscus = document.querySelector("iframe.giscus-frame");
+    if (giscus) {
+        giscus.contentWindow.postMessage(
+            { giscus: { setConfig: { theme: theme } } },
+            "https://giscus.app"
+        );
+    }
+}
+
+(function () {
+    function handler() {
+        if (document.documentElement.dataset.scheme === "light") {
+            setGiscusTheme('light');
+        } else {
+            setGiscusTheme('dark_dimmed');
+        }
+    }
+
+    window.addEventListener("message", (e) => {
+        if (e.origin !== "https://giscus.app") return;
+        handler();
+    });
+
+    window.addEventListener("onColorSchemeChange", handler);
+})();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 Paradox29
+    </section>
+
+    <section class="wordcount">本站总字数：72.6k 字
+</section>
+    <section class="powerby">
+        
+    </section>
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+    <span id="busuanzi_container_site_pv" style='display:none'> 本站总访问量 <span id="busuanzi_value_site_pv"></span> 次 </span>·
+    <span id="busuanzi_container_site_uv" style='display:none'> 总访客数 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+<script language="javascript"> 
+    var now = new Date();
+    function createtime(){
+        now.setTime(now.getTime()+250); 
+        var grt= new Date("2025/10/15 00:00:00"); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+        minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+
+        document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"
+    }
+    setInterval("createtime()",250); 
+</script> 
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+  body {
+    background: url(https://1parado.github.io/background/background.jpg) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+</style>
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        z-index: 99;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-image: url(https://1parado.github.io/icons/backTop.svg);
+    }
+</style>
+
+<script>
+    
+
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop
+        rightSideBar.appendChild(btn)
+        
+        window.onscroll = function() {
+            
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    }
+
+    
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+
+    initScrollTop();
+</script>
+
+<style>
+    #TableOfContents > ul, ol {
+        ul, ol {
+            display: none;
+        }
+        .open {
+            display: block;
+        }
+    }
+</style>
+
+<script>
+    function initTocHide() {
+        
+        let toc = document.querySelector(".widget--toc");
+        if (!toc) {
+            return;
+        }
+        
+        window.addEventListener('scroll', function() {
+            
+            let openUl = document.querySelectorAll(".open");
+            if (openUl.length > 0) {
+              openUl.forEach((ul) => {
+                ul.classList.remove("open")
+              })
+            }
+            
+            let currentLi = document.querySelector(".active-class");
+            if (!currentLi) {
+                return
+            }
+            
+            if (currentLi.children.length > 1) {
+                currentLi.children[1].classList.add("open")
+            }
+            
+            let ul = currentLi.parentElement;
+            do {
+                ul.classList.add("open");
+                ul = ul.parentElement.parentElement
+            } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'))
+        });
+    }
+    initTocHide()
+</script>
+
+    </body>
+</html>
