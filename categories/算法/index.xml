@@ -1103,9 +1103,8 @@
     background-attachment: fixed;
   }
 &lt;/style&gt;
-&lt;p&gt;&amp;mdash;2025.10.17&lt;/p&gt;
-&lt;h1 id=&#34;哈希&#34;&gt;哈希
-&lt;/h1&gt;&lt;p&gt;补充知识：
+&lt;h1 id=&#34;20251017&#34;&gt;2025.10.17
+&lt;/h1&gt;&lt;p&gt;哈希 补充知识：
 &lt;a class=&#34;link&#34; href=&#34;https://javaguidepro.com/blog/hash-table-java/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://javaguidepro.com/blog/hash-table-java/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;哈希表是根据key直接访问存储位置的暑假结构，key&amp;ndash;&amp;gt;hash函数&amp;ndash;&amp;gt;存储桶，每个存储桶可以存储一个或多个键值对。（哈希冲突即不同的键映射到同一个存储桶中）&lt;/p&gt;
@@ -1168,9 +1167,9 @@ class Solution {
 
     }
 } --&gt;
-&lt;h2 id=&#34;移动零&#34;&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/move-zeroes/description/?envType=study-plan-v2&amp;amp;envId=top-100-liked&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;移动零&lt;/a&gt;
-&lt;/h2&gt;&lt;p&gt;class Solution {
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/move-zeroes/description/?envType=study-plan-v2&amp;amp;envId=top-100-liked&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;移动零&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;class Solution {
 public void moveZeroes(int[] nums) {
 int[] res = new int[];
 if(nums == null || nums.length == 0){
@@ -1179,9 +1178,9 @@ return res;
 &lt;pre&gt;&lt;code&gt;}
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;}&lt;/p&gt;
-&lt;p&gt;&amp;mdash; 2025.10.22&lt;/p&gt;
-&lt;h1 id=&#34;普通数组&#34;&gt;普通数组
-&lt;/h1&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/maximum-subarray/?envType=study-plan-v2&amp;amp;envId=top-100-liked&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;h1 id=&#34;20251022&#34;&gt;2025.10.22
+&lt;/h1&gt;&lt;p&gt;普通数组：
+&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/maximum-subarray/?envType=study-plan-v2&amp;amp;envId=top-100-liked&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;53.最大子数组和&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;1.我首先想的是双指针 但是最大子数组和不具备单调性，无法使用常规的“滑动窗口”技巧（即不能通过移动左右指针来收缩或扩展窗口以逼近答案）&amp;ndash;方法选用不当 不知道什么算法应该解决什么问题
 2.&lt;strong&gt;前缀和&lt;/strong&gt; 用数组来保存前缀和 这里又有几个坑 比如不能让fix_num += num[i] 因为fix_num中的元素初始化都为0 这相当于 fix_num = num[i]。 求前缀和可以用sum+=num[i],然后让fix_num[i] = sum; 而且要注意，不能简单的用最大前缀和-最小前缀和，要满足这个最大前缀和在最小前缀和的右边 否则不能计算。&lt;/p&gt;
@@ -1213,8 +1212,8 @@ return res;
 要使这个差值最大，就要让 fix[j] 尽可能大，fix[i-1] 尽可能小，且 i-1 &amp;lt; j.【为什么是减去fix[i-1]???】
 3.&lt;strong&gt;动态规划DP&lt;/strong&gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;二分查找&#34;&gt;二分查找
-&lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/search-insert-position/?envType=study-plan-v2&amp;amp;envId=top-100-liked&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;p&gt;二分查找：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/search-insert-position/?envType=study-plan-v2&amp;amp;envId=top-100-liked&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;力扣35 搜索插入位置&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%8a%9b%e6%89%a335.jpg&#34;
 	
@@ -1414,8 +1413,8 @@ return res;
 	
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&amp;mdash;2025.10.23
-今天换了一种刷题的策略 不按照分类做了 直接按照题单顺序来做 我觉得简单题其实难度还好 中等难度的题我就A不出来了 主要还是在于我的数据结构基础掌握的不是很牢固 今天刷题的时候遇到的问题：&lt;/p&gt;
+&lt;h1 id=&#34;20251023&#34;&gt;2025.10.23
+&lt;/h1&gt;&lt;p&gt;今天换了一种刷题的策略 不按照分类做了 直接按照题单顺序来做 我觉得简单题其实难度还好 中等难度的题我就A不出来了 主要还是在于我的数据结构基础掌握的不是很牢固 今天刷题的时候遇到的问题：&lt;/p&gt;
 &lt;p&gt;1.hashmap怎么初始化 hashmap的操作 hashMap怎么遍历 怎么获得key 怎么获得value&lt;/p&gt;
 &lt;p&gt;2.动态数组ArrayList怎么创建 ArrayList的常见操作&lt;/p&gt;
 &lt;p&gt;3.位运算 异或运算符^，异或运算的性质  &amp;ndash;相同为0，不同为1 任意数与0异或，结果仍是它本身。与运算 &amp;amp;&lt;/p&gt;
@@ -1431,6 +1430,13 @@ return res;
 	
 	
 &gt;&lt;/p&gt;
+&lt;h1 id=&#34;20251025&#34;&gt;2025.10.25
+&lt;/h1&gt;&lt;p&gt;今天把之前写过的简单题回顾了一下 其中还是有一些题A不出来的 而且有的时候想法太多 一道题目把好几道题解想混了 就越想越多 反而做不出来 而且这些题解的时间复杂度和空间复杂度还有优化的可能 未来需要学习别人高阶的题解，还有一个问题是我对Java中内置的函数了解的不多 导致重复造轮子 写起来就比较吃力。
+如果让我回顾一下简单题的知识点的话，首先是数据结构的实现：链表的数据结构（单链表），树的数据结构（二叉树）。主要涉及到的知识点：数组，动态数组ArrayList，HashMap（如何遍历HashMap），链表，位运算（异或，按位与），双指针，递归，二分查找。总体来说今天的状态还是满意的 写了16道题 想不出来实现方法/报错的有四五道 还可以接受。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;今天没做出来的题目：反转链表，买卖股票的时机，移动零，删除链表倒数第N个节点
+具体的实现代码我放在GitHub上面了，&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/1parado_repo.github.io/blob/main/leetcode1025.java&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;hot100 简单题回顾&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 </description>
         </item>
         
