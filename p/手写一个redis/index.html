@@ -10,7 +10,7 @@
 <meta property='og:description' content="\r参考：如何从零开始手写一个Redis\n2025.10.24 如何实现固定缓存大小 HashMap，ConcurrentHashMap可以作为缓存使用 但HashMap本身不是线程安全的 但是作为基础的Java集合 不管是HashMap还是ConcurrentHashMap本身不具备自动的数据淘汰机制，这样可能会导致OOM（内存溢出）\n淘汰机制：FIFO（先进缓存先被淘汰）,LRU（最近最少使用）,LFU（最近最少频率使用），从左往右命中率越来越高，成本也越来越高\n对于加了淘汰机制的HashMap仍然存在几个问题：锁竞争激烈，不支持过期时间，不知此自动刷新，于是出现了Guava Caffeine&hellip;\n引导类：是指在框架或应用程序中负责启动和初始化的核心类。Springboot中引导类即Application为后缀的类 对于该项目 配置了一个缓存引导类CacheBS方便用户使用\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 @Test public void helloTest() { ICache&lt;String, String&gt; cache = CacheBs.&lt;String,String&gt;newInstance() .size(2) .build(); cache.put(&#34;1&#34;, &#34;1&#34;); cache.put(&#34;2&#34;, &#34;2&#34;); cache.put(&#34;3&#34;, &#34;3&#34;); // 1从缓存中出来 3进去 cache.put(&#34;4&#34;, &#34;4&#34;); // 2从缓存中出来 4进去 Assert.assertEquals(2, cache.size()); // 测试cache的大小是否为2 不相同则测试不通过 System.out.println(cache.keySet()); } ">
 <meta property='og:url' content='https://1parado.github.io/p/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAredis/'>
 <meta property='og:site_name' content='Paradox’s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Redis' /><meta property='article:published_time' content='2025-10-24T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-24T10:34:32&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Redis' /><meta property='article:published_time' content='2025-10-24T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-26T16:24:20&#43;08:00'/>
 <meta name="twitter:title" content="手写一个Redis">
 <meta name="twitter:description" content="\r参考：如何从零开始手写一个Redis\n2025.10.24 如何实现固定缓存大小 HashMap，ConcurrentHashMap可以作为缓存使用 但HashMap本身不是线程安全的 但是作为基础的Java集合 不管是HashMap还是ConcurrentHashMap本身不具备自动的数据淘汰机制，这样可能会导致OOM（内存溢出）\n淘汰机制：FIFO（先进缓存先被淘汰）,LRU（最近最少使用）,LFU（最近最少频率使用），从左往右命中率越来越高，成本也越来越高\n对于加了淘汰机制的HashMap仍然存在几个问题：锁竞争激烈，不支持过期时间，不知此自动刷新，于是出现了Guava Caffeine&hellip;\n引导类：是指在框架或应用程序中负责启动和初始化的核心类。Springboot中引导类即Application为后缀的类 对于该项目 配置了一个缓存引导类CacheBS方便用户使用\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 @Test public void helloTest() { ICache&lt;String, String&gt; cache = CacheBs.&lt;String,String&gt;newInstance() .size(2) .build(); cache.put(&#34;1&#34;, &#34;1&#34;); cache.put(&#34;2&#34;, &#34;2&#34;); cache.put(&#34;3&#34;, &#34;3&#34;); // 1从缓存中出来 3进去 cache.put(&#34;4&#34;, &#34;4&#34;); // 2从缓存中出来 4进去 Assert.assertEquals(2, cache.size()); // 测试cache的大小是否为2 不相同则测试不通过 System.out.println(cache.keySet()); } ">
     </head>
@@ -294,9 +294,20 @@
       <ol>
         <li><a href="#如何实现固定缓存大小">如何实现固定缓存大小</a></li>
         <li><a href="#实现过期时间expire">实现过期时间expire</a></li>
+        <li><a href="#expire过期如何随机获取key">expire过期如何随机获取key</a></li>
         <li><a href="#实现内存数据重启不丢失">实现内存数据重启不丢失</a></li>
         <li><a href="#添加监听器">添加监听器</a></li>
+      </ol>
+    </li>
+    <li><a href="#20251026">2025.10.26</a>
+      <ol>
         <li><a href="#lru-缓存淘汰">LRU 缓存淘汰</a></li>
+        <li><a href="#lru-缓存淘汰优化">LRU 缓存淘汰优化</a></li>
+        <li><a href="#lru-缓存淘汰算法如何避免缓存污染">LRU 缓存淘汰算法如何避免缓存污染</a></li>
+        <li><a href="#最近最不常用lfu淘汰算法">最近最不常用（LFU）淘汰算法</a></li>
+        <li><a href="#clock-页面置换算法">Clock 页面置换算法</a></li>
+        <li><a href="#分布式锁">分布式锁</a></li>
+        <li><a href="#hashmap源码">HashMap源码</a></li>
       </ol>
     </li>
   </ol>
@@ -363,7 +374,7 @@
 
 
                 <time class="article-time--reading">
-                    1 minute read
+                    2 minute read
                 </time>
             </div>
         
@@ -499,6 +510,19 @@
 	
 	
 ></p>
+<h3 id="expire过期如何随机获取key">expire过期如何随机获取key
+</h3><p>之前实现的过期很简单 用hashMap存储过期数据，然后轮询处理，执行定时清理任务
+redis实现的定时清理任务并不是时时刻刻都在执行的，定时任务中删除过期键逻辑采用了自适应算法，根据键的过期比例、使用快慢两种速率模式回收键，如图所示，先随机抽取key 如果有四分之一以上的key过期则执行 否则不执行</p>
+<p><img src="/img/redis%27%e5%ae%9a%e6%97%b6%e6%b8%85%e7%90%86%e4%bb%bb%e5%8a%a1.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="redis’定时清理任务"
+	
+	
+></p>
 <h3 id="实现内存数据重启不丢失">实现内存数据重启不丢失
 </h3><p>由于我们的数据是放在内存中的 如何保证重启之后数据还在？（Redis持久化）</p>
 <p>Redis的持久化机制包括三种：RDB(快照)，AOF（只追加文件），混合策略.</p>
@@ -572,8 +596,114 @@
 	
 	
 ></p>
-<h3 id="lru-缓存淘汰">LRU 缓存淘汰
-</h3>
+<h2 id="20251026">2025.10.26
+</h2><h3 id="lru-缓存淘汰">LRU 缓存淘汰
+</h3><p>LRU最近最少使用 是一种比较常见的淘汰算法 如果数据最近被访问过 就认为被访问的概率更高</p>
+<blockquote>
+<p>局部性准则：时间局部性（最近被访问过，再次访问的肯可能性很高）和空间局部性（访问到某个磁盘信息，接下来可能访问局部的存储空间）缓存中用到的LRU即遵循了时间局部性准则</p></blockquote>
+<p>实现：利用链表 新数据插入到链表头部 缓存命中，将命中数据移到链表头部 如果链表满了丢弃链表尾部数据。
+代码实现起来需要用到：链表插入，如何判断缓存命中（HashMap），链表删除等知识</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">lruEvictTest</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">ICache</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CacheBs</span><span class="p">.</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">String</span><span class="o">&gt;</span><span class="n">newInstance</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">size</span><span class="p">(</span><span class="n">3</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">evict</span><span class="p">(</span><span class="n">CacheEvicts</span><span class="p">.</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="n">lru</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">cache</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;A&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;hello&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">cache</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;B&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;world&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">cache</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;C&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;FIFO&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 访问一次A // </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">cache</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&#34;A&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">cache</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;D&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;LRU&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertEquals</span><span class="p">(</span><span class="n">3</span><span class="p">,</span><span class="w"> </span><span class="n">cache</span><span class="p">.</span><span class="na">size</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">cache</span><span class="p">.</span><span class="na">keySet</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果是FIFO 结果应该是[B,C,D] 由于是LRU A最近被访问过 所以淘汰的是B 结果是[A,C,D]
+<img src="/img/Lru%e6%b7%98%e6%b1%b0.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Lru淘汰"
+	
+	
+></p>
+<h3 id="lru-缓存淘汰优化">LRU 缓存淘汰优化
+</h3><p>优化思路：1.用一个<strong>数组</strong>存储时间戳 为每个数据添加一个时间戳属性 每次访问数据时，更新该数据的时间戳 当数据空间满的时候 扫描时间戳最小的数据 但是需要用空间存储时间戳 并且淘汰数据的时候需要扫描整个数组</p>
+<p>2.之前的简单实现是基于链表的 由于链表的性质（链表中插入和删除某个已知元素的时间复杂度是O(1)，但是插入和删除之前需要遍历链表找到元素时间复杂度是O(N)）因此可以用<strong>双向链表</strong>优化一下淘汰末尾数据的操作</p>
+<p>3.双向链表查找某个元素依然需要遍历链表 时间复杂度是O(n) 可以基于双向链表和哈希表 将哈希表中的数据和链表中的节点形成映射 插入和删除操作的时间复杂度下降为O(1) 但是引入哈希表会造成空间开销</p>
+<p>LinkedHashMap是一种list和HashMap结合的数据结构 但是LinkedHashMap不会淘汰数据 可以重写removeEldestEntry方法实现淘汰数据。</p>
+<h3 id="lru-缓存淘汰算法如何避免缓存污染">LRU 缓存淘汰算法如何避免缓存污染
+</h3><blockquote>
+<p>当存在热点数据时，LRU的效率很好，但<strong>偶发性的、周期性的批量操作会导致LRU命中率急剧下降，缓存污染情况比较严重</strong>。</p></blockquote>
+<p>1.LRU-K算法:LRU是将最近使用一次的数据放入缓存 LRU-K是通过维护一个队列，用于记录缓存数据被访问的历史 当某个数据的访问次数达到K时 将数据放入缓存 数据淘汰的时候淘汰第K次访问时间距当前时间最大的数据
+数据第一次被访问时，加入到<strong>历史访问列表</strong>，如果数据在访问历史列表中没有达到K次访问，则按照一定的规则（FIFO,LRU）淘汰；</p>
+<p>当访问历史队列中的数据访问次数达到K次后，将数据索引从历史队列中删除，将数据移到缓存队列中，并缓存数据，缓存队列重新按照时间排序；</p>
+<p>缓存数据队列中被再次访问后，重新排序，需要淘汰数据时，淘汰缓存队列中排在末尾的数据，即“淘汰倒数K次访问离现在最久的数据”。</p>
+<p>2.2Q算法 将LRU-2中的历史访问列表改为FIFO缓存队列 因此2Q算法中有两个缓存队列：FIFO队列和 LRU队列</p>
+<p>3.MQ算法 根据数据的访问频率将数据分为多个队列 不同的队列有不同的访问优先级 优先缓存访问次数最多的数据。</p>
+<h3 id="最近最不常用lfu淘汰算法">最近最不常用（LFU）淘汰算法
+</h3><p>LFU将频率上最不常访问的数据淘汰 需要额外存储每个数据的访问次数</p>
+<p>如果用HashMap将key放数据，value放访问次数的话 新增和查询的时间复杂度都是O(1),但是删除就需要遍历HashMap时间复杂度为O（n）。在此基础上，用小顶堆+HashMap 插入和删除的操作是O（logn）。如果在淘汰数据的时候想要实现O(1)的时间复杂度，可以利用双Hashmap，HashMap中存放 key 和节点之间的映射关系，节点中的value保存对应的访问次数信息 相同的访问次数同freqMap进行关联 可以通过频率获取响应的链表</p>
+<p>基于上面两种淘汰策略可以看到<strong>LFU是基于访问频次</strong>的模式，而<strong>LRU是基于访问时间</strong>的模式。</p>
+<h3 id="clock-页面置换算法">Clock 页面置换算法
+</h3><p>操作系统使用的内存管理即Clock页面置换算法，该算法通过链接指针将内存中的所有页面组织成一个循环队列，并为每个页面设置一个访问位。当页面被访问时，其访问位设置为1。当需要淘汰页面以释放空间时，算法会扫描循环队列，选择访问位为0的页面进行置换。如果所有页面的访问位均为1，则将它们置为0并进行第二轮扫描。</p>
+<p>实现：循环链表 + map
+改进后的Clock页面置换算法：除了访问位，添加一个修改位 考虑了页面是否被修改过 优先淘汰未被修改过的页面</p>
+<h3 id="分布式锁">分布式锁
+</h3><p>Jdk中提供了加锁方式：synchronized加锁，乐观锁，读写锁，可重入锁&hellip;在单机系统中为多线程情况下保证线程安全。在分布式系统中，上面的锁不再适用，因此为了解决分布式系统中的并发问题 需要引入分布式锁。
+参考：<a class="link" href="https://blog.csdn.net/2301_80017072/article/details/149727509"  target="_blank" rel="noopener"
+    >分布式锁原理</a></p>
+<p>分布式锁：是一种跨节点，跨服务的互斥机制，一个可靠的分布式锁需要满足：互斥性，安全性，防死锁，可用性，容错性。
+实现的核心原理：通过SET命令实现互斥 即用一个redis键作为锁的标识 当客户端对某个共享资源获取锁时，需要判断该资源是否已上锁 没上锁的时候才可以设置锁键获取锁，释放锁的时候删除锁键即可（在释放锁的时候可以通过Lua脚本实现操作的原子性）。
+SET命令的两个参数：NX（not exist） 用于获取锁 PX设置锁键的过期时间</p>
+<p>获取锁的命令比如：SET lock:stock client1 NX PX 30000</p>
+<h3 id="hashmap源码">HashMap源码
+</h3><p>HashMap是数组+链表+红黑树（JDK1.8增加了红黑树部分）实现的。HashMap实例有两个影响其性能的参数: <strong>初始容量（16）和负载因子（默认0.75）</strong>，阈值可以通过threshold = length * Load factor计算。HashMap非线程安全</p>
+<p>参考：<a class="link" href="https://juejin.cn/post/7135640624744628255"  target="_blank" rel="noopener"
+    >hashmap源码分析</a></p>
+<p><img src="/img/HashMap%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="HashMap数据结构"
+	
+	
+></p>
+<p>HashMap类中有一个非常重要的字段，就是 Node[] table，即哈希桶数组。</p>
+<blockquote>
+<p>哈希桶是一种通过链地址法（开散列法）解决哈希冲突的结构。它将具有相同散列地址的元素存储在一个链表中，每个链表被称为一个哈希桶.</p></blockquote>
+<p>HashMap是使用哈希表存储的 哈希表为了解决哈希冲突 可以采用开放地址法和链地址法，HashMap采用了链地址法。为了控制hash冲突发生的概率且让哈希桶数组的占用空间少，于是需要一个好的Hash算法和<strong>扩容机制</strong>。</p>
+<p>扩容机制：Node[] table(哈希桶数组)，初始化长度为16，负载因子为0.75，阈值为初始化长度 * 负载因子。当数量超过阈值时需要扩容，扩容之后HashMap容量是之前的2倍。在HashMap中，哈希桶数组table的长度length大小必须为2的n次方(一定是合数)，这种设计主要是为了在取模和扩容时做优化，同时为了减少冲突，HashMap定位哈希桶索引位置时，也加入了高位参与运算的过程。在JDK1.8中，引入了红黑树，当链表长度过大（超过8），链表转化为红黑树。因为红黑树的查找时间复杂度为O(logn) 链表查找的时间复杂度为O(n).Java中的数组不会自动扩容，实际上是通过一个新的数组代替原有的数组，通过resize方法实现。在多线程使用场景中，应该尽量避免使用线程不安全的HashMap，而使用线程安全的ConcurrentHashMap。</p>
+
 </section>
 
 
@@ -608,7 +738,7 @@
 
 
         <span>
-            Last updated on Oct 24, 2025 10:34 CST
+            Last updated on Oct 26, 2025 16:24 CST
         </span>
     </section></footer>
 
@@ -717,7 +847,7 @@ function setGiscusTheme(theme) {
         2025 Paradox29
     </section>
 
-    <section class="wordcount">本站总字数：74.6k 字
+    <section class="wordcount">本站总字数：82.9k 字
 </section>
     <section class="powerby">
         
