@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Sun, 26 Oct 2025 16:24:20 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 26 Oct 2025 22:41:39 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>手写一个Redis</title>
         <link>https://1parado.github.io/p/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAredis/</link>
         <pubDate>Fri, 24 Oct 2025 00:00:00 +0000</pubDate>
@@ -400,8 +400,54 @@ Redis 采用的是&lt;strong&gt;定期删除+惰性删除&lt;/strong&gt;结合�
 &lt;p&gt;大量的key集中过期（缓存雪崩）造成的后果：请求延迟增加 内存占用过高，为了避免这种情况，key的过期时间尽量随机 并开启lazy free机制（异步删除过期key 不会阻塞主线程的运行）&lt;/p&gt;
 &lt;p&gt;Redis 的内存淘汰策略（6种）：
 Redis 的内存淘汰策略只有在运行内存达到了配置的最大内存阈值时才会触发，这个阈值是通过 redis.conf 的 maxmemory 参数来定义的&lt;/p&gt;
-&lt;p&gt;明天该看这个了 &lt;a class=&#34;link&#34; href=&#34;https://javaguide.cn/database/redis/redis-questions-02.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;常见面试总结下&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2025-10-26&#34;&gt;2025-10-26
+&lt;/h2&gt;&lt;h3 id=&#34;redis事务&#34;&gt;Redis事务
+&lt;/h3&gt;&lt;p&gt;Redis 事务（并不是关系型数据库的事务），提供了一种将多个命令请求打包的功能。然后，再按顺序执行打包的所有命令，并且不会被中途打断。日常开发中一般不适用redis事务。事务的ACID特性（原子性，一致性，隔离性，持久性），redis事务不支持回滚操作，所以Redis事务不支持原子性。redis支持持久性（重启后数据还在）：1.RDB快照,2.AOF只追加文件,3.混合模式&lt;/p&gt;
+&lt;p&gt;AOF持久化的实时性更好 redis的配置文件中存放了三种持久化方式（fsyn）always，everysec，no
+可以通过lua脚本配合Redis事务的缺陷。&lt;/p&gt;
+&lt;h3 id=&#34;性能优化&#34;&gt;性能优化
+&lt;/h3&gt;&lt;p&gt;1.可以使用&lt;strong&gt;批量操作&lt;/strong&gt;减少网络传输，因为批量操作可以减少网络传输次数，减少网络开销，减少RTT(往返时延)
+2.pipeline 对于不支持批量操作的命令 可以用pipeline将redis命令封装成一组 这些命令会被一次性传输给redis服务器 但是需要注意批量操作的元素个数，避免网络传输的数据量过大。
+3.lua脚本 支持批量操作多条命令，可以看作是原子操作&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果 Lua 脚本运行时出错并中途结束，之后的操作不会进行，但是之前已经发生的写操作不会撤销，所以即使使用了 Lua 脚本，也不能实现类似数据库回滚的原子性&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;大量key集中过期缓存雪崩&#34;&gt;大量key集中过期（缓存雪崩）
+&lt;/h3&gt;&lt;p&gt;对于过期key Redis 采用的是 定期删除+惰性删除，为了解决缓存雪崩，1.需要给key设置随机过期时间（expire）2.开启lazy-free惰性删除（异步删除key，将删除操作交给单独的子进程处理 避免阻塞主线程）&lt;/p&gt;
+&lt;h3 id=&#34;bigkey&#34;&gt;Bigkey
+&lt;/h3&gt;&lt;p&gt;如果一个key对应的value占用的内存比较大 这个key可以叫bigkey（例如1MB）。bigkey消耗了更多的内存空间和带宽 还会对性能造成影响：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;客户端超时阻塞：redis执行命令是单线程处理 如果遇到bigkey时会比较耗时&lt;/li&gt;
+&lt;li&gt;网络阻塞&lt;/li&gt;
+&lt;li&gt;工作线程阻塞：删除bigkey时会阻塞工作线程&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如何找到bigkey：1.可以使用&amp;ndash;bigkeys参数查找redis中的bigkey，2.可以用redis自带的scan命令，当redis采用的时RDB持久化的时候，3.可以用开源软件分析RDB文件找出bigkey&lt;/p&gt;
+&lt;p&gt;如何处理bigkey：1.可以将bigkey分割成小key 2.可以手动清理 3.开启惰性删除&amp;hellip;&lt;/p&gt;
+&lt;h3 id=&#34;hotkey&#34;&gt;Hotkey
+&lt;/h3&gt;&lt;p&gt;如果一个key的访问次数明显多于其他key 这个key可认为是热点key 如果hotkey处理不好 redis会直接宕机 大量请求落到数据库中 可能导致数据库崩溃&lt;/p&gt;
+&lt;p&gt;如何找到hotkey：1.当数据淘汰策略采用的是LFU最近最少访问的时候，可以用&amp;ndash;hotkeys参数查找redis的hotkey，返回所有key被访问的次数。2.可以用monitor命令 可以实时查看redis所有操作的方式 可以监控redis实例的操作情况（不建议用）3.开源软件&lt;/p&gt;
+&lt;p&gt;如何处理hotkey：1.读写分离 主节点处理写请求 从节点处理读请求，2.可以使用redis cluster 将热点数据放在多个redis节点上   3.二级缓存（可以通过caffine/guava创建本地缓存）&lt;/p&gt;
+&lt;h3 id=&#34;慢查询命令&#34;&gt;慢查询命令
+&lt;/h3&gt;&lt;p&gt;redis命令执行：1.发送命令 2.命令排队 3. 命令执行 4.返回结果。redis慢查询统计的是命令执行的耗时 查询的是命令执行时间较长的命令。&lt;/p&gt;
+&lt;p&gt;如何找到慢查询命令：通过查看慢查询日志，慢查询日志中记录执行时间超过指定阈值的命令。慢查询日志同样会占用一定的空间 可能会导致内存占用过高的问题。常见的命令： 查询慢日志SLOWLOG GET，清空慢日志SLOWLOG RESET，返回慢查询命令的数量 SLOWLOG LEN&lt;/p&gt;
+&lt;h3 id=&#34;redis生产问题&#34;&gt;Redis生产问题
+&lt;/h3&gt;&lt;p&gt;1.缓存穿透（查询的数据不在缓存也不在数据库中） 解决方案：缓存空值，布隆过滤器&lt;/p&gt;
+&lt;p&gt;2.缓存击穿（热点key失效，大量并发请求访问数据库导致数据库负载过高） 解决方案：分布式锁，缓存预热，自动续期&lt;/p&gt;
+&lt;p&gt;3.缓存雪崩（大量的key同时失效，或者缓存服务器宕机 导致所有请求访问数据库）解决方案：为key设置随机过期时间 设置多级缓存 使用高可用架构（Redis集群或哨兵模式或主从架构）&lt;/p&gt;
+&lt;h3 id=&#34;缓存预热如何实现&#34;&gt;缓存预热如何实现
+&lt;/h3&gt;&lt;p&gt;缓存预热是防止热点数据不在缓存中 导致缓存击穿或缓存雪崩的一种解决方案 可以在系统启动或者高并发请求之前 将热点数据提前加载缓存中避免缓存失效。&lt;/p&gt;
+&lt;p&gt;缓存预热的两种实现方式：1. 使用定时任务 2.使用消息队列&lt;/p&gt;
+&lt;h3 id=&#34;缓存和数据库数据的一致性&#34;&gt;缓存和数据库数据的一致性
+&lt;/h3&gt;&lt;p&gt;参考：&lt;a class=&#34;link&#34; href=&#34;https://mp.weixin.qq.com/s?__biz=MzIyOTYxNDI5OA==&amp;amp;mid=2247487312&amp;amp;idx=1&amp;amp;sn=fa19566f5729d6598155b5c676eee62d&amp;amp;chksm=e8beb8e5dfc931f3e35655da9da0b61c79f2843101c130cf38996446975014f958a6481aacf1&amp;amp;scene=178&amp;amp;cur_album_id=1699766580538032128#rd&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;缓存和数据库一致性问题，看这篇就够了&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;想要保证数据库和缓存一致性，&lt;strong&gt;推荐采用「先更新数据库，再删除缓存」方案，并配合「消息队列」或「订阅变更日志」的方式来做&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;对于1.先删除缓存，再更新数据库以及 2.读写分离 + 主从复制延迟情况下，缓存和数据不一致的问题，可以采用延迟双删策略（在更新数据库后，先删除缓存中的数据，然后延迟一段时间再删除一次缓存）。为了保证数据一致性和系统性能，只需要保证最终一致性即可 不用要求强一致性。&lt;/p&gt;
+&lt;h3 id=&#34;redis高可用架构&#34;&gt;Redis高可用架构
+&lt;/h3&gt;&lt;p&gt;实际生产中 redis如果只部署一个节点 当机器故障的时候整个系统无法提供服务（单点故障），因此在集群模式下，将redis节点部署在一台或者几台，可用提高服务的可用性。&lt;/p&gt;
+&lt;p&gt;1.主从模式：节点分为主节点和从节点 主节点进行读写操作，从节点只能进行读操作。主节点数据变化，将变化数据同步给从节点 保持数据同步（主从同步，刚刚连接的时候进行全量同步，全量同步结束之后，进行增量同步）&lt;/p&gt;
+&lt;p&gt;2.哨兵模式：主从模式下，当主节点宕机之后需要将从节点改成主节点，需要人工干预，开销大。所以在实际生产中，优先考虑哨兵模式，主节点宕机后，哨兵自动选取主节点。一般为了便于选举主节点，选用奇数个哨兵。哨兵是一个独立的进程，哨兵进程向所有的redis机器发送命令，等待redis响应 从而监控多个运行的redis实例&lt;/p&gt;
+&lt;p&gt;3.集群模式：主从模式和哨兵模式下，每台redis服务器存储相同的数据，浪费内存 。集群模式下实现redis的分布式存储，对数据进行分片，每个节点可以存储不同内容。QPS要求高的时候使用。&lt;/p&gt;
+&lt;h3 id=&#34;redis实现延时任务&#34;&gt;Redis实现延时任务
+&lt;/h3&gt;&lt;p&gt;实现方式：1.redis过期事件监听 2.redisson内置的延迟队列&lt;/p&gt;
 </description>
         </item>
         <item>
