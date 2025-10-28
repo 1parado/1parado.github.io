@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Mon, 27 Oct 2025 08:14:52 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 28 Oct 2025 22:52:47 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>代码随想录(长期更新)</title>
         <link>https://1parado.github.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0/</link>
         <pubDate>Fri, 17 Oct 2025 00:00:00 +0000</pubDate>
@@ -1439,6 +1439,9 @@ return res;
 &lt;p&gt;今天没做出来的题目：反转链表，买卖股票的时机，移动零，删除链表倒数第N个节点
 具体的实现代码我放在GitHub上面了，&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/1parado_repo.github.io/blob/main/leetcode1025.java&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;hot100 简单题回顾&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;20251028&#34;&gt;2025.10.28
+&lt;/h2&gt;&lt;p&gt;昨天公司派活了 在公司摸索一天 所以昨天就写了两道算法题 今天在公司依然在摸索 今天也写了两道题 不知道这种刷题策略有没有效果哦？ [hot100双指针](&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/1parado_repo.github.io/blob/main/leetcode1028.java&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;1parado_repo.github.io/leetcode1028.java at main · 1parado/1parado_repo.github.io&lt;/a&gt;) 今天写了移动零和盛水最多的边界 也就是快慢指针和首尾指针 三数之和那道题 大致意思看懂了 但是让我自己实现有一点麻烦 之后再复习。&lt;/p&gt;
 </description>
         </item>
         

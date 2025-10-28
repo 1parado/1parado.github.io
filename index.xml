@@ -1211,6 +1211,29 @@ Java中现在主流的ORM框架包括：&lt;/p&gt;
 	
 	
 &gt;&lt;/p&gt;
+&lt;h2 id=&#34;20251028&#34;&gt;2025.10.28
+&lt;/h2&gt;&lt;p&gt;今天在公司写公司业务代码 所以没什么时间学习其他的 来公司学到的东西一个就是看自己的ip 一个就是如何用贝锐花生壳访问内网数据 公司项目用的是RuoYi 主要是代码版本太多了 数据库也是 总之我现在是一头雾水 本来应该阔以用代码生成器生成代码框架的 但是现在我得自己搭框架 但是也还好吧 至少能更熟悉项目怎么写的 在写的时候 我觉得最主要的还是和前端交互的问题 不知道该传回前端什么参数 所以我只能先自己写 等到时候测试的时候再改 听说之前他们也是这样做的 如果想自测的话就用postman 我现在就是如此 今天总算开始写功能模块了 周五要交公司周报 周四要在学校开组会汇报 有点累累的 但是！今天May给我个惊喜 她看我腰痛 给我买了个腰部按摩仪 好幸福 好感动 谢谢哦 公司的业务代码就不放了 今天实现的功能模块不多 希望之后熟悉之后写的快点 然后学习其他的 加油 爱你May.
+附图两张：
+&lt;img src=&#34;https://1parado.github.io/img/shixi10281.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;三个接口&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/shixi10282.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;postman&#34;
+	
+	
+&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -2767,6 +2790,9 @@ return res;
 &lt;p&gt;今天没做出来的题目：反转链表，买卖股票的时机，移动零，删除链表倒数第N个节点
 具体的实现代码我放在GitHub上面了，&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/1parado_repo.github.io/blob/main/leetcode1025.java&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;hot100 简单题回顾&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;20251028&#34;&gt;2025.10.28
+&lt;/h2&gt;&lt;p&gt;昨天公司派活了 在公司摸索一天 所以昨天就写了两道算法题 今天在公司依然在摸索 今天也写了两道题 不知道这种刷题策略有没有效果哦？ [hot100双指针](&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/1parado_repo.github.io/blob/main/leetcode1028.java&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;1parado_repo.github.io/leetcode1028.java at main · 1parado/1parado_repo.github.io&lt;/a&gt;) 今天写了移动零和盛水最多的边界 也就是快慢指针和首尾指针 三数之和那道题 大致意思看懂了 但是让我自己实现有一点麻烦 之后再复习。&lt;/p&gt;
 </description>
         </item>
         <item>
