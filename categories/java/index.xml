@@ -7,6 +7,26 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright><atom:link href="https://1parado.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>JVM 常见面试题</title>
+        <link>https://1parado.github.io/p/jvm-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
+        <pubDate>Thu, 30 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/jvm-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;h2 id=&#34;2025-10-30&#34;&gt;2025-10-30
+&lt;/h2&gt;&lt;p&gt;参考链接：
+&lt;a class=&#34;link&#34; href=&#34;https://javaguide.cn/java/jvm/memory-area.html#%E5%89%8D%E8%A8%80&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;JVM&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;java内存&#34;&gt;Java内存
+&lt;/h3&gt;</description>
+        </item>
+        <item>
         <title>自然语言转SQL语句实现增删改查操作</title>
         <link>https://1parado.github.io/p/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E8%BD%ACsql%E8%AF%AD%E5%8F%A5%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/</link>
         <pubDate>Thu, 23 Oct 2025 00:00:00 +0000</pubDate>
