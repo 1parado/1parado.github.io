@@ -10,7 +10,7 @@
 <meta property='og:description' content="\r2025.10.17 哈希 补充知识： https://javaguidepro.com/blog/hash-table-java/\n哈希表是根据key直接访问存储位置的暑假结构，key&ndash;&gt;hash函数&ndash;&gt;存储桶，每个存储桶可以存储一个或多个键值对。（哈希冲突即不同的键映射到同一个存储桶中）\n1.Hashtable 是 Java 中最早提供的哈希表实现，它是线程安全的，不允许键或值为 null\n2.HashMap 是 Java 中最常用的哈希表实现，它不是线程安全的，允许键和值为 null\n3.LinkedHashMap 是 HashMap 的子类，它维护了一个双向链表，用于记录键值对的插入顺序或访问顺序\n当需要查询一个元素是否出现过，或者一个元素是否在集合里&mdash;&gt;哈希法。用空间换时间，可以用数组、set、map&hellip;做哈希法\n两数之和 题解1. 双重循环 题解2. 哈希法 Map（key，value） （我想的一个是双重循环，一个是排序比较，但是注意审题，排序之后下标都变了肯定不对！） a + b = target， 当指针指到a时，可以去map中找b是否存在。key存放值，value存放下标\n参考题解: https://github.com/youngyangyang04/leetcode-master/blob/master/problems/0001.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C.md\n代码： class Solution { public int[] twoSum(int[] nums, int target) { // 创建一个返回数组 int[] res = new int[2]; // 当传入的数组为空 直接返回[ , ] //数组为null是空引用，并没有创建这个数组对象 数组长度为0是有这个数组对象但数组元素为空 if(nums == null || nums.length == 0){ return res; } Map&lt;Integer,Integer&gt; indexMap = new HashMap&lt;&gt;(); // 遍历到某个a元素的时候，去map中找是否有满足target - a = b的b元素 有则将两者下标返回 没有则加入map // nums[i]当作key, i当作value for(int i = 0; i &lt; nums.length; i++){ if(indexMap.containsKey(target - nums[i])){ res[0] = i; res[1] = indexMap.get(target - nums[i]); return res; } indexMap.put(nums[i],i); // haspMap插入key-value键值对 } return res; } }\n">
 <meta property='og:url' content='https://1parado.github.io/p/%E5%8A%9B%E6%89%A3hot100/'>
 <meta property='og:site_name' content='Paradox’s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='算法' /><meta property='article:published_time' content='2025-10-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-28T22:52:47&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='算法' /><meta property='article:published_time' content='2025-10-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-01T22:09:07&#43;08:00'/>
 <meta name="twitter:title" content="力扣hot100">
 <meta name="twitter:description" content="\r2025.10.17 哈希 补充知识： https://javaguidepro.com/blog/hash-table-java/\n哈希表是根据key直接访问存储位置的暑假结构，key&ndash;&gt;hash函数&ndash;&gt;存储桶，每个存储桶可以存储一个或多个键值对。（哈希冲突即不同的键映射到同一个存储桶中）\n1.Hashtable 是 Java 中最早提供的哈希表实现，它是线程安全的，不允许键或值为 null\n2.HashMap 是 Java 中最常用的哈希表实现，它不是线程安全的，允许键和值为 null\n3.LinkedHashMap 是 HashMap 的子类，它维护了一个双向链表，用于记录键值对的插入顺序或访问顺序\n当需要查询一个元素是否出现过，或者一个元素是否在集合里&mdash;&gt;哈希法。用空间换时间，可以用数组、set、map&hellip;做哈希法\n两数之和 题解1. 双重循环 题解2. 哈希法 Map（key，value） （我想的一个是双重循环，一个是排序比较，但是注意审题，排序之后下标都变了肯定不对！） a + b = target， 当指针指到a时，可以去map中找b是否存在。key存放值，value存放下标\n参考题解: https://github.com/youngyangyang04/leetcode-master/blob/master/problems/0001.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C.md\n代码： class Solution { public int[] twoSum(int[] nums, int target) { // 创建一个返回数组 int[] res = new int[2]; // 当传入的数组为空 直接返回[ , ] //数组为null是空引用，并没有创建这个数组对象 数组长度为0是有这个数组对象但数组元素为空 if(nums == null || nums.length == 0){ return res; } Map&lt;Integer,Integer&gt; indexMap = new HashMap&lt;&gt;(); // 遍历到某个a元素的时候，去map中找是否有满足target - a = b的b元素 有则将两者下标返回 没有则加入map // nums[i]当作key, i当作value for(int i = 0; i &lt; nums.length; i++){ if(indexMap.containsKey(target - nums[i])){ res[0] = i; res[1] = indexMap.get(target - nums[i]); return res; } indexMap.put(nums[i],i); // haspMap插入key-value键值对 } return res; } }\n">
     </head>
@@ -304,6 +304,8 @@
     <li><a href="#20251023">2025.10.23</a></li>
     <li><a href="#20251025">2025.10.25</a></li>
     <li><a href="#20251028">2025.10.28</a></li>
+    <li><a href="#20251031">2025.10.31</a></li>
+    <li><a href="#20251101">2025.11.01</a></li>
   </ol>
 </nav>
         </div>
@@ -451,7 +453,7 @@ class Solution {
         if(strs==null ||strs.length==0){
             return nums;
         }
-        HashMap index = new HashMap(); 
+        HashMap index = new HashMap();
         for
 
     }
@@ -546,7 +548,7 @@ return res;
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">searchInsert</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">nums</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 可能出现的情况四种1.找到nums[mid] = target</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 2.没出现 目标值在最前面 </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 2.没出现 目标值在最前面</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 3.没出现 目标值在最后面</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 4.没出现 目标值在某个区间</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//  2 3 4 要保证统一返回</span><span class="w">
@@ -563,7 +565,7 @@ return res;
 </span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">low</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">mid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">high</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">low</span><span class="p">)</span><span class="o">/</span><span class="n">2</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            
+</span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">high</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
@@ -599,7 +601,7 @@ return res;
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">nums</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">matrix</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">index</span><span class="o">++</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            
+</span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
@@ -653,12 +655,12 @@ return res;
 </span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">nums</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">matrix</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">index</span><span class="o">++</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            
+</span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">       
+</span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">j</span><span class="p">){</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="o">/</span><span class="n">2</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">target</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">nums</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span><span class="p">){</span><span class="w">
@@ -729,6 +731,22 @@ return res;
 <h2 id="20251028">2025.10.28
 </h2><p>昨天公司派活了 在公司摸索一天 所以昨天就写了两道算法题 今天在公司依然在摸索 今天也写了两道题 不知道这种刷题策略有没有效果哦？ [hot100双指针](<a class="link" href="https://github.com/1parado/1parado_repo.github.io/blob/main/leetcode1028.java"  target="_blank" rel="noopener"
     >1parado_repo.github.io/leetcode1028.java at main · 1parado/1parado_repo.github.io</a>) 今天写了移动零和盛水最多的边界 也就是快慢指针和首尾指针 三数之和那道题 大致意思看懂了 但是让我自己实现有一点麻烦 之后再复习。</p>
+<h2 id="20251031">2025.10.31
+</h2><p>昨天和今天总共写了四道题 其中有一道最大子数组的问题不是太熟悉 其他的三道题 做的挺熟的 遇到原题肯定是会做的！ 我天，这个博客是10.17开始写的 截止今天为止10.31 现在我总共刷了23道题 基本上是一天两道题的程度 其中还有些掌握的不是很熟练的 我觉得这刷题速度太慢了 而且还没看SQL的相关题 <a class="link" href="https://github.com/1parado/1parado_repo.github.io/blob/main/leetcode_1031.java"  target="_blank" rel="noopener"
+    >昨天和今天做的四道题，大部分关于前缀和</a></p>
+<h2 id="20251101">2025.11.01
+</h2><p>今天可以哦 截止今天为止总共刷了30道题目了！！！ 一天刷了七道题 其实还可以吧这个速度 有些题目并不是最优解 如果碰到要求时间复杂度和空间复杂度的话估计会寄 今天的心情不是很美丽，这里就不说什么事情了 我不知道顿感力是好还是坏 后天又要上班 不想去 公司的业务难道真的要在周末完成吗 我觉得我负责的接口写的什么都不是呢。 <a class="link" href="https://github.com/1parado/1parado_repo.github.io/blob/main/leetcode_1101.java"  target="_blank" rel="noopener"
+    >今天写的力扣题目</a>
+<img src="/img/%e5%8a%9b%e6%89%a31101.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="30道题纪念"
+	
+	
+></p>
 
 </section>
 
@@ -766,7 +784,7 @@ return res;
 
 
         <span>
-            Last updated on Oct 28, 2025 22:52 CST
+            Last updated on Nov 01, 2025 22:09 CST
         </span>
     </section></footer>
 
@@ -862,7 +880,7 @@ function setGiscusTheme(theme) {
         2025 Paradox29
     </section>
 
-    <section class="wordcount">本站总字数：97.9k 字
+    <section class="wordcount">本站总字数：100.5k 字
 </section>
     <section class="powerby">
         

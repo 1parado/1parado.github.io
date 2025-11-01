@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Sun, 26 Oct 2025 23:21:14 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 01 Nov 2025 22:06:17 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>常用工具Git Maven</title>
         <link>https://1parado.github.io/p/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7git-maven/</link>
         <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
@@ -71,6 +71,19 @@ git clone &lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/&#34; 
 将项目推到GitHub上：
 &lt;a class=&#34;link&#34; href=&#34;./img/git%e5%91%bd%e4%bb%a4.png&#34; &gt;git命令&lt;/a&gt;
 在编程工具IDEA，VScode等软件中都有版本控制 使用起来很方便，甚至Obsidian，Notion等笔记软件也可以用Git实现版本控制 就很舒服 需要注意的一点就是涉及隐私的文件不要发布在网上 可以在.gitignore声明&lt;/p&gt;
+&lt;h2 id=&#34;2025-11-01&#34;&gt;2025-11-01
+&lt;/h2&gt;&lt;h3 id=&#34;编程工具zed&#34;&gt;编程工具：Zed
+&lt;/h3&gt;&lt;p&gt;最近了解了一款新的轻量级编程软件 由Rust语言编写 据说想成为VSCode的替代品，目前还处于开发阶段，但是已经有一些功能实现了，比如代码补全，语法高亮，代码格式化等。其实本来下载了另一款轻量级编程软件叫Lapce 但是奈何不太会用 因此下载了Zed 实际上Zed同样不太会用 网上的教程少之又少 现在还是摸索阶段，昨天搞到凌晨一点 启动Java程序一直启动不起来 原来是我Java文件没加后缀 真的气煞我也 不过最终还是能跑起来的 实现了一个简单的hello world程序 Zed打开文件的速度确实很快 而且占用内存非常小 我看了只有百分之五左右 这可比idea轻多了 而且zed支持多种语言，包括但不限于Java、Python、JavaScript等编写 今天的md文件就是在zed中写的 希望之后能熟悉这个软件 我的电脑之后还能再战几年（其实也可以试试Sublime Text，这个听说也很快）
+&lt;img src=&#34;https://1parado.github.io/img/zed_helloworld.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Zed&#34;
+	
+	
+&gt;&lt;/p&gt;
 </description>
         </item>
         
