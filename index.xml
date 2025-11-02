@@ -27,11 +27,11 @@
 &lt;/h3&gt;</description>
         </item>
         <item>
-        <title>常用工具Git Maven</title>
-        <link>https://1parado.github.io/p/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7git-maven/</link>
+        <title>常用工具</title>
+        <link>https://1parado.github.io/p/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/</link>
         <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://1parado.github.io/p/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7git-maven/</guid>
+        <guid>https://1parado.github.io/p/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/</guid>
         <description>&lt;h2 id=&#34;2025-10-26&#34;&gt;2025-10-26
 &lt;/h2&gt;&lt;h3 id=&#34;maven&#34;&gt;Maven
 &lt;/h3&gt;&lt;p&gt;参考：&lt;a class=&#34;link&#34; href=&#34;https://javaguide.cn/tools/maven/maven-core-concepts.html#%E4%BE%9D%E8%B5%96%E9%85%8D%E7%BD%AE&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -103,6 +103,12 @@ git clone &lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/&#34; 
 	
 	
 &gt;&lt;/p&gt;
+&lt;h2 id=&#34;2025-11-02&#34;&gt;2025-11-02
+&lt;/h2&gt;&lt;h3 id=&#34;cursor无限续杯&#34;&gt;Cursor无限续杯
+&lt;/h3&gt;&lt;p&gt;支持正版Cursor！ 首先Cursor是真的好用 一个月20美刀其实也还好。在进行Cursor注册之前 首先要先注册一个无限邮 因为Cursor是通过邮箱注册新用户的 这里我用的是2925无限邮 比如邮箱名字叫example@2925.com 接下来 你只需要给examplea@2925.com,exampleb@2925.com&amp;hellip;发送一条消息 这样你在2925无限邮就能收到子邮箱的验证码 这样就不需要多次创建QQ邮箱了 &lt;a class=&#34;link&#34; href=&#34;https://www.2925.com/#/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2925邮箱&lt;/a&gt; 然后进入&lt;a class=&#34;link&#34; href=&#34;https://authenticator.cursor.sh/sign-up?client_id=client_01GS6W3C96KW4WRS6Z93JCE2RJ&amp;amp;redirect_uri=https%3A%2F%2Fcursor.com%2Fapi%2Fauth%2Fcallback&amp;amp;state=%257B%2522returnTo%2522%253A%2522%252Fdashboard%2522%252C%2522nonce%2522%253A%2522882cb7b1-765c-4370-8f48-8224fea5460a%2522%257D&amp;amp;authorization_session_id=01K927FWG22GKXJ4DB9CBKAW6G&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Cursor的注册页面&lt;/a&gt; 然后按照步骤进行注册即可 手机号码可以用自己的 银行卡号不需要绑定即可使用Cursor 如果Cursor官网把你的IP封了 可以按照&lt;a class=&#34;link&#34; href=&#34;https://github.com/yuaotian/go-cursor-help/blob/master/README_CN.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Cursor重置&lt;/a&gt;来进行机器码重置 我的电脑上需要将Cursor 卸载再重新下载 然后重置机器码（选择2）接着再进行注册 手机号接收验证码目前不知道能用几次（手机号1用了几次然后该手机号就不能注册了） 我用网上那种接收验证码的网站没成功过 之后再试试看。&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -1273,6 +1279,20 @@ Java中现在主流的ORM框架包括：&lt;/p&gt;
 &lt;/h2&gt;&lt;p&gt;今天下午有组会 所以下午请了假 室友的同门也想来公司上班 所以我问了一个HR姐 她说请示一下大老板 今天组会的时候 老师说开题没有要求 毕业也没有要求 只是最后发的论文 如果发的期刊太水了 老师不报销 其实这样也还好 对于想找工作的 出去找实习经历 顺便也把发期刊的钱挣了 对于想读博深造的人 在学校跟随老师的步伐继续写好论文 这样其实挺好的 我很支持 希望之后能顺利毕业 我是觉得我这篇论文发EI没问题 到时候看看吧 希望没问题 自从决定学习技术找工作之后 我就一直挺焦虑的 没办法平衡好工作和生活 有时候甚至觉得放假休息都不行 一周七天 每天都在高强度的学习 锻炼时间也减少了 我觉得这样肯定不适合长久发展 身体熬垮了 再好的短期收益也不值 很谢谢May给我买点按摩仪哦 很好用 谢谢 也很感谢家里面给我生活费 父母的爱真的无以为报 希望我以后能挣大钱！！！ 但是我本质上对钱也没啥想法 公司的任务还是很多的 早上的时候依然在测试 不知道这个项目要做到什么时候 今天写了几道算法题 写算法真的很影响心情 而且很耗费精力 害的我都没办法好好陪May 🐕力扣 真的好想有个好工作啊 祝我好运 明天周五了 又可以过双休了 时间过的好快 希望十二月之后 一月份左右 我能找到去成都的实习 希望是团子！ 加油！！！&lt;/p&gt;
 &lt;h2 id=&#34;20251031&#34;&gt;2025.10.31
 &lt;/h2&gt;&lt;p&gt;时间过的好快 转眼就31号了 明天就是十一月份了 今天在公司 我突然想明白一件事 我现在写的接口什么的 好多都是让ai写的 但是我连接口的书写格式 以及接口如何设计都没了解过 现在打算重新改一版接口 但还是不要大改吧 至少能满足需求的同时 尽量少点改动 然后负责将我们两个的接口模块整合在一起 看看周六日怎么把这个工作干完吧 同时多写几道算法题 多陪陪家里和May(更新一下)今天学到晚上十一点就休息 给自己放松一下 多睡会觉 一切顺利！&lt;/p&gt;
+&lt;h2 id=&#34;20251102&#34;&gt;2025.11.02
+&lt;/h2&gt;&lt;p&gt;今天还是周天，本人却已经自动在周末完成公司的任务需求了。真的是天选打工人了，主要第一次实习，我也不知道公司交给我的业务需要多久完成，所以想着是快点完成任务，早点交差。让前端的人员一直等下去也不太好。但是我主要现在是有点搞不清楚前端和后端的区别在哪里，我现在在写后端接口以及api文档，这些本来就是在后端的任务范围之内的吧，但是我自己又想着用postman自测一下，不知道后端人员需不需要进行测试。
+这个任务是上周交给我的，现在我只是给了一个初版的api文档，以及将首页的几个接口跑通了，不知道这样的进度慢不慢，所以周日晚上的时候自己又在这里写。其实是能学到东西的，比如我学到了如何用cursor 和 trae 比如我知道如何跳过token认证（排除路径进行测试）等等&amp;hellip;我觉得收获还是很多的，现在只是将接口交给公司，之后还要进一步进行业务的确定，因为现在最主要的就是数据库中的数据都是玩具数据，甚至我到现在还没捋清楚业务的逻辑，之后可以再看看。
+最近一直忙着工作，忙着学习，想着未来能进一个好公司，能挣多一些钱，能减轻家里的负担，能离May更近一点。但是我太焦虑了，可能把这种情绪也传给了May，所以她才会觉得我最近对她不上心，我们都是在乎对方的，不希望之后会有更多的不开心了。加油！我觉得最近学习的东西还是不够去团子的吧 八股文还没怎么背 算法也只是刷了三十题（第一遍）看看接下来这个月能学到多少东西吧！加油！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e4%bb%bb%e5%8a%a1%e9%a6%96%e9%a1%b5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;完成的模块自测&#34;
+	
+	
+&gt;&lt;/p&gt;
 </description>
         </item>
         <item>

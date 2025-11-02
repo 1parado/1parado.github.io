@@ -7,12 +7,12 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Sat, 01 Nov 2025 22:06:17 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>常用工具Git Maven</title>
-        <link>https://1parado.github.io/p/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7git-maven/</link>
+        <lastBuildDate>Sun, 02 Nov 2025 21:16:14 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>常用工具</title>
+        <link>https://1parado.github.io/p/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/</link>
         <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://1parado.github.io/p/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7git-maven/</guid>
+        <guid>https://1parado.github.io/p/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/</guid>
         <description>&lt;h2 id=&#34;2025-10-26&#34;&gt;2025-10-26
 &lt;/h2&gt;&lt;h3 id=&#34;maven&#34;&gt;Maven
 &lt;/h3&gt;&lt;p&gt;参考：&lt;a class=&#34;link&#34; href=&#34;https://javaguide.cn/tools/maven/maven-core-concepts.html#%E4%BE%9D%E8%B5%96%E9%85%8D%E7%BD%AE&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -84,6 +84,12 @@ git clone &lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/&#34; 
 	
 	
 &gt;&lt;/p&gt;
+&lt;h2 id=&#34;2025-11-02&#34;&gt;2025-11-02
+&lt;/h2&gt;&lt;h3 id=&#34;cursor无限续杯&#34;&gt;Cursor无限续杯
+&lt;/h3&gt;&lt;p&gt;支持正版Cursor！ 首先Cursor是真的好用 一个月20美刀其实也还好。在进行Cursor注册之前 首先要先注册一个无限邮 因为Cursor是通过邮箱注册新用户的 这里我用的是2925无限邮 比如邮箱名字叫example@2925.com 接下来 你只需要给examplea@2925.com,exampleb@2925.com&amp;hellip;发送一条消息 这样你在2925无限邮就能收到子邮箱的验证码 这样就不需要多次创建QQ邮箱了 &lt;a class=&#34;link&#34; href=&#34;https://www.2925.com/#/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2925邮箱&lt;/a&gt; 然后进入&lt;a class=&#34;link&#34; href=&#34;https://authenticator.cursor.sh/sign-up?client_id=client_01GS6W3C96KW4WRS6Z93JCE2RJ&amp;amp;redirect_uri=https%3A%2F%2Fcursor.com%2Fapi%2Fauth%2Fcallback&amp;amp;state=%257B%2522returnTo%2522%253A%2522%252Fdashboard%2522%252C%2522nonce%2522%253A%2522882cb7b1-765c-4370-8f48-8224fea5460a%2522%257D&amp;amp;authorization_session_id=01K927FWG22GKXJ4DB9CBKAW6G&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Cursor的注册页面&lt;/a&gt; 然后按照步骤进行注册即可 手机号码可以用自己的 银行卡号不需要绑定即可使用Cursor 如果Cursor官网把你的IP封了 可以按照&lt;a class=&#34;link&#34; href=&#34;https://github.com/yuaotian/go-cursor-help/blob/master/README_CN.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Cursor重置&lt;/a&gt;来进行机器码重置 我的电脑上需要将Cursor 卸载再重新下载 然后重置机器码（选择2）接着再进行注册 手机号接收验证码目前不知道能用几次（手机号1用了几次然后该手机号就不能注册了） 我用网上那种接收验证码的网站没成功过 之后再试试看。&lt;/p&gt;
 </description>
         </item>
         
