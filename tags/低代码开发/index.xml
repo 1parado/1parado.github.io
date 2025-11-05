@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Sat, 18 Oct 2025 16:54:14 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 05 Nov 2025 19:38:05 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>RuoYi框架</title>
         <link>https://1parado.github.io/p/ruoyi%E6%A1%86%E6%9E%B6/</link>
         <pubDate>Thu, 16 Oct 2025 00:00:00 +0000</pubDate>
@@ -38,6 +38,7 @@
 	
 &gt;
 按照RuoYi配置文档一步一步来其实挺好搭建的，主要是要先配置环境。&lt;/p&gt;
+&lt;p&gt;低代码开发平台在于将一些基础配置都给你了 然后你只需要根据业务逻辑写CRUD就可以了 首先要导入数据库，然后用若依的代码生成器生成一些基础的代码（Controller，Service，ServiceImpl，Mapper），然后根据业务需求开始写代码，一些小公司的业务就是在若依的基础上进行二次开发。现在若依又出了若依AI，不知道这个项目会不会在以后有更多的小公司应用，总之，了解若依对于找小公司进去工作是很有帮助的。&lt;/p&gt;
 </description>
         </item>
         
