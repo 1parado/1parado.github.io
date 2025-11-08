@@ -990,6 +990,29 @@ Admin端新增抢课信息
 &lt;p&gt;想到了一个小玩意，在用户进行发布帖子和进行评论的时候，进行敏感词检查。如果内容中包含敏感词 就弹出提示。实现起来挺简单的，让Java后端负责业务逻辑，python负责机器学习，python运行在本地端口，两者通过http进行通信。
 详情请看这篇文章 &lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%8F%E6%84%9F%E8%AF%8D%E6%A3%80%E6%B5%8B/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;如何实现一个简单的敏感词检测&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;2025.11.08&lt;/p&gt;
+&lt;h2 id=&#34;集成调查问卷系统&#34;&gt;集成调查问卷系统
+&lt;/h2&gt;&lt;p&gt;在现有的项目基础上，集成一个调查问卷系统，用于收集学生对课程的反馈和建议。根据角色不同，展示不同页面，对于游客可以浏览系统主页和问卷信息。教师和管理员可以发布调查问卷，学生可以填写和查看调查问卷。今天先把大致的页面和模块写完，现在登录模块有点问题，等明天再看一下。
+&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b71.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b72.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;&lt;/p&gt;
 </description>
         </item>
         

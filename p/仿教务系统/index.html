@@ -10,7 +10,7 @@
 <meta property='og:description' content="简历上的一个仿教务系统项目 负责实现多角色登录，高并发抢课，AI智能选课助手模块等">
 <meta property='og:url' content='https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/'>
 <meta property='og:site_name' content='Paradox’s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SpringBoot' /><meta property='article:tag' content='Redis' /><meta property='article:published_time' content='2025-10-15T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-22T16:49:05&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SpringBoot' /><meta property='article:tag' content='Redis' /><meta property='article:published_time' content='2025-10-15T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-08T23:54:02&#43;08:00'/>
 <meta name="twitter:title" content="仿教务系统">
 <meta name="twitter:description" content="简历上的一个仿教务系统项目 负责实现多角色登录，高并发抢课，AI智能选课助手模块等">
     </head>
@@ -295,6 +295,7 @@
     <li><a href="#支付模块">支付模块</a></li>
     <li><a href="#ai选课助手模块">AI选课助手模块</a></li>
     <li><a href="#论坛模块">论坛模块</a></li>
+    <li><a href="#集成调查问卷系统">集成调查问卷系统</a></li>
   </ol>
 </nav>
         </div>
@@ -625,6 +626,29 @@ Admin端新增抢课信息
 <p>想到了一个小玩意，在用户进行发布帖子和进行评论的时候，进行敏感词检查。如果内容中包含敏感词 就弹出提示。实现起来挺简单的，让Java后端负责业务逻辑，python负责机器学习，python运行在本地端口，两者通过http进行通信。
 详情请看这篇文章 <a class="link" href="https://1parado.github.io/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%8F%E6%84%9F%E8%AF%8D%E6%A3%80%E6%B5%8B/"  target="_blank" rel="noopener"
     >如何实现一个简单的敏感词检测</a></p></blockquote>
+<p>2025.11.08</p>
+<h2 id="集成调查问卷系统">集成调查问卷系统
+</h2><p>在现有的项目基础上，集成一个调查问卷系统，用于收集学生对课程的反馈和建议。根据角色不同，展示不同页面，对于游客可以浏览系统主页和问卷信息。教师和管理员可以发布调查问卷，学生可以填写和查看调查问卷。今天先把大致的页面和模块写完，现在登录模块有点问题，等明天再看一下。
+<img src="/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b71.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="调查问卷"
+	
+	
+>
+<img src="/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b72.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="调查问卷"
+	
+	
+></p>
 
 </section>
 
@@ -662,7 +686,7 @@ Admin端新增抢课信息
 
 
         <span>
-            Last updated on Oct 22, 2025 16:49 CST
+            Last updated on Nov 08, 2025 23:54 CST
         </span>
     </section></footer>
 
@@ -810,7 +834,7 @@ function setGiscusTheme(theme) {
         2025 Paradox29
     </section>
 
-    <section class="wordcount">本站总字数：112.8k 字
+    <section class="wordcount">本站总字数：114.1k 字
 </section>
     <section class="powerby">
         
