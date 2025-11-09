@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Sat, 08 Nov 2025 23:54:02 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 10 Nov 2025 00:25:23 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>手写一个Redis</title>
         <link>https://1parado.github.io/p/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAredis/</link>
         <pubDate>Fri, 24 Oct 2025 00:00:00 +0000</pubDate>
@@ -725,6 +725,62 @@ Admin端新增抢课信息
 	
 	
 &gt;&lt;/p&gt;
+&lt;p&gt;2025.11.09
+今天完成的进度挺快的，现在大致看了一下，除了新建调查问卷的接口有点小问题，其他接口基本上都可以正常运行了，所以将运行截图放在这，源码放在Github上。其实这个模块没有什么重难点，文件导入和上传算一个吗？其实也不是很难，总之开发这个模块还是挺简单的。首先是RBAC权限控制，管理员可以查看全部调查问卷列表，普通用户可以浏览，但是无其他权限，比如增删改查操作，用户只可以进行查看和填写。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b73.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+调查问卷列表支持条件筛选和分页查询，这个用mp的分页查询即可&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b74.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+管理员有增删改查的权限，问卷详情信息和问卷数据统计信息如下图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b75.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b76.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b77.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+开发这个模块的是时候，真的觉得不是很难，未来想着看看能不能与AI结合起来，或者在教务系统中添加一些其他的子模块。GitHub仓库放在这&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/survey-system/tree/master&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;郑州大学调查问卷子系统&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         
