@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Wed, 12 Nov 2025 23:30:09 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 16 Nov 2025 23:41:58 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>代码随想录(长期更新)</title>
         <link>https://1parado.github.io/p/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0/</link>
         <pubDate>Fri, 17 Oct 2025 00:00:00 +0000</pubDate>
@@ -1461,6 +1461,9 @@ return res;
 &lt;h2 id=&#34;20251112&#34;&gt;2025.11.12
 &lt;/h2&gt;&lt;p&gt;至今为止已经刷到了49题了，马上一半了。主要是好多题目是看着别人的代码才敲出来的。之后还是要多在算法上面下功夫的，主要是没有一个安静的做题空间，但是客观事实也不是借口，&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/1parado_repo.github.io/blob/main/leetcode1112.java&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;力扣刷到了一半！&lt;/a&gt;，希望面试的时候遇到的题目都是我会的题目，而且我看评论区，有些大厂要求一道题目不止会一道解法，还是要勤能补拙吧。之后要多刷多记，至少对于hot100的题目要做到熟练吧，还得看看sql题，感觉找个好工作好难啊，需要学的东西太多了，需要付出的东西也太多了，而且还要面对生活中的其他事情。&lt;/p&gt;
+&lt;h2 id=&#34;20251116&#34;&gt;2025.11.16
+&lt;/h2&gt;&lt;p&gt;今天刷到了六十题 四天刷了十题实在算不上多，问题的关键在于，我刷的慢，而且大多数题目没有经过自己的思考和讲解，所以在自己的脑子里面留不下印象，希望多写几遍会有进步，学习是有一个加速度的，只要基础打好，后面学知识会越来越快的，这个理论我是很相信的。&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/1parado_repo.github.io/blob/main/leetcode1116.java&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;刷题终于来到了60题&lt;/a&gt;，但是我觉得这肯定还是远远不够的，之后如果想去团子的话，肯定还是要刷codetop里面的题，希望能有个好的结果吧！希望以后的工作不忙，让我有时间学习自己的东西，虽然这有点像天方夜谭。&lt;/p&gt;
 </description>
         </item>
         
