@@ -7,11 +7,11 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright><atom:link href="https://1parado.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>酒旅系统</title>
-        <link>https://1parado.github.io/p/%E9%85%92%E6%97%85%E7%B3%BB%E7%BB%9F/</link>
-        <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
+        <title>仿教务系统</title>
+        <link>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</link>
+        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://1parado.github.io/p/%E9%85%92%E6%97%85%E7%B3%BB%E7%BB%9F/</guid>
+        <guid>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</guid>
         <description>&lt;style&gt;
   body {
     background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
@@ -19,82 +19,325 @@
     background-attachment: fixed;
   }
 &lt;/style&gt;
-&lt;h2 id=&#34;2025-11-15&#34;&gt;2025-11-15
-&lt;/h2&gt;&lt;p&gt;打算用Trae-solo模式开发一个酒旅系统，今天先大致搞明白现在市场上的需求。先建立一个脚手架，现在的情况是前后端都能运行起来了，暂时不会报错，这么来看还是可以的，不知道对比于cursor来说怎么样。未来真的会一个人一个ai就能完成一个需求的开发吗，我觉得真的会。下面是暂时实现了登录功能和简单的列表展示功能，先睡了，明天再看。
-&lt;img src=&#34;https://1parado.github.io/img/flight_system1.png&#34;
+&lt;p&gt;2025.10.15
+这是创建的
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/1parado_repo.github.io/blob/main/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;思维导图&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;2025.10.21&lt;/p&gt;
+&lt;h2 id=&#34;登录模块&#34;&gt;登录模块
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;登录鉴权&lt;/strong&gt; ：该项目采用SpringAOP + 自定义注解@RoleRequire实现RBAC鉴权&lt;/p&gt;
+&lt;p&gt;现有的登录鉴权方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;SpringSecurity&lt;/strong&gt;+RBAC模型+JWT实现认证与授权&lt;/li&gt;
+&lt;li&gt;SpringBoot + &lt;strong&gt;Sa-Token&lt;/strong&gt; + MyBatis + MySQL + Redis 实现用户鉴权、角色管理、权限管理&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Apache Shiro&lt;/strong&gt; 是一个轻量级的安全框架，适合需要简单易用的权限管理的项目&lt;/li&gt;
+&lt;li&gt;自定义 定义用户、角色、权限三张表，设计合理的关联关系， 使用拦截器或 AOP 实现权限校验逻辑。根据业务需求设计动态权限分配机制。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;JWT实现无状态认证&lt;/strong&gt;（不需要服务器存储用户的会话状态），一个JWT包括头部，载荷，签名。&lt;/p&gt;
+&lt;p&gt;过程：用户登录认证时，服务端验证用户身份，成功的话，服务端生成JWT返回给客户端，客户端在之后的请求中将JWT放在请求的头部（Authorization）,然后服务端通过解析JWT从而确定用户的身份和权限&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;双token机制实现无感刷新&lt;/strong&gt;：分为两种token 一种是access token（访问令牌）短期有效 ，一种是 refresh token（刷新令牌），长期有效。&lt;/p&gt;
+&lt;p&gt;过程：客户端登录，认证成功，服务端签发access_token（返回给前端）和refresh token（存入cookie） 之后，客户端访问接口都带着access_token 当access_token过期之后 客户端发送给refresh token给服务端 验证通过则生成新的access token和refresh token，从而实现无感刷新&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://juejin.cn/post/7548268336417751055&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;双 Token 认证机制：从原理到实践的完整实现双 Token 认证机制：从原理到实践的完整实现 在现代 Web 应用中 - 掘金&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;登录模块展示：首先进入登录页面：
+&lt;img src=&#34;https://1parado.github.io/img/%e7%99%bb%e5%bd%95%e9%a1%b5%e9%9d%a2.png&#34;
 	
 	
 	
 	loading=&#34;lazy&#34;
 	
-		alt=&#34;酒旅系统&#34;
+		alt=&#34;登录页面&#34;
 	
 	
 &gt;
-&lt;img src=&#34;https://1parado.github.io/img/flight_system2.png&#34;
+然后根据角色的不同，进入不同的主页，系统分为三种角色Admin,Teacher,Student
+&lt;img src=&#34;https://1parado.github.io/img/%e7%99%bb%e5%bd%95%e9%89%b4%e6%9d%83.png&#34;
 	
 	
 	
 	loading=&#34;lazy&#34;
 	
-		alt=&#34;酒旅系统&#34;
+		alt=&#34;登录鉴权&#34;
 	
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;今天搞了很久，发现前端的页面还是没有美化，不知道怎么搞的，而且现在存在的问题，用户登录成功之后，跳转到网站的主页，但是右上角应该显示的是用户的账号的，现在还是显示的是登录二字。今天只是把数据填充一下，能展示一下基本的增删改查。关键在于我想利用AI做一些能够真正用到实处的技术，最后做出来的还是CRUD，本质上和管理系统没区别。不过今天算法做到六十题还是可以的，虽然说大部分都是照着题解写一遍，然后理解一下，我觉得还是得有个模板，不能相同知识点的题目用不同套路写，这样脑子会很混乱，所以今天我就用ai生成模板，然后用模板解题，最后我只要记住模板的思想即可。明天又要上班了，累之！&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/flight1.png&#34;
+&lt;h2 id=&#34;秒杀抢课模块&#34;&gt;秒杀抢课模块
+&lt;/h2&gt;&lt;p&gt;1.获取动态路径 使用UUID + MD5生成一个唯一标识符 结合前端URL生成动态路径 避免被脚本直接访问&lt;/p&gt;
+&lt;p&gt;2.实现限流保护 使用令牌桶实现限流保护（ &lt;strong&gt;Redis + 令牌桶算法&lt;/strong&gt;），这里创建一个工具类TokenBucket，里面的参数包括桶的最大容量，间隔几秒补充几个令牌，当前可用令牌数&amp;hellip;方法包括令牌补充refill和获取令牌逻辑try Acquire 从而实现限流。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;还可以利用redission实现分布式限流 &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/Mistiest/p/19082141&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;基于 Redisson 的分布式限流实战：令牌桶算法的优雅实现 - 你小志蒸不戳 - 博客园&lt;/a&gt;，比如保护AI访问的API&lt;/p&gt;
+&lt;p&gt;其他限流方式：&lt;strong&gt;固定窗口、滑动窗口、漏桶限流和令牌桶限流算法&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;检验动态路径（在获取动态path的时候会将动态path存入Redis，用于此时的动态路径校验）&lt;/li&gt;
+&lt;li&gt;检查当前用户是否重复秒杀 (幂等控制) 通过三级缓存实现 本地缓存采用Caffine/Guava 二级缓存采用Redis 三级缓存采用数据库 当发现任意一级的数据库中已经有选课记录了 就返回重复秒杀异常&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;幂等性指的是一个操作，无论执行多少次，都能得到相同的结果，即它不会因为执行多次而影响系统的状态。这在处理网络请求、数据库操作等场景中尤为重要，例如在订单支付、消息推送等操作中，即使因为网络延迟或其他原因导致多次请求，也应保证操作只执行一次，避免重复处理。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;进入秒杀的核心阶段  Redis + Lua脚本 + RocketMQ 实现 库存预减 + 异步入队&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.bytewaver.top/2025/02/14/project/seckill/%e4%bb%8e%e9%9b%b6%e5%bc%80%e5%a7%8b%e5%ae%9e%e7%8e%b0%e7%a7%92%e6%9d%80%e7%b3%bb%e7%bb%9f3/#%e7%a7%92%e6%9d%80%e6%8e%a5%e5%8f%a3%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;从零开始实现秒杀系统（三）：RocketMQ消息队列篇 - Xun&amp;rsquo;s Blog&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Lua脚本进行双重判断，首先判断是否售罄标志，然后再判断库存预减之后的库存数量，并且在脚本中实现库存减1的操作 如果成功返回1 失败返回 0.Lua脚本返回成功，系统发送消息到消息队列（RocketMQ）采用&lt;strong&gt;事务消息机制&lt;/strong&gt;保证数据的最终一致性。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;生产者发送半消息 本地事务创建选课记录（订单） 根据事务的执行结果通知Broker是投递该消息还是丢弃该消息  消费者异步从MQ中消费信息 完成后续业务。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%bc%82%e6%ad%a5%e7%a7%92%e6%9d%80.png&#34;
 	
 	
 	
 	loading=&#34;lazy&#34;
 	
-		alt=&#34;酒旅系统&#34;
+		alt=&#34;异步秒杀流程&#34;
 	
 	
 &gt;&lt;/p&gt;
-&lt;h2 id=&#34;2025-11-22&#34;&gt;2025-11-22
-&lt;/h2&gt;&lt;p&gt;公司的项目终于告一段落了，打算重拾这个酒旅项目，目前我的兴趣在于如果美化前端页面，在王哥那里&amp;quot;偷师&amp;quot;，看到了一个写前端页面的轻量化的软件Hbuilder X。（也可以写md文档，不知道和其他软件比起来如何），总之也是美化了一下页面，但是我还是觉得现在的前端页面好丑啊，附图两张，听说Gemini 3的前端能力很强，有机会试一下。
-&lt;img src=&#34;https://1parado.github.io/img/flight1122-1.png&#34;
+&lt;p&gt;页面展示：
+首先填写预选课信息（类似于商城系统的购物车），然后查看选课信息（普通选课和秒杀抢课）
+&lt;img src=&#34;https://1parado.github.io/img/%e9%99%90%e6%97%b6%e6%8a%a2%e8%af%be.png&#34;
 	
 	
 	
 	loading=&#34;lazy&#34;
 	
-		alt=&#34;酒旅系统&#34;
+		alt=&#34;限时抢课&#34;
 	
 	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/flight1122-2.png&#34;
+&gt;
+如果用户是首次抢课且库存充足，则显示抢课成功
+&lt;img src=&#34;https://1parado.github.io/img/%e6%8a%a2%e8%af%be%e6%88%90%e5%8a%9f.png&#34;
 	
 	
 	
 	loading=&#34;lazy&#34;
 	
-		alt=&#34;酒旅系统&#34;
+		alt=&#34;抢课成功&#34;
+	
+	
+&gt;
+如果用户重复抢课则提醒请勿重复秒杀
+&lt;img src=&#34;https://1parado.github.io/img/%e9%87%8d%e5%a4%8d%e6%8a%a2%e8%af%be%e6%8f%90%e9%86%92.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;重复抢课提醒&#34;
+	
+	
+&gt;
+Admin端新增抢课信息
+&lt;img src=&#34;https://1parado.github.io/img/%e6%96%b0%e5%a2%9e%e6%8a%a2%e8%af%be%e4%bf%a1%e6%81%af.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;新增抢课&#34;
+	
+	
+&gt;
+当学生张三选过课程之后，该课程已经“售罄”了 接下来用李四来选课会提醒库存不足 抢课失败
+&lt;img src=&#34;https://1parado.github.io/img/%e6%8a%a2%e8%af%be%e5%a4%b1%e8%b4%a5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;抢课失败&#34;
 	
 	
 &gt;&lt;/p&gt;
+&lt;p&gt;之后可以考虑用jmeter测试高并发场景下的抢课情况。&lt;/p&gt;
+&lt;h2 id=&#34;支付模块&#34;&gt;支付模块
+&lt;/h2&gt;&lt;p&gt;支付过程：&lt;/p&gt;
+&lt;p&gt;用户点击缴费 进入AliPayController 用请求头中的Authorization进行身份验证 用请求体中的PaymentPO来生成缴费信息【前端会收集页面信息 当用户点击缴费按钮就会构建PaymentPO写入请求体中传给后端】
+初始化订单信息 订单的状态初始化为0 标识未缴费 每个订单有一个唯一的订单号
+使用创建好的支付工具类PayUtil 调用支付宝接口完成支付流程&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;PayUtil中的核心方法即发起支付和查询支付结果方法：
+&lt;strong&gt;发起支付&lt;/strong&gt;：1.初始化支付宝客户端 2. 创建支付请求 3.设置业务参数 4.发起请求并且返回支付结果
+&lt;strong&gt;查询支付结果&lt;/strong&gt;：创建查询请求-执行查询-处理查询结果&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;结果展示：
+学生点击缴费之后，跳转到支付页面
+&lt;img src=&#34;https://1parado.github.io/img/%e6%94%af%e4%bb%98%e5%8c%85.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;支付宝&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;GitHub上面有一些支付服务的项目： &lt;a class=&#34;link&#34; href=&#34;https://github.com/search?q=%E6%94%AF%E4%BB%98&amp;amp;ref=opensearch&amp;amp;type=repositories&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/search?q=%E6%94%AF%E4%BB%98&amp;ref=opensearch&amp;type=repositories&lt;/a&gt; 可以支持支付服务的快速开发。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;ai选课助手模块&#34;&gt;AI选课助手模块
+&lt;/h2&gt;&lt;p&gt;chatClient介绍：https://springdoc.cn/spring-ai/api/chatclient.html&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;请求接收与路由&lt;/strong&gt;：用户通过Vue3前端界面提出问题，后端RESTful API接收请求。核心的&lt;strong&gt;智能路由&lt;/strong&gt;逻辑会根据预设关键词（如“选课”、“推荐”、“统计”等）判断问题类型。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;业务上下文构建&lt;/strong&gt;：对于选课相关问题，系统会调用 CourseSelectionService ，通过 JdbcTemplate 高效查询选课数据库，获取课程热度、名额、个人成绩倾向等&lt;strong&gt;实时统计数据&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Prompt工程与模型调用&lt;/strong&gt;：将查询到的业务数据作为上下文，与预先设计好的&lt;strong&gt;系统Prompt&lt;/strong&gt;（如“你是一名选课顾问…”）进行组装，形成完整的提示信息，然后通过Spring AI调用本地的Ollama (Qwen2:7b)模型。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;响应返回&lt;/strong&gt;：模型生成的个性化建议或通用回答最终通过统一的API返回给前端展示。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我总觉得&lt;strong&gt;代码生成器&lt;/strong&gt;（Mybatis-Plus，RuoYi代码生成器）的实现方式和这也差不多 首先创建模板（这里是提示词）然后查询表结构数据，再进行模板渲染得到生成的代码&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;过程：请求流程：chatClient.call(message) → 调用 OllamaChatClient → 向本地 Ollama 服务发送请求
+智能路由：isCourseSelectionQuestion 方法实现业务问题识别，将选课相关问题路由到 BusinessAIService&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;chatClient是SpringAi提供的聊天
+页面展示：
+&lt;img src=&#34;https://1parado.github.io/img/%e9%80%89%e8%af%be%e5%8a%a9%e6%89%8b.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;选课助手&#34;
+	
+	
+&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;2025.10.22&lt;/p&gt;
+&lt;h2 id=&#34;论坛模块&#34;&gt;论坛模块
+&lt;/h2&gt;&lt;p&gt;对于论坛模块，学生可以发帖评价课程，教师不能发帖，两者都可以进行评论回复交流
+论坛主页展示一些帖子和热门榜单（Redis缓存）【这都是些简单的增删改查】
+&lt;img src=&#34;https://1parado.github.io/img/%e8%ae%ba%e5%9d%9b%e4%b8%bb%e9%a1%b5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;论坛主页&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%ad%a6%e7%94%9f%e5%8f%91%e5%b8%96.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;学生发帖&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%80%81%e5%b8%88%e4%b8%8d%e8%83%bd%e5%8f%91%e8%b4%b4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;老师不能发帖&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%af%84%e8%ae%ba%e6%a8%a1%e5%9d%97.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;评论模块&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;想到了一个小玩意，在用户进行发布帖子和进行评论的时候，进行敏感词检查。如果内容中包含敏感词 就弹出提示。实现起来挺简单的，让Java后端负责业务逻辑，python负责机器学习，python运行在本地端口，两者通过http进行通信。
+详情请看这篇文章 &lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%8F%E6%84%9F%E8%AF%8D%E6%A3%80%E6%B5%8B/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;如何实现一个简单的敏感词检测&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;2025.11.08&lt;/p&gt;
+&lt;h2 id=&#34;集成调查问卷系统&#34;&gt;集成调查问卷系统
+&lt;/h2&gt;&lt;p&gt;在现有的项目基础上，集成一个调查问卷系统，用于收集学生对课程的反馈和建议。根据角色不同，展示不同页面，对于游客可以浏览系统主页和问卷信息。教师和管理员可以发布调查问卷，学生可以填写和查看调查问卷。今天先把大致的页面和模块写完，现在登录模块有点问题，等明天再看一下。
+&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b71.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b72.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;2025.11.09
+今天完成的进度挺快的，现在大致看了一下，除了新建调查问卷的接口有点小问题，其他接口基本上都可以正常运行了，所以将运行截图放在这，源码放在Github上。其实这个模块没有什么重难点，文件导入和上传算一个吗？其实也不是很难，总之开发这个模块还是挺简单的。首先是RBAC权限控制，管理员可以查看全部调查问卷列表，普通用户可以浏览，但是无其他权限，比如增删改查操作，用户只可以进行查看和填写。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b73.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+调查问卷列表支持条件筛选和分页查询，这个用mp的分页查询即可&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b74.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+管理员有增删改查的权限，问卷详情信息和问卷数据统计信息如下图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b75.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b76.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b77.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+开发这个模块的是时候，真的觉得不是很难，未来想着看看能不能与AI结合起来，或者在教务系统中添加一些其他的子模块。GitHub仓库放在这&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/survey-system/tree/master&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;郑州大学调查问卷子系统&lt;/a&gt;&lt;/p&gt;
 </description>
-        </item>
-        <item>
-        <title>JVM 常见面试题</title>
-        <link>https://1parado.github.io/p/jvm-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
-        <pubDate>Thu, 30 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/p/jvm-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
-        <description>&lt;style&gt;
-  body {
-    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-&lt;/style&gt;
-&lt;h2 id=&#34;2025-10-30&#34;&gt;2025-10-30
-&lt;/h2&gt;&lt;p&gt;参考链接：
-&lt;a class=&#34;link&#34; href=&#34;https://javaguide.cn/java/jvm/memory-area.html#%E5%89%8D%E8%A8%80&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;JVM&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;java内存&#34;&gt;Java内存
-&lt;/h3&gt;</description>
         </item>
         <item>
         <title>自然语言转SQL语句实现增删改查操作</title>
@@ -323,6 +566,96 @@ Java中现在主流的ORM框架包括：&lt;/p&gt;
 &lt;p&gt;现在这个系统只是实现了查询功能 其他增删改操作实现起来跟查询操作大同小异 所以通过自然语言操作数据库是可行的并且有益于降低数据操作的门槛 GitHub上有好多优秀的开源项目 这里我就不一一列举了 总之 这个系统只是一个简单的MCP数据库的基本实现。&lt;/p&gt;
 &lt;p&gt;项目源码地址：https://github.com/1parado/MCP-Database&lt;/p&gt;
 </description>
+        </item>
+        <item>
+        <title>酒旅系统</title>
+        <link>https://1parado.github.io/p/%E9%85%92%E6%97%85%E7%B3%BB%E7%BB%9F/</link>
+        <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/%E9%85%92%E6%97%85%E7%B3%BB%E7%BB%9F/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;h2 id=&#34;2025-11-15&#34;&gt;2025-11-15
+&lt;/h2&gt;&lt;p&gt;打算用Trae-solo模式开发一个酒旅系统，今天先大致搞明白现在市场上的需求。先建立一个脚手架，现在的情况是前后端都能运行起来了，暂时不会报错，这么来看还是可以的，不知道对比于cursor来说怎么样。未来真的会一个人一个ai就能完成一个需求的开发吗，我觉得真的会。下面是暂时实现了登录功能和简单的列表展示功能，先睡了，明天再看。
+&lt;img src=&#34;https://1parado.github.io/img/flight_system1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/flight_system2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;今天搞了很久，发现前端的页面还是没有美化，不知道怎么搞的，而且现在存在的问题，用户登录成功之后，跳转到网站的主页，但是右上角应该显示的是用户的账号的，现在还是显示的是登录二字。今天只是把数据填充一下，能展示一下基本的增删改查。关键在于我想利用AI做一些能够真正用到实处的技术，最后做出来的还是CRUD，本质上和管理系统没区别。不过今天算法做到六十题还是可以的，虽然说大部分都是照着题解写一遍，然后理解一下，我觉得还是得有个模板，不能相同知识点的题目用不同套路写，这样脑子会很混乱，所以今天我就用ai生成模板，然后用模板解题，最后我只要记住模板的思想即可。明天又要上班了，累之！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/flight1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2025-11-22&#34;&gt;2025-11-22
+&lt;/h2&gt;&lt;p&gt;公司的项目终于告一段落了，打算重拾这个酒旅项目，目前我的兴趣在于如果美化前端页面，在王哥那里&amp;quot;偷师&amp;quot;，看到了一个写前端页面的轻量化的软件Hbuilder X。（也可以写md文档，不知道和其他软件比起来如何），总之也是美化了一下页面，但是我还是觉得现在的前端页面好丑啊，附图两张，听说Gemini 3的前端能力很强，有机会试一下。
+&lt;img src=&#34;https://1parado.github.io/img/flight1122-1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/flight1122-2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>JVM 常见面试题</title>
+        <link>https://1parado.github.io/p/jvm-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
+        <pubDate>Thu, 30 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/jvm-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;h2 id=&#34;2025-10-30&#34;&gt;2025-10-30
+&lt;/h2&gt;&lt;p&gt;参考链接：
+&lt;a class=&#34;link&#34; href=&#34;https://javaguide.cn/java/jvm/memory-area.html#%E5%89%8D%E8%A8%80&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;JVM&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;java内存&#34;&gt;Java内存
+&lt;/h3&gt;</description>
         </item>
         <item>
         <title>如何实现一个简单的敏感词检测</title>
@@ -806,339 +1139,6 @@ Java中现在主流的ORM框架包括：&lt;/p&gt;
 &gt;
 按照RuoYi配置文档一步一步来其实挺好搭建的，主要是要先配置环境。&lt;/p&gt;
 &lt;p&gt;低代码开发平台在于将一些基础配置都给你了 然后你只需要根据业务逻辑写CRUD就可以了 首先要导入数据库，然后用若依的代码生成器生成一些基础的代码（Controller，Service，ServiceImpl，Mapper），然后根据业务需求开始写代码，一些小公司的业务就是在若依的基础上进行二次开发。现在若依又出了若依AI，不知道这个项目会不会在以后有更多的小公司应用，总之，了解若依对于找小公司进去工作是很有帮助的。&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>仿教务系统</title>
-        <link>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</link>
-        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</guid>
-        <description>&lt;style&gt;
-  body {
-    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-&lt;/style&gt;
-&lt;p&gt;2025.10.15
-这是创建的
-&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/1parado_repo.github.io/blob/main/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;思维导图&lt;/a&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;2025.10.21&lt;/p&gt;
-&lt;h2 id=&#34;登录模块&#34;&gt;登录模块
-&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;登录鉴权&lt;/strong&gt; ：该项目采用SpringAOP + 自定义注解@RoleRequire实现RBAC鉴权&lt;/p&gt;
-&lt;p&gt;现有的登录鉴权方式：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;SpringSecurity&lt;/strong&gt;+RBAC模型+JWT实现认证与授权&lt;/li&gt;
-&lt;li&gt;SpringBoot + &lt;strong&gt;Sa-Token&lt;/strong&gt; + MyBatis + MySQL + Redis 实现用户鉴权、角色管理、权限管理&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Apache Shiro&lt;/strong&gt; 是一个轻量级的安全框架，适合需要简单易用的权限管理的项目&lt;/li&gt;
-&lt;li&gt;自定义 定义用户、角色、权限三张表，设计合理的关联关系， 使用拦截器或 AOP 实现权限校验逻辑。根据业务需求设计动态权限分配机制。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;JWT实现无状态认证&lt;/strong&gt;（不需要服务器存储用户的会话状态），一个JWT包括头部，载荷，签名。&lt;/p&gt;
-&lt;p&gt;过程：用户登录认证时，服务端验证用户身份，成功的话，服务端生成JWT返回给客户端，客户端在之后的请求中将JWT放在请求的头部（Authorization）,然后服务端通过解析JWT从而确定用户的身份和权限&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;双token机制实现无感刷新&lt;/strong&gt;：分为两种token 一种是access token（访问令牌）短期有效 ，一种是 refresh token（刷新令牌），长期有效。&lt;/p&gt;
-&lt;p&gt;过程：客户端登录，认证成功，服务端签发access_token（返回给前端）和refresh token（存入cookie） 之后，客户端访问接口都带着access_token 当access_token过期之后 客户端发送给refresh token给服务端 验证通过则生成新的access token和refresh token，从而实现无感刷新&lt;/p&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://juejin.cn/post/7548268336417751055&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;双 Token 认证机制：从原理到实践的完整实现双 Token 认证机制：从原理到实践的完整实现 在现代 Web 应用中 - 掘金&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;登录模块展示：首先进入登录页面：
-&lt;img src=&#34;https://1parado.github.io/img/%e7%99%bb%e5%bd%95%e9%a1%b5%e9%9d%a2.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;登录页面&#34;
-	
-	
-&gt;
-然后根据角色的不同，进入不同的主页，系统分为三种角色Admin,Teacher,Student
-&lt;img src=&#34;https://1parado.github.io/img/%e7%99%bb%e5%bd%95%e9%89%b4%e6%9d%83.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;登录鉴权&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h2 id=&#34;秒杀抢课模块&#34;&gt;秒杀抢课模块
-&lt;/h2&gt;&lt;p&gt;1.获取动态路径 使用UUID + MD5生成一个唯一标识符 结合前端URL生成动态路径 避免被脚本直接访问&lt;/p&gt;
-&lt;p&gt;2.实现限流保护 使用令牌桶实现限流保护（ &lt;strong&gt;Redis + 令牌桶算法&lt;/strong&gt;），这里创建一个工具类TokenBucket，里面的参数包括桶的最大容量，间隔几秒补充几个令牌，当前可用令牌数&amp;hellip;方法包括令牌补充refill和获取令牌逻辑try Acquire 从而实现限流。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;还可以利用redission实现分布式限流 &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/Mistiest/p/19082141&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;基于 Redisson 的分布式限流实战：令牌桶算法的优雅实现 - 你小志蒸不戳 - 博客园&lt;/a&gt;，比如保护AI访问的API&lt;/p&gt;
-&lt;p&gt;其他限流方式：&lt;strong&gt;固定窗口、滑动窗口、漏桶限流和令牌桶限流算法&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;检验动态路径（在获取动态path的时候会将动态path存入Redis，用于此时的动态路径校验）&lt;/li&gt;
-&lt;li&gt;检查当前用户是否重复秒杀 (幂等控制) 通过三级缓存实现 本地缓存采用Caffine/Guava 二级缓存采用Redis 三级缓存采用数据库 当发现任意一级的数据库中已经有选课记录了 就返回重复秒杀异常&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;幂等性指的是一个操作，无论执行多少次，都能得到相同的结果，即它不会因为执行多次而影响系统的状态。这在处理网络请求、数据库操作等场景中尤为重要，例如在订单支付、消息推送等操作中，即使因为网络延迟或其他原因导致多次请求，也应保证操作只执行一次，避免重复处理。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;
-&lt;p&gt;进入秒杀的核心阶段  Redis + Lua脚本 + RocketMQ 实现 库存预减 + 异步入队&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.bytewaver.top/2025/02/14/project/seckill/%e4%bb%8e%e9%9b%b6%e5%bc%80%e5%a7%8b%e5%ae%9e%e7%8e%b0%e7%a7%92%e6%9d%80%e7%b3%bb%e7%bb%9f3/#%e7%a7%92%e6%9d%80%e6%8e%a5%e5%8f%a3%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;从零开始实现秒杀系统（三）：RocketMQ消息队列篇 - Xun&amp;rsquo;s Blog&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Lua脚本进行双重判断，首先判断是否售罄标志，然后再判断库存预减之后的库存数量，并且在脚本中实现库存减1的操作 如果成功返回1 失败返回 0.Lua脚本返回成功，系统发送消息到消息队列（RocketMQ）采用&lt;strong&gt;事务消息机制&lt;/strong&gt;保证数据的最终一致性。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;生产者发送半消息 本地事务创建选课记录（订单） 根据事务的执行结果通知Broker是投递该消息还是丢弃该消息  消费者异步从MQ中消费信息 完成后续业务。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%bc%82%e6%ad%a5%e7%a7%92%e6%9d%80.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;异步秒杀流程&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;页面展示：
-首先填写预选课信息（类似于商城系统的购物车），然后查看选课信息（普通选课和秒杀抢课）
-&lt;img src=&#34;https://1parado.github.io/img/%e9%99%90%e6%97%b6%e6%8a%a2%e8%af%be.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;限时抢课&#34;
-	
-	
-&gt;
-如果用户是首次抢课且库存充足，则显示抢课成功
-&lt;img src=&#34;https://1parado.github.io/img/%e6%8a%a2%e8%af%be%e6%88%90%e5%8a%9f.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;抢课成功&#34;
-	
-	
-&gt;
-如果用户重复抢课则提醒请勿重复秒杀
-&lt;img src=&#34;https://1parado.github.io/img/%e9%87%8d%e5%a4%8d%e6%8a%a2%e8%af%be%e6%8f%90%e9%86%92.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;重复抢课提醒&#34;
-	
-	
-&gt;
-Admin端新增抢课信息
-&lt;img src=&#34;https://1parado.github.io/img/%e6%96%b0%e5%a2%9e%e6%8a%a2%e8%af%be%e4%bf%a1%e6%81%af.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;新增抢课&#34;
-	
-	
-&gt;
-当学生张三选过课程之后，该课程已经“售罄”了 接下来用李四来选课会提醒库存不足 抢课失败
-&lt;img src=&#34;https://1parado.github.io/img/%e6%8a%a2%e8%af%be%e5%a4%b1%e8%b4%a5.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;抢课失败&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;之后可以考虑用jmeter测试高并发场景下的抢课情况。&lt;/p&gt;
-&lt;h2 id=&#34;支付模块&#34;&gt;支付模块
-&lt;/h2&gt;&lt;p&gt;支付过程：&lt;/p&gt;
-&lt;p&gt;用户点击缴费 进入AliPayController 用请求头中的Authorization进行身份验证 用请求体中的PaymentPO来生成缴费信息【前端会收集页面信息 当用户点击缴费按钮就会构建PaymentPO写入请求体中传给后端】
-初始化订单信息 订单的状态初始化为0 标识未缴费 每个订单有一个唯一的订单号
-使用创建好的支付工具类PayUtil 调用支付宝接口完成支付流程&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;PayUtil中的核心方法即发起支付和查询支付结果方法：
-&lt;strong&gt;发起支付&lt;/strong&gt;：1.初始化支付宝客户端 2. 创建支付请求 3.设置业务参数 4.发起请求并且返回支付结果
-&lt;strong&gt;查询支付结果&lt;/strong&gt;：创建查询请求-执行查询-处理查询结果&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;结果展示：
-学生点击缴费之后，跳转到支付页面
-&lt;img src=&#34;https://1parado.github.io/img/%e6%94%af%e4%bb%98%e5%8c%85.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;支付宝&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;GitHub上面有一些支付服务的项目： &lt;a class=&#34;link&#34; href=&#34;https://github.com/search?q=%E6%94%AF%E4%BB%98&amp;amp;ref=opensearch&amp;amp;type=repositories&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/search?q=%E6%94%AF%E4%BB%98&amp;ref=opensearch&amp;type=repositories&lt;/a&gt; 可以支持支付服务的快速开发。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;h2 id=&#34;ai选课助手模块&#34;&gt;AI选课助手模块
-&lt;/h2&gt;&lt;p&gt;chatClient介绍：https://springdoc.cn/spring-ai/api/chatclient.html&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;请求接收与路由&lt;/strong&gt;：用户通过Vue3前端界面提出问题，后端RESTful API接收请求。核心的&lt;strong&gt;智能路由&lt;/strong&gt;逻辑会根据预设关键词（如“选课”、“推荐”、“统计”等）判断问题类型。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;业务上下文构建&lt;/strong&gt;：对于选课相关问题，系统会调用 CourseSelectionService ，通过 JdbcTemplate 高效查询选课数据库，获取课程热度、名额、个人成绩倾向等&lt;strong&gt;实时统计数据&lt;/strong&gt;。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Prompt工程与模型调用&lt;/strong&gt;：将查询到的业务数据作为上下文，与预先设计好的&lt;strong&gt;系统Prompt&lt;/strong&gt;（如“你是一名选课顾问…”）进行组装，形成完整的提示信息，然后通过Spring AI调用本地的Ollama (Qwen2:7b)模型。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;响应返回&lt;/strong&gt;：模型生成的个性化建议或通用回答最终通过统一的API返回给前端展示。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;我总觉得&lt;strong&gt;代码生成器&lt;/strong&gt;（Mybatis-Plus，RuoYi代码生成器）的实现方式和这也差不多 首先创建模板（这里是提示词）然后查询表结构数据，再进行模板渲染得到生成的代码&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;过程：请求流程：chatClient.call(message) → 调用 OllamaChatClient → 向本地 Ollama 服务发送请求
-智能路由：isCourseSelectionQuestion 方法实现业务问题识别，将选课相关问题路由到 BusinessAIService&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;chatClient是SpringAi提供的聊天
-页面展示：
-&lt;img src=&#34;https://1parado.github.io/img/%e9%80%89%e8%af%be%e5%8a%a9%e6%89%8b.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;选课助手&#34;
-	
-	
-&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;2025.10.22&lt;/p&gt;
-&lt;h2 id=&#34;论坛模块&#34;&gt;论坛模块
-&lt;/h2&gt;&lt;p&gt;对于论坛模块，学生可以发帖评价课程，教师不能发帖，两者都可以进行评论回复交流
-论坛主页展示一些帖子和热门榜单（Redis缓存）【这都是些简单的增删改查】
-&lt;img src=&#34;https://1parado.github.io/img/%e8%ae%ba%e5%9d%9b%e4%b8%bb%e9%a1%b5.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;论坛主页&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%ad%a6%e7%94%9f%e5%8f%91%e5%b8%96.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;学生发帖&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%80%81%e5%b8%88%e4%b8%8d%e8%83%bd%e5%8f%91%e8%b4%b4.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;老师不能发帖&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%af%84%e8%ae%ba%e6%a8%a1%e5%9d%97.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;评论模块&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;想到了一个小玩意，在用户进行发布帖子和进行评论的时候，进行敏感词检查。如果内容中包含敏感词 就弹出提示。实现起来挺简单的，让Java后端负责业务逻辑，python负责机器学习，python运行在本地端口，两者通过http进行通信。
-详情请看这篇文章 &lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%8F%E6%84%9F%E8%AF%8D%E6%A3%80%E6%B5%8B/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;如何实现一个简单的敏感词检测&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;2025.11.08&lt;/p&gt;
-&lt;h2 id=&#34;集成调查问卷系统&#34;&gt;集成调查问卷系统
-&lt;/h2&gt;&lt;p&gt;在现有的项目基础上，集成一个调查问卷系统，用于收集学生对课程的反馈和建议。根据角色不同，展示不同页面，对于游客可以浏览系统主页和问卷信息。教师和管理员可以发布调查问卷，学生可以填写和查看调查问卷。今天先把大致的页面和模块写完，现在登录模块有点问题，等明天再看一下。
-&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b71.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;
-&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b72.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;2025.11.09
-今天完成的进度挺快的，现在大致看了一下，除了新建调查问卷的接口有点小问题，其他接口基本上都可以正常运行了，所以将运行截图放在这，源码放在Github上。其实这个模块没有什么重难点，文件导入和上传算一个吗？其实也不是很难，总之开发这个模块还是挺简单的。首先是RBAC权限控制，管理员可以查看全部调查问卷列表，普通用户可以浏览，但是无其他权限，比如增删改查操作，用户只可以进行查看和填写。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b73.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;
-调查问卷列表支持条件筛选和分页查询，这个用mp的分页查询即可&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b74.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;
-管理员有增删改查的权限，问卷详情信息和问卷数据统计信息如下图&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b75.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;
-&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b76.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;
-&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b77.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;
-开发这个模块的是时候，真的觉得不是很难，未来想着看看能不能与AI结合起来，或者在教务系统中添加一些其他的子模块。GitHub仓库放在这&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/survey-system/tree/master&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;郑州大学调查问卷子系统&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         

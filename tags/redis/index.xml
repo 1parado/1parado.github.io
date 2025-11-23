@@ -7,520 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Sat, 22 Nov 2025 23:35:16 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>酒旅系统</title>
-        <link>https://1parado.github.io/p/%E9%85%92%E6%97%85%E7%B3%BB%E7%BB%9F/</link>
-        <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/p/%E9%85%92%E6%97%85%E7%B3%BB%E7%BB%9F/</guid>
-        <description>&lt;style&gt;
-  body {
-    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-&lt;/style&gt;
-&lt;h2 id=&#34;2025-11-15&#34;&gt;2025-11-15
-&lt;/h2&gt;&lt;p&gt;打算用Trae-solo模式开发一个酒旅系统，今天先大致搞明白现在市场上的需求。先建立一个脚手架，现在的情况是前后端都能运行起来了，暂时不会报错，这么来看还是可以的，不知道对比于cursor来说怎么样。未来真的会一个人一个ai就能完成一个需求的开发吗，我觉得真的会。下面是暂时实现了登录功能和简单的列表展示功能，先睡了，明天再看。
-&lt;img src=&#34;https://1parado.github.io/img/flight_system1.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;酒旅系统&#34;
-	
-	
-&gt;
-&lt;img src=&#34;https://1parado.github.io/img/flight_system2.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;酒旅系统&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;今天搞了很久，发现前端的页面还是没有美化，不知道怎么搞的，而且现在存在的问题，用户登录成功之后，跳转到网站的主页，但是右上角应该显示的是用户的账号的，现在还是显示的是登录二字。今天只是把数据填充一下，能展示一下基本的增删改查。关键在于我想利用AI做一些能够真正用到实处的技术，最后做出来的还是CRUD，本质上和管理系统没区别。不过今天算法做到六十题还是可以的，虽然说大部分都是照着题解写一遍，然后理解一下，我觉得还是得有个模板，不能相同知识点的题目用不同套路写，这样脑子会很混乱，所以今天我就用ai生成模板，然后用模板解题，最后我只要记住模板的思想即可。明天又要上班了，累之！&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/flight1.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;酒旅系统&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h2 id=&#34;2025-11-22&#34;&gt;2025-11-22
-&lt;/h2&gt;&lt;p&gt;公司的项目终于告一段落了，打算重拾这个酒旅项目，目前我的兴趣在于如果美化前端页面，在王哥那里&amp;quot;偷师&amp;quot;，看到了一个写前端页面的轻量化的软件Hbuilder X。（也可以写md文档，不知道和其他软件比起来如何），总之也是美化了一下页面，但是我还是觉得现在的前端页面好丑啊，附图两张，听说Gemini 3的前端能力很强，有机会试一下。
-&lt;img src=&#34;https://1parado.github.io/img/flight1122-1.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;酒旅系统&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/flight1122-2.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;酒旅系统&#34;
-	
-	
-&gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>手写一个Redis</title>
-        <link>https://1parado.github.io/p/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAredis/</link>
-        <pubDate>Fri, 24 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/p/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAredis/</guid>
-        <description>&lt;style&gt;
-  body {
-    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-&lt;/style&gt;
-&lt;p&gt;参考：&lt;a class=&#34;link&#34; href=&#34;https://github.com/houbb/cache?tab=readme-ov-file&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;如何从零开始手写一个Redis&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;20251024&#34;&gt;2025.10.24
-&lt;/h2&gt;&lt;h3 id=&#34;如何实现固定缓存大小&#34;&gt;如何实现固定缓存大小
-&lt;/h3&gt;&lt;p&gt;HashMap，ConcurrentHashMap可以作为缓存使用 但HashMap本身不是线程安全的 但是作为基础的Java集合 不管是HashMap还是ConcurrentHashMap本身不具备自动的数据淘汰机制，这样可能会导致OOM（内存溢出）&lt;/p&gt;
-&lt;p&gt;淘汰机制：FIFO（先进缓存先被淘汰）,LRU（最近最少使用）,LFU（最近最少频率使用），从左往右命中率越来越高，成本也越来越高&lt;/p&gt;
-&lt;p&gt;对于加了淘汰机制的HashMap仍然存在几个问题：锁竞争激烈，不支持过期时间，不知此自动刷新，于是出现了Guava Caffeine&amp;hellip;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;引导类：是指在框架或应用程序中负责启动和初始化的核心类。Springboot中引导类即Application为后缀的类 对于该项目 配置了一个缓存引导类CacheBS方便用户使用&lt;/p&gt;&lt;/blockquote&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;helloTest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICache&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheBs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 1从缓存中出来 3进去&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 2从缓存中出来 4进去&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 测试cache的大小是否为2 不相同则测试不通过&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;keySet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%85%88%e8%bf%9b%e5%85%88%e5%87%ba%e7%bc%93%e5%ad%98%e6%b5%8b%e8%af%95%e6%88%90%e5%8a%9f.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;先进先出测试&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h3 id=&#34;实现过期时间expire&#34;&gt;实现过期时间expire
-&lt;/h3&gt;&lt;p&gt;Redis中的expire可以用于验证码失效，登录token失效等业务场景&amp;hellip; 设计一个cacheExpire接口 可以计算多久之后过期&lt;/p&gt;
-&lt;p&gt;过期的实现原理：可以通过一个定时任务比如一秒钟一次轮询，一次清理10个数据，直到将过期的信息清空。可以将过期数据存入到map中 key对应过期的数据 value对应过期时间。在这里定义了一个单线程 用来执行清空任务，清空任务执行的过程即遍历map中的key 判断value是否过期，为了避免单词执行时间太久 所以设置一个单次清空最大数量限制。&lt;/p&gt;
-&lt;p&gt;定时任务优化：可以通过排序Map快速判断哪些过期数据需要清理，即让过期时间作为key，让相同过期时间的数据放入列表中作为value。&lt;/p&gt;
-&lt;p&gt;由于我们采用了定时轮询的方式 所以有时候数据可能清理不及时 当访问数据的时候可能访问到脏数据。因此引入了惰性删除，当用到某个数据的时候 才对数据进行删除判断操作。&lt;/p&gt;
-&lt;p&gt;具体实现：在用到某些数据之前 先对数据进行刷新操作&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;expireTest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;InterruptedException&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICache&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheBs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;now&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;expireAt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;now&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;40&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 沉睡 50S，让其过期&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TimeUnit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;MILLISECONDS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;50&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;keySet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%ae%9e%e7%8e%b0%e8%bf%87%e6%9c%9f%e6%97%b6%e9%97%b4.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;实现过期时间&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h3 id=&#34;expire过期如何随机获取key&#34;&gt;expire过期如何随机获取key
-&lt;/h3&gt;&lt;p&gt;之前实现的过期很简单 用hashMap存储过期数据，然后轮询处理，执行定时清理任务
-redis实现的定时清理任务并不是时时刻刻都在执行的，定时任务中删除过期键逻辑采用了自适应算法，根据键的过期比例、使用快慢两种速率模式回收键，如图所示，先随机抽取key 如果有四分之一以上的key过期则执行 否则不执行&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/redis%27%e5%ae%9a%e6%97%b6%e6%b8%85%e7%90%86%e4%bb%bb%e5%8a%a1.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;redis’定时清理任务&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h3 id=&#34;实现内存数据重启不丢失&#34;&gt;实现内存数据重启不丢失
-&lt;/h3&gt;&lt;p&gt;由于我们的数据是放在内存中的 如何保证重启之后数据还在？（Redis持久化）&lt;/p&gt;
-&lt;p&gt;Redis的持久化机制包括三种：RDB(快照)，AOF（只追加文件），混合策略.&lt;/p&gt;
-&lt;p&gt;这里我们先实现&lt;strong&gt;RDB快照模式&lt;/strong&gt;，我们可以在缓存启动的时候，可以通过指定初始化加载的信息，从而实现数据持久化。现在我们需要知道如何将缓存中的内容持久化到文件或数据库中？，知道这些信息，就可以在重启之后加载这些信息，来保证数据不丢失了。对于导出的文件来说还有很多细节，比如文件的压缩，CRC校验&amp;hellip;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e9%87%8d%e5%90%af%e6%95%b0%e6%8d%ae%e4%b8%8d%e4%b8%a2%e5%a4%b1.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;重启数据不丢失&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;persistRdbTest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;InterruptedException&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICache&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheBs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;load&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MyCacheLoad&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 指定持久化策略&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;persist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CachePersists&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dbJson&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1.rdb&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 传入文件&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TimeUnit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;SECONDS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;strong&gt;AOF模式&lt;/strong&gt;：RDB模式将缓存内容全部持久化比较耗时， AOF模式针对修改内容的指令，将指令&lt;strong&gt;顺序添加&lt;/strong&gt;到文件中，因此AOF的实时性更好，顺序写避免了IO的随机写问题。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/AOF%e6%8c%81%e4%b9%85%e5%8c%96.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;AOF持久化&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h3 id=&#34;添加监听器&#34;&gt;添加监听器
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;删除监听器：我们之前已经实现expire 是对用户透明的（用户感知不到），并且当内存满了的时候，Redis会进行内存淘汰（evict 淘汰），这对用户来说也是透明的  如果用户想获取到这些信息，可以通过添加监听器实现。即在删除的位置调用监听器即可。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;慢操作监听器：redis 中会存储慢操作的相关日志信息（参数包括：耗时阈值，最多存储多少条慢日志记录） 所有我们可以对于所有的操作记录操作耗时 如果耗时超过用户设置的阈值 调用慢操作监听器&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;自定义监听器&amp;hellip;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e7%bc%93%e5%ad%98%e5%88%a0%e9%99%a4%e6%97%a5%e5%bf%97.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;缓存删除日志&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h2 id=&#34;20251026&#34;&gt;2025.10.26
-&lt;/h2&gt;&lt;h3 id=&#34;lru-缓存淘汰&#34;&gt;LRU 缓存淘汰
-&lt;/h3&gt;&lt;p&gt;LRU最近最少使用 是一种比较常见的淘汰算法 如果数据最近被访问过 就认为被访问的概率更高&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;局部性准则：时间局部性（最近被访问过，再次访问的肯可能性很高）和空间局部性（访问到某个磁盘信息，接下来可能访问局部的存储空间）缓存中用到的LRU即遵循了时间局部性准则&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;实现：利用链表 新数据插入到链表头部 缓存命中，将命中数据移到链表头部 如果链表满了丢弃链表尾部数据。
-代码实现起来需要用到：链表插入，如何判断缓存命中（HashMap），链表删除等知识&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;lruEvictTest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;InterruptedException&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICache&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheBs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;evict&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheEvicts&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lru&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hello&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;B&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;world&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;FIFO&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 访问一次A // &lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;D&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;LRU&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;keySet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;如果是FIFO 结果应该是[B,C,D] 由于是LRU A最近被访问过 所以淘汰的是B 结果是[A,C,D]
-&lt;img src=&#34;https://1parado.github.io/img/Lru%e6%b7%98%e6%b1%b0.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Lru淘汰&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h3 id=&#34;lru-缓存淘汰优化&#34;&gt;LRU 缓存淘汰优化
-&lt;/h3&gt;&lt;p&gt;优化思路：1.用一个&lt;strong&gt;数组&lt;/strong&gt;存储时间戳 为每个数据添加一个时间戳属性 每次访问数据时，更新该数据的时间戳 当数据空间满的时候 扫描时间戳最小的数据 但是需要用空间存储时间戳 并且淘汰数据的时候需要扫描整个数组&lt;/p&gt;
-&lt;p&gt;2.之前的简单实现是基于链表的 由于链表的性质（链表中插入和删除某个已知元素的时间复杂度是O(1)，但是插入和删除之前需要遍历链表找到元素时间复杂度是O(N)）因此可以用&lt;strong&gt;双向链表&lt;/strong&gt;优化一下淘汰末尾数据的操作&lt;/p&gt;
-&lt;p&gt;3.双向链表查找某个元素依然需要遍历链表 时间复杂度是O(n) 可以基于双向链表和哈希表 将哈希表中的数据和链表中的节点形成映射 插入和删除操作的时间复杂度下降为O(1) 但是引入哈希表会造成空间开销&lt;/p&gt;
-&lt;p&gt;LinkedHashMap是一种list和HashMap结合的数据结构 但是LinkedHashMap不会淘汰数据 可以重写removeEldestEntry方法实现淘汰数据。&lt;/p&gt;
-&lt;h3 id=&#34;lru-缓存淘汰算法如何避免缓存污染&#34;&gt;LRU 缓存淘汰算法如何避免缓存污染
-&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;当存在热点数据时，LRU的效率很好，但&lt;strong&gt;偶发性的、周期性的批量操作会导致LRU命中率急剧下降，缓存污染情况比较严重&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;1.LRU-K算法:LRU是将最近使用一次的数据放入缓存 LRU-K是通过维护一个队列，用于记录缓存数据被访问的历史 当某个数据的访问次数达到K时 将数据放入缓存 数据淘汰的时候淘汰第K次访问时间距当前时间最大的数据
-数据第一次被访问时，加入到&lt;strong&gt;历史访问列表&lt;/strong&gt;，如果数据在访问历史列表中没有达到K次访问，则按照一定的规则（FIFO,LRU）淘汰；&lt;/p&gt;
-&lt;p&gt;当访问历史队列中的数据访问次数达到K次后，将数据索引从历史队列中删除，将数据移到缓存队列中，并缓存数据，缓存队列重新按照时间排序；&lt;/p&gt;
-&lt;p&gt;缓存数据队列中被再次访问后，重新排序，需要淘汰数据时，淘汰缓存队列中排在末尾的数据，即“淘汰倒数K次访问离现在最久的数据”。&lt;/p&gt;
-&lt;p&gt;2.2Q算法 将LRU-2中的历史访问列表改为FIFO缓存队列 因此2Q算法中有两个缓存队列：FIFO队列和 LRU队列&lt;/p&gt;
-&lt;p&gt;3.MQ算法 根据数据的访问频率将数据分为多个队列 不同的队列有不同的访问优先级 优先缓存访问次数最多的数据。&lt;/p&gt;
-&lt;h3 id=&#34;最近最不常用lfu淘汰算法&#34;&gt;最近最不常用（LFU）淘汰算法
-&lt;/h3&gt;&lt;p&gt;LFU将频率上最不常访问的数据淘汰 需要额外存储每个数据的访问次数&lt;/p&gt;
-&lt;p&gt;如果用HashMap将key放数据，value放访问次数的话 新增和查询的时间复杂度都是O(1),但是删除就需要遍历HashMap时间复杂度为O（n）。在此基础上，用小顶堆+HashMap 插入和删除的操作是O（logn）。如果在淘汰数据的时候想要实现O(1)的时间复杂度，可以利用双Hashmap，HashMap中存放 key 和节点之间的映射关系，节点中的value保存对应的访问次数信息 相同的访问次数同freqMap进行关联 可以通过频率获取响应的链表&lt;/p&gt;
-&lt;p&gt;基于上面两种淘汰策略可以看到&lt;strong&gt;LFU是基于访问频次&lt;/strong&gt;的模式，而&lt;strong&gt;LRU是基于访问时间&lt;/strong&gt;的模式。&lt;/p&gt;
-&lt;h3 id=&#34;clock-页面置换算法&#34;&gt;Clock 页面置换算法
-&lt;/h3&gt;&lt;p&gt;操作系统使用的内存管理即Clock页面置换算法，该算法通过链接指针将内存中的所有页面组织成一个循环队列，并为每个页面设置一个访问位。当页面被访问时，其访问位设置为1。当需要淘汰页面以释放空间时，算法会扫描循环队列，选择访问位为0的页面进行置换。如果所有页面的访问位均为1，则将它们置为0并进行第二轮扫描。&lt;/p&gt;
-&lt;p&gt;实现：循环链表 + map
-改进后的Clock页面置换算法：除了访问位，添加一个修改位 考虑了页面是否被修改过 优先淘汰未被修改过的页面&lt;/p&gt;
-&lt;h3 id=&#34;分布式锁&#34;&gt;分布式锁
-&lt;/h3&gt;&lt;p&gt;Jdk中提供了加锁方式：synchronized加锁，乐观锁，读写锁，可重入锁&amp;hellip;在单机系统中为多线程情况下保证线程安全。在分布式系统中，上面的锁不再适用，因此为了解决分布式系统中的并发问题 需要引入分布式锁。
-参考：&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/2301_80017072/article/details/149727509&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;分布式锁原理&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;分布式锁：是一种跨节点，跨服务的互斥机制，一个可靠的分布式锁需要满足：互斥性，安全性，防死锁，可用性，容错性。
-实现的核心原理：通过SET命令实现互斥 即用一个redis键作为锁的标识 当客户端对某个共享资源获取锁时，需要判断该资源是否已上锁 没上锁的时候才可以设置锁键获取锁，释放锁的时候删除锁键即可（在释放锁的时候可以通过Lua脚本实现操作的原子性）。
-SET命令的两个参数：NX（not exist） 用于获取锁 PX设置锁键的过期时间&lt;/p&gt;
-&lt;p&gt;获取锁的命令比如：SET lock:stock client1 NX PX 30000&lt;/p&gt;
-&lt;h3 id=&#34;hashmap源码&#34;&gt;HashMap源码
-&lt;/h3&gt;&lt;p&gt;HashMap是数组+链表+红黑树（JDK1.8增加了红黑树部分）实现的。HashMap实例有两个影响其性能的参数: &lt;strong&gt;初始容量（16）和负载因子（默认0.75）&lt;/strong&gt;，阈值可以通过threshold = length * Load factor计算。HashMap非线程安全&lt;/p&gt;
-&lt;p&gt;参考：&lt;a class=&#34;link&#34; href=&#34;https://juejin.cn/post/7135640624744628255&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;hashmap源码分析&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/HashMap%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;HashMap数据结构&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;HashMap类中有一个非常重要的字段，就是 Node[] table，即哈希桶数组。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;哈希桶是一种通过链地址法（开散列法）解决哈希冲突的结构。它将具有相同散列地址的元素存储在一个链表中，每个链表被称为一个哈希桶.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;HashMap是使用哈希表存储的 哈希表为了解决哈希冲突 可以采用开放地址法和链地址法，HashMap采用了链地址法。为了控制hash冲突发生的概率且让哈希桶数组的占用空间少，于是需要一个好的Hash算法和&lt;strong&gt;扩容机制&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;扩容机制：Node[] table(哈希桶数组)，初始化长度为16，负载因子为0.75，阈值为初始化长度 * 负载因子。当数量超过阈值时需要扩容，扩容之后HashMap容量是之前的2倍。在HashMap中，哈希桶数组table的长度length大小必须为2的n次方(一定是合数)，这种设计主要是为了在取模和扩容时做优化，同时为了减少冲突，HashMap定位哈希桶索引位置时，也加入了高位参与运算的过程。在JDK1.8中，引入了红黑树，当链表长度过大（超过8），链表转化为红黑树。因为红黑树的查找时间复杂度为O(logn) 链表查找的时间复杂度为O(n).Java中的数组不会自动扩容，实际上是通过一个新的数组代替原有的数组，通过resize方法实现。在多线程使用场景中，应该尽量避免使用线程不安全的HashMap，而使用线程安全的ConcurrentHashMap。&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>Redis 常见面试题</title>
-        <link>https://1parado.github.io/p/redis-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
-        <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/p/redis-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
-        <description>&lt;style&gt;
-  body {
-    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-&lt;/style&gt;
-&lt;h2 id=&#34;2025-10-19&#34;&gt;2025-10-19
-&lt;/h2&gt;&lt;p&gt;参考链接：
-&lt;a class=&#34;link&#34; href=&#34;https://javaguide.cn/database/redis/redis-questions-01.html#%E4%BB%80%E4%B9%88%E6%98%AF-redis&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://javaguide.cn/database/redis/redis-questions-01.html#%E4%BB%80%E4%B9%88%E6%98%AF-redis&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Redis是NoSQL数据库，是一种内存数据库。读写速度很快，经常用于分布式缓存方向，存储的是key-value对数据。Redis支持事务，持久化，lua脚本&amp;hellip;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;可以试一下&lt;a class=&#34;link&#34; href=&#34;https://onecompiler.com/redis&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;在线编译器&lt;/a&gt;写一下redis命令 简单易上手 easy~&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;Redis为什么速度快：1.纯内存操作（纳秒级），传统的数据库需要读写磁盘（毫秒级） 2.高效的I/O模型。3.优化的内部数据结构4.简洁高效的通信协议（RESP）. redis适合做缓存不适合做主数据库，因为内存成本高，且redis虽然支持数据持久化但是有数据丢失风险。
-其他的分布式缓存：Tendis,KeyDB&amp;hellip;&lt;/p&gt;
-&lt;p&gt;选择Redis的原因：1.访问速度快（基于内存） 2.高并发 3. 功能全面（可以作缓存，可以用于分布式锁，限流，消息队列，延时队列&amp;hellip;）&lt;/p&gt;
-&lt;p&gt;常见的缓存读写策略：https://javaguide.cn/database/redis/3-commonly-used-cache-read-and-write-strategies.html&lt;/p&gt;
-&lt;h2 id=&#34;2025-10-20&#34;&gt;2025-10-20
-&lt;/h2&gt;&lt;p&gt;Redis 应用&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;缓存&lt;/li&gt;
-&lt;li&gt;分布式锁 Redission&lt;/li&gt;
-&lt;li&gt;做限流工具 Redis+LUA脚本 RRateLimiter实现分布式限流即基于Lua脚本+令牌桶算法&lt;/li&gt;
-&lt;li&gt;做消息队列 Redis的Stream类型的数据结构更适合做消息队列（但一般用中间件）&lt;/li&gt;
-&lt;li&gt;做延时队列 内置了延时队列 基于Sorted Set实现&lt;/li&gt;
-&lt;li&gt;分布式session 利用String或Hash数据结构存储session数据&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Redis可以实现全文搜索引擎功能 需要借助RedisSearch（一个基于Redis的搜索引擎模块）：性能更优秀 较低内存占用实现快速索引。&lt;/p&gt;
-&lt;p&gt;延时任务（红包过期自动退还）:实现方式：1. redis过期事件监听（不推荐） 2. redission内置的延时队列 减少了丢消息的可能，消息不存在重复消费问题&lt;/p&gt;
-&lt;p&gt;redis常见的数据类型：String、List、Set、ZSet、Hash 三种特殊数据类型：HyperLogLog（基数统计）、Bitmap （位图）、Geospatial (地理位置)&lt;/p&gt;
-&lt;h2 id=&#34;2025-10-21&#34;&gt;2025-10-21
-&lt;/h2&gt;&lt;h3 id=&#34;redis持久化机制&#34;&gt;Redis持久化机制：
-&lt;/h3&gt;&lt;p&gt;redis支持三种持久化：
-&lt;strong&gt;1.快照RDB，2.只追加文件AOF， 3.RDB和AOF混合持久化&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;1.RDB持久化 创建快照获取存储在内存种数据在某个时间点的副本 创建快照之后 可以对快照备份 可以创建副本（Redis主从结构） RDB是redis默认的持久化方式&lt;/p&gt;
-&lt;p&gt;RDB创建快照 save：同步保存操作 会阻塞Redis主线程 bgsave 用子进程执行 不会阻塞Redis主线程&lt;/p&gt;
-&lt;p&gt;2.AOF持久化 实时性更好 开启AOF持久化之后每次执行改变redis数据的命令 redis就会将该命令写入AOF缓冲区 然后再写入到AOF文件&lt;/p&gt;
-&lt;p&gt;AOF流程：所有的写命令追加到AOF缓冲区
-文件写入：将AOF缓冲区的数据写入到AOF文件中
-文件同步： AOF缓冲区根据对应的持久化方式向硬盘做同步操作
-文件重写：AOF越来越大 需要定期对AOF文件重写
-重启加载：redis重启时 可以加载AOF文件进行数据恢复&lt;/p&gt;
-&lt;p&gt;redis有三种不同的AOF持久化方式（区别在于同步AOF文件的时机不同 即刷盘时机不同）：
-1.appendfsync always
-2.appendfsync everyseconds
-3.appendfsync no&lt;/p&gt;
-&lt;p&gt;一般的关系型数据库是在执行命令前记录日志 AOF持久化机制是在执行命令之后记录日志：优点：可以避免额外开销 不会阻塞当前执行的命令 缺点：可能会造成修改丢失 可能会阻塞后续其他命令&lt;/p&gt;
-&lt;p&gt;AOF重写（当AOF文件越来越大 进行AOF重写即压缩AOF文件） Redis将AOF重写程序放在子进程执行 避免造成对redis正常处理命令请求造成影响。&lt;/p&gt;
-&lt;p&gt;Redis单线程模式和多线程模式：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;对于读写命令来说，Redis 一直是单线程模型。不过，在 Redis 4.0 版本之后引入了多线程来执行一些大键值对的异步删除操作，Redis 6.0 版本之后引入了多线程来处理网络请求（提高网络 IO 读写性能）&lt;/p&gt;&lt;/blockquote&gt;
-&lt;h3 id=&#34;redis内存管理&#34;&gt;Redis内存管理
-&lt;/h3&gt;&lt;p&gt;保存的缓存数据会有一个过期时间 如果不设置过期时间 可能会出现OOM内存溢出问题
-expire key 60 // 在60s后key过期
-setex key 60 value // 数据在 60s 后过期（对于字符串类型）
-ttl key //查看数据还有多久过期
-过期时间还可以用于业务场景中如登录token，验证码&amp;hellip;&lt;/p&gt;
-&lt;p&gt;redis通过&lt;strong&gt;过期字典&lt;/strong&gt;保存数据过期的时间，过期字典的key指向redis的某个key 过期字典的值指向key的过期时间 在查询key的时候 redis会首先检查一下key是否过期 即在过期字典中查找key是否存在 存在的话 进行过期删除&lt;/p&gt;
-&lt;p&gt;redis过期删除策略包括：
-惰性删除（取出key时进行检查），定期删除（周期性的抽查一些key），延迟队列（将设置过期时间的key放入延迟队列 到期后删除key），定时删除（数据过期立马删除）
-Redis 采用的是&lt;strong&gt;定期删除+惰性删除&lt;/strong&gt;结合的策略 由于定期删除是周期性的随机抽查一些数据，抽查的数据数量由expire.c决定 默认为20 定期删除的频率由hz决定 默认为10 表示每秒执行10次尝试&lt;/p&gt;
-&lt;p&gt;大量的key集中过期（缓存雪崩）造成的后果：请求延迟增加 内存占用过高，为了避免这种情况，key的过期时间尽量随机 并开启lazy free机制（异步删除过期key 不会阻塞主线程的运行）&lt;/p&gt;
-&lt;p&gt;Redis 的内存淘汰策略（6种）：
-Redis 的内存淘汰策略只有在运行内存达到了配置的最大内存阈值时才会触发，这个阈值是通过 redis.conf 的 maxmemory 参数来定义的&lt;/p&gt;
-&lt;h2 id=&#34;2025-10-26&#34;&gt;2025-10-26
-&lt;/h2&gt;&lt;h3 id=&#34;redis事务&#34;&gt;Redis事务
-&lt;/h3&gt;&lt;p&gt;Redis 事务（并不是关系型数据库的事务），提供了一种将多个命令请求打包的功能。然后，再按顺序执行打包的所有命令，并且不会被中途打断。日常开发中一般不适用redis事务。事务的ACID特性（原子性，一致性，隔离性，持久性），redis事务不支持回滚操作，所以Redis事务不支持原子性。redis支持持久性（重启后数据还在）：1.RDB快照,2.AOF只追加文件,3.混合模式&lt;/p&gt;
-&lt;p&gt;AOF持久化的实时性更好 redis的配置文件中存放了三种持久化方式（fsyn）always，everysec，no
-可以通过lua脚本配合Redis事务的缺陷。&lt;/p&gt;
-&lt;h3 id=&#34;性能优化&#34;&gt;性能优化
-&lt;/h3&gt;&lt;p&gt;1.可以使用&lt;strong&gt;批量操作&lt;/strong&gt;减少网络传输，因为批量操作可以减少网络传输次数，减少网络开销，减少RTT(往返时延)
-2.pipeline 对于不支持批量操作的命令 可以用pipeline将redis命令封装成一组 这些命令会被一次性传输给redis服务器 但是需要注意批量操作的元素个数，避免网络传输的数据量过大。
-3.lua脚本 支持批量操作多条命令，可以看作是原子操作&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;如果 Lua 脚本运行时出错并中途结束，之后的操作不会进行，但是之前已经发生的写操作不会撤销，所以即使使用了 Lua 脚本，也不能实现类似数据库回滚的原子性&lt;/p&gt;&lt;/blockquote&gt;
-&lt;h3 id=&#34;大量key集中过期缓存雪崩&#34;&gt;大量key集中过期（缓存雪崩）
-&lt;/h3&gt;&lt;p&gt;对于过期key Redis 采用的是 定期删除+惰性删除，为了解决缓存雪崩，1.需要给key设置随机过期时间（expire）2.开启lazy-free惰性删除（异步删除key，将删除操作交给单独的子进程处理 避免阻塞主线程）&lt;/p&gt;
-&lt;h3 id=&#34;bigkey&#34;&gt;Bigkey
-&lt;/h3&gt;&lt;p&gt;如果一个key对应的value占用的内存比较大 这个key可以叫bigkey（例如1MB）。bigkey消耗了更多的内存空间和带宽 还会对性能造成影响：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;客户端超时阻塞：redis执行命令是单线程处理 如果遇到bigkey时会比较耗时&lt;/li&gt;
-&lt;li&gt;网络阻塞&lt;/li&gt;
-&lt;li&gt;工作线程阻塞：删除bigkey时会阻塞工作线程&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;如何找到bigkey：1.可以使用&amp;ndash;bigkeys参数查找redis中的bigkey，2.可以用redis自带的scan命令，当redis采用的时RDB持久化的时候，3.可以用开源软件分析RDB文件找出bigkey&lt;/p&gt;
-&lt;p&gt;如何处理bigkey：1.可以将bigkey分割成小key 2.可以手动清理 3.开启惰性删除&amp;hellip;&lt;/p&gt;
-&lt;h3 id=&#34;hotkey&#34;&gt;Hotkey
-&lt;/h3&gt;&lt;p&gt;如果一个key的访问次数明显多于其他key 这个key可认为是热点key 如果hotkey处理不好 redis会直接宕机 大量请求落到数据库中 可能导致数据库崩溃&lt;/p&gt;
-&lt;p&gt;如何找到hotkey：1.当数据淘汰策略采用的是LFU最近最少访问的时候，可以用&amp;ndash;hotkeys参数查找redis的hotkey，返回所有key被访问的次数。2.可以用monitor命令 可以实时查看redis所有操作的方式 可以监控redis实例的操作情况（不建议用）3.开源软件&lt;/p&gt;
-&lt;p&gt;如何处理hotkey：1.读写分离 主节点处理写请求 从节点处理读请求，2.可以使用redis cluster 将热点数据放在多个redis节点上   3.二级缓存（可以通过caffine/guava创建本地缓存）&lt;/p&gt;
-&lt;h3 id=&#34;慢查询命令&#34;&gt;慢查询命令
-&lt;/h3&gt;&lt;p&gt;redis命令执行：1.发送命令 2.命令排队 3. 命令执行 4.返回结果。redis慢查询统计的是命令执行的耗时 查询的是命令执行时间较长的命令。&lt;/p&gt;
-&lt;p&gt;如何找到慢查询命令：通过查看慢查询日志，慢查询日志中记录执行时间超过指定阈值的命令。慢查询日志同样会占用一定的空间 可能会导致内存占用过高的问题。常见的命令： 查询慢日志SLOWLOG GET，清空慢日志SLOWLOG RESET，返回慢查询命令的数量 SLOWLOG LEN&lt;/p&gt;
-&lt;h3 id=&#34;redis生产问题&#34;&gt;Redis生产问题
-&lt;/h3&gt;&lt;p&gt;1.缓存穿透（查询的数据不在缓存也不在数据库中） 解决方案：缓存空值，布隆过滤器&lt;/p&gt;
-&lt;p&gt;2.缓存击穿（热点key失效，大量并发请求访问数据库导致数据库负载过高） 解决方案：分布式锁，缓存预热，自动续期&lt;/p&gt;
-&lt;p&gt;3.缓存雪崩（大量的key同时失效，或者缓存服务器宕机 导致所有请求访问数据库）解决方案：为key设置随机过期时间 设置多级缓存 使用高可用架构（Redis集群或哨兵模式或主从架构）&lt;/p&gt;
-&lt;h3 id=&#34;缓存预热如何实现&#34;&gt;缓存预热如何实现
-&lt;/h3&gt;&lt;p&gt;缓存预热是防止热点数据不在缓存中 导致缓存击穿或缓存雪崩的一种解决方案 可以在系统启动或者高并发请求之前 将热点数据提前加载缓存中避免缓存失效。&lt;/p&gt;
-&lt;p&gt;缓存预热的两种实现方式：1. 使用定时任务 2.使用消息队列&lt;/p&gt;
-&lt;h3 id=&#34;缓存和数据库数据的一致性&#34;&gt;缓存和数据库数据的一致性
-&lt;/h3&gt;&lt;p&gt;参考：&lt;a class=&#34;link&#34; href=&#34;https://mp.weixin.qq.com/s?__biz=MzIyOTYxNDI5OA==&amp;amp;mid=2247487312&amp;amp;idx=1&amp;amp;sn=fa19566f5729d6598155b5c676eee62d&amp;amp;chksm=e8beb8e5dfc931f3e35655da9da0b61c79f2843101c130cf38996446975014f958a6481aacf1&amp;amp;scene=178&amp;amp;cur_album_id=1699766580538032128#rd&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;缓存和数据库一致性问题，看这篇就够了&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;想要保证数据库和缓存一致性，&lt;strong&gt;推荐采用「先更新数据库，再删除缓存」方案，并配合「消息队列」或「订阅变更日志」的方式来做&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;对于1.先删除缓存，再更新数据库以及 2.读写分离 + 主从复制延迟情况下，缓存和数据不一致的问题，可以采用延迟双删策略（在更新数据库后，先删除缓存中的数据，然后延迟一段时间再删除一次缓存）。为了保证数据一致性和系统性能，只需要保证最终一致性即可 不用要求强一致性。&lt;/p&gt;
-&lt;h3 id=&#34;redis高可用架构&#34;&gt;Redis高可用架构
-&lt;/h3&gt;&lt;p&gt;实际生产中 redis如果只部署一个节点 当机器故障的时候整个系统无法提供服务（单点故障），因此在集群模式下，将redis节点部署在一台或者几台，可用提高服务的可用性。&lt;/p&gt;
-&lt;p&gt;1.主从模式：节点分为主节点和从节点 主节点进行读写操作，从节点只能进行读操作。主节点数据变化，将变化数据同步给从节点 保持数据同步（主从同步，刚刚连接的时候进行全量同步，全量同步结束之后，进行增量同步）&lt;/p&gt;
-&lt;p&gt;2.哨兵模式：主从模式下，当主节点宕机之后需要将从节点改成主节点，需要人工干预，开销大。所以在实际生产中，优先考虑哨兵模式，主节点宕机后，哨兵自动选取主节点。一般为了便于选举主节点，选用奇数个哨兵。哨兵是一个独立的进程，哨兵进程向所有的redis机器发送命令，等待redis响应 从而监控多个运行的redis实例&lt;/p&gt;
-&lt;p&gt;3.集群模式：主从模式和哨兵模式下，每台redis服务器存储相同的数据，浪费内存 。集群模式下实现redis的分布式存储，对数据进行分片，每个节点可以存储不同内容。QPS要求高的时候使用。&lt;/p&gt;
-&lt;h3 id=&#34;redis实现延时任务&#34;&gt;Redis实现延时任务
-&lt;/h3&gt;&lt;p&gt;实现方式：1.redis过期事件监听 2.redisson内置的延迟队列&lt;/p&gt;
-</description>
-        </item>
-        <item>
+        <lastBuildDate>Sun, 23 Nov 2025 23:39:43 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>仿教务系统</title>
         <link>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</link>
         <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
@@ -851,6 +338,519 @@ Admin端新增抢课信息
 &gt;
 开发这个模块的是时候，真的觉得不是很难，未来想着看看能不能与AI结合起来，或者在教务系统中添加一些其他的子模块。GitHub仓库放在这&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/survey-system/tree/master&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;郑州大学调查问卷子系统&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>手写一个Redis</title>
+        <link>https://1parado.github.io/p/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAredis/</link>
+        <pubDate>Fri, 24 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAredis/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;参考：&lt;a class=&#34;link&#34; href=&#34;https://github.com/houbb/cache?tab=readme-ov-file&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;如何从零开始手写一个Redis&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;20251024&#34;&gt;2025.10.24
+&lt;/h2&gt;&lt;h3 id=&#34;如何实现固定缓存大小&#34;&gt;如何实现固定缓存大小
+&lt;/h3&gt;&lt;p&gt;HashMap，ConcurrentHashMap可以作为缓存使用 但HashMap本身不是线程安全的 但是作为基础的Java集合 不管是HashMap还是ConcurrentHashMap本身不具备自动的数据淘汰机制，这样可能会导致OOM（内存溢出）&lt;/p&gt;
+&lt;p&gt;淘汰机制：FIFO（先进缓存先被淘汰）,LRU（最近最少使用）,LFU（最近最少频率使用），从左往右命中率越来越高，成本也越来越高&lt;/p&gt;
+&lt;p&gt;对于加了淘汰机制的HashMap仍然存在几个问题：锁竞争激烈，不支持过期时间，不知此自动刷新，于是出现了Guava Caffeine&amp;hellip;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;引导类：是指在框架或应用程序中负责启动和初始化的核心类。Springboot中引导类即Application为后缀的类 对于该项目 配置了一个缓存引导类CacheBS方便用户使用&lt;/p&gt;&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;helloTest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICache&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheBs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 1从缓存中出来 3进去&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 2从缓存中出来 4进去&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 测试cache的大小是否为2 不相同则测试不通过&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;keySet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%85%88%e8%bf%9b%e5%85%88%e5%87%ba%e7%bc%93%e5%ad%98%e6%b5%8b%e8%af%95%e6%88%90%e5%8a%9f.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;先进先出测试&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;实现过期时间expire&#34;&gt;实现过期时间expire
+&lt;/h3&gt;&lt;p&gt;Redis中的expire可以用于验证码失效，登录token失效等业务场景&amp;hellip; 设计一个cacheExpire接口 可以计算多久之后过期&lt;/p&gt;
+&lt;p&gt;过期的实现原理：可以通过一个定时任务比如一秒钟一次轮询，一次清理10个数据，直到将过期的信息清空。可以将过期数据存入到map中 key对应过期的数据 value对应过期时间。在这里定义了一个单线程 用来执行清空任务，清空任务执行的过程即遍历map中的key 判断value是否过期，为了避免单词执行时间太久 所以设置一个单次清空最大数量限制。&lt;/p&gt;
+&lt;p&gt;定时任务优化：可以通过排序Map快速判断哪些过期数据需要清理，即让过期时间作为key，让相同过期时间的数据放入列表中作为value。&lt;/p&gt;
+&lt;p&gt;由于我们采用了定时轮询的方式 所以有时候数据可能清理不及时 当访问数据的时候可能访问到脏数据。因此引入了惰性删除，当用到某个数据的时候 才对数据进行删除判断操作。&lt;/p&gt;
+&lt;p&gt;具体实现：在用到某些数据之前 先对数据进行刷新操作&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;expireTest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;InterruptedException&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICache&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheBs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;now&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;expireAt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;now&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;40&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 沉睡 50S，让其过期&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TimeUnit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;MILLISECONDS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;50&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;keySet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%ae%9e%e7%8e%b0%e8%bf%87%e6%9c%9f%e6%97%b6%e9%97%b4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;实现过期时间&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;expire过期如何随机获取key&#34;&gt;expire过期如何随机获取key
+&lt;/h3&gt;&lt;p&gt;之前实现的过期很简单 用hashMap存储过期数据，然后轮询处理，执行定时清理任务
+redis实现的定时清理任务并不是时时刻刻都在执行的，定时任务中删除过期键逻辑采用了自适应算法，根据键的过期比例、使用快慢两种速率模式回收键，如图所示，先随机抽取key 如果有四分之一以上的key过期则执行 否则不执行&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/redis%27%e5%ae%9a%e6%97%b6%e6%b8%85%e7%90%86%e4%bb%bb%e5%8a%a1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;redis’定时清理任务&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;实现内存数据重启不丢失&#34;&gt;实现内存数据重启不丢失
+&lt;/h3&gt;&lt;p&gt;由于我们的数据是放在内存中的 如何保证重启之后数据还在？（Redis持久化）&lt;/p&gt;
+&lt;p&gt;Redis的持久化机制包括三种：RDB(快照)，AOF（只追加文件），混合策略.&lt;/p&gt;
+&lt;p&gt;这里我们先实现&lt;strong&gt;RDB快照模式&lt;/strong&gt;，我们可以在缓存启动的时候，可以通过指定初始化加载的信息，从而实现数据持久化。现在我们需要知道如何将缓存中的内容持久化到文件或数据库中？，知道这些信息，就可以在重启之后加载这些信息，来保证数据不丢失了。对于导出的文件来说还有很多细节，比如文件的压缩，CRC校验&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e9%87%8d%e5%90%af%e6%95%b0%e6%8d%ae%e4%b8%8d%e4%b8%a2%e5%a4%b1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;重启数据不丢失&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;persistRdbTest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;InterruptedException&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICache&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheBs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;load&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MyCacheLoad&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 指定持久化策略&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;persist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CachePersists&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dbJson&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1.rdb&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 传入文件&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TimeUnit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;SECONDS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;AOF模式&lt;/strong&gt;：RDB模式将缓存内容全部持久化比较耗时， AOF模式针对修改内容的指令，将指令&lt;strong&gt;顺序添加&lt;/strong&gt;到文件中，因此AOF的实时性更好，顺序写避免了IO的随机写问题。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/AOF%e6%8c%81%e4%b9%85%e5%8c%96.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;AOF持久化&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;添加监听器&#34;&gt;添加监听器
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;删除监听器：我们之前已经实现expire 是对用户透明的（用户感知不到），并且当内存满了的时候，Redis会进行内存淘汰（evict 淘汰），这对用户来说也是透明的  如果用户想获取到这些信息，可以通过添加监听器实现。即在删除的位置调用监听器即可。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;慢操作监听器：redis 中会存储慢操作的相关日志信息（参数包括：耗时阈值，最多存储多少条慢日志记录） 所有我们可以对于所有的操作记录操作耗时 如果耗时超过用户设置的阈值 调用慢操作监听器&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;自定义监听器&amp;hellip;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e7%bc%93%e5%ad%98%e5%88%a0%e9%99%a4%e6%97%a5%e5%bf%97.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;缓存删除日志&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;20251026&#34;&gt;2025.10.26
+&lt;/h2&gt;&lt;h3 id=&#34;lru-缓存淘汰&#34;&gt;LRU 缓存淘汰
+&lt;/h3&gt;&lt;p&gt;LRU最近最少使用 是一种比较常见的淘汰算法 如果数据最近被访问过 就认为被访问的概率更高&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;局部性准则：时间局部性（最近被访问过，再次访问的肯可能性很高）和空间局部性（访问到某个磁盘信息，接下来可能访问局部的存储空间）缓存中用到的LRU即遵循了时间局部性准则&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;实现：利用链表 新数据插入到链表头部 缓存命中，将命中数据移到链表头部 如果链表满了丢弃链表尾部数据。
+代码实现起来需要用到：链表插入，如何判断缓存命中（HashMap），链表删除等知识&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;lruEvictTest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;InterruptedException&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICache&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheBs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;evict&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheEvicts&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lru&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hello&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;B&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;world&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;FIFO&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 访问一次A // &lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;D&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;LRU&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;keySet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果是FIFO 结果应该是[B,C,D] 由于是LRU A最近被访问过 所以淘汰的是B 结果是[A,C,D]
+&lt;img src=&#34;https://1parado.github.io/img/Lru%e6%b7%98%e6%b1%b0.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Lru淘汰&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;lru-缓存淘汰优化&#34;&gt;LRU 缓存淘汰优化
+&lt;/h3&gt;&lt;p&gt;优化思路：1.用一个&lt;strong&gt;数组&lt;/strong&gt;存储时间戳 为每个数据添加一个时间戳属性 每次访问数据时，更新该数据的时间戳 当数据空间满的时候 扫描时间戳最小的数据 但是需要用空间存储时间戳 并且淘汰数据的时候需要扫描整个数组&lt;/p&gt;
+&lt;p&gt;2.之前的简单实现是基于链表的 由于链表的性质（链表中插入和删除某个已知元素的时间复杂度是O(1)，但是插入和删除之前需要遍历链表找到元素时间复杂度是O(N)）因此可以用&lt;strong&gt;双向链表&lt;/strong&gt;优化一下淘汰末尾数据的操作&lt;/p&gt;
+&lt;p&gt;3.双向链表查找某个元素依然需要遍历链表 时间复杂度是O(n) 可以基于双向链表和哈希表 将哈希表中的数据和链表中的节点形成映射 插入和删除操作的时间复杂度下降为O(1) 但是引入哈希表会造成空间开销&lt;/p&gt;
+&lt;p&gt;LinkedHashMap是一种list和HashMap结合的数据结构 但是LinkedHashMap不会淘汰数据 可以重写removeEldestEntry方法实现淘汰数据。&lt;/p&gt;
+&lt;h3 id=&#34;lru-缓存淘汰算法如何避免缓存污染&#34;&gt;LRU 缓存淘汰算法如何避免缓存污染
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;当存在热点数据时，LRU的效率很好，但&lt;strong&gt;偶发性的、周期性的批量操作会导致LRU命中率急剧下降，缓存污染情况比较严重&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;1.LRU-K算法:LRU是将最近使用一次的数据放入缓存 LRU-K是通过维护一个队列，用于记录缓存数据被访问的历史 当某个数据的访问次数达到K时 将数据放入缓存 数据淘汰的时候淘汰第K次访问时间距当前时间最大的数据
+数据第一次被访问时，加入到&lt;strong&gt;历史访问列表&lt;/strong&gt;，如果数据在访问历史列表中没有达到K次访问，则按照一定的规则（FIFO,LRU）淘汰；&lt;/p&gt;
+&lt;p&gt;当访问历史队列中的数据访问次数达到K次后，将数据索引从历史队列中删除，将数据移到缓存队列中，并缓存数据，缓存队列重新按照时间排序；&lt;/p&gt;
+&lt;p&gt;缓存数据队列中被再次访问后，重新排序，需要淘汰数据时，淘汰缓存队列中排在末尾的数据，即“淘汰倒数K次访问离现在最久的数据”。&lt;/p&gt;
+&lt;p&gt;2.2Q算法 将LRU-2中的历史访问列表改为FIFO缓存队列 因此2Q算法中有两个缓存队列：FIFO队列和 LRU队列&lt;/p&gt;
+&lt;p&gt;3.MQ算法 根据数据的访问频率将数据分为多个队列 不同的队列有不同的访问优先级 优先缓存访问次数最多的数据。&lt;/p&gt;
+&lt;h3 id=&#34;最近最不常用lfu淘汰算法&#34;&gt;最近最不常用（LFU）淘汰算法
+&lt;/h3&gt;&lt;p&gt;LFU将频率上最不常访问的数据淘汰 需要额外存储每个数据的访问次数&lt;/p&gt;
+&lt;p&gt;如果用HashMap将key放数据，value放访问次数的话 新增和查询的时间复杂度都是O(1),但是删除就需要遍历HashMap时间复杂度为O（n）。在此基础上，用小顶堆+HashMap 插入和删除的操作是O（logn）。如果在淘汰数据的时候想要实现O(1)的时间复杂度，可以利用双Hashmap，HashMap中存放 key 和节点之间的映射关系，节点中的value保存对应的访问次数信息 相同的访问次数同freqMap进行关联 可以通过频率获取响应的链表&lt;/p&gt;
+&lt;p&gt;基于上面两种淘汰策略可以看到&lt;strong&gt;LFU是基于访问频次&lt;/strong&gt;的模式，而&lt;strong&gt;LRU是基于访问时间&lt;/strong&gt;的模式。&lt;/p&gt;
+&lt;h3 id=&#34;clock-页面置换算法&#34;&gt;Clock 页面置换算法
+&lt;/h3&gt;&lt;p&gt;操作系统使用的内存管理即Clock页面置换算法，该算法通过链接指针将内存中的所有页面组织成一个循环队列，并为每个页面设置一个访问位。当页面被访问时，其访问位设置为1。当需要淘汰页面以释放空间时，算法会扫描循环队列，选择访问位为0的页面进行置换。如果所有页面的访问位均为1，则将它们置为0并进行第二轮扫描。&lt;/p&gt;
+&lt;p&gt;实现：循环链表 + map
+改进后的Clock页面置换算法：除了访问位，添加一个修改位 考虑了页面是否被修改过 优先淘汰未被修改过的页面&lt;/p&gt;
+&lt;h3 id=&#34;分布式锁&#34;&gt;分布式锁
+&lt;/h3&gt;&lt;p&gt;Jdk中提供了加锁方式：synchronized加锁，乐观锁，读写锁，可重入锁&amp;hellip;在单机系统中为多线程情况下保证线程安全。在分布式系统中，上面的锁不再适用，因此为了解决分布式系统中的并发问题 需要引入分布式锁。
+参考：&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/2301_80017072/article/details/149727509&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;分布式锁原理&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;分布式锁：是一种跨节点，跨服务的互斥机制，一个可靠的分布式锁需要满足：互斥性，安全性，防死锁，可用性，容错性。
+实现的核心原理：通过SET命令实现互斥 即用一个redis键作为锁的标识 当客户端对某个共享资源获取锁时，需要判断该资源是否已上锁 没上锁的时候才可以设置锁键获取锁，释放锁的时候删除锁键即可（在释放锁的时候可以通过Lua脚本实现操作的原子性）。
+SET命令的两个参数：NX（not exist） 用于获取锁 PX设置锁键的过期时间&lt;/p&gt;
+&lt;p&gt;获取锁的命令比如：SET lock:stock client1 NX PX 30000&lt;/p&gt;
+&lt;h3 id=&#34;hashmap源码&#34;&gt;HashMap源码
+&lt;/h3&gt;&lt;p&gt;HashMap是数组+链表+红黑树（JDK1.8增加了红黑树部分）实现的。HashMap实例有两个影响其性能的参数: &lt;strong&gt;初始容量（16）和负载因子（默认0.75）&lt;/strong&gt;，阈值可以通过threshold = length * Load factor计算。HashMap非线程安全&lt;/p&gt;
+&lt;p&gt;参考：&lt;a class=&#34;link&#34; href=&#34;https://juejin.cn/post/7135640624744628255&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;hashmap源码分析&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/HashMap%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;HashMap数据结构&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;HashMap类中有一个非常重要的字段，就是 Node[] table，即哈希桶数组。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;哈希桶是一种通过链地址法（开散列法）解决哈希冲突的结构。它将具有相同散列地址的元素存储在一个链表中，每个链表被称为一个哈希桶.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;HashMap是使用哈希表存储的 哈希表为了解决哈希冲突 可以采用开放地址法和链地址法，HashMap采用了链地址法。为了控制hash冲突发生的概率且让哈希桶数组的占用空间少，于是需要一个好的Hash算法和&lt;strong&gt;扩容机制&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;扩容机制：Node[] table(哈希桶数组)，初始化长度为16，负载因子为0.75，阈值为初始化长度 * 负载因子。当数量超过阈值时需要扩容，扩容之后HashMap容量是之前的2倍。在HashMap中，哈希桶数组table的长度length大小必须为2的n次方(一定是合数)，这种设计主要是为了在取模和扩容时做优化，同时为了减少冲突，HashMap定位哈希桶索引位置时，也加入了高位参与运算的过程。在JDK1.8中，引入了红黑树，当链表长度过大（超过8），链表转化为红黑树。因为红黑树的查找时间复杂度为O(logn) 链表查找的时间复杂度为O(n).Java中的数组不会自动扩容，实际上是通过一个新的数组代替原有的数组，通过resize方法实现。在多线程使用场景中，应该尽量避免使用线程不安全的HashMap，而使用线程安全的ConcurrentHashMap。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>酒旅系统</title>
+        <link>https://1parado.github.io/p/%E9%85%92%E6%97%85%E7%B3%BB%E7%BB%9F/</link>
+        <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/%E9%85%92%E6%97%85%E7%B3%BB%E7%BB%9F/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;h2 id=&#34;2025-11-15&#34;&gt;2025-11-15
+&lt;/h2&gt;&lt;p&gt;打算用Trae-solo模式开发一个酒旅系统，今天先大致搞明白现在市场上的需求。先建立一个脚手架，现在的情况是前后端都能运行起来了，暂时不会报错，这么来看还是可以的，不知道对比于cursor来说怎么样。未来真的会一个人一个ai就能完成一个需求的开发吗，我觉得真的会。下面是暂时实现了登录功能和简单的列表展示功能，先睡了，明天再看。
+&lt;img src=&#34;https://1parado.github.io/img/flight_system1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/flight_system2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;今天搞了很久，发现前端的页面还是没有美化，不知道怎么搞的，而且现在存在的问题，用户登录成功之后，跳转到网站的主页，但是右上角应该显示的是用户的账号的，现在还是显示的是登录二字。今天只是把数据填充一下，能展示一下基本的增删改查。关键在于我想利用AI做一些能够真正用到实处的技术，最后做出来的还是CRUD，本质上和管理系统没区别。不过今天算法做到六十题还是可以的，虽然说大部分都是照着题解写一遍，然后理解一下，我觉得还是得有个模板，不能相同知识点的题目用不同套路写，这样脑子会很混乱，所以今天我就用ai生成模板，然后用模板解题，最后我只要记住模板的思想即可。明天又要上班了，累之！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/flight1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2025-11-22&#34;&gt;2025-11-22
+&lt;/h2&gt;&lt;p&gt;公司的项目终于告一段落了，打算重拾这个酒旅项目，目前我的兴趣在于如果美化前端页面，在王哥那里&amp;quot;偷师&amp;quot;，看到了一个写前端页面的轻量化的软件Hbuilder X。（也可以写md文档，不知道和其他软件比起来如何），总之也是美化了一下页面，但是我还是觉得现在的前端页面好丑啊，附图两张，听说Gemini 3的前端能力很强，有机会试一下。
+&lt;img src=&#34;https://1parado.github.io/img/flight1122-1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/flight1122-2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Redis 常见面试题</title>
+        <link>https://1parado.github.io/p/redis-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
+        <pubDate>Sun, 19 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/redis-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;h2 id=&#34;2025-10-19&#34;&gt;2025-10-19
+&lt;/h2&gt;&lt;p&gt;参考链接：
+&lt;a class=&#34;link&#34; href=&#34;https://javaguide.cn/database/redis/redis-questions-01.html#%E4%BB%80%E4%B9%88%E6%98%AF-redis&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://javaguide.cn/database/redis/redis-questions-01.html#%E4%BB%80%E4%B9%88%E6%98%AF-redis&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Redis是NoSQL数据库，是一种内存数据库。读写速度很快，经常用于分布式缓存方向，存储的是key-value对数据。Redis支持事务，持久化，lua脚本&amp;hellip;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;可以试一下&lt;a class=&#34;link&#34; href=&#34;https://onecompiler.com/redis&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;在线编译器&lt;/a&gt;写一下redis命令 简单易上手 easy~&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Redis为什么速度快：1.纯内存操作（纳秒级），传统的数据库需要读写磁盘（毫秒级） 2.高效的I/O模型。3.优化的内部数据结构4.简洁高效的通信协议（RESP）. redis适合做缓存不适合做主数据库，因为内存成本高，且redis虽然支持数据持久化但是有数据丢失风险。
+其他的分布式缓存：Tendis,KeyDB&amp;hellip;&lt;/p&gt;
+&lt;p&gt;选择Redis的原因：1.访问速度快（基于内存） 2.高并发 3. 功能全面（可以作缓存，可以用于分布式锁，限流，消息队列，延时队列&amp;hellip;）&lt;/p&gt;
+&lt;p&gt;常见的缓存读写策略：https://javaguide.cn/database/redis/3-commonly-used-cache-read-and-write-strategies.html&lt;/p&gt;
+&lt;h2 id=&#34;2025-10-20&#34;&gt;2025-10-20
+&lt;/h2&gt;&lt;p&gt;Redis 应用&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;缓存&lt;/li&gt;
+&lt;li&gt;分布式锁 Redission&lt;/li&gt;
+&lt;li&gt;做限流工具 Redis+LUA脚本 RRateLimiter实现分布式限流即基于Lua脚本+令牌桶算法&lt;/li&gt;
+&lt;li&gt;做消息队列 Redis的Stream类型的数据结构更适合做消息队列（但一般用中间件）&lt;/li&gt;
+&lt;li&gt;做延时队列 内置了延时队列 基于Sorted Set实现&lt;/li&gt;
+&lt;li&gt;分布式session 利用String或Hash数据结构存储session数据&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Redis可以实现全文搜索引擎功能 需要借助RedisSearch（一个基于Redis的搜索引擎模块）：性能更优秀 较低内存占用实现快速索引。&lt;/p&gt;
+&lt;p&gt;延时任务（红包过期自动退还）:实现方式：1. redis过期事件监听（不推荐） 2. redission内置的延时队列 减少了丢消息的可能，消息不存在重复消费问题&lt;/p&gt;
+&lt;p&gt;redis常见的数据类型：String、List、Set、ZSet、Hash 三种特殊数据类型：HyperLogLog（基数统计）、Bitmap （位图）、Geospatial (地理位置)&lt;/p&gt;
+&lt;h2 id=&#34;2025-10-21&#34;&gt;2025-10-21
+&lt;/h2&gt;&lt;h3 id=&#34;redis持久化机制&#34;&gt;Redis持久化机制：
+&lt;/h3&gt;&lt;p&gt;redis支持三种持久化：
+&lt;strong&gt;1.快照RDB，2.只追加文件AOF， 3.RDB和AOF混合持久化&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;1.RDB持久化 创建快照获取存储在内存种数据在某个时间点的副本 创建快照之后 可以对快照备份 可以创建副本（Redis主从结构） RDB是redis默认的持久化方式&lt;/p&gt;
+&lt;p&gt;RDB创建快照 save：同步保存操作 会阻塞Redis主线程 bgsave 用子进程执行 不会阻塞Redis主线程&lt;/p&gt;
+&lt;p&gt;2.AOF持久化 实时性更好 开启AOF持久化之后每次执行改变redis数据的命令 redis就会将该命令写入AOF缓冲区 然后再写入到AOF文件&lt;/p&gt;
+&lt;p&gt;AOF流程：所有的写命令追加到AOF缓冲区
+文件写入：将AOF缓冲区的数据写入到AOF文件中
+文件同步： AOF缓冲区根据对应的持久化方式向硬盘做同步操作
+文件重写：AOF越来越大 需要定期对AOF文件重写
+重启加载：redis重启时 可以加载AOF文件进行数据恢复&lt;/p&gt;
+&lt;p&gt;redis有三种不同的AOF持久化方式（区别在于同步AOF文件的时机不同 即刷盘时机不同）：
+1.appendfsync always
+2.appendfsync everyseconds
+3.appendfsync no&lt;/p&gt;
+&lt;p&gt;一般的关系型数据库是在执行命令前记录日志 AOF持久化机制是在执行命令之后记录日志：优点：可以避免额外开销 不会阻塞当前执行的命令 缺点：可能会造成修改丢失 可能会阻塞后续其他命令&lt;/p&gt;
+&lt;p&gt;AOF重写（当AOF文件越来越大 进行AOF重写即压缩AOF文件） Redis将AOF重写程序放在子进程执行 避免造成对redis正常处理命令请求造成影响。&lt;/p&gt;
+&lt;p&gt;Redis单线程模式和多线程模式：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对于读写命令来说，Redis 一直是单线程模型。不过，在 Redis 4.0 版本之后引入了多线程来执行一些大键值对的异步删除操作，Redis 6.0 版本之后引入了多线程来处理网络请求（提高网络 IO 读写性能）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;redis内存管理&#34;&gt;Redis内存管理
+&lt;/h3&gt;&lt;p&gt;保存的缓存数据会有一个过期时间 如果不设置过期时间 可能会出现OOM内存溢出问题
+expire key 60 // 在60s后key过期
+setex key 60 value // 数据在 60s 后过期（对于字符串类型）
+ttl key //查看数据还有多久过期
+过期时间还可以用于业务场景中如登录token，验证码&amp;hellip;&lt;/p&gt;
+&lt;p&gt;redis通过&lt;strong&gt;过期字典&lt;/strong&gt;保存数据过期的时间，过期字典的key指向redis的某个key 过期字典的值指向key的过期时间 在查询key的时候 redis会首先检查一下key是否过期 即在过期字典中查找key是否存在 存在的话 进行过期删除&lt;/p&gt;
+&lt;p&gt;redis过期删除策略包括：
+惰性删除（取出key时进行检查），定期删除（周期性的抽查一些key），延迟队列（将设置过期时间的key放入延迟队列 到期后删除key），定时删除（数据过期立马删除）
+Redis 采用的是&lt;strong&gt;定期删除+惰性删除&lt;/strong&gt;结合的策略 由于定期删除是周期性的随机抽查一些数据，抽查的数据数量由expire.c决定 默认为20 定期删除的频率由hz决定 默认为10 表示每秒执行10次尝试&lt;/p&gt;
+&lt;p&gt;大量的key集中过期（缓存雪崩）造成的后果：请求延迟增加 内存占用过高，为了避免这种情况，key的过期时间尽量随机 并开启lazy free机制（异步删除过期key 不会阻塞主线程的运行）&lt;/p&gt;
+&lt;p&gt;Redis 的内存淘汰策略（6种）：
+Redis 的内存淘汰策略只有在运行内存达到了配置的最大内存阈值时才会触发，这个阈值是通过 redis.conf 的 maxmemory 参数来定义的&lt;/p&gt;
+&lt;h2 id=&#34;2025-10-26&#34;&gt;2025-10-26
+&lt;/h2&gt;&lt;h3 id=&#34;redis事务&#34;&gt;Redis事务
+&lt;/h3&gt;&lt;p&gt;Redis 事务（并不是关系型数据库的事务），提供了一种将多个命令请求打包的功能。然后，再按顺序执行打包的所有命令，并且不会被中途打断。日常开发中一般不适用redis事务。事务的ACID特性（原子性，一致性，隔离性，持久性），redis事务不支持回滚操作，所以Redis事务不支持原子性。redis支持持久性（重启后数据还在）：1.RDB快照,2.AOF只追加文件,3.混合模式&lt;/p&gt;
+&lt;p&gt;AOF持久化的实时性更好 redis的配置文件中存放了三种持久化方式（fsyn）always，everysec，no
+可以通过lua脚本配合Redis事务的缺陷。&lt;/p&gt;
+&lt;h3 id=&#34;性能优化&#34;&gt;性能优化
+&lt;/h3&gt;&lt;p&gt;1.可以使用&lt;strong&gt;批量操作&lt;/strong&gt;减少网络传输，因为批量操作可以减少网络传输次数，减少网络开销，减少RTT(往返时延)
+2.pipeline 对于不支持批量操作的命令 可以用pipeline将redis命令封装成一组 这些命令会被一次性传输给redis服务器 但是需要注意批量操作的元素个数，避免网络传输的数据量过大。
+3.lua脚本 支持批量操作多条命令，可以看作是原子操作&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果 Lua 脚本运行时出错并中途结束，之后的操作不会进行，但是之前已经发生的写操作不会撤销，所以即使使用了 Lua 脚本，也不能实现类似数据库回滚的原子性&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;大量key集中过期缓存雪崩&#34;&gt;大量key集中过期（缓存雪崩）
+&lt;/h3&gt;&lt;p&gt;对于过期key Redis 采用的是 定期删除+惰性删除，为了解决缓存雪崩，1.需要给key设置随机过期时间（expire）2.开启lazy-free惰性删除（异步删除key，将删除操作交给单独的子进程处理 避免阻塞主线程）&lt;/p&gt;
+&lt;h3 id=&#34;bigkey&#34;&gt;Bigkey
+&lt;/h3&gt;&lt;p&gt;如果一个key对应的value占用的内存比较大 这个key可以叫bigkey（例如1MB）。bigkey消耗了更多的内存空间和带宽 还会对性能造成影响：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;客户端超时阻塞：redis执行命令是单线程处理 如果遇到bigkey时会比较耗时&lt;/li&gt;
+&lt;li&gt;网络阻塞&lt;/li&gt;
+&lt;li&gt;工作线程阻塞：删除bigkey时会阻塞工作线程&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如何找到bigkey：1.可以使用&amp;ndash;bigkeys参数查找redis中的bigkey，2.可以用redis自带的scan命令，当redis采用的时RDB持久化的时候，3.可以用开源软件分析RDB文件找出bigkey&lt;/p&gt;
+&lt;p&gt;如何处理bigkey：1.可以将bigkey分割成小key 2.可以手动清理 3.开启惰性删除&amp;hellip;&lt;/p&gt;
+&lt;h3 id=&#34;hotkey&#34;&gt;Hotkey
+&lt;/h3&gt;&lt;p&gt;如果一个key的访问次数明显多于其他key 这个key可认为是热点key 如果hotkey处理不好 redis会直接宕机 大量请求落到数据库中 可能导致数据库崩溃&lt;/p&gt;
+&lt;p&gt;如何找到hotkey：1.当数据淘汰策略采用的是LFU最近最少访问的时候，可以用&amp;ndash;hotkeys参数查找redis的hotkey，返回所有key被访问的次数。2.可以用monitor命令 可以实时查看redis所有操作的方式 可以监控redis实例的操作情况（不建议用）3.开源软件&lt;/p&gt;
+&lt;p&gt;如何处理hotkey：1.读写分离 主节点处理写请求 从节点处理读请求，2.可以使用redis cluster 将热点数据放在多个redis节点上   3.二级缓存（可以通过caffine/guava创建本地缓存）&lt;/p&gt;
+&lt;h3 id=&#34;慢查询命令&#34;&gt;慢查询命令
+&lt;/h3&gt;&lt;p&gt;redis命令执行：1.发送命令 2.命令排队 3. 命令执行 4.返回结果。redis慢查询统计的是命令执行的耗时 查询的是命令执行时间较长的命令。&lt;/p&gt;
+&lt;p&gt;如何找到慢查询命令：通过查看慢查询日志，慢查询日志中记录执行时间超过指定阈值的命令。慢查询日志同样会占用一定的空间 可能会导致内存占用过高的问题。常见的命令： 查询慢日志SLOWLOG GET，清空慢日志SLOWLOG RESET，返回慢查询命令的数量 SLOWLOG LEN&lt;/p&gt;
+&lt;h3 id=&#34;redis生产问题&#34;&gt;Redis生产问题
+&lt;/h3&gt;&lt;p&gt;1.缓存穿透（查询的数据不在缓存也不在数据库中） 解决方案：缓存空值，布隆过滤器&lt;/p&gt;
+&lt;p&gt;2.缓存击穿（热点key失效，大量并发请求访问数据库导致数据库负载过高） 解决方案：分布式锁，缓存预热，自动续期&lt;/p&gt;
+&lt;p&gt;3.缓存雪崩（大量的key同时失效，或者缓存服务器宕机 导致所有请求访问数据库）解决方案：为key设置随机过期时间 设置多级缓存 使用高可用架构（Redis集群或哨兵模式或主从架构）&lt;/p&gt;
+&lt;h3 id=&#34;缓存预热如何实现&#34;&gt;缓存预热如何实现
+&lt;/h3&gt;&lt;p&gt;缓存预热是防止热点数据不在缓存中 导致缓存击穿或缓存雪崩的一种解决方案 可以在系统启动或者高并发请求之前 将热点数据提前加载缓存中避免缓存失效。&lt;/p&gt;
+&lt;p&gt;缓存预热的两种实现方式：1. 使用定时任务 2.使用消息队列&lt;/p&gt;
+&lt;h3 id=&#34;缓存和数据库数据的一致性&#34;&gt;缓存和数据库数据的一致性
+&lt;/h3&gt;&lt;p&gt;参考：&lt;a class=&#34;link&#34; href=&#34;https://mp.weixin.qq.com/s?__biz=MzIyOTYxNDI5OA==&amp;amp;mid=2247487312&amp;amp;idx=1&amp;amp;sn=fa19566f5729d6598155b5c676eee62d&amp;amp;chksm=e8beb8e5dfc931f3e35655da9da0b61c79f2843101c130cf38996446975014f958a6481aacf1&amp;amp;scene=178&amp;amp;cur_album_id=1699766580538032128#rd&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;缓存和数据库一致性问题，看这篇就够了&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;想要保证数据库和缓存一致性，&lt;strong&gt;推荐采用「先更新数据库，再删除缓存」方案，并配合「消息队列」或「订阅变更日志」的方式来做&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;对于1.先删除缓存，再更新数据库以及 2.读写分离 + 主从复制延迟情况下，缓存和数据不一致的问题，可以采用延迟双删策略（在更新数据库后，先删除缓存中的数据，然后延迟一段时间再删除一次缓存）。为了保证数据一致性和系统性能，只需要保证最终一致性即可 不用要求强一致性。&lt;/p&gt;
+&lt;h3 id=&#34;redis高可用架构&#34;&gt;Redis高可用架构
+&lt;/h3&gt;&lt;p&gt;实际生产中 redis如果只部署一个节点 当机器故障的时候整个系统无法提供服务（单点故障），因此在集群模式下，将redis节点部署在一台或者几台，可用提高服务的可用性。&lt;/p&gt;
+&lt;p&gt;1.主从模式：节点分为主节点和从节点 主节点进行读写操作，从节点只能进行读操作。主节点数据变化，将变化数据同步给从节点 保持数据同步（主从同步，刚刚连接的时候进行全量同步，全量同步结束之后，进行增量同步）&lt;/p&gt;
+&lt;p&gt;2.哨兵模式：主从模式下，当主节点宕机之后需要将从节点改成主节点，需要人工干预，开销大。所以在实际生产中，优先考虑哨兵模式，主节点宕机后，哨兵自动选取主节点。一般为了便于选举主节点，选用奇数个哨兵。哨兵是一个独立的进程，哨兵进程向所有的redis机器发送命令，等待redis响应 从而监控多个运行的redis实例&lt;/p&gt;
+&lt;p&gt;3.集群模式：主从模式和哨兵模式下，每台redis服务器存储相同的数据，浪费内存 。集群模式下实现redis的分布式存储，对数据进行分片，每个节点可以存储不同内容。QPS要求高的时候使用。&lt;/p&gt;
+&lt;h3 id=&#34;redis实现延时任务&#34;&gt;Redis实现延时任务
+&lt;/h3&gt;&lt;p&gt;实现方式：1.redis过期事件监听 2.redisson内置的延迟队列&lt;/p&gt;
 </description>
         </item>
         
