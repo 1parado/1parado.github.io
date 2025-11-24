@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Mon, 24 Nov 2025 16:48:08 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 24 Nov 2025 17:59:29 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>仿教务系统</title>
         <link>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</link>
         <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
@@ -865,6 +865,87 @@ SET命令的两个参数：NX（not exist） 用于获取锁 PX设置锁键的�
 &lt;p&gt;小总结：目前实现了一个酒旅系统的基本功能模块，用户登录，然后进入系统首页，支持航班预定，酒店预定，景区预定，用车服务预定，餐厅预定。集成会员积分系统，AI智慧客服，地图查找附近酒旅服务，评论功能，发布与查看社区帖子等。&lt;/p&gt;
 &lt;p&gt;Github仓库：&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/travel_system&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;酒旅系统&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;趁着有空美化了一下前端页面，用的Grok 4.1，提示词是ios风格，其实做出来的效果还是可以的。未来真的面向ai编程了！
+&lt;img src=&#34;https://1parado.github.io/img/flight11241.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/flight11242.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/flight11243.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/flight11244.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/flight11245.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/flight11246.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/flight11247.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/flight11248.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
