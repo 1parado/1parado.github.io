@@ -635,6 +635,142 @@ Java中现在主流的ORM框架包括：&lt;/p&gt;
 	
 	
 &gt;&lt;/p&gt;
+&lt;h2 id=&#34;2025-11-24&#34;&gt;2025-11-24
+&lt;/h2&gt;&lt;p&gt;今天把登录遇到的问题和几个模块的展示问题都解决了，首先是用户登录成功之后需要展示用户的账号名字，这个需要在前端进行一个条件判断。对于酒店模块，首页展示城市的酒店列表，点击查看详情，可以进行预定，之后进行下单，支付（暂时认为下单即支付成功，之后再添加支付模块）。这里暂时不考虑高并发，之后需要再完善。
+&lt;img src=&#34;https://1parado.github.io/img/flight1124-1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;对于景区模块来说，逻辑是类似的。可以搜索城市热门景区，然后购买景区门票。
+&lt;img src=&#34;https://1parado.github.io/img/flight1124-2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;本系统是一站式全服务旅行系统，所以也支持打车服务，可以提前预约用车服务
+&lt;img src=&#34;https://1parado.github.io/img/flight1124-3.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;用户可以看到本人待支付和已支付的订单，可以查看航班、酒店、景区、用车等订单的情况，之后还可以加入待出行提醒。
+&lt;img src=&#34;https://1parado.github.io/img/flight1124-4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;新增了一个地图模块，默认是上海市，首先定位到所在城市，然后选择类型，查找附近的酒店或者景区（在本系统中登记过的），然后可以在地图上显示自己所在位置和附近酒店和景区的位置距离。我觉得未来还可以添加餐厅模块，积分会员，评论功能，个性化推荐，AI客服等等。
+&lt;img src=&#34;https://1parado.github.io/img/flight1124-5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;新增了餐厅模块，支持预约餐厅，添加了评论模块，在航班，酒店，景区，用车，餐厅等模块中，点击详情之后，可以展示其他用户的评价，登录用户也可以进行发表评价。其实我甚至觉得可以添加附近商城，直接把衣食住行全部都包括在内，但是系统显得有点太臃肿了。不过，感觉真的有搞头。现在实现的功能都只是简单的功能，并没有考虑高并发请求，之后需要考虑redis和中间件的使用。
+&lt;img src=&#34;https://1parado.github.io/img/flight1124-6.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;AI客服模块暂时没有接入大模型，智能根据用户输入的提示词，然后回答指定内容，跳转到指定页面，之后可以接入本地大模型。
+&lt;img src=&#34;https://1parado.github.io/img/flight1124-7.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;下面这个是接入本地大模型之后的回答，首先用本地模型进行回答，然后规则引擎提供站内快捷操作使用建议。本地大模型使用的是qwen2:0.5b，这个模型的数学计算太捞了，2+2等于几都能回答错，幸好我本地还有一个deepseek-r1:8b。下次买电脑一定买个好点的配置。
+&lt;img src=&#34;https://1parado.github.io/img/flight1124-8.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;
+在现有的系统中添加一个会员享折扣模块，当用户消费到一定金额的时候，可以享受更高的优惠价格
+&lt;img src=&#34;https://1parado.github.io/img/flight1124-11.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在支付订单页面，添加一个合并订单功能，可以选择支付方式，可以创建分期付款。
+&lt;img src=&#34;https://1parado.github.io/img/flight1124-10.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/flight1124-9.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;再添加一个社区模块和收藏，添加购物车功能，社区模块类似于小红书那种，但肯定只是简陋版的小红书，支持发布帖子，查看帖子。为了简单起见，没用oss文件上传服务，用的是&lt;a class=&#34;link&#34; href=&#34;https://imgbb.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;imgbb&lt;/a&gt;网站，无需登陆，上传图片直接得到访问地址。
+&lt;img src=&#34;https://1parado.github.io/img/flight1124-12.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;酒旅系统&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;小总结：目前实现了一个酒旅系统的基本功能模块，用户登录，然后进入系统首页，支持航班预定，酒店预定，景区预定，用车服务预定，餐厅预定。集成会员积分系统，AI智慧客服，地图查找附近酒旅服务，评论功能，发布与查看社区帖子等。&lt;/p&gt;
+&lt;p&gt;Github仓库：&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/travel_system&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;酒旅系统&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
