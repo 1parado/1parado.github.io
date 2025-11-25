@@ -7,7 +7,23 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Mon, 24 Nov 2025 21:53:25 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 25 Nov 2025 15:09:57 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>AI</title>
+        <link>https://1parado.github.io/tags/ai/</link>
+        <pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/ai/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Java</title>
+        <link>https://1parado.github.io/tags/java/</link>
+        <pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/java/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Redis</title>
         <link>https://1parado.github.io/tags/redis/</link>
         <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
@@ -21,14 +37,6 @@
         <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/tags/springboot/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Java</title>
-        <link>https://1parado.github.io/tags/java/</link>
-        <pubDate>Thu, 30 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/tags/java/</guid>
         <description></description>
         </item>
         <item>
