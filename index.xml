@@ -889,6 +889,72 @@ Java中现在主流的ORM框架包括：&lt;/p&gt;
 </description>
         </item>
         <item>
+        <title>BookBlog</title>
+        <link>https://1parado.github.io/p/bookblog/</link>
+        <pubDate>Thu, 04 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/bookblog/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;昨天晚上听了一个字节前员工的播客。学到了很多东西，从他的视角来看真正的社交类软件是那些用于交友的比如陌陌，探探。然而抖音，快手这类的他说刚开始都是工具类软件，然后经历过一个社区阶段，才达到现在的高度。所以我就在想能不能做一个阅读博客，即满足了分享欲，又能吸引一些粘性用户——阅读爱好者，并不提供书链接，只是提供一个类似于静态博客的内容，让用户的可玩性很高，并且可以满足分享需求。同时可以作为一个工具类软件记录自己每天，每周，每月，每年的阅读情况。因为我发现，自从我学会做博客之后，我也对于分享，开源这件事情有了很强烈的感觉。之后还会更新一些其他有意思的功能，目前暂时做出的功能如下图所示：支持从notion导入读书清单，查看读书列表，书籍详情，读书数据等，支持海报分享。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/book1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;book1&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/book2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;book1&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/book3.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;book1&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/book4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;book1&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/book5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;book1&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>无人驾驶</title>
         <link>https://1parado.github.io/p/%E6%97%A0%E4%BA%BA%E9%A9%BE%E9%A9%B6/</link>
         <pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate>
