@@ -7,7 +7,170 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Thu, 04 Dec 2025 19:09:21 +0800</lastBuildDate><atom:link href="https://1parado.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 22 Dec 2025 23:18:30 +0800</lastBuildDate><atom:link href="https://1parado.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Diary 一款多功能日记软件</title>
+        <link>https://1parado.github.io/p/diary-%E4%B8%80%E6%AC%BE%E5%A4%9A%E5%8A%9F%E8%83%BD%E6%97%A5%E8%AE%B0%E8%BD%AF%E4%BB%B6/</link>
+        <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/diary-%E4%B8%80%E6%AC%BE%E5%A4%9A%E5%8A%9F%E8%83%BD%E6%97%A5%E8%AE%B0%E8%BD%AF%E4%BB%B6/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;最近一段时间一直在学习用Trae、cursor、Kiro&amp;hellip;等AI编程软件编写自己的程序，之前开发了好多小demo，还有一个IM即时通讯系统被我和朋友放在服务器上面玩了一下。这几周突发奇想，想到了能不能做一个TOC的日记+笔记软件。然后我就用我现有的技术栈来开发了一款Diary软件。
+首先展示一下电脑上面的AI编辑器吧，其实本来还有Antigrivity，但是下载下来不知道为啥不能用。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;前端我是用Figma-make做的，直接给他提示词然后生成前端页面。前端开发用的是Vue+vite，后端是SpringBoot+Mybatis，数据库用的是Postgresql。在本地安装Postgresql也有好多坑，之后我再写篇博客记录一下。
+首先介绍一下这个软件的功能，包括注册、登录、写日记、画画、打字练习、社区、读书、思维导图等等&amp;hellip;在用AI进行编程的时候，我觉得最主要的难点就是如何保证AI刚开始搭建的脚手架是可以运行的，有时候他会给一些相互排斥的依赖导致项目无法正常运行。然后就是AI在面对复杂场景的时候，需要尽可能详尽的提示词，否则做出来的东西肯定是一大堆漏洞的。&lt;/p&gt;
+&lt;p&gt;接下来就是软件的页面展示：
+注册和登录页面：用户创建用户并且登录跳转到主页&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;进入主页，左边是软件的功能模块，包括查看日记，查找日记，日常话题比赛，书架，社区，数据分析，垃圾箱，打字练习，绘画，思维导图等功能。
+&lt;img src=&#34;https://1parado.github.io/img/12-22-3.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;新建日记页面：支持md文档格式，可以预览，可以边预览边写日记，支持快捷键操作 常见的ctrl + s进行保存等操作，在settings中可以进行自定义快捷键操作。在发布日记/笔记的时候可以选择private或share，这决定了你的日记/笔记会不会在社区页面进行展示。还可以进行语音转文字，支持天气查询等等小功能。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;搜索页面：用户可以根据日历进行筛选或者日记的标题，标签等进行搜索。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;写故事页面，是我随便想到了一个功能，为了让自己的软件更有趣一些，做了一个每日命题作文，然后用户可以进行参赛，通过在社区中进行投票，然后选出前三名。社区中保证一人一票机制，对于参与比赛的故事，下面会是爱心图标代表投票，不参与的是点赞图标。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-6.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;社区页面主要展示用户共享的日记/笔记。然后可以进行评论功能，支持多级评论。在设计软件的时候，我觉得作为一个日记/笔记软件应该不需要加好友之类的吧，所以只是进行了简单的社区分享功能的搭建。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-7.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;数据分析页面主要记录用户写的日记数量，通过可视化的形式展示给用户。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-8.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;打字练习页面，是因为我偶然看到一个页面是放置了一个3D键盘，然后用户打字可以在屏幕上面的3D键盘上进行动态交互，我觉得这个创意挺好的，所以就实现了一下这个功能，打字练习暂且只支持中英文&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-9.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;画板页面就是支持用户把自己的一天画出来，然后支持AI挑选日记，然后根据日记内容生成用户想要的图片。这里我本来打算用Google的香蕉模型的，但是API调用太贵了，暂且搁置。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-11.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/12-22-10.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;思维导图页：我个人觉得最有用的页面，目前的思维导图我用的总是不太习惯，所以创建了一个思维导图模块，支持无限画布，无限节点。最重要的是导出的时候没有水印，不用受制于人了！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-12.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;最后就是设置页面了，可以改邮箱和密码，修改快捷键操作，支持日记导出为三种格式。支持light和drak模式。之后应该还会添加一些其他的模块。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-13.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1WtqQB1Evr/?share_source=copy_web&amp;amp;vd_source=e51d3438543fd80d97a3f4ce11e7cdcb&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;哔哩哔哩项目介绍链接&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>仿教务系统</title>
         <link>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</link>
         <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
