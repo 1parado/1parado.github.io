@@ -15,7 +15,7 @@
     <lastmod>2025-11-23T23:40:10+08:00</lastmod>
   </url><url>
     <loc>https://1parado.github.io/categories/</loc>
-    <lastmod>2025-12-22T23:18:30+08:00</lastmod>
+    <lastmod>2025-12-24T21:56:54+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -33,7 +33,7 @@
                 />
   </url><url>
     <loc>https://1parado.github.io/post/</loc>
-    <lastmod>2025-12-22T23:18:30+08:00</lastmod>
+    <lastmod>2025-12-24T21:56:54+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -45,11 +45,8 @@
                 href="https://1parado.github.io/post/"
                 />
   </url><url>
-    <loc>https://1parado.github.io/tags/springboot/</loc>
-    <lastmod>2025-12-22T23:18:30+08:00</lastmod>
-  </url><url>
     <loc>https://1parado.github.io/tags/</loc>
-    <lastmod>2025-12-22T23:18:30+08:00</lastmod>
+    <lastmod>2025-12-24T21:56:54+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -65,6 +62,15 @@
                 hreflang="en"
                 href="https://1parado.github.io/tags/"
                 />
+  </url><url>
+    <loc>https://1parado.github.io/tags/windows/</loc>
+    <lastmod>2025-12-24T21:56:54+08:00</lastmod>
+  </url><url>
+    <loc>https://1parado.github.io/p/windows%E7%9A%84c%E7%9B%98%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2025-12-24T21:56:54+08:00</lastmod>
+  </url><url>
+    <loc>https://1parado.github.io/tags/springboot/</loc>
+    <lastmod>2025-12-22T23:18:30+08:00</lastmod>
   </url><url>
     <loc>https://1parado.github.io/tags/trae/</loc>
     <lastmod>2025-12-22T23:18:30+08:00</lastmod>
