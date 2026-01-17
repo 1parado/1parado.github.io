@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Wed, 07 Jan 2026 14:59:07 +0800</lastBuildDate><atom:link href="https://1parado.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 18 Jan 2026 00:01:47 +0800</lastBuildDate><atom:link href="https://1parado.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Diary 一款多功能日记软件</title>
         <link>https://1parado.github.io/p/diary-%E4%B8%80%E6%AC%BE%E5%A4%9A%E5%8A%9F%E8%83%BD%E6%97%A5%E8%AE%B0%E8%BD%AF%E4%BB%B6/</link>
         <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
@@ -4402,6 +4402,73 @@ return res;
 &lt;p&gt;参考链接：
 &lt;a class=&#34;link&#34; href=&#34;https://bright9911.github.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://bright9911.github.io/&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Smart life 更懂你的AI助手</title>
+        <link>https://1parado.github.io/p/smart-life-%E6%9B%B4%E6%87%82%E4%BD%A0%E7%9A%84ai%E5%8A%A9%E6%89%8B/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/smart-life-%E6%9B%B4%E6%87%82%E4%BD%A0%E7%9A%84ai%E5%8A%A9%E6%89%8B/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;最近看Qwen说可以操作阿里系的应用，所以学习如何开发一款智能体应用，把传统的应用都集合在一个聊天页面中，技术栈：后端是SpingAI+Ollama 前端是Vue + Vite。该项目的本质上就是通过人类给AI发布命令，AI来调用相关接口操作数据库从而实现操作。
+在开发之前需要考虑清楚一些问题：&lt;strong&gt;怎么让AI准确的识别自然语言的意图并且正确操作接口&lt;/strong&gt;？其实准确来讲有点像Text2DB.&lt;/p&gt;
+&lt;p&gt;页面展示：&lt;img src=&#34;https://1parado.github.io/img/1-17-1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;页面&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/1-17-2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;页面&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/1-17-3.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;页面&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/1-17-4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;页面&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/1-17-5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;页面&#34;
+	
+	
+&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
