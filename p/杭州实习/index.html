@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="论坛模块发帖和发布评论的一个简单的敏感词检测功能">
-<title>如何实现一个简单的敏感词检测</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="\r2026.1.27 仔细想想，其实我还是很幸运的。很感谢一路上遇到的这么多帮助过我的朋友们，和我一起讨论论文的by哥，帮助我找到第一次实习的yh，以及一直给予我经济支持的父母，给我动力的May。说真的，换做之前，我真的没有勇气踏出这一步，独自一个人前往千里之外的杭州。本人向来胆小，熟悉我的人都知道。所以这次杭州实习，担心远远大于激动，担心火车卧铺，担心租房，担心公司等等，但是实际上，担心的事情还是一件件的发生了，而且结果还不错，卧铺睡的也挺好的，租房也不错，公司员工也是很友好的。所以，行胜于言。今天去公司跟带我的老师沟通了一下，感觉说的挺有道理的，感觉他就是在业界很厉害的大佬，应该是架构师那种级别的吧，总之就是讲的很通透的。一月29号就可以入职了，今天他还问我一个问题，说我这次实习的预期是什么，只是一段简历上的实习经历，还是真的想要学习业务，或者为了钱。我也支支吾吾说不明白，总觉得这些大佬的规划都是很宏观的，而且不是很肤浅的单纯为了钱而工作。要学习的东西还是有很多的，希望进步速度能快一点，更快的让自己的段位升级。最后，一直想感谢May，想告诉May，真的很谢谢你。让我暂时不是很迷茫，让我有一个清晰的目标，让我感受到一个人为我担心为我开心的感觉有多么美好。总之，我真的是很幸运的了。最后，也希望我们能够照顾好我自己的身体，做热爱的事，爱对的人。希望这次实习能够让我自己更好的掌控自己的生活和经济，更加独立。特别特别特别特别AI你，May，希望你能好好照顾自己。杭州杭州!Fighting！\n">
+<title>杭州实习</title>
 
-<link rel='canonical' href='https://1parado.github.io/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%8F%E6%84%9F%E8%AF%8D%E6%A3%80%E6%B5%8B/'>
+<link rel='canonical' href='https://1parado.github.io/p/%E6%9D%AD%E5%B7%9E%E5%AE%9E%E4%B9%A0/'>
 
-<link rel="stylesheet" href="/scss/style.min.ec0275f9efc7477560607f9610e0eeb6ebb5e53a8dcbdd5591f1ea2ee0b3c273.css"><meta property='og:title' content="如何实现一个简单的敏感词检测">
-<meta property='og:description' content="论坛模块发帖和发布评论的一个简单的敏感词检测功能">
-<meta property='og:url' content='https://1parado.github.io/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%8F%E6%84%9F%E8%AF%8D%E6%A3%80%E6%B5%8B/'>
+<link rel="stylesheet" href="/scss/style.min.ec0275f9efc7477560607f9610e0eeb6ebb5e53a8dcbdd5591f1ea2ee0b3c273.css"><meta property='og:title' content="杭州实习">
+<meta property='og:description' content="\r2026.1.27 仔细想想，其实我还是很幸运的。很感谢一路上遇到的这么多帮助过我的朋友们，和我一起讨论论文的by哥，帮助我找到第一次实习的yh，以及一直给予我经济支持的父母，给我动力的May。说真的，换做之前，我真的没有勇气踏出这一步，独自一个人前往千里之外的杭州。本人向来胆小，熟悉我的人都知道。所以这次杭州实习，担心远远大于激动，担心火车卧铺，担心租房，担心公司等等，但是实际上，担心的事情还是一件件的发生了，而且结果还不错，卧铺睡的也挺好的，租房也不错，公司员工也是很友好的。所以，行胜于言。今天去公司跟带我的老师沟通了一下，感觉说的挺有道理的，感觉他就是在业界很厉害的大佬，应该是架构师那种级别的吧，总之就是讲的很通透的。一月29号就可以入职了，今天他还问我一个问题，说我这次实习的预期是什么，只是一段简历上的实习经历，还是真的想要学习业务，或者为了钱。我也支支吾吾说不明白，总觉得这些大佬的规划都是很宏观的，而且不是很肤浅的单纯为了钱而工作。要学习的东西还是有很多的，希望进步速度能快一点，更快的让自己的段位升级。最后，一直想感谢May，想告诉May，真的很谢谢你。让我暂时不是很迷茫，让我有一个清晰的目标，让我感受到一个人为我担心为我开心的感觉有多么美好。总之，我真的是很幸运的了。最后，也希望我们能够照顾好我自己的身体，做热爱的事，爱对的人。希望这次实习能够让我自己更好的掌控自己的生活和经济，更加独立。特别特别特别特别AI你，May，希望你能好好照顾自己。杭州杭州!Fighting！\n">
+<meta property='og:url' content='https://1parado.github.io/p/%E6%9D%AD%E5%B7%9E%E5%AE%9E%E4%B9%A0/'>
 <meta property='og:site_name' content='Paradox’s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='SpringBoot' /><meta property='article:tag' content='机器学习' /><meta property='article:published_time' content='2025-10-22T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-23T19:21:06&#43;08:00'/>
-<meta name="twitter:title" content="如何实现一个简单的敏感词检测">
-<meta name="twitter:description" content="论坛模块发帖和发布评论的一个简单的敏感词检测功能">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='SpringBoot' /><meta property='article:published_time' content='2026-01-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-01-27T21:55:48&#43;08:00'/>
+<meta name="twitter:title" content="杭州实习">
+<meta name="twitter:description" content="\r2026.1.27 仔细想想，其实我还是很幸运的。很感谢一路上遇到的这么多帮助过我的朋友们，和我一起讨论论文的by哥，帮助我找到第一次实习的yh，以及一直给予我经济支持的父母，给我动力的May。说真的，换做之前，我真的没有勇气踏出这一步，独自一个人前往千里之外的杭州。本人向来胆小，熟悉我的人都知道。所以这次杭州实习，担心远远大于激动，担心火车卧铺，担心租房，担心公司等等，但是实际上，担心的事情还是一件件的发生了，而且结果还不错，卧铺睡的也挺好的，租房也不错，公司员工也是很友好的。所以，行胜于言。今天去公司跟带我的老师沟通了一下，感觉说的挺有道理的，感觉他就是在业界很厉害的大佬，应该是架构师那种级别的吧，总之就是讲的很通透的。一月29号就可以入职了，今天他还问我一个问题，说我这次实习的预期是什么，只是一段简历上的实习经历，还是真的想要学习业务，或者为了钱。我也支支吾吾说不明白，总觉得这些大佬的规划都是很宏观的，而且不是很肤浅的单纯为了钱而工作。要学习的东西还是有很多的，希望进步速度能快一点，更快的让自己的段位升级。最后，一直想感谢May，想告诉May，真的很谢谢你。让我暂时不是很迷茫，让我有一个清晰的目标，让我感受到一个人为我担心为我开心的感觉有多么美好。总之，我真的是很幸运的了。最后，也希望我们能够照顾好我自己的身体，做热爱的事，爱对的人。希望这次实习能够让我自己更好的掌控自己的生活和经济，更加独立。特别特别特别特别AI你，May，希望你能好好照顾自己。杭州杭州!Fighting！\n">
     </head>
     <body class="
     article-page
@@ -258,12 +258,8 @@
     
     <header class="article-category">
         
-            <a href="/categories/java/" style="background-color: #2a9d8f; color: #fff;">
-                Java
-            </a>
-        
-            <a href="/categories/ai/" style="background-color: #2a9d8f; color: #fff;">
-                AI
+            <a href="/categories/%E5%AE%9E%E4%B9%A0/" style="background-color: #2a9d8f; color: #fff;">
+                实习
             </a>
         
     </header>
@@ -271,13 +267,9 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%8F%E6%84%9F%E8%AF%8D%E6%A3%80%E6%B5%8B/">如何实现一个简单的敏感词检测</a>
+            <a href="/p/%E6%9D%AD%E5%B7%9E%E5%AE%9E%E4%B9%A0/">杭州实习</a>
         </h2>
     
-        
-        <h3 class="article-subtitle">
-            论坛模块发帖和发布评论的一个简单的敏感词检测功能
-        </h3>
         
     </div>
 
@@ -297,7 +289,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Oct 22, 2025</time>
+                <time class="article-time--published">Jan 27, 2026</time>
             </div>
         
 
@@ -312,7 +304,7 @@
 
 
                 <time class="article-time--reading">
-                    2 minute read
+                    1 minute read
                 </time>
             </div>
         
@@ -335,179 +327,8 @@
     background-attachment: fixed;
   }
 </style>
-<p>实现过程：1.创建机器学习模型 通过（朴素贝叶斯 + TF-IDF 向量化）实现文本二分类 当文本中包含敏感词的时候返回1 否则返回0 这里我创建了一个sensitive_detector.py文件。首先自定义输入一些敏感词数据库，然后进行文本向量化，将文字转为数值特征，然后用MultinomialNB模型进行训练 最后保存模型（.pkl文件），让该模型运行在本地的一个端口上</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">jsonify</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">jieba</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">joblib</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span> <span class="p">(</span> <span class="vm">__name__</span> <span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># === 1. 准备数据 ===</span>
-</span></span><span class="line"><span class="cl"><span class="n">texts</span> <span class="o">=</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 正常内容</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;我爱学习人工智能&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;今天真开心&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;你好，朋友&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;祝你生活愉快&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;我喜欢听音乐&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;看电影真有趣&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;一起打游戏吧&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;美丽的风景让人心情愉快&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1"># 敏感内容</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;买枪支弹药请加我&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;出售身份证&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;这是黄色网站链接&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;成人内容免费看&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;黄色小说推荐&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;如何制作炸弹&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;赌博网站登录入口&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;免费看黄片&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">]</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># 0=正常，1=敏感</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># === 2. 中文分词函数 ===</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">chinese_tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">jieba</span><span class="o">.</span><span class="n">lcut</span> <span class="p">(</span> <span class="n">text</span> <span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># === 3. 向量化 + 训练模型 ===</span>
-</span></span><span class="line"><span class="cl"><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span> <span class="p">(</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">chinese_tokenizer</span> <span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span> <span class="p">(</span> <span class="n">texts</span> <span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">=</span> <span class="n">MultinomialNB</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">model</span><span class="o">.</span><span class="n">fit</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">labels</span> <span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># === 4. 保存模型（方便部署） ===</span>
-</span></span><span class="line"><span class="cl"><span class="n">joblib</span><span class="o">.</span><span class="n">dump</span> <span class="p">(</span> <span class="n">vectorizer</span><span class="p">,</span> <span class="s1">&#39;vectorizer.pkl&#39;</span> <span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">joblib</span><span class="o">.</span><span class="n">dump</span> <span class="p">(</span> <span class="n">model</span><span class="p">,</span> <span class="s1">&#39;model.pkl&#39;</span> <span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nd">@app.route</span> <span class="p">(</span> <span class="s2">&#34;/predict&#34;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;POST&#34;</span><span class="p">]</span> <span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">predict</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span> <span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="n">text</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span> <span class="p">(</span> <span class="s2">&#34;text&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span> <span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">X_new</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span> <span class="p">(</span> <span class="p">[</span><span class="n">text</span><span class="p">]</span> <span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span> <span class="p">(</span> <span class="n">X_new</span> <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">jsonify</span> <span class="p">(</span> <span class="p">{</span><span class="s2">&#34;sensitive&#34;</span><span class="p">:</span> <span class="nb">bool</span> <span class="p">(</span> <span class="n">pred</span> <span class="p">)}</span> <span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">app</span><span class="o">.</span><span class="n">run</span> <span class="p">(</span> <span class="n">port</span><span class="o">=</span><span class="mi">5001</span> <span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>运行上述py文件：</p>
-<p><img src="/img/%e6%95%8f%e6%84%9f%e8%af%8d%e6%a3%80%e6%9f%a5%e8%bf%90%e8%a1%8c%e5%9c%a85001%e7%ab%af%e5%8f%a3.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="敏感词检查运行在5001端口"
-	
-	
-></p>
-<p>接下来可以通过postman等接口测试工具测试一下，当发布敏感词的时候会显示true 无敏感词的时候显示false。</p>
-<p><img src="/img/%e6%95%8f%e6%84%9f%e8%af%8d%e9%aa%8c%e8%af%81.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="敏感词验证"
-	
-	
-></p>
-<p>运行项目进行检测：</p>
-<p><img src="/img/%e6%95%8f%e6%84%9f%e8%af%8d%e8%af%84%e8%ae%ba%e5%a4%b1%e8%b4%a5.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="敏感词评论失败"
-	
-	
-></p>
-<p><img src="/img/%e9%9d%9e%e6%95%8f%e6%84%9f%e8%af%8d%e8%af%84%e8%ae%ba%e6%88%90%e5%8a%9f.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="非敏感词评论成功"
-	
-	
-></p>
-<p>到此 就实现了一个简单的文本敏感词检测功能 可以用于论坛模块的发帖和评论功能中。后续可以扩展敏感词库，敏感词库可以从开源中文敏感词库（如“百度敏感词库”、“naughty-words 中文版”）获取&hellip;</p>
+<h2 id="2026127">2026.1.27
+</h2><p>仔细想想，其实我还是很幸运的。很感谢一路上遇到的这么多帮助过我的朋友们，和我一起讨论论文的by哥，帮助我找到第一次实习的yh，以及一直给予我经济支持的父母，给我动力的May。说真的，换做之前，我真的没有勇气踏出这一步，独自一个人前往千里之外的杭州。本人向来胆小，熟悉我的人都知道。所以这次杭州实习，担心远远大于激动，担心火车卧铺，担心租房，担心公司等等，但是实际上，担心的事情还是一件件的发生了，而且结果还不错，卧铺睡的也挺好的，租房也不错，公司员工也是很友好的。所以，行胜于言。今天去公司跟带我的老师沟通了一下，感觉说的挺有道理的，感觉他就是在业界很厉害的大佬，应该是架构师那种级别的吧，总之就是讲的很通透的。一月29号就可以入职了，今天他还问我一个问题，说我这次实习的预期是什么，只是一段简历上的实习经历，还是真的想要学习业务，或者为了钱。我也支支吾吾说不明白，总觉得这些大佬的规划都是很宏观的，而且不是很肤浅的单纯为了钱而工作。要学习的东西还是有很多的，希望进步速度能快一点，更快的让自己的段位升级。最后，一直想感谢May，想告诉May，真的很谢谢你。让我暂时不是很迷茫，让我有一个清晰的目标，让我感受到一个人为我担心为我开心的感觉有多么美好。总之，我真的是很幸运的了。最后，也希望我们能够照顾好我自己的身体，做热爱的事，爱对的人。希望这次实习能够让我自己更好的掌控自己的生活和经济，更加独立。特别特别特别特别AI你，May，希望你能好好照顾自己。杭州杭州!Fighting！</p>
 
 </section>
 
@@ -516,9 +337,9 @@
     
     <section class="article-tags">
         
-            <a href="/tags/springboot/">SpringBoot</a>
+            <a href="/tags/java/">Java</a>
         
-            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+            <a href="/tags/springboot/">SpringBoot</a>
         
     </section>
 
@@ -545,7 +366,7 @@
 
 
         <span>
-            Last updated on Oct 23, 2025 19:21 CST
+            Last updated on Jan 27, 2026 21:55 CST
         </span>
     </section></footer>
 
@@ -564,64 +385,12 @@
             
                 
 <article class="">
-    <a href="/p/diary-%E4%B8%80%E6%AC%BE%E5%A4%9A%E5%8A%9F%E8%83%BD%E6%97%A5%E8%AE%B0%E8%BD%AF%E4%BB%B6/">
+    <a href="/p/%E5%AE%9E%E4%B9%A0%E7%BB%8F%E5%8E%86/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">Diary 一款多功能日记软件</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/bookblog/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">BookBlog</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E8%BD%ACsql%E8%AF%AD%E5%8F%A5%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">自然语言转SQL语句实现增删改查操作</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%9C%AC%E5%9C%B0%E7%BF%BB%E8%AF%91%E5%99%A8/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">实现一个本地翻译器</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/%E9%85%92%E6%97%85%E7%B3%BB%E7%BB%9F/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">酒旅系统</h2>
+            <h2 class="article-title">实习经历</h2>
         </div>
     </a>
 </article>
