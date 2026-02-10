@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Tue, 03 Feb 2026 21:09:26 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 10 Feb 2026 20:53:44 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>实习日常刷代码</title>
         <link>https://1parado.github.io/p/%E5%AE%9E%E4%B9%A0%E6%97%A5%E5%B8%B8%E5%88%B7%E4%BB%A3%E7%A0%81/</link>
         <pubDate>Tue, 03 Feb 2026 00:00:00 +0000</pubDate>
@@ -134,6 +134,31 @@
 &lt;/h2&gt;&lt;p&gt;这个公司也太棒了，虽然是刚入职，但是过年前也是会给实习生发年货的，甚至有些实习生已经请假回校了，还会记住他们的地址，给他们邮寄过去。公司这氛围真的好好。希望能在这个公司多学一些东西吧，现在只是拿到了一个项目的代码，让我看，我也不知道看什么，求人不得，反诸求己。只有自己多学一点吧，毕竟快过年了，大家都想早点回家，可能对于我来说，估计就是年后才给我分配任务吧。主要是我主要要任务做，也不知道会分配给我什么工作，现在给我的是python代码，爬虫之类的项目，我觉得我应该稍微了解一下就好，之后肯定要做微服务相关的，重心应该放在Java这边吧，总之多学一点对之后肯定还是有帮助的吧。战胜迷茫的好办法就是静下心来一步一步来，慢慢的攻克难关，要有优先级，经常总结回顾。总之，还是需要继续努力的，前几天歇几天，天天玩手机也觉得没意思，先设定一个学习方向吧。现在work and life banlance的很好呀（我这雷霆英文）。加油加油！&lt;/p&gt;
 &lt;h2 id=&#34;202623&#34;&gt;2026.2.3
 &lt;/h2&gt;&lt;p&gt;今天在公司接到了我的第一个任务：排查sql数据为什么不一致，应该插入四万条数据，为什么插入11万条数据。让我排查这个问题，然后将解决思路记录到语雀中，我觉得还好吧，本来下午刚上班其实就完成了这个任务，但是又出现了一个新问题，就是某明奇妙的两个字段不是NULL，而是Default，我现在看来其实还是很简单的一个东西，主要还是我不太了解流程吧。不过到下班之前其实也是搞好了，等到明天测试一下就好了。本来还以为要在那里加班，但是公司的正式员工们都说了可以明天，或者如果这个任务完不成就提给mentor，让他重新安排其他人做。我觉得我还是完成的不错的，哈哈哈。明天早上去把解决思路挪到语雀上就好了应该。还是提前去一下吧，估计半个小时能搞完。2月5号，我们小组要去聚餐，我在公司现在负责的数据库之类的工作，OMS+数字仓库，这和Java有关吗我还不太清楚，总之在公司多学一点经验吧。加油！昨天晚上跟May聊了好久，真的希望所有的烦恼都远离你哈。健健康康的，天天开开心心的就足够了，明天得把鼠标带回来，出租屋里没有鼠标玩电脑有点难受&amp;hellip; 希望明天我负责的任务不要出乱子.&lt;/p&gt;
+&lt;h2 id=&#34;2026210&#34;&gt;2026.2.10
+&lt;/h2&gt;&lt;p&gt;快过年了，公司任务也不是很多，今天做了一个网页然后部署到Vercel，然后关联到我的域名上面了，其实还挺好看的。主要是现在都是玻璃拟态IOS风，主要在这个页面放一些自己常用的链接，还有一些常用的工具。打算将之前的酒旅项目从单体改造成微服务，感觉可以水好几篇博客了。哈哈哈。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.paradox29.xyz/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.paradox29.xyz/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;页面展示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/02101.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/02102.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
