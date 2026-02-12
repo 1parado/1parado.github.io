@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>SpringCloud on Paradox’s Blog</title>
+        <link>https://1parado.github.io/tags/springcloud/</link>
+        <description>Recent content in SpringCloud on Paradox’s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>Paradox29</copyright>
+        <lastBuildDate>Thu, 12 Feb 2026 16:09:34 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/springcloud/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>单体转向微服务的一次实践</title>
+        <link>https://1parado.github.io/p/%E5%8D%95%E4%BD%93%E8%BD%AC%E5%90%91%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E4%B8%80%E6%AC%A1%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/%E5%8D%95%E4%BD%93%E8%BD%AC%E5%90%91%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E4%B8%80%E6%AC%A1%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;之前的项目地址：&lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/%E9%85%92%E6%97%85%E7%B3%BB%E7%BB%9F/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;酒旅系统&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;公司现在的系统架构是SpringCloud微服务，刚开始接触的时候一头雾水，当然学习一个东西最好的办法就是上手去做，去试错。所以现在借助AI，打算从零到一开始学习，摸索微服务的架构。重构一个系统当然会遇到很多问题，在此记录一些踩过的坑，也尽量能帮助一些人更好更快的理解和学习微服务。&lt;/p&gt;
+&lt;h3 id=&#34;2026212&#34;&gt;2026.2.12
+&lt;/h3&gt;&lt;p&gt;首先讲一下之前的系统架构，采用JAVA 17，SpringBoot 3.2.5,数据库用的MySQL 8.0做持久化，在系统中引入一些中间件包括比如Redis，ES，RocketMQ等等,之前的系统中，只有一个数据库travel_system,里面包含27张表。很显然，这种架构不适合进行业务更改，也不适合版本更新。而且全部业务放在一个系统中，团队进行代码编写也很头痛（虽然我只有一个人）。总之，从单体到微服务架构是很有必要的。&lt;/p&gt;
+&lt;p&gt;之前的数据库（按照业务领域划分）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;之前系统的数据库&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;之前系统的整体架构：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;之前系统的总体架构&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在进行重构之前，首先第一步就是要先做好备份，将项目做好备份，将数据库表结构和数据转储为SQL文件，接下来就可以开始进行重构之旅了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-3.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;压缩包&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;首先第一步，将前置条件都准备好，因为不知名原因我电脑上面用不了Docker，所以我的项目所需要的配置都需要下载到我的电脑本地，所以需要先下载一个Nacos（阿里出的一个服务注册和发现以及动态配置的网关），
+这里我下载的是2.5.2版本。Nacos默认是集群模式开启的，因为我电脑上的内存不是很够，所以改成单机模式跑，Nacos默认在8848端口启动，在浏览器中打开输入: http://localhost:8848/nacos，控制台初始默认账号和密码都是：nacos。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Nacos&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;接下来需要考虑的就是将原来单体项目划分为几个微服务，按理说应该是最好一个微服务负责一个业务的，但是考虑到我电脑配置，启动那么多微服务和中间件，说不定电脑要提前退休。所以把之前的项目分成四个微服务（protal，trade，payment，support）+Gateway网关+common模块。各个模块负责的业务不同，并且要求每个微服务使的数据库一定要不同，所以创建了四个数据库，然后将之前的数据库表结构迁移过来。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;改造后的数据库&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;创建一个后端项目，创建根pom文件，该pom文件的&lt;modules&gt;应该包括拆分后的子模块，&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.paradox&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;travel-microservices&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0.0&lt;span class=&#34;nt&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;pom&lt;span class=&#34;nt&#34;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Travel Microservices&lt;span class=&#34;nt&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;description&amp;gt;&lt;/span&gt;智旅云OTA微服务平台&lt;span class=&#34;nt&#34;&gt;&amp;lt;/description&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;modules&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;common&lt;span class=&#34;nt&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;gateway-service&lt;span class=&#34;nt&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;portal-service&lt;span class=&#34;nt&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;trade-service&lt;span class=&#34;nt&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;payment-service&lt;span class=&#34;nt&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;support-service&lt;span class=&#34;nt&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/modules&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;然后应该由这个根pom文件来统一属性和依赖的版本。后面的子模块只需要引入父模块即可，避免了依赖不一致的问题，避免版本冲突。
+在进行拆分的时候，首先应该选择比较好拆分的模块进行试试水，首选的就是common模块，该模块中只需要包含各服务通用的DTO,VO对象，统一响应对象Result，工具类，工具类的API接口即可。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-6.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;common模块&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;我的系统中该模块实现了三个工具类，包括JWT工具类实现生成token，解析token，对比token等功能。UserContext工具类实现获取userId。DataMask工具类，实现敏感数据脱敏等。其中重点可以讲一下UserContext工具类，配合拦截器实现获取userId，在业务调用结束之后一定要进行线程释放，避免内存泄露或线程污染。下图中汇总了一些使用usercontext的好处，以及与其他获得userId方式的对比。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-8.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;UserContext&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;到此，实际上，项目的脚手架差不多都已经搭建好了。网关服务和Common模块都已经搭建好了，之后只需要实现其他四个微服务即可。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

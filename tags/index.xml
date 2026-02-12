@@ -7,7 +7,23 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Tue, 10 Feb 2026 20:53:44 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 12 Feb 2026 16:09:34 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Nacos</title>
+        <link>https://1parado.github.io/tags/nacos/</link>
+        <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/nacos/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>SpringCloud</title>
+        <link>https://1parado.github.io/tags/springcloud/</link>
+        <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/springcloud/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Java</title>
         <link>https://1parado.github.io/tags/java/</link>
         <pubDate>Tue, 03 Feb 2026 00:00:00 +0000</pubDate>
