@@ -7,23 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Fri, 13 Feb 2026 10:42:11 +0800</lastBuildDate><atom:link href="https://1parado.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Prompt</title>
-        <link>https://1parado.github.io/categories/prompt/</link>
-        <pubDate>Fri, 13 Feb 2026 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/categories/prompt/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>JavaScript</title>
-        <link>https://1parado.github.io/categories/javascript/</link>
-        <pubDate>Wed, 21 Jan 2026 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/categories/javascript/</guid>
-        <description></description>
-        </item>
-        <item>
+        <lastBuildDate>Fri, 13 Feb 2026 15:07:10 +0800</lastBuildDate><atom:link href="https://1parado.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>AI</title>
         <link>https://1parado.github.io/categories/ai/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -38,6 +22,22 @@
         
         <guid>https://1parado.github.io/categories/java/</guid>
         <description>&lt;img src="https://1parado.github.io/categories/java/hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg" alt="Featured image of post Java" /&gt;</description>
+        </item>
+        <item>
+        <title>JavaScript</title>
+        <link>https://1parado.github.io/categories/javascript/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/categories/javascript/</guid>
+        <description>&lt;img src="https://1parado.github.io/categories/javascript/a.jpg" alt="Featured image of post JavaScript" /&gt;</description>
+        </item>
+        <item>
+        <title>Prompt</title>
+        <link>https://1parado.github.io/categories/prompt/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/categories/prompt/</guid>
+        <description>&lt;img src="https://1parado.github.io/categories/prompt/b.jpg" alt="Featured image of post Prompt" /&gt;</description>
         </item>
         <item>
         <title>博客</title>
