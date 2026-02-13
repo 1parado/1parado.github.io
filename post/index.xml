@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Thu, 12 Feb 2026 16:09:34 +0800</lastBuildDate><atom:link href="https://1parado.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 13 Feb 2026 14:55:50 +0800</lastBuildDate><atom:link href="https://1parado.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>单体转向微服务的一次实践</title>
         <link>https://1parado.github.io/p/%E5%8D%95%E4%BD%93%E8%BD%AC%E5%90%91%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E4%B8%80%E6%AC%A1%E5%AE%9E%E8%B7%B5/</link>
         <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
@@ -1188,6 +1188,72 @@ Java中现在主流的ORM框架包括：&lt;/p&gt;
 </description>
         </item>
         <item>
+        <title>PromptShare</title>
+        <link>https://1parado.github.io/p/promptshare/</link>
+        <pubDate>Fri, 13 Feb 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/promptshare/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;在编程中开源代码可以减少重复造轮子的情况，同理，在提示词工程中，开源提示词也可以减少一部分的工作量。在GitHub或一些技术社区中经常会看到一些共享的Prompt知识库。人们常说，一个人的力量是有限的，而人民群众的力量是无穷的。如果制作一个以提示词为主题的开源社区，全世界个地方人们都在社区中开源自己遇到的问题，以及如何使用提示词和AI智能体来解决这些问题，这也是很棒的一件事情。因此，以我微薄的知识和编程技术，制作了一个简易的RromptShare提示词共享社区，也算抛砖引玉，希望更多人能参与到提示词开源的过程中，能减少精力在写一些通用提示词上，将更大的精力放在更有挑战的事情上。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/213-1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;提示词&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/213-2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;提示词&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/213-3.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;提示词&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/213-4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;提示词&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/213-5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;提示词&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>实习日常刷代码</title>
         <link>https://1parado.github.io/p/%E5%AE%9E%E4%B9%A0%E6%97%A5%E5%B8%B8%E5%88%B7%E4%BB%A3%E7%A0%81/</link>
         <pubDate>Tue, 03 Feb 2026 00:00:00 +0000</pubDate>
@@ -1339,6 +1405,9 @@ Java中现在主流的ORM框架包括：&lt;/p&gt;
 	
 	
 &gt;&lt;/p&gt;
+&lt;h2 id=&#34;2026213&#34;&gt;2026.2.13
+&lt;/h2&gt;&lt;p&gt;明天再上一天班就可以回家过年了，公司发钱好快，我已经收到一月份来上班的工资了，虽然不知道工资是怎么算的。不过薪资我很满意。公司真的很好了，氛围也好，福利待遇也挺好的吧，而且薪资其实对于我来说也挺好的。而且来到这个公司，我总觉得有很大的意愿想要做些东西，不止于只做一些公司分配给我的任务，想要年后给Mentor提一下要不要建立一个公司内部的提示词知识库，能不能让我参与年后AI相关的项目。今天在公司，毕竟是年前嘛没有什么工作了，所以手搓了一个提示词共享平台，然后部署到Vercle上面了，之前总觉得部署到网上是一件很困难的事情，现在有AI的帮助，真的只要愿意学，掌握的速度真的很快。项目用的Nuxt+Vite，数据库用的Vercel上面的免费Postgresql。不过我刚才问群友才发现市面上已经有类似的项目了，名字叫aishort，而且在Github上面已经有7.2k Stars了。不管怎么说，面向AI编程时代，掌握怎么写提示词是很重要的。 我的项目访问地址： &lt;a class=&#34;link&#34; href=&#34;https://www.paradox29.xyz/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PromptWiki&lt;/a&gt;。看到这里的人祝你新年快乐！&lt;/p&gt;
 </description>
         </item>
         <item>
