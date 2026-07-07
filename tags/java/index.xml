@@ -7,7 +7,75 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Fri, 13 Feb 2026 14:55:50 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 07 Jul 2026 15:20:12 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>七牛云暑期实训</title>
+        <link>https://1parado.github.io/p/%E4%B8%83%E7%89%9B%E4%BA%91%E6%9A%91%E6%9C%9F%E5%AE%9E%E8%AE%AD/</link>
+        <pubDate>Tue, 07 Jul 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/%E4%B8%83%E7%89%9B%E4%BA%91%E6%9A%91%E6%9C%9F%E5%AE%9E%E8%AE%AD/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;h2 id=&#34;202677&#34;&gt;2026.7.7
+&lt;/h2&gt;&lt;p&gt;本来在之前一段时间，做了七牛云的暑期实训营比赛，当时只给三天时间，熬了三天夜，准备项目，之后又熬夜准备路演。终于拿到Offer了，最后被一纸否决令直接否决了。蚌埠住。&lt;/p&gt;
+&lt;p&gt;做的是语音日历这个题目，我的想法是将其作为一个日历 + Todo的结合体，并且面向企业和个人用户的一款产品。企业版主要是办公协同，个人版主要是语音伴侣。主要可以实现通过语音来创建日程，并且可以和其他人进行协同，通过语音来和应用进行交互。通过这次做项目我学到了语音交互流程：STT-VAD-LLM-TTS。闭门造车还是比不上去产业界工作三天学的东西多。&lt;/p&gt;
+&lt;p&gt;Github地址： &lt;a class=&#34;link&#34; href=&#34;https://github.com/Xbai-hang/qiniu-challenge&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;语音日历&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://r2.sparyn.tech/qiniu-challenge-demo.mp4&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;演示地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;注册登录页面：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/771.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;图片&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;主页：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/772.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;图片&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;语音AI，可以语音交流，可以通过AI来帮忙创建日程：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/773.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;图片&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;VibeCoding 流程：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/774.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;图片&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这一段时间，家里面也经历一些事情，在学校也是天天论文论文论文论文，不过感谢这段经历，如果没有这段经历，我不知道理想和现实的差距还有多大距离。&lt;/p&gt;
+&lt;p&gt;自由、平等、公正、法治。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>实习日常刷代码</title>
         <link>https://1parado.github.io/p/%E5%AE%9E%E4%B9%A0%E6%97%A5%E5%B8%B8%E5%88%B7%E4%BB%A3%E7%A0%81/</link>
         <pubDate>Tue, 03 Feb 2026 00:00:00 +0000</pubDate>

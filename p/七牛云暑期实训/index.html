@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="安全清理C盘内容">
-<title>Windows的c盘内存问题</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="\r2026.7.7 本来在之前一段时间，做了七牛云的暑期实训营比赛，当时只给三天时间，熬了三天夜，准备项目，之后又熬夜准备路演。终于拿到Offer了，最后被一纸否决令直接否决了。蚌埠住。\n做的是语音日历这个题目，我的想法是将其作为一个日历 + Todo的结合体，并且面向企业和个人用户的一款产品。企业版主要是办公协同，个人版主要是语音伴侣。主要可以实现通过语音来创建日程，并且可以和其他人进行协同，通过语音来和应用进行交互。通过这次做项目我学到了语音交互流程：STT-VAD-LLM-TTS。闭门造车还是比不上去产业界工作三天学的东西多。\nGithub地址： 语音日历 演示地址\n注册登录页面：\n主页：\n语音AI，可以语音交流，可以通过AI来帮忙创建日程：\nVibeCoding 流程：\n这一段时间，家里面也经历一些事情，在学校也是天天论文论文论文论文，不过感谢这段经历，如果没有这段经历，我不知道理想和现实的差距还有多大距离。\n自由、平等、公正、法治。\n">
+<title>七牛云暑期实训</title>
 
-<link rel='canonical' href='https://1parado.github.io/p/windows%E7%9A%84c%E7%9B%98%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/'>
+<link rel='canonical' href='https://1parado.github.io/p/%E4%B8%83%E7%89%9B%E4%BA%91%E6%9A%91%E6%9C%9F%E5%AE%9E%E8%AE%AD/'>
 
-<link rel="stylesheet" href="/scss/style.min.ec0275f9efc7477560607f9610e0eeb6ebb5e53a8dcbdd5591f1ea2ee0b3c273.css"><meta property='og:title' content="Windows的c盘内存问题">
-<meta property='og:description' content="安全清理C盘内容">
-<meta property='og:url' content='https://1parado.github.io/p/windows%E7%9A%84c%E7%9B%98%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/'>
+<link rel="stylesheet" href="/scss/style.min.ec0275f9efc7477560607f9610e0eeb6ebb5e53a8dcbdd5591f1ea2ee0b3c273.css"><meta property='og:title' content="七牛云暑期实训">
+<meta property='og:description' content="\r2026.7.7 本来在之前一段时间，做了七牛云的暑期实训营比赛，当时只给三天时间，熬了三天夜，准备项目，之后又熬夜准备路演。终于拿到Offer了，最后被一纸否决令直接否决了。蚌埠住。\n做的是语音日历这个题目，我的想法是将其作为一个日历 + Todo的结合体，并且面向企业和个人用户的一款产品。企业版主要是办公协同，个人版主要是语音伴侣。主要可以实现通过语音来创建日程，并且可以和其他人进行协同，通过语音来和应用进行交互。通过这次做项目我学到了语音交互流程：STT-VAD-LLM-TTS。闭门造车还是比不上去产业界工作三天学的东西多。\nGithub地址： 语音日历 演示地址\n注册登录页面：\n主页：\n语音AI，可以语音交流，可以通过AI来帮忙创建日程：\nVibeCoding 流程：\n这一段时间，家里面也经历一些事情，在学校也是天天论文论文论文论文，不过感谢这段经历，如果没有这段经历，我不知道理想和现实的差距还有多大距离。\n自由、平等、公正、法治。\n">
+<meta property='og:url' content='https://1parado.github.io/p/%E4%B8%83%E7%89%9B%E4%BA%91%E6%9A%91%E6%9C%9F%E5%AE%9E%E8%AE%AD/'>
 <meta property='og:site_name' content='Paradox’s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Windows' /><meta property='article:published_time' content='2025-12-24T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-24T21:56:54&#43;08:00'/>
-<meta name="twitter:title" content="Windows的c盘内存问题">
-<meta name="twitter:description" content="安全清理C盘内容">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='AI' /><meta property='article:published_time' content='2026-07-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-07-07T15:20:12&#43;08:00'/>
+<meta name="twitter:title" content="七牛云暑期实训">
+<meta name="twitter:description" content="\r2026.7.7 本来在之前一段时间，做了七牛云的暑期实训营比赛，当时只给三天时间，熬了三天夜，准备项目，之后又熬夜准备路演。终于拿到Offer了，最后被一纸否决令直接否决了。蚌埠住。\n做的是语音日历这个题目，我的想法是将其作为一个日历 + Todo的结合体，并且面向企业和个人用户的一款产品。企业版主要是办公协同，个人版主要是语音伴侣。主要可以实现通过语音来创建日程，并且可以和其他人进行协同，通过语音来和应用进行交互。通过这次做项目我学到了语音交互流程：STT-VAD-LLM-TTS。闭门造车还是比不上去产业界工作三天学的东西多。\nGithub地址： 语音日历 演示地址\n注册登录页面：\n主页：\n语音AI，可以语音交流，可以通过AI来帮忙创建日程：\nVibeCoding 流程：\n这一段时间，家里面也经历一些事情，在学校也是天天论文论文论文论文，不过感谢这段经历，如果没有这段经历，我不知道理想和现实的差距还有多大距离。\n自由、平等、公正、法治。\n">
     </head>
     <body class="
     article-page
@@ -258,8 +258,8 @@
     
     <header class="article-category">
         
-            <a href="/categories/java/" style="background-color: #2a9d8f; color: #fff;">
-                Java
+            <a href="/categories/%E5%AE%9E%E4%B9%A0/" style="background-color: #2a9d8f; color: #fff;">
+                实习
             </a>
         
     </header>
@@ -267,13 +267,9 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/windows%E7%9A%84c%E7%9B%98%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/">Windows的c盘内存问题</a>
+            <a href="/p/%E4%B8%83%E7%89%9B%E4%BA%91%E6%9A%91%E6%9C%9F%E5%AE%9E%E8%AE%AD/">七牛云暑期实训</a>
         </h2>
     
-        
-        <h3 class="article-subtitle">
-            安全清理C盘内容
-        </h3>
         
     </div>
 
@@ -293,7 +289,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Dec 24, 2025</time>
+                <time class="article-time--published">Jul 07, 2026</time>
             </div>
         
 
@@ -331,42 +327,59 @@
     background-attachment: fixed;
   }
 </style>
-<p>首先推荐一个工具：TreeSize Free，在微软商店即可下载。功能是可以查看某个磁盘下面的使用情况。我的C盘总是莫名其妙的少好多内存，之前要么是因为将虚拟机下载到磁盘了里面了，直接给我占用了几十个G，要么是因为IDEA打开前端代码的时候，把前端的nodea moudle也进行索引了，好家伙，给我的电脑一顿霍霍。今天也是突然少了20个G，忍无可忍，无须再忍。使用TreeSize Free，可以查看到C盘的使用情况，然后发现有个文件是今天创建了，而且只一个文件占用了24.9GB内存。查了一下资料，发现原来是C盘默认会开启系统保护，也就是说，在C盘中的文件会自动保留一些之前的文件的影子副本，如图所示。（这里我已经删除过了，所以图片中显示的是空）</p>
-<p><img src="/img/12-24-1.png"
+<h2 id="202677">2026.7.7
+</h2><p>本来在之前一段时间，做了七牛云的暑期实训营比赛，当时只给三天时间，熬了三天夜，准备项目，之后又熬夜准备路演。终于拿到Offer了，最后被一纸否决令直接否决了。蚌埠住。</p>
+<p>做的是语音日历这个题目，我的想法是将其作为一个日历 + Todo的结合体，并且面向企业和个人用户的一款产品。企业版主要是办公协同，个人版主要是语音伴侣。主要可以实现通过语音来创建日程，并且可以和其他人进行协同，通过语音来和应用进行交互。通过这次做项目我学到了语音交互流程：STT-VAD-LLM-TTS。闭门造车还是比不上去产业界工作三天学的东西多。</p>
+<p>Github地址： <a class="link" href="https://github.com/Xbai-hang/qiniu-challenge"  target="_blank" rel="noopener"
+    >语音日历</a>
+<a class="link" href="https://r2.sparyn.tech/qiniu-challenge-demo.mp4"  target="_blank" rel="noopener"
+    >演示地址</a></p>
+<p>注册登录页面：</p>
+<p><img src="/img/771.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="此前版本"
+		alt="图片"
 	
 	
 ></p>
-<p>所以在决定删除影子副本之前，需考率好最近的文件有没有需要回退到之前版本的。如果没有则直接可以进行删除。Windows + X打开Power Shell （系统管理员），然后输入vssadmin list shadows 查看已有的影子副本。可以精确删除某个副本 vssadmin delete shadows /for C: /shadow:{19aa&hellip;&hellip;}，但是这里我直接选择的是删除所有影子副本：vssadmin delete shadows /all.然后可以关闭系统保护功能，但是文件就不能回退到之前版本了，所以这里我推荐规定最大的副本使用量。</p>
-<p>通过windows + R，输入sysdm.cpl，在系统属性中点击系统保护。点击配置可以配置最大使用量。</p>
-<p><img src="/img/12-24-2.png"
+<p>主页：</p>
+<p><img src="/img/772.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="系统保护"
+		alt="图片"
 	
 	
 ></p>
-<p>在做完以上操作之后，可以看到我的C盘上面直接释放了34GB内存。重返C盘自由。</p>
-<p><img src="/img/12-24-3.png"
+<p>语音AI，可以语音交流，可以通过AI来帮忙创建日程：</p>
+<p><img src="/img/773.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="C盘内存"
+		alt="图片"
 	
 	
 ></p>
-<p>这次有个发现，关于电脑软件安装、磁盘清理之类的知识，不知道是我的错觉还是什么，我总觉得qwen比GPT、Grok好用。当然也有可能是我先用的前两款AI奠定了基础知识，所以才知道用qwen怎么解决问题。之前在Windows本地安装Postgresql也是一样，因为电脑的用户名是中文的，本来不支持本地安装，然后问了一下qwen，按照他一步一步的教，也是安好了Postgresql。还是希望国内的AI能够发挥出更大的作用。
-今天试用了一下OpenCode Cline 和 Desktop 还挺好用的，里面内置的有ChatGLM 4.7。还是挺好用的。</p>
+<p>VibeCoding 流程：</p>
+<p><img src="/img/774.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="图片"
+	
+	
+></p>
+<p>这一段时间，家里面也经历一些事情，在学校也是天天论文论文论文论文，不过感谢这段经历，如果没有这段经历，我不知道理想和现实的差距还有多大距离。</p>
+<p>自由、平等、公正、法治。</p>
 
 </section>
 
@@ -375,7 +388,9 @@
     
     <section class="article-tags">
         
-            <a href="/tags/windows/">Windows</a>
+            <a href="/tags/java/">Java</a>
+        
+            <a href="/tags/ai/">AI</a>
         
     </section>
 
@@ -402,7 +417,7 @@
 
 
         <span>
-            Last updated on Dec 24, 2025 21:56 CST
+            Last updated on Jul 07, 2026 15:20 CST
         </span>
     </section></footer>
 
@@ -421,12 +436,12 @@
             
                 
 <article class="">
-    <a href="/p/%E5%8D%95%E4%BD%93%E8%BD%AC%E5%90%91%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E4%B8%80%E6%AC%A1%E5%AE%9E%E8%B7%B5/">
+    <a href="/p/%E6%9D%AD%E5%B7%9E%E5%AE%9E%E4%B9%A0/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">单体转向微服务的一次实践</h2>
+            <h2 class="article-title">杭州实习</h2>
         </div>
     </a>
 </article>
@@ -434,12 +449,12 @@
             
                 
 <article class="">
-    <a href="/p/smart-life-%E6%9B%B4%E6%87%82%E4%BD%A0%E7%9A%84ai%E5%8A%A9%E6%89%8B/">
+    <a href="/p/%E5%AE%9E%E4%B9%A0%E7%BB%8F%E5%8E%86/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">Smart life 更懂你的AI助手</h2>
+            <h2 class="article-title">实习经历</h2>
         </div>
     </a>
 </article>
@@ -447,38 +462,12 @@
             
                 
 <article class="">
-    <a href="/p/ai%E7%94%9F%E6%88%90%E7%AE%80%E5%8D%95%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE/">
+    <a href="/p/%E6%97%A0%E4%BA%BA%E9%A9%BE%E9%A9%B6/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">AI生成简单的前后端分离项目</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/diary-%E4%B8%80%E6%AC%BE%E5%A4%9A%E5%8A%9F%E8%83%BD%E6%97%A5%E8%AE%B0%E8%BD%AF%E4%BB%B6/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Diary 一款多功能日记软件</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/bookblog/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">BookBlog</h2>
+            <h2 class="article-title">无人驾驶</h2>
         </div>
     </a>
 </article>
