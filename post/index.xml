@@ -7,1187 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Thu, 06 Aug 2026 17:36:07 +0800</lastBuildDate><atom:link href="https://1parado.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>单体转向微服务的一次实践</title>
-        <link>https://1parado.github.io/p/%E5%8D%95%E4%BD%93%E8%BD%AC%E5%90%91%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E4%B8%80%E6%AC%A1%E5%AE%9E%E8%B7%B5/</link>
-        <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/p/%E5%8D%95%E4%BD%93%E8%BD%AC%E5%90%91%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E4%B8%80%E6%AC%A1%E5%AE%9E%E8%B7%B5/</guid>
-        <description>&lt;style&gt;
-  body {
-    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-&lt;/style&gt;
-&lt;p&gt;之前的项目地址：&lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/%E9%85%92%E6%97%85%E7%B3%BB%E7%BB%9F/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;酒旅系统&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;公司现在的系统架构是SpringCloud微服务，刚开始接触的时候一头雾水，当然学习一个东西最好的办法就是上手去做，去试错。所以现在借助AI，打算从零到一开始学习，摸索微服务的架构。重构一个系统当然会遇到很多问题，在此记录一些踩过的坑，也尽量能帮助一些人更好更快的理解和学习微服务。&lt;/p&gt;
-&lt;h3 id=&#34;2026212&#34;&gt;2026.2.12
-&lt;/h3&gt;&lt;p&gt;首先讲一下之前的系统架构，采用JAVA 17，SpringBoot 3.2.5,数据库用的MySQL 8.0做持久化，在系统中引入一些中间件包括比如Redis，ES，RocketMQ等等,之前的系统中，只有一个数据库travel_system,里面包含27张表。很显然，这种架构不适合进行业务更改，也不适合版本更新。而且全部业务放在一个系统中，团队进行代码编写也很头痛（虽然我只有一个人）。总之，从单体到微服务架构是很有必要的。&lt;/p&gt;
-&lt;p&gt;之前的数据库（按照业务领域划分）&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-1.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;之前系统的数据库&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;之前系统的整体架构：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-2.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;之前系统的总体架构&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;在进行重构之前，首先第一步就是要先做好备份，将项目做好备份，将数据库表结构和数据转储为SQL文件，接下来就可以开始进行重构之旅了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-3.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;压缩包&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;首先第一步，将前置条件都准备好，因为不知名原因我电脑上面用不了Docker，所以我的项目所需要的配置都需要下载到我的电脑本地，所以需要先下载一个Nacos（阿里出的一个服务注册和发现以及动态配置的网关），
-这里我下载的是2.5.2版本。Nacos默认是集群模式开启的，因为我电脑上的内存不是很够，所以改成单机模式跑，Nacos默认在8848端口启动，在浏览器中打开输入: http://localhost:8848/nacos，控制台初始默认账号和密码都是：nacos。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-4.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Nacos&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;接下来需要考虑的就是将原来单体项目划分为几个微服务，按理说应该是最好一个微服务负责一个业务的，但是考虑到我电脑配置，启动那么多微服务和中间件，说不定电脑要提前退休。所以把之前的项目分成四个微服务（protal，trade，payment，support）+Gateway网关+common模块。各个模块负责的业务不同，并且要求每个微服务使的数据库一定要不同，所以创建了四个数据库，然后将之前的数据库表结构迁移过来。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-5.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;改造后的数据库&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;创建一个后端项目，创建根pom文件，该pom文件的&lt;modules&gt;应该包括拆分后的子模块，&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.paradox&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;travel-microservices&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0.0&lt;span class=&#34;nt&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;pom&lt;span class=&#34;nt&#34;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Travel Microservices&lt;span class=&#34;nt&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;description&amp;gt;&lt;/span&gt;智旅云OTA微服务平台&lt;span class=&#34;nt&#34;&gt;&amp;lt;/description&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;modules&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;common&lt;span class=&#34;nt&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;gateway-service&lt;span class=&#34;nt&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;portal-service&lt;span class=&#34;nt&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;trade-service&lt;span class=&#34;nt&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;payment-service&lt;span class=&#34;nt&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;support-service&lt;span class=&#34;nt&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/modules&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;然后应该由这个根pom文件来统一属性和依赖的版本。后面的子模块只需要引入父模块即可，避免了依赖不一致的问题，避免版本冲突。
-在进行拆分的时候，首先应该选择比较好拆分的模块进行试试水，首选的就是common模块，该模块中只需要包含各服务通用的DTO,VO对象，统一响应对象Result，工具类，工具类的API接口即可。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-6.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;common模块&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;我的系统中该模块实现了三个工具类，包括JWT工具类实现生成token，解析token，对比token等功能。UserContext工具类实现获取userId。DataMask工具类，实现敏感数据脱敏等。其中重点可以讲一下UserContext工具类，配合拦截器实现获取userId，在业务调用结束之后一定要进行线程释放，避免内存泄露或线程污染。下图中汇总了一些使用usercontext的好处，以及与其他获得userId方式的对比。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-8.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;UserContext&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;到此，实际上，项目的脚手架差不多都已经搭建好了。网关服务和Common模块都已经搭建好了，之后只需要实现其他四个微服务即可。&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>Diary 一款多功能日记软件</title>
-        <link>https://1parado.github.io/p/diary-%E4%B8%80%E6%AC%BE%E5%A4%9A%E5%8A%9F%E8%83%BD%E6%97%A5%E8%AE%B0%E8%BD%AF%E4%BB%B6/</link>
-        <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/p/diary-%E4%B8%80%E6%AC%BE%E5%A4%9A%E5%8A%9F%E8%83%BD%E6%97%A5%E8%AE%B0%E8%BD%AF%E4%BB%B6/</guid>
-        <description>&lt;style&gt;
-  body {
-    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-&lt;/style&gt;
-&lt;p&gt;最近一段时间一直在学习用Trae、cursor、Kiro&amp;hellip;等AI编程软件编写自己的程序，之前开发了好多小demo，还有一个IM即时通讯系统被我和朋友放在服务器上面玩了一下。这几周突发奇想，想到了能不能做一个TOC的日记+笔记软件。然后我就用我现有的技术栈来开发了一款Diary软件。
-首先展示一下电脑上面的AI编辑器吧，其实本来还有Antigrivity，但是下载下来不知道为啥不能用。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-1.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Diary&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;前端我是用Figma-make做的，直接给他提示词然后生成前端页面。前端开发用的是Vue+vite，后端是SpringBoot+Mybatis，数据库用的是Postgresql。在本地安装Postgresql也有好多坑，之后我再写篇博客记录一下。
-首先介绍一下这个软件的功能，包括注册、登录、写日记、画画、打字练习、社区、读书、思维导图等等&amp;hellip;在用AI进行编程的时候，我觉得最主要的难点就是如何保证AI刚开始搭建的脚手架是可以运行的，有时候他会给一些相互排斥的依赖导致项目无法正常运行。然后就是AI在面对复杂场景的时候，需要尽可能详尽的提示词，否则做出来的东西肯定是一大堆漏洞的。&lt;/p&gt;
-&lt;p&gt;接下来就是软件的页面展示：
-注册和登录页面：用户创建用户并且登录跳转到主页&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-2.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Diary&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;进入主页，左边是软件的功能模块，包括查看日记，查找日记，日常话题比赛，书架，社区，数据分析，垃圾箱，打字练习，绘画，思维导图等功能。
-&lt;img src=&#34;https://1parado.github.io/img/12-22-3.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Diary&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;新建日记页面：支持md文档格式，可以预览，可以边预览边写日记，支持快捷键操作 常见的ctrl + s进行保存等操作，在settings中可以进行自定义快捷键操作。在发布日记/笔记的时候可以选择private或share，这决定了你的日记/笔记会不会在社区页面进行展示。还可以进行语音转文字，支持天气查询等等小功能。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-4.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Diary&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;搜索页面：用户可以根据日历进行筛选或者日记的标题，标签等进行搜索。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-5.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Diary&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;写故事页面，是我随便想到了一个功能，为了让自己的软件更有趣一些，做了一个每日命题作文，然后用户可以进行参赛，通过在社区中进行投票，然后选出前三名。社区中保证一人一票机制，对于参与比赛的故事，下面会是爱心图标代表投票，不参与的是点赞图标。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-6.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Diary&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;社区页面主要展示用户共享的日记/笔记。然后可以进行评论功能，支持多级评论。在设计软件的时候，我觉得作为一个日记/笔记软件应该不需要加好友之类的吧，所以只是进行了简单的社区分享功能的搭建。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-7.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Diary&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;数据分析页面主要记录用户写的日记数量，通过可视化的形式展示给用户。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-8.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Diary&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;打字练习页面，是因为我偶然看到一个页面是放置了一个3D键盘，然后用户打字可以在屏幕上面的3D键盘上进行动态交互，我觉得这个创意挺好的，所以就实现了一下这个功能，打字练习暂且只支持中英文&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-9.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Diary&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;画板页面就是支持用户把自己的一天画出来，然后支持AI挑选日记，然后根据日记内容生成用户想要的图片。这里我本来打算用Google的香蕉模型的，但是API调用太贵了，暂且搁置。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-11.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Diary&#34;
-	
-	
-&gt;
-&lt;img src=&#34;https://1parado.github.io/img/12-22-10.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Diary&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;思维导图页：我个人觉得最有用的页面，目前的思维导图我用的总是不太习惯，所以创建了一个思维导图模块，支持无限画布，无限节点。最重要的是导出的时候没有水印，不用受制于人了！&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-12.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Diary&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;最后就是设置页面了，可以改邮箱和密码，修改快捷键操作，支持日记导出为三种格式。支持light和drak模式。之后应该还会添加一些其他的模块。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-13.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Diary&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1WtqQB1Evr/?share_source=copy_web&amp;amp;vd_source=e51d3438543fd80d97a3f4ce11e7cdcb&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;哔哩哔哩项目介绍链接&lt;/a&gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>仿教务系统</title>
-        <link>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</link>
-        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</guid>
-        <description>&lt;style&gt;
-  body {
-    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-&lt;/style&gt;
-&lt;p&gt;2025.10.15
-这是创建的
-&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/1parado_repo.github.io/blob/main/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;思维导图&lt;/a&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;2025.10.21&lt;/p&gt;
-&lt;h2 id=&#34;登录模块&#34;&gt;登录模块
-&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;登录鉴权&lt;/strong&gt; ：该项目采用SpringAOP + 自定义注解@RoleRequire实现RBAC鉴权&lt;/p&gt;
-&lt;p&gt;现有的登录鉴权方式：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;SpringSecurity&lt;/strong&gt;+RBAC模型+JWT实现认证与授权&lt;/li&gt;
-&lt;li&gt;SpringBoot + &lt;strong&gt;Sa-Token&lt;/strong&gt; + MyBatis + MySQL + Redis 实现用户鉴权、角色管理、权限管理&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Apache Shiro&lt;/strong&gt; 是一个轻量级的安全框架，适合需要简单易用的权限管理的项目&lt;/li&gt;
-&lt;li&gt;自定义 定义用户、角色、权限三张表，设计合理的关联关系， 使用拦截器或 AOP 实现权限校验逻辑。根据业务需求设计动态权限分配机制。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;JWT实现无状态认证&lt;/strong&gt;（不需要服务器存储用户的会话状态），一个JWT包括头部，载荷，签名。&lt;/p&gt;
-&lt;p&gt;过程：用户登录认证时，服务端验证用户身份，成功的话，服务端生成JWT返回给客户端，客户端在之后的请求中将JWT放在请求的头部（Authorization）,然后服务端通过解析JWT从而确定用户的身份和权限&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;双token机制实现无感刷新&lt;/strong&gt;：分为两种token 一种是access token（访问令牌）短期有效 ，一种是 refresh token（刷新令牌），长期有效。&lt;/p&gt;
-&lt;p&gt;过程：客户端登录，认证成功，服务端签发access_token（返回给前端）和refresh token（存入cookie） 之后，客户端访问接口都带着access_token 当access_token过期之后 客户端发送给refresh token给服务端 验证通过则生成新的access token和refresh token，从而实现无感刷新&lt;/p&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://juejin.cn/post/7548268336417751055&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;双 Token 认证机制：从原理到实践的完整实现双 Token 认证机制：从原理到实践的完整实现 在现代 Web 应用中 - 掘金&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;登录模块展示：首先进入登录页面：
-&lt;img src=&#34;https://1parado.github.io/img/%e7%99%bb%e5%bd%95%e9%a1%b5%e9%9d%a2.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;登录页面&#34;
-	
-	
-&gt;
-然后根据角色的不同，进入不同的主页，系统分为三种角色Admin,Teacher,Student
-&lt;img src=&#34;https://1parado.github.io/img/%e7%99%bb%e5%bd%95%e9%89%b4%e6%9d%83.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;登录鉴权&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h2 id=&#34;秒杀抢课模块&#34;&gt;秒杀抢课模块
-&lt;/h2&gt;&lt;p&gt;1.获取动态路径 使用UUID + MD5生成一个唯一标识符 结合前端URL生成动态路径 避免被脚本直接访问&lt;/p&gt;
-&lt;p&gt;2.实现限流保护 使用令牌桶实现限流保护（ &lt;strong&gt;Redis + 令牌桶算法&lt;/strong&gt;），这里创建一个工具类TokenBucket，里面的参数包括桶的最大容量，间隔几秒补充几个令牌，当前可用令牌数&amp;hellip;方法包括令牌补充refill和获取令牌逻辑try Acquire 从而实现限流。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;还可以利用redission实现分布式限流 &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/Mistiest/p/19082141&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;基于 Redisson 的分布式限流实战：令牌桶算法的优雅实现 - 你小志蒸不戳 - 博客园&lt;/a&gt;，比如保护AI访问的API&lt;/p&gt;
-&lt;p&gt;其他限流方式：&lt;strong&gt;固定窗口、滑动窗口、漏桶限流和令牌桶限流算法&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;检验动态路径（在获取动态path的时候会将动态path存入Redis，用于此时的动态路径校验）&lt;/li&gt;
-&lt;li&gt;检查当前用户是否重复秒杀 (幂等控制) 通过三级缓存实现 本地缓存采用Caffine/Guava 二级缓存采用Redis 三级缓存采用数据库 当发现任意一级的数据库中已经有选课记录了 就返回重复秒杀异常&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;幂等性指的是一个操作，无论执行多少次，都能得到相同的结果，即它不会因为执行多次而影响系统的状态。这在处理网络请求、数据库操作等场景中尤为重要，例如在订单支付、消息推送等操作中，即使因为网络延迟或其他原因导致多次请求，也应保证操作只执行一次，避免重复处理。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;
-&lt;p&gt;进入秒杀的核心阶段  Redis + Lua脚本 + RocketMQ 实现 库存预减 + 异步入队&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.bytewaver.top/2025/02/14/project/seckill/%e4%bb%8e%e9%9b%b6%e5%bc%80%e5%a7%8b%e5%ae%9e%e7%8e%b0%e7%a7%92%e6%9d%80%e7%b3%bb%e7%bb%9f3/#%e7%a7%92%e6%9d%80%e6%8e%a5%e5%8f%a3%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;从零开始实现秒杀系统（三）：RocketMQ消息队列篇 - Xun&amp;rsquo;s Blog&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Lua脚本进行双重判断，首先判断是否售罄标志，然后再判断库存预减之后的库存数量，并且在脚本中实现库存减1的操作 如果成功返回1 失败返回 0.Lua脚本返回成功，系统发送消息到消息队列（RocketMQ）采用&lt;strong&gt;事务消息机制&lt;/strong&gt;保证数据的最终一致性。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;生产者发送半消息 本地事务创建选课记录（订单） 根据事务的执行结果通知Broker是投递该消息还是丢弃该消息  消费者异步从MQ中消费信息 完成后续业务。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%bc%82%e6%ad%a5%e7%a7%92%e6%9d%80.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;异步秒杀流程&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;页面展示：
-首先填写预选课信息（类似于商城系统的购物车），然后查看选课信息（普通选课和秒杀抢课）
-&lt;img src=&#34;https://1parado.github.io/img/%e9%99%90%e6%97%b6%e6%8a%a2%e8%af%be.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;限时抢课&#34;
-	
-	
-&gt;
-如果用户是首次抢课且库存充足，则显示抢课成功
-&lt;img src=&#34;https://1parado.github.io/img/%e6%8a%a2%e8%af%be%e6%88%90%e5%8a%9f.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;抢课成功&#34;
-	
-	
-&gt;
-如果用户重复抢课则提醒请勿重复秒杀
-&lt;img src=&#34;https://1parado.github.io/img/%e9%87%8d%e5%a4%8d%e6%8a%a2%e8%af%be%e6%8f%90%e9%86%92.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;重复抢课提醒&#34;
-	
-	
-&gt;
-Admin端新增抢课信息
-&lt;img src=&#34;https://1parado.github.io/img/%e6%96%b0%e5%a2%9e%e6%8a%a2%e8%af%be%e4%bf%a1%e6%81%af.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;新增抢课&#34;
-	
-	
-&gt;
-当学生张三选过课程之后，该课程已经“售罄”了 接下来用李四来选课会提醒库存不足 抢课失败
-&lt;img src=&#34;https://1parado.github.io/img/%e6%8a%a2%e8%af%be%e5%a4%b1%e8%b4%a5.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;抢课失败&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;之后可以考虑用jmeter测试高并发场景下的抢课情况。&lt;/p&gt;
-&lt;h2 id=&#34;支付模块&#34;&gt;支付模块
-&lt;/h2&gt;&lt;p&gt;支付过程：&lt;/p&gt;
-&lt;p&gt;用户点击缴费 进入AliPayController 用请求头中的Authorization进行身份验证 用请求体中的PaymentPO来生成缴费信息【前端会收集页面信息 当用户点击缴费按钮就会构建PaymentPO写入请求体中传给后端】
-初始化订单信息 订单的状态初始化为0 标识未缴费 每个订单有一个唯一的订单号
-使用创建好的支付工具类PayUtil 调用支付宝接口完成支付流程&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;PayUtil中的核心方法即发起支付和查询支付结果方法：
-&lt;strong&gt;发起支付&lt;/strong&gt;：1.初始化支付宝客户端 2. 创建支付请求 3.设置业务参数 4.发起请求并且返回支付结果
-&lt;strong&gt;查询支付结果&lt;/strong&gt;：创建查询请求-执行查询-处理查询结果&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;结果展示：
-学生点击缴费之后，跳转到支付页面
-&lt;img src=&#34;https://1parado.github.io/img/%e6%94%af%e4%bb%98%e5%8c%85.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;支付宝&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;GitHub上面有一些支付服务的项目： &lt;a class=&#34;link&#34; href=&#34;https://github.com/search?q=%E6%94%AF%E4%BB%98&amp;amp;ref=opensearch&amp;amp;type=repositories&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/search?q=%E6%94%AF%E4%BB%98&amp;ref=opensearch&amp;type=repositories&lt;/a&gt; 可以支持支付服务的快速开发。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;h2 id=&#34;ai选课助手模块&#34;&gt;AI选课助手模块
-&lt;/h2&gt;&lt;p&gt;chatClient介绍：https://springdoc.cn/spring-ai/api/chatclient.html&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;请求接收与路由&lt;/strong&gt;：用户通过Vue3前端界面提出问题，后端RESTful API接收请求。核心的&lt;strong&gt;智能路由&lt;/strong&gt;逻辑会根据预设关键词（如“选课”、“推荐”、“统计”等）判断问题类型。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;业务上下文构建&lt;/strong&gt;：对于选课相关问题，系统会调用 CourseSelectionService ，通过 JdbcTemplate 高效查询选课数据库，获取课程热度、名额、个人成绩倾向等&lt;strong&gt;实时统计数据&lt;/strong&gt;。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Prompt工程与模型调用&lt;/strong&gt;：将查询到的业务数据作为上下文，与预先设计好的&lt;strong&gt;系统Prompt&lt;/strong&gt;（如“你是一名选课顾问…”）进行组装，形成完整的提示信息，然后通过Spring AI调用本地的Ollama (Qwen2:7b)模型。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;响应返回&lt;/strong&gt;：模型生成的个性化建议或通用回答最终通过统一的API返回给前端展示。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;我总觉得&lt;strong&gt;代码生成器&lt;/strong&gt;（Mybatis-Plus，RuoYi代码生成器）的实现方式和这也差不多 首先创建模板（这里是提示词）然后查询表结构数据，再进行模板渲染得到生成的代码&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;过程：请求流程：chatClient.call(message) → 调用 OllamaChatClient → 向本地 Ollama 服务发送请求
-智能路由：isCourseSelectionQuestion 方法实现业务问题识别，将选课相关问题路由到 BusinessAIService&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;chatClient是SpringAi提供的聊天
-页面展示：
-&lt;img src=&#34;https://1parado.github.io/img/%e9%80%89%e8%af%be%e5%8a%a9%e6%89%8b.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;选课助手&#34;
-	
-	
-&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;2025.10.22&lt;/p&gt;
-&lt;h2 id=&#34;论坛模块&#34;&gt;论坛模块
-&lt;/h2&gt;&lt;p&gt;对于论坛模块，学生可以发帖评价课程，教师不能发帖，两者都可以进行评论回复交流
-论坛主页展示一些帖子和热门榜单（Redis缓存）【这都是些简单的增删改查】
-&lt;img src=&#34;https://1parado.github.io/img/%e8%ae%ba%e5%9d%9b%e4%b8%bb%e9%a1%b5.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;论坛主页&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%ad%a6%e7%94%9f%e5%8f%91%e5%b8%96.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;学生发帖&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%80%81%e5%b8%88%e4%b8%8d%e8%83%bd%e5%8f%91%e8%b4%b4.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;老师不能发帖&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%af%84%e8%ae%ba%e6%a8%a1%e5%9d%97.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;评论模块&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;想到了一个小玩意，在用户进行发布帖子和进行评论的时候，进行敏感词检查。如果内容中包含敏感词 就弹出提示。实现起来挺简单的，让Java后端负责业务逻辑，python负责机器学习，python运行在本地端口，两者通过http进行通信。
-详情请看这篇文章 &lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%8F%E6%84%9F%E8%AF%8D%E6%A3%80%E6%B5%8B/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;如何实现一个简单的敏感词检测&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;2025.11.08&lt;/p&gt;
-&lt;h2 id=&#34;集成调查问卷系统&#34;&gt;集成调查问卷系统
-&lt;/h2&gt;&lt;p&gt;在现有的项目基础上，集成一个调查问卷系统，用于收集学生对课程的反馈和建议。根据角色不同，展示不同页面，对于游客可以浏览系统主页和问卷信息。教师和管理员可以发布调查问卷，学生可以填写和查看调查问卷。今天先把大致的页面和模块写完，现在登录模块有点问题，等明天再看一下。
-&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b71.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;
-&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b72.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;2025.11.09
-今天完成的进度挺快的，现在大致看了一下，除了新建调查问卷的接口有点小问题，其他接口基本上都可以正常运行了，所以将运行截图放在这，源码放在Github上。其实这个模块没有什么重难点，文件导入和上传算一个吗？其实也不是很难，总之开发这个模块还是挺简单的。首先是RBAC权限控制，管理员可以查看全部调查问卷列表，普通用户可以浏览，但是无其他权限，比如增删改查操作，用户只可以进行查看和填写。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b73.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;
-调查问卷列表支持条件筛选和分页查询，这个用mp的分页查询即可&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b74.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;
-管理员有增删改查的权限，问卷详情信息和问卷数据统计信息如下图&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b75.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;
-&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b76.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;
-&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b77.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;
-开发这个模块的是时候，真的觉得不是很难，未来想着看看能不能与AI结合起来，或者在教务系统中添加一些其他的子模块。GitHub仓库放在这&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/survey-system/tree/master&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;郑州大学调查问卷子系统&lt;/a&gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>手写一个Redis</title>
-        <link>https://1parado.github.io/p/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAredis/</link>
-        <pubDate>Fri, 24 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/p/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAredis/</guid>
-        <description>&lt;style&gt;
-  body {
-    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-&lt;/style&gt;
-&lt;p&gt;参考：&lt;a class=&#34;link&#34; href=&#34;https://github.com/houbb/cache?tab=readme-ov-file&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;如何从零开始手写一个Redis&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;20251024&#34;&gt;2025.10.24
-&lt;/h2&gt;&lt;h3 id=&#34;如何实现固定缓存大小&#34;&gt;如何实现固定缓存大小
-&lt;/h3&gt;&lt;p&gt;HashMap，ConcurrentHashMap可以作为缓存使用 但HashMap本身不是线程安全的 但是作为基础的Java集合 不管是HashMap还是ConcurrentHashMap本身不具备自动的数据淘汰机制，这样可能会导致OOM（内存溢出）&lt;/p&gt;
-&lt;p&gt;淘汰机制：FIFO（先进缓存先被淘汰）,LRU（最近最少使用）,LFU（最近最少频率使用），从左往右命中率越来越高，成本也越来越高&lt;/p&gt;
-&lt;p&gt;对于加了淘汰机制的HashMap仍然存在几个问题：锁竞争激烈，不支持过期时间，不知此自动刷新，于是出现了Guava Caffeine&amp;hellip;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;引导类：是指在框架或应用程序中负责启动和初始化的核心类。Springboot中引导类即Application为后缀的类 对于该项目 配置了一个缓存引导类CacheBS方便用户使用&lt;/p&gt;&lt;/blockquote&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;helloTest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICache&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheBs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 1从缓存中出来 3进去&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 2从缓存中出来 4进去&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 测试cache的大小是否为2 不相同则测试不通过&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;keySet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%85%88%e8%bf%9b%e5%85%88%e5%87%ba%e7%bc%93%e5%ad%98%e6%b5%8b%e8%af%95%e6%88%90%e5%8a%9f.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;先进先出测试&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h3 id=&#34;实现过期时间expire&#34;&gt;实现过期时间expire
-&lt;/h3&gt;&lt;p&gt;Redis中的expire可以用于验证码失效，登录token失效等业务场景&amp;hellip; 设计一个cacheExpire接口 可以计算多久之后过期&lt;/p&gt;
-&lt;p&gt;过期的实现原理：可以通过一个定时任务比如一秒钟一次轮询，一次清理10个数据，直到将过期的信息清空。可以将过期数据存入到map中 key对应过期的数据 value对应过期时间。在这里定义了一个单线程 用来执行清空任务，清空任务执行的过程即遍历map中的key 判断value是否过期，为了避免单词执行时间太久 所以设置一个单次清空最大数量限制。&lt;/p&gt;
-&lt;p&gt;定时任务优化：可以通过排序Map快速判断哪些过期数据需要清理，即让过期时间作为key，让相同过期时间的数据放入列表中作为value。&lt;/p&gt;
-&lt;p&gt;由于我们采用了定时轮询的方式 所以有时候数据可能清理不及时 当访问数据的时候可能访问到脏数据。因此引入了惰性删除，当用到某个数据的时候 才对数据进行删除判断操作。&lt;/p&gt;
-&lt;p&gt;具体实现：在用到某些数据之前 先对数据进行刷新操作&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;expireTest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;InterruptedException&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICache&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheBs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;now&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;expireAt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;now&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;40&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 沉睡 50S，让其过期&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TimeUnit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;MILLISECONDS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;50&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;keySet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%ae%9e%e7%8e%b0%e8%bf%87%e6%9c%9f%e6%97%b6%e9%97%b4.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;实现过期时间&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h3 id=&#34;expire过期如何随机获取key&#34;&gt;expire过期如何随机获取key
-&lt;/h3&gt;&lt;p&gt;之前实现的过期很简单 用hashMap存储过期数据，然后轮询处理，执行定时清理任务
-redis实现的定时清理任务并不是时时刻刻都在执行的，定时任务中删除过期键逻辑采用了自适应算法，根据键的过期比例、使用快慢两种速率模式回收键，如图所示，先随机抽取key 如果有四分之一以上的key过期则执行 否则不执行&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/redis%27%e5%ae%9a%e6%97%b6%e6%b8%85%e7%90%86%e4%bb%bb%e5%8a%a1.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;redis’定时清理任务&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h3 id=&#34;实现内存数据重启不丢失&#34;&gt;实现内存数据重启不丢失
-&lt;/h3&gt;&lt;p&gt;由于我们的数据是放在内存中的 如何保证重启之后数据还在？（Redis持久化）&lt;/p&gt;
-&lt;p&gt;Redis的持久化机制包括三种：RDB(快照)，AOF（只追加文件），混合策略.&lt;/p&gt;
-&lt;p&gt;这里我们先实现&lt;strong&gt;RDB快照模式&lt;/strong&gt;，我们可以在缓存启动的时候，可以通过指定初始化加载的信息，从而实现数据持久化。现在我们需要知道如何将缓存中的内容持久化到文件或数据库中？，知道这些信息，就可以在重启之后加载这些信息，来保证数据不丢失了。对于导出的文件来说还有很多细节，比如文件的压缩，CRC校验&amp;hellip;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e9%87%8d%e5%90%af%e6%95%b0%e6%8d%ae%e4%b8%8d%e4%b8%a2%e5%a4%b1.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;重启数据不丢失&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;persistRdbTest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;InterruptedException&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICache&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheBs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;load&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MyCacheLoad&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 指定持久化策略&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;persist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CachePersists&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dbJson&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1.rdb&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 传入文件&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TimeUnit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;SECONDS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;strong&gt;AOF模式&lt;/strong&gt;：RDB模式将缓存内容全部持久化比较耗时， AOF模式针对修改内容的指令，将指令&lt;strong&gt;顺序添加&lt;/strong&gt;到文件中，因此AOF的实时性更好，顺序写避免了IO的随机写问题。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/AOF%e6%8c%81%e4%b9%85%e5%8c%96.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;AOF持久化&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h3 id=&#34;添加监听器&#34;&gt;添加监听器
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;删除监听器：我们之前已经实现expire 是对用户透明的（用户感知不到），并且当内存满了的时候，Redis会进行内存淘汰（evict 淘汰），这对用户来说也是透明的  如果用户想获取到这些信息，可以通过添加监听器实现。即在删除的位置调用监听器即可。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;慢操作监听器：redis 中会存储慢操作的相关日志信息（参数包括：耗时阈值，最多存储多少条慢日志记录） 所有我们可以对于所有的操作记录操作耗时 如果耗时超过用户设置的阈值 调用慢操作监听器&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;自定义监听器&amp;hellip;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e7%bc%93%e5%ad%98%e5%88%a0%e9%99%a4%e6%97%a5%e5%bf%97.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;缓存删除日志&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h2 id=&#34;20251026&#34;&gt;2025.10.26
-&lt;/h2&gt;&lt;h3 id=&#34;lru-缓存淘汰&#34;&gt;LRU 缓存淘汰
-&lt;/h3&gt;&lt;p&gt;LRU最近最少使用 是一种比较常见的淘汰算法 如果数据最近被访问过 就认为被访问的概率更高&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;局部性准则：时间局部性（最近被访问过，再次访问的肯可能性很高）和空间局部性（访问到某个磁盘信息，接下来可能访问局部的存储空间）缓存中用到的LRU即遵循了时间局部性准则&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;实现：利用链表 新数据插入到链表头部 缓存命中，将命中数据移到链表头部 如果链表满了丢弃链表尾部数据。
-代码实现起来需要用到：链表插入，如何判断缓存命中（HashMap），链表删除等知识&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;lruEvictTest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;InterruptedException&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICache&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheBs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;evict&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheEvicts&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lru&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hello&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;B&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;world&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;FIFO&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 访问一次A // &lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;D&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;LRU&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;keySet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;如果是FIFO 结果应该是[B,C,D] 由于是LRU A最近被访问过 所以淘汰的是B 结果是[A,C,D]
-&lt;img src=&#34;https://1parado.github.io/img/Lru%e6%b7%98%e6%b1%b0.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Lru淘汰&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h3 id=&#34;lru-缓存淘汰优化&#34;&gt;LRU 缓存淘汰优化
-&lt;/h3&gt;&lt;p&gt;优化思路：1.用一个&lt;strong&gt;数组&lt;/strong&gt;存储时间戳 为每个数据添加一个时间戳属性 每次访问数据时，更新该数据的时间戳 当数据空间满的时候 扫描时间戳最小的数据 但是需要用空间存储时间戳 并且淘汰数据的时候需要扫描整个数组&lt;/p&gt;
-&lt;p&gt;2.之前的简单实现是基于链表的 由于链表的性质（链表中插入和删除某个已知元素的时间复杂度是O(1)，但是插入和删除之前需要遍历链表找到元素时间复杂度是O(N)）因此可以用&lt;strong&gt;双向链表&lt;/strong&gt;优化一下淘汰末尾数据的操作&lt;/p&gt;
-&lt;p&gt;3.双向链表查找某个元素依然需要遍历链表 时间复杂度是O(n) 可以基于双向链表和哈希表 将哈希表中的数据和链表中的节点形成映射 插入和删除操作的时间复杂度下降为O(1) 但是引入哈希表会造成空间开销&lt;/p&gt;
-&lt;p&gt;LinkedHashMap是一种list和HashMap结合的数据结构 但是LinkedHashMap不会淘汰数据 可以重写removeEldestEntry方法实现淘汰数据。&lt;/p&gt;
-&lt;h3 id=&#34;lru-缓存淘汰算法如何避免缓存污染&#34;&gt;LRU 缓存淘汰算法如何避免缓存污染
-&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;当存在热点数据时，LRU的效率很好，但&lt;strong&gt;偶发性的、周期性的批量操作会导致LRU命中率急剧下降，缓存污染情况比较严重&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;1.LRU-K算法:LRU是将最近使用一次的数据放入缓存 LRU-K是通过维护一个队列，用于记录缓存数据被访问的历史 当某个数据的访问次数达到K时 将数据放入缓存 数据淘汰的时候淘汰第K次访问时间距当前时间最大的数据
-数据第一次被访问时，加入到&lt;strong&gt;历史访问列表&lt;/strong&gt;，如果数据在访问历史列表中没有达到K次访问，则按照一定的规则（FIFO,LRU）淘汰；&lt;/p&gt;
-&lt;p&gt;当访问历史队列中的数据访问次数达到K次后，将数据索引从历史队列中删除，将数据移到缓存队列中，并缓存数据，缓存队列重新按照时间排序；&lt;/p&gt;
-&lt;p&gt;缓存数据队列中被再次访问后，重新排序，需要淘汰数据时，淘汰缓存队列中排在末尾的数据，即“淘汰倒数K次访问离现在最久的数据”。&lt;/p&gt;
-&lt;p&gt;2.2Q算法 将LRU-2中的历史访问列表改为FIFO缓存队列 因此2Q算法中有两个缓存队列：FIFO队列和 LRU队列&lt;/p&gt;
-&lt;p&gt;3.MQ算法 根据数据的访问频率将数据分为多个队列 不同的队列有不同的访问优先级 优先缓存访问次数最多的数据。&lt;/p&gt;
-&lt;h3 id=&#34;最近最不常用lfu淘汰算法&#34;&gt;最近最不常用（LFU）淘汰算法
-&lt;/h3&gt;&lt;p&gt;LFU将频率上最不常访问的数据淘汰 需要额外存储每个数据的访问次数&lt;/p&gt;
-&lt;p&gt;如果用HashMap将key放数据，value放访问次数的话 新增和查询的时间复杂度都是O(1),但是删除就需要遍历HashMap时间复杂度为O（n）。在此基础上，用小顶堆+HashMap 插入和删除的操作是O（logn）。如果在淘汰数据的时候想要实现O(1)的时间复杂度，可以利用双Hashmap，HashMap中存放 key 和节点之间的映射关系，节点中的value保存对应的访问次数信息 相同的访问次数同freqMap进行关联 可以通过频率获取响应的链表&lt;/p&gt;
-&lt;p&gt;基于上面两种淘汰策略可以看到&lt;strong&gt;LFU是基于访问频次&lt;/strong&gt;的模式，而&lt;strong&gt;LRU是基于访问时间&lt;/strong&gt;的模式。&lt;/p&gt;
-&lt;h3 id=&#34;clock-页面置换算法&#34;&gt;Clock 页面置换算法
-&lt;/h3&gt;&lt;p&gt;操作系统使用的内存管理即Clock页面置换算法，该算法通过链接指针将内存中的所有页面组织成一个循环队列，并为每个页面设置一个访问位。当页面被访问时，其访问位设置为1。当需要淘汰页面以释放空间时，算法会扫描循环队列，选择访问位为0的页面进行置换。如果所有页面的访问位均为1，则将它们置为0并进行第二轮扫描。&lt;/p&gt;
-&lt;p&gt;实现：循环链表 + map
-改进后的Clock页面置换算法：除了访问位，添加一个修改位 考虑了页面是否被修改过 优先淘汰未被修改过的页面&lt;/p&gt;
-&lt;h3 id=&#34;分布式锁&#34;&gt;分布式锁
-&lt;/h3&gt;&lt;p&gt;Jdk中提供了加锁方式：synchronized加锁，乐观锁，读写锁，可重入锁&amp;hellip;在单机系统中为多线程情况下保证线程安全。在分布式系统中，上面的锁不再适用，因此为了解决分布式系统中的并发问题 需要引入分布式锁。
-参考：&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/2301_80017072/article/details/149727509&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;分布式锁原理&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;分布式锁：是一种跨节点，跨服务的互斥机制，一个可靠的分布式锁需要满足：互斥性，安全性，防死锁，可用性，容错性。
-实现的核心原理：通过SET命令实现互斥 即用一个redis键作为锁的标识 当客户端对某个共享资源获取锁时，需要判断该资源是否已上锁 没上锁的时候才可以设置锁键获取锁，释放锁的时候删除锁键即可（在释放锁的时候可以通过Lua脚本实现操作的原子性）。
-SET命令的两个参数：NX（not exist） 用于获取锁 PX设置锁键的过期时间&lt;/p&gt;
-&lt;p&gt;获取锁的命令比如：SET lock:stock client1 NX PX 30000&lt;/p&gt;
-&lt;h3 id=&#34;hashmap源码&#34;&gt;HashMap源码
-&lt;/h3&gt;&lt;p&gt;HashMap是数组+链表+红黑树（JDK1.8增加了红黑树部分）实现的。HashMap实例有两个影响其性能的参数: &lt;strong&gt;初始容量（16）和负载因子（默认0.75）&lt;/strong&gt;，阈值可以通过threshold = length * Load factor计算。HashMap非线程安全&lt;/p&gt;
-&lt;p&gt;参考：&lt;a class=&#34;link&#34; href=&#34;https://juejin.cn/post/7135640624744628255&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;hashmap源码分析&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/HashMap%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;HashMap数据结构&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;HashMap类中有一个非常重要的字段，就是 Node[] table，即哈希桶数组。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;哈希桶是一种通过链地址法（开散列法）解决哈希冲突的结构。它将具有相同散列地址的元素存储在一个链表中，每个链表被称为一个哈希桶.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;HashMap是使用哈希表存储的 哈希表为了解决哈希冲突 可以采用开放地址法和链地址法，HashMap采用了链地址法。为了控制hash冲突发生的概率且让哈希桶数组的占用空间少，于是需要一个好的Hash算法和&lt;strong&gt;扩容机制&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;扩容机制：Node[] table(哈希桶数组)，初始化长度为16，负载因子为0.75，阈值为初始化长度 * 负载因子。当数量超过阈值时需要扩容，扩容之后HashMap容量是之前的2倍。在HashMap中，哈希桶数组table的长度length大小必须为2的n次方(一定是合数)，这种设计主要是为了在取模和扩容时做优化，同时为了减少冲突，HashMap定位哈希桶索引位置时，也加入了高位参与运算的过程。在JDK1.8中，引入了红黑树，当链表长度过大（超过8），链表转化为红黑树。因为红黑树的查找时间复杂度为O(logn) 链表查找的时间复杂度为O(n).Java中的数组不会自动扩容，实际上是通过一个新的数组代替原有的数组，通过resize方法实现。在多线程使用场景中，应该尽量避免使用线程不安全的HashMap，而使用线程安全的ConcurrentHashMap。&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>自然语言转SQL语句实现增删改查操作</title>
-        <link>https://1parado.github.io/p/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E8%BD%ACsql%E8%AF%AD%E5%8F%A5%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/</link>
-        <pubDate>Thu, 23 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/p/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E8%BD%ACsql%E8%AF%AD%E5%8F%A5%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/</guid>
-        <description>&lt;style&gt;
-  body {
-    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-&lt;/style&gt;
-&lt;p&gt;首先需要了解一下什么是ORM（对象关系映射）:简单来说就是在&lt;strong&gt;关系型数据库&lt;/strong&gt;和对象（Bean，Entity）之间作一个映射，通过这种映射 我们就可以用面向对象编程（OOP）概念喝语法来操作数据库 不需要直接写SQL语句 ORM设计可以实现数据存取与业务逻辑完全分离
-Java中现在主流的ORM框架包括：&lt;/p&gt;
-&lt;p&gt;1.Hibernate：最流行的Java ORM框架之一&lt;/p&gt;
-&lt;p&gt;2.MyBatis：一种&amp;quot;半自动&amp;quot;的ORM框架&lt;/p&gt;
-&lt;p&gt;3.MyBatis-plus：MyBatis增强版 自带 CRUD、分页、Wrapper 等&lt;/p&gt;
-&lt;p&gt;MyBatis和Hibernate的区别可以看这篇文章：&lt;a class=&#34;link&#34; href=&#34;https://juejin.cn/post/7342799429583323177&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;MyBatis和Hibernate到底哪个好&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;本文使用的是Hibernate框架 因为他是spring默认的ORM框架 且支持快速开发 实现起来比较方便 而且我现在实现的只是一些简单的增删改查 数据量也不是很大 所以选用Hinernate框架&lt;/p&gt;
-&lt;p&gt;在pom文件中添加下面依赖 即可使用&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework.boot&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-boot-starter-data-jpa&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Hibernate有两种映射方法  一种是基于xml文件进行映射 一种是基于注解映射
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;配置方法1 ：在hibernate.cfg.xml文件中配置数据库和映射文件&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;!DOCTYPE hibernate-configuration PUBLIC
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;        &amp;#34;-//Hibernate/Hibernate Configuration DTD 3.0//EN&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;        &amp;#34;http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd&amp;#34;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;hibernate-configuration&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;session-factory&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- 数据库连接配置 --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.connection.driver_class&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;com.mysql.cj.jdbc.Driver&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.connection.url&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;jdbc:mysql://localhost:3306/数据库名&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.connection.username&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;账号&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.connection.password&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;密码&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- SQL方言 --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.dialect&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;org.hibernate.dialect.MySQL8Dialect&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- 显示SQL语句 --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.show_sql&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- 自动创建表 --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.hbm2ddl.auto&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;update&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- 映射文件 --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;mapping&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;resource=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;com/example/model/User.hbm.xml&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/session-factory&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/hibernate-configuration&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;配置方法2：即在yml文件中配置：然后在实体类上用注解的方式实现映射&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;spring&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;datasource&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;jdbc:mysql://localhost:3306/mydb&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;driver-class-name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;com.mysql.cj.jdbc.Driver&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;jpa&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;hibernate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;ddl-auto&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;update&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;show-sql&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;properties&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;hibernate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;dialect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;org.hibernate.dialect.MySQL8Dialect&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;在entity包创建实体 Hibernate可以通过实体类自动生成表结构
-&lt;img src=&#34;https://1parado.github.io/img/Hibernate%e6%a1%86%e6%9e%b6.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Hibernate框架&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;参考&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/unbelievevc/article/details/132096074&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Hibernate的执行过程&lt;/a&gt;，简单说明一下Hibernate的执行过程&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;创建configuration实例，加载配置文件和映射文件到实例中&amp;ndash;创建sessionFactory实例&amp;ndash;创建session实例（非线程安全，每次请求创建一个新实例）&amp;ndash;创建Transaction实例开启事务&amp;ndash;利用session接口进行持久化操作&amp;ndash;提交事务&amp;ndash;关闭session和sessionFactory断开连接&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;项目的实现过程：首先前端有两个按钮 测试连接和执行查询 前端将请求发送给后端 点击测试连接来测试是否连接到数据库  点击执行按钮会将输入的文本传入后端 后端通过调用本地大模型将其转换为SQL语句 并且执行SQL操作 实现自然语言操作数据库的功能&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;遇到的问题1：后端端口在8080 前端端口在63342 浏览器默认阻止不同源之间的请求 所以需要CORS配置（跨域资源共享）
-在WebConfig文件中加入下面代码实现跨域资源共享&lt;/p&gt;&lt;/blockquote&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//配置全局CORS&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Configuration&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;WebConfig&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;implements&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;WebMvcConfigurer&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Override&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;addCorsMappings&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CorsRegistry&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;registry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;registry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;addMapping&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/api/**&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;allowedOrigins&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://localhost:63342&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 根据实际前端端口调整&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;allowedMethods&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;GET&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;POST&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;PUT&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;DELETE&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;allowCredentials&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;遇到的问题2：调用的本地模型是qwen2:0.5b 他太逊了（其实是我prompt没给对）刚开始一直不能将文本语言转为正确的SQL语句 后面换了几次prompt才能正常运行。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;运行页面：
-第一次查询失败 因为我犯蠢了 没将ollama启动&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e6%9f%a5%e8%af%a2%e5%a4%b1%e8%b4%a51.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;nltodb查询失败1&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e6%9f%a5%e8%af%a2%e6%88%90%e5%8a%9f.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;nltodb查询成功&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e7%b2%be%e5%87%86%e6%9f%a5%e8%af%a2.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;nltodb精准查询&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;用英文操作其实也是阔以的 因为输入的文本都是传入给本地大模型了 他会给你正确的sql语句 正确的操作数据库&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e8%8b%b1%e6%96%87%e6%9f%a5%e8%af%a2.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;nltodb英文查询&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;现在这个系统只是实现了查询功能 其他增删改操作实现起来跟查询操作大同小异 所以通过自然语言操作数据库是可行的并且有益于降低数据操作的门槛 GitHub上有好多优秀的开源项目 这里我就不一一列举了 总之 这个系统只是一个简单的MCP数据库的基本实现。&lt;/p&gt;
-&lt;p&gt;项目源码地址：https://github.com/1parado/MCP-Database&lt;/p&gt;
-</description>
-        </item>
-        <item>
+        <lastBuildDate>Thu, 06 Aug 2026 17:50:23 +0800</lastBuildDate><atom:link href="https://1parado.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Go 教程第一课</title>
         <link>https://1parado.github.io/p/go-%E6%95%99%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/</link>
         <pubDate>Thu, 06 Aug 2026 00:00:00 +0000</pubDate>
@@ -1738,6 +558,141 @@ Java中现在主流的ORM框架包括：&lt;/p&gt;
 	
 	
 &gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>单体转向微服务的一次实践</title>
+        <link>https://1parado.github.io/p/%E5%8D%95%E4%BD%93%E8%BD%AC%E5%90%91%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E4%B8%80%E6%AC%A1%E5%AE%9E%E8%B7%B5/</link>
+        <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/%E5%8D%95%E4%BD%93%E8%BD%AC%E5%90%91%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E4%B8%80%E6%AC%A1%E5%AE%9E%E8%B7%B5/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;之前的项目地址：&lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/%E9%85%92%E6%97%85%E7%B3%BB%E7%BB%9F/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;酒旅系统&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;公司现在的系统架构是SpringCloud微服务，刚开始接触的时候一头雾水，当然学习一个东西最好的办法就是上手去做，去试错。所以现在借助AI，打算从零到一开始学习，摸索微服务的架构。重构一个系统当然会遇到很多问题，在此记录一些踩过的坑，也尽量能帮助一些人更好更快的理解和学习微服务。&lt;/p&gt;
+&lt;h3 id=&#34;2026212&#34;&gt;2026.2.12
+&lt;/h3&gt;&lt;p&gt;首先讲一下之前的系统架构，采用JAVA 17，SpringBoot 3.2.5,数据库用的MySQL 8.0做持久化，在系统中引入一些中间件包括比如Redis，ES，RocketMQ等等,之前的系统中，只有一个数据库travel_system,里面包含27张表。很显然，这种架构不适合进行业务更改，也不适合版本更新。而且全部业务放在一个系统中，团队进行代码编写也很头痛（虽然我只有一个人）。总之，从单体到微服务架构是很有必要的。&lt;/p&gt;
+&lt;p&gt;之前的数据库（按照业务领域划分）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;之前系统的数据库&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;之前系统的整体架构：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;之前系统的总体架构&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在进行重构之前，首先第一步就是要先做好备份，将项目做好备份，将数据库表结构和数据转储为SQL文件，接下来就可以开始进行重构之旅了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-3.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;压缩包&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;首先第一步，将前置条件都准备好，因为不知名原因我电脑上面用不了Docker，所以我的项目所需要的配置都需要下载到我的电脑本地，所以需要先下载一个Nacos（阿里出的一个服务注册和发现以及动态配置的网关），
+这里我下载的是2.5.2版本。Nacos默认是集群模式开启的，因为我电脑上的内存不是很够，所以改成单机模式跑，Nacos默认在8848端口启动，在浏览器中打开输入: http://localhost:8848/nacos，控制台初始默认账号和密码都是：nacos。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Nacos&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;接下来需要考虑的就是将原来单体项目划分为几个微服务，按理说应该是最好一个微服务负责一个业务的，但是考虑到我电脑配置，启动那么多微服务和中间件，说不定电脑要提前退休。所以把之前的项目分成四个微服务（protal，trade，payment，support）+Gateway网关+common模块。各个模块负责的业务不同，并且要求每个微服务使的数据库一定要不同，所以创建了四个数据库，然后将之前的数据库表结构迁移过来。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;改造后的数据库&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;创建一个后端项目，创建根pom文件，该pom文件的&lt;modules&gt;应该包括拆分后的子模块，&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.paradox&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;travel-microservices&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0.0&lt;span class=&#34;nt&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;pom&lt;span class=&#34;nt&#34;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Travel Microservices&lt;span class=&#34;nt&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;description&amp;gt;&lt;/span&gt;智旅云OTA微服务平台&lt;span class=&#34;nt&#34;&gt;&amp;lt;/description&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;modules&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;common&lt;span class=&#34;nt&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;gateway-service&lt;span class=&#34;nt&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;portal-service&lt;span class=&#34;nt&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;trade-service&lt;span class=&#34;nt&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;payment-service&lt;span class=&#34;nt&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;support-service&lt;span class=&#34;nt&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/modules&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;然后应该由这个根pom文件来统一属性和依赖的版本。后面的子模块只需要引入父模块即可，避免了依赖不一致的问题，避免版本冲突。
+在进行拆分的时候，首先应该选择比较好拆分的模块进行试试水，首选的就是common模块，该模块中只需要包含各服务通用的DTO,VO对象，统一响应对象Result，工具类，工具类的API接口即可。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-6.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;common模块&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;我的系统中该模块实现了三个工具类，包括JWT工具类实现生成token，解析token，对比token等功能。UserContext工具类实现获取userId。DataMask工具类，实现敏感数据脱敏等。其中重点可以讲一下UserContext工具类，配合拦截器实现获取userId，在业务调用结束之后一定要进行线程释放，避免内存泄露或线程污染。下图中汇总了一些使用usercontext的好处，以及与其他获得userId方式的对比。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/212-8.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;UserContext&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;到此，实际上，项目的脚手架差不多都已经搭建好了。网关服务和Common模块都已经搭建好了，之后只需要实现其他四个微服务即可。&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -2402,6 +1357,169 @@ Java中现在主流的ORM框架包括：&lt;/p&gt;
 </description>
         </item>
         <item>
+        <title>Diary 一款多功能日记软件</title>
+        <link>https://1parado.github.io/p/diary-%E4%B8%80%E6%AC%BE%E5%A4%9A%E5%8A%9F%E8%83%BD%E6%97%A5%E8%AE%B0%E8%BD%AF%E4%BB%B6/</link>
+        <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/diary-%E4%B8%80%E6%AC%BE%E5%A4%9A%E5%8A%9F%E8%83%BD%E6%97%A5%E8%AE%B0%E8%BD%AF%E4%BB%B6/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;最近一段时间一直在学习用Trae、cursor、Kiro&amp;hellip;等AI编程软件编写自己的程序，之前开发了好多小demo，还有一个IM即时通讯系统被我和朋友放在服务器上面玩了一下。这几周突发奇想，想到了能不能做一个TOC的日记+笔记软件。然后我就用我现有的技术栈来开发了一款Diary软件。
+首先展示一下电脑上面的AI编辑器吧，其实本来还有Antigrivity，但是下载下来不知道为啥不能用。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;前端我是用Figma-make做的，直接给他提示词然后生成前端页面。前端开发用的是Vue+vite，后端是SpringBoot+Mybatis，数据库用的是Postgresql。在本地安装Postgresql也有好多坑，之后我再写篇博客记录一下。
+首先介绍一下这个软件的功能，包括注册、登录、写日记、画画、打字练习、社区、读书、思维导图等等&amp;hellip;在用AI进行编程的时候，我觉得最主要的难点就是如何保证AI刚开始搭建的脚手架是可以运行的，有时候他会给一些相互排斥的依赖导致项目无法正常运行。然后就是AI在面对复杂场景的时候，需要尽可能详尽的提示词，否则做出来的东西肯定是一大堆漏洞的。&lt;/p&gt;
+&lt;p&gt;接下来就是软件的页面展示：
+注册和登录页面：用户创建用户并且登录跳转到主页&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;进入主页，左边是软件的功能模块，包括查看日记，查找日记，日常话题比赛，书架，社区，数据分析，垃圾箱，打字练习，绘画，思维导图等功能。
+&lt;img src=&#34;https://1parado.github.io/img/12-22-3.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;新建日记页面：支持md文档格式，可以预览，可以边预览边写日记，支持快捷键操作 常见的ctrl + s进行保存等操作，在settings中可以进行自定义快捷键操作。在发布日记/笔记的时候可以选择private或share，这决定了你的日记/笔记会不会在社区页面进行展示。还可以进行语音转文字，支持天气查询等等小功能。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;搜索页面：用户可以根据日历进行筛选或者日记的标题，标签等进行搜索。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;写故事页面，是我随便想到了一个功能，为了让自己的软件更有趣一些，做了一个每日命题作文，然后用户可以进行参赛，通过在社区中进行投票，然后选出前三名。社区中保证一人一票机制，对于参与比赛的故事，下面会是爱心图标代表投票，不参与的是点赞图标。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-6.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;社区页面主要展示用户共享的日记/笔记。然后可以进行评论功能，支持多级评论。在设计软件的时候，我觉得作为一个日记/笔记软件应该不需要加好友之类的吧，所以只是进行了简单的社区分享功能的搭建。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-7.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;数据分析页面主要记录用户写的日记数量，通过可视化的形式展示给用户。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-8.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;打字练习页面，是因为我偶然看到一个页面是放置了一个3D键盘，然后用户打字可以在屏幕上面的3D键盘上进行动态交互，我觉得这个创意挺好的，所以就实现了一下这个功能，打字练习暂且只支持中英文&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-9.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;画板页面就是支持用户把自己的一天画出来，然后支持AI挑选日记，然后根据日记内容生成用户想要的图片。这里我本来打算用Google的香蕉模型的，但是API调用太贵了，暂且搁置。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-11.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/12-22-10.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;思维导图页：我个人觉得最有用的页面，目前的思维导图我用的总是不太习惯，所以创建了一个思维导图模块，支持无限画布，无限节点。最重要的是导出的时候没有水印，不用受制于人了！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-12.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;最后就是设置页面了，可以改邮箱和密码，修改快捷键操作，支持日记导出为三种格式。支持light和drak模式。之后应该还会添加一些其他的模块。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/12-22-13.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1WtqQB1Evr/?share_source=copy_web&amp;amp;vd_source=e51d3438543fd80d97a3f4ce11e7cdcb&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;哔哩哔哩项目介绍链接&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>BookBlog</title>
         <link>https://1parado.github.io/p/bookblog/</link>
         <pubDate>Thu, 04 Dec 2025 00:00:00 +0000</pubDate>
@@ -3033,6 +2151,555 @@ git clone &lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/&#34; 
 	
 	
 &gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>手写一个Redis</title>
+        <link>https://1parado.github.io/p/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAredis/</link>
+        <pubDate>Fri, 24 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAredis/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;参考：&lt;a class=&#34;link&#34; href=&#34;https://github.com/houbb/cache?tab=readme-ov-file&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;如何从零开始手写一个Redis&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;20251024&#34;&gt;2025.10.24
+&lt;/h2&gt;&lt;h3 id=&#34;如何实现固定缓存大小&#34;&gt;如何实现固定缓存大小
+&lt;/h3&gt;&lt;p&gt;HashMap，ConcurrentHashMap可以作为缓存使用 但HashMap本身不是线程安全的 但是作为基础的Java集合 不管是HashMap还是ConcurrentHashMap本身不具备自动的数据淘汰机制，这样可能会导致OOM（内存溢出）&lt;/p&gt;
+&lt;p&gt;淘汰机制：FIFO（先进缓存先被淘汰）,LRU（最近最少使用）,LFU（最近最少频率使用），从左往右命中率越来越高，成本也越来越高&lt;/p&gt;
+&lt;p&gt;对于加了淘汰机制的HashMap仍然存在几个问题：锁竞争激烈，不支持过期时间，不知此自动刷新，于是出现了Guava Caffeine&amp;hellip;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;引导类：是指在框架或应用程序中负责启动和初始化的核心类。Springboot中引导类即Application为后缀的类 对于该项目 配置了一个缓存引导类CacheBS方便用户使用&lt;/p&gt;&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;helloTest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICache&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheBs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 1从缓存中出来 3进去&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 2从缓存中出来 4进去&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 测试cache的大小是否为2 不相同则测试不通过&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;keySet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%85%88%e8%bf%9b%e5%85%88%e5%87%ba%e7%bc%93%e5%ad%98%e6%b5%8b%e8%af%95%e6%88%90%e5%8a%9f.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;先进先出测试&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;实现过期时间expire&#34;&gt;实现过期时间expire
+&lt;/h3&gt;&lt;p&gt;Redis中的expire可以用于验证码失效，登录token失效等业务场景&amp;hellip; 设计一个cacheExpire接口 可以计算多久之后过期&lt;/p&gt;
+&lt;p&gt;过期的实现原理：可以通过一个定时任务比如一秒钟一次轮询，一次清理10个数据，直到将过期的信息清空。可以将过期数据存入到map中 key对应过期的数据 value对应过期时间。在这里定义了一个单线程 用来执行清空任务，清空任务执行的过程即遍历map中的key 判断value是否过期，为了避免单词执行时间太久 所以设置一个单次清空最大数量限制。&lt;/p&gt;
+&lt;p&gt;定时任务优化：可以通过排序Map快速判断哪些过期数据需要清理，即让过期时间作为key，让相同过期时间的数据放入列表中作为value。&lt;/p&gt;
+&lt;p&gt;由于我们采用了定时轮询的方式 所以有时候数据可能清理不及时 当访问数据的时候可能访问到脏数据。因此引入了惰性删除，当用到某个数据的时候 才对数据进行删除判断操作。&lt;/p&gt;
+&lt;p&gt;具体实现：在用到某些数据之前 先对数据进行刷新操作&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;expireTest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;InterruptedException&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICache&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheBs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;long&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;now&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;expireAt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;now&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;40&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 沉睡 50S，让其过期&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TimeUnit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;MILLISECONDS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;50&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;keySet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%ae%9e%e7%8e%b0%e8%bf%87%e6%9c%9f%e6%97%b6%e9%97%b4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;实现过期时间&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;expire过期如何随机获取key&#34;&gt;expire过期如何随机获取key
+&lt;/h3&gt;&lt;p&gt;之前实现的过期很简单 用hashMap存储过期数据，然后轮询处理，执行定时清理任务
+redis实现的定时清理任务并不是时时刻刻都在执行的，定时任务中删除过期键逻辑采用了自适应算法，根据键的过期比例、使用快慢两种速率模式回收键，如图所示，先随机抽取key 如果有四分之一以上的key过期则执行 否则不执行&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/redis%27%e5%ae%9a%e6%97%b6%e6%b8%85%e7%90%86%e4%bb%bb%e5%8a%a1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;redis’定时清理任务&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;实现内存数据重启不丢失&#34;&gt;实现内存数据重启不丢失
+&lt;/h3&gt;&lt;p&gt;由于我们的数据是放在内存中的 如何保证重启之后数据还在？（Redis持久化）&lt;/p&gt;
+&lt;p&gt;Redis的持久化机制包括三种：RDB(快照)，AOF（只追加文件），混合策略.&lt;/p&gt;
+&lt;p&gt;这里我们先实现&lt;strong&gt;RDB快照模式&lt;/strong&gt;，我们可以在缓存启动的时候，可以通过指定初始化加载的信息，从而实现数据持久化。现在我们需要知道如何将缓存中的内容持久化到文件或数据库中？，知道这些信息，就可以在重启之后加载这些信息，来保证数据不丢失了。对于导出的文件来说还有很多细节，比如文件的压缩，CRC校验&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e9%87%8d%e5%90%af%e6%95%b0%e6%8d%ae%e4%b8%8d%e4%b8%a2%e5%a4%b1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;重启数据不丢失&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Test&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;persistRdbTest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;InterruptedException&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICache&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheBs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;load&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MyCacheLoad&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 指定持久化策略&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;persist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CachePersists&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dbJson&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1.rdb&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 传入文件&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TimeUnit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;SECONDS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;AOF模式&lt;/strong&gt;：RDB模式将缓存内容全部持久化比较耗时， AOF模式针对修改内容的指令，将指令&lt;strong&gt;顺序添加&lt;/strong&gt;到文件中，因此AOF的实时性更好，顺序写避免了IO的随机写问题。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/AOF%e6%8c%81%e4%b9%85%e5%8c%96.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;AOF持久化&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;添加监听器&#34;&gt;添加监听器
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;删除监听器：我们之前已经实现expire 是对用户透明的（用户感知不到），并且当内存满了的时候，Redis会进行内存淘汰（evict 淘汰），这对用户来说也是透明的  如果用户想获取到这些信息，可以通过添加监听器实现。即在删除的位置调用监听器即可。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;慢操作监听器：redis 中会存储慢操作的相关日志信息（参数包括：耗时阈值，最多存储多少条慢日志记录） 所有我们可以对于所有的操作记录操作耗时 如果耗时超过用户设置的阈值 调用慢操作监听器&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;自定义监听器&amp;hellip;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e7%bc%93%e5%ad%98%e5%88%a0%e9%99%a4%e6%97%a5%e5%bf%97.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;缓存删除日志&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;20251026&#34;&gt;2025.10.26
+&lt;/h2&gt;&lt;h3 id=&#34;lru-缓存淘汰&#34;&gt;LRU 缓存淘汰
+&lt;/h3&gt;&lt;p&gt;LRU最近最少使用 是一种比较常见的淘汰算法 如果数据最近被访问过 就认为被访问的概率更高&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;局部性准则：时间局部性（最近被访问过，再次访问的肯可能性很高）和空间局部性（访问到某个磁盘信息，接下来可能访问局部的存储空间）缓存中用到的LRU即遵循了时间局部性准则&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;实现：利用链表 新数据插入到链表头部 缓存命中，将命中数据移到链表头部 如果链表满了丢弃链表尾部数据。
+代码实现起来需要用到：链表插入，如何判断缓存命中（HashMap），链表删除等知识&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;lruEvictTest&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;InterruptedException&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICache&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheBs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;evict&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CacheEvicts&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lru&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hello&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;B&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;world&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;FIFO&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 访问一次A // &lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;put&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;D&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;LRU&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;assertEquals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;keySet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果是FIFO 结果应该是[B,C,D] 由于是LRU A最近被访问过 所以淘汰的是B 结果是[A,C,D]
+&lt;img src=&#34;https://1parado.github.io/img/Lru%e6%b7%98%e6%b1%b0.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Lru淘汰&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;lru-缓存淘汰优化&#34;&gt;LRU 缓存淘汰优化
+&lt;/h3&gt;&lt;p&gt;优化思路：1.用一个&lt;strong&gt;数组&lt;/strong&gt;存储时间戳 为每个数据添加一个时间戳属性 每次访问数据时，更新该数据的时间戳 当数据空间满的时候 扫描时间戳最小的数据 但是需要用空间存储时间戳 并且淘汰数据的时候需要扫描整个数组&lt;/p&gt;
+&lt;p&gt;2.之前的简单实现是基于链表的 由于链表的性质（链表中插入和删除某个已知元素的时间复杂度是O(1)，但是插入和删除之前需要遍历链表找到元素时间复杂度是O(N)）因此可以用&lt;strong&gt;双向链表&lt;/strong&gt;优化一下淘汰末尾数据的操作&lt;/p&gt;
+&lt;p&gt;3.双向链表查找某个元素依然需要遍历链表 时间复杂度是O(n) 可以基于双向链表和哈希表 将哈希表中的数据和链表中的节点形成映射 插入和删除操作的时间复杂度下降为O(1) 但是引入哈希表会造成空间开销&lt;/p&gt;
+&lt;p&gt;LinkedHashMap是一种list和HashMap结合的数据结构 但是LinkedHashMap不会淘汰数据 可以重写removeEldestEntry方法实现淘汰数据。&lt;/p&gt;
+&lt;h3 id=&#34;lru-缓存淘汰算法如何避免缓存污染&#34;&gt;LRU 缓存淘汰算法如何避免缓存污染
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;当存在热点数据时，LRU的效率很好，但&lt;strong&gt;偶发性的、周期性的批量操作会导致LRU命中率急剧下降，缓存污染情况比较严重&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;1.LRU-K算法:LRU是将最近使用一次的数据放入缓存 LRU-K是通过维护一个队列，用于记录缓存数据被访问的历史 当某个数据的访问次数达到K时 将数据放入缓存 数据淘汰的时候淘汰第K次访问时间距当前时间最大的数据
+数据第一次被访问时，加入到&lt;strong&gt;历史访问列表&lt;/strong&gt;，如果数据在访问历史列表中没有达到K次访问，则按照一定的规则（FIFO,LRU）淘汰；&lt;/p&gt;
+&lt;p&gt;当访问历史队列中的数据访问次数达到K次后，将数据索引从历史队列中删除，将数据移到缓存队列中，并缓存数据，缓存队列重新按照时间排序；&lt;/p&gt;
+&lt;p&gt;缓存数据队列中被再次访问后，重新排序，需要淘汰数据时，淘汰缓存队列中排在末尾的数据，即“淘汰倒数K次访问离现在最久的数据”。&lt;/p&gt;
+&lt;p&gt;2.2Q算法 将LRU-2中的历史访问列表改为FIFO缓存队列 因此2Q算法中有两个缓存队列：FIFO队列和 LRU队列&lt;/p&gt;
+&lt;p&gt;3.MQ算法 根据数据的访问频率将数据分为多个队列 不同的队列有不同的访问优先级 优先缓存访问次数最多的数据。&lt;/p&gt;
+&lt;h3 id=&#34;最近最不常用lfu淘汰算法&#34;&gt;最近最不常用（LFU）淘汰算法
+&lt;/h3&gt;&lt;p&gt;LFU将频率上最不常访问的数据淘汰 需要额外存储每个数据的访问次数&lt;/p&gt;
+&lt;p&gt;如果用HashMap将key放数据，value放访问次数的话 新增和查询的时间复杂度都是O(1),但是删除就需要遍历HashMap时间复杂度为O（n）。在此基础上，用小顶堆+HashMap 插入和删除的操作是O（logn）。如果在淘汰数据的时候想要实现O(1)的时间复杂度，可以利用双Hashmap，HashMap中存放 key 和节点之间的映射关系，节点中的value保存对应的访问次数信息 相同的访问次数同freqMap进行关联 可以通过频率获取响应的链表&lt;/p&gt;
+&lt;p&gt;基于上面两种淘汰策略可以看到&lt;strong&gt;LFU是基于访问频次&lt;/strong&gt;的模式，而&lt;strong&gt;LRU是基于访问时间&lt;/strong&gt;的模式。&lt;/p&gt;
+&lt;h3 id=&#34;clock-页面置换算法&#34;&gt;Clock 页面置换算法
+&lt;/h3&gt;&lt;p&gt;操作系统使用的内存管理即Clock页面置换算法，该算法通过链接指针将内存中的所有页面组织成一个循环队列，并为每个页面设置一个访问位。当页面被访问时，其访问位设置为1。当需要淘汰页面以释放空间时，算法会扫描循环队列，选择访问位为0的页面进行置换。如果所有页面的访问位均为1，则将它们置为0并进行第二轮扫描。&lt;/p&gt;
+&lt;p&gt;实现：循环链表 + map
+改进后的Clock页面置换算法：除了访问位，添加一个修改位 考虑了页面是否被修改过 优先淘汰未被修改过的页面&lt;/p&gt;
+&lt;h3 id=&#34;分布式锁&#34;&gt;分布式锁
+&lt;/h3&gt;&lt;p&gt;Jdk中提供了加锁方式：synchronized加锁，乐观锁，读写锁，可重入锁&amp;hellip;在单机系统中为多线程情况下保证线程安全。在分布式系统中，上面的锁不再适用，因此为了解决分布式系统中的并发问题 需要引入分布式锁。
+参考：&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/2301_80017072/article/details/149727509&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;分布式锁原理&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;分布式锁：是一种跨节点，跨服务的互斥机制，一个可靠的分布式锁需要满足：互斥性，安全性，防死锁，可用性，容错性。
+实现的核心原理：通过SET命令实现互斥 即用一个redis键作为锁的标识 当客户端对某个共享资源获取锁时，需要判断该资源是否已上锁 没上锁的时候才可以设置锁键获取锁，释放锁的时候删除锁键即可（在释放锁的时候可以通过Lua脚本实现操作的原子性）。
+SET命令的两个参数：NX（not exist） 用于获取锁 PX设置锁键的过期时间&lt;/p&gt;
+&lt;p&gt;获取锁的命令比如：SET lock:stock client1 NX PX 30000&lt;/p&gt;
+&lt;h3 id=&#34;hashmap源码&#34;&gt;HashMap源码
+&lt;/h3&gt;&lt;p&gt;HashMap是数组+链表+红黑树（JDK1.8增加了红黑树部分）实现的。HashMap实例有两个影响其性能的参数: &lt;strong&gt;初始容量（16）和负载因子（默认0.75）&lt;/strong&gt;，阈值可以通过threshold = length * Load factor计算。HashMap非线程安全&lt;/p&gt;
+&lt;p&gt;参考：&lt;a class=&#34;link&#34; href=&#34;https://juejin.cn/post/7135640624744628255&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;hashmap源码分析&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/HashMap%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;HashMap数据结构&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;HashMap类中有一个非常重要的字段，就是 Node[] table，即哈希桶数组。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;哈希桶是一种通过链地址法（开散列法）解决哈希冲突的结构。它将具有相同散列地址的元素存储在一个链表中，每个链表被称为一个哈希桶.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;HashMap是使用哈希表存储的 哈希表为了解决哈希冲突 可以采用开放地址法和链地址法，HashMap采用了链地址法。为了控制hash冲突发生的概率且让哈希桶数组的占用空间少，于是需要一个好的Hash算法和&lt;strong&gt;扩容机制&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;扩容机制：Node[] table(哈希桶数组)，初始化长度为16，负载因子为0.75，阈值为初始化长度 * 负载因子。当数量超过阈值时需要扩容，扩容之后HashMap容量是之前的2倍。在HashMap中，哈希桶数组table的长度length大小必须为2的n次方(一定是合数)，这种设计主要是为了在取模和扩容时做优化，同时为了减少冲突，HashMap定位哈希桶索引位置时，也加入了高位参与运算的过程。在JDK1.8中，引入了红黑树，当链表长度过大（超过8），链表转化为红黑树。因为红黑树的查找时间复杂度为O(logn) 链表查找的时间复杂度为O(n).Java中的数组不会自动扩容，实际上是通过一个新的数组代替原有的数组，通过resize方法实现。在多线程使用场景中，应该尽量避免使用线程不安全的HashMap，而使用线程安全的ConcurrentHashMap。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>自然语言转SQL语句实现增删改查操作</title>
+        <link>https://1parado.github.io/p/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E8%BD%ACsql%E8%AF%AD%E5%8F%A5%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/</link>
+        <pubDate>Thu, 23 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E8%BD%ACsql%E8%AF%AD%E5%8F%A5%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;首先需要了解一下什么是ORM（对象关系映射）:简单来说就是在&lt;strong&gt;关系型数据库&lt;/strong&gt;和对象（Bean，Entity）之间作一个映射，通过这种映射 我们就可以用面向对象编程（OOP）概念喝语法来操作数据库 不需要直接写SQL语句 ORM设计可以实现数据存取与业务逻辑完全分离
+Java中现在主流的ORM框架包括：&lt;/p&gt;
+&lt;p&gt;1.Hibernate：最流行的Java ORM框架之一&lt;/p&gt;
+&lt;p&gt;2.MyBatis：一种&amp;quot;半自动&amp;quot;的ORM框架&lt;/p&gt;
+&lt;p&gt;3.MyBatis-plus：MyBatis增强版 自带 CRUD、分页、Wrapper 等&lt;/p&gt;
+&lt;p&gt;MyBatis和Hibernate的区别可以看这篇文章：&lt;a class=&#34;link&#34; href=&#34;https://juejin.cn/post/7342799429583323177&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;MyBatis和Hibernate到底哪个好&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;本文使用的是Hibernate框架 因为他是spring默认的ORM框架 且支持快速开发 实现起来比较方便 而且我现在实现的只是一些简单的增删改查 数据量也不是很大 所以选用Hinernate框架&lt;/p&gt;
+&lt;p&gt;在pom文件中添加下面依赖 即可使用&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework.boot&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-boot-starter-data-jpa&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Hibernate有两种映射方法  一种是基于xml文件进行映射 一种是基于注解映射
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;配置方法1 ：在hibernate.cfg.xml文件中配置数据库和映射文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;!DOCTYPE hibernate-configuration PUBLIC
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;        &amp;#34;-//Hibernate/Hibernate Configuration DTD 3.0//EN&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;        &amp;#34;http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd&amp;#34;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;hibernate-configuration&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;session-factory&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- 数据库连接配置 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.connection.driver_class&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;com.mysql.cj.jdbc.Driver&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.connection.url&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;jdbc:mysql://localhost:3306/数据库名&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.connection.username&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;账号&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.connection.password&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;密码&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- SQL方言 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.dialect&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;org.hibernate.dialect.MySQL8Dialect&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- 显示SQL语句 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.show_sql&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- 自动创建表 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.hbm2ddl.auto&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;update&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- 映射文件 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;mapping&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;resource=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;com/example/model/User.hbm.xml&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/session-factory&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/hibernate-configuration&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;配置方法2：即在yml文件中配置：然后在实体类上用注解的方式实现映射&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;spring&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;datasource&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;jdbc:mysql://localhost:3306/mydb&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;driver-class-name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;com.mysql.cj.jdbc.Driver&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;jpa&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;hibernate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;ddl-auto&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;update&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;show-sql&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;properties&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;hibernate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;dialect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;org.hibernate.dialect.MySQL8Dialect&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在entity包创建实体 Hibernate可以通过实体类自动生成表结构
+&lt;img src=&#34;https://1parado.github.io/img/Hibernate%e6%a1%86%e6%9e%b6.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Hibernate框架&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;参考&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/unbelievevc/article/details/132096074&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hibernate的执行过程&lt;/a&gt;，简单说明一下Hibernate的执行过程&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;创建configuration实例，加载配置文件和映射文件到实例中&amp;ndash;创建sessionFactory实例&amp;ndash;创建session实例（非线程安全，每次请求创建一个新实例）&amp;ndash;创建Transaction实例开启事务&amp;ndash;利用session接口进行持久化操作&amp;ndash;提交事务&amp;ndash;关闭session和sessionFactory断开连接&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;项目的实现过程：首先前端有两个按钮 测试连接和执行查询 前端将请求发送给后端 点击测试连接来测试是否连接到数据库  点击执行按钮会将输入的文本传入后端 后端通过调用本地大模型将其转换为SQL语句 并且执行SQL操作 实现自然语言操作数据库的功能&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;遇到的问题1：后端端口在8080 前端端口在63342 浏览器默认阻止不同源之间的请求 所以需要CORS配置（跨域资源共享）
+在WebConfig文件中加入下面代码实现跨域资源共享&lt;/p&gt;&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//配置全局CORS&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Configuration&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;WebConfig&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;implements&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;WebMvcConfigurer&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Override&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;addCorsMappings&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CorsRegistry&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;registry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;registry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;addMapping&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/api/**&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;allowedOrigins&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://localhost:63342&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 根据实际前端端口调整&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;allowedMethods&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;GET&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;POST&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;PUT&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;DELETE&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;allowCredentials&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;遇到的问题2：调用的本地模型是qwen2:0.5b 他太逊了（其实是我prompt没给对）刚开始一直不能将文本语言转为正确的SQL语句 后面换了几次prompt才能正常运行。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;运行页面：
+第一次查询失败 因为我犯蠢了 没将ollama启动&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e6%9f%a5%e8%af%a2%e5%a4%b1%e8%b4%a51.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;nltodb查询失败1&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e6%9f%a5%e8%af%a2%e6%88%90%e5%8a%9f.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;nltodb查询成功&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e7%b2%be%e5%87%86%e6%9f%a5%e8%af%a2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;nltodb精准查询&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;用英文操作其实也是阔以的 因为输入的文本都是传入给本地大模型了 他会给你正确的sql语句 正确的操作数据库&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e8%8b%b1%e6%96%87%e6%9f%a5%e8%af%a2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;nltodb英文查询&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;现在这个系统只是实现了查询功能 其他增删改操作实现起来跟查询操作大同小异 所以通过自然语言操作数据库是可行的并且有益于降低数据操作的门槛 GitHub上有好多优秀的开源项目 这里我就不一一列举了 总之 这个系统只是一个简单的MCP数据库的基本实现。&lt;/p&gt;
+&lt;p&gt;项目源码地址：https://github.com/1parado/MCP-Database&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -5329,6 +4996,339 @@ return res;
 &lt;ol&gt;
 &lt;li&gt;二进制日志（Binary log）：记录了所有对数据库的DDL和DML操作。可以用于数据备份，主从复制&lt;/li&gt;
 &lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>仿教务系统</title>
+        <link>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</link>
+        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;2025.10.15
+这是创建的
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/1parado_repo.github.io/blob/main/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;思维导图&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;2025.10.21&lt;/p&gt;
+&lt;h2 id=&#34;登录模块&#34;&gt;登录模块
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;登录鉴权&lt;/strong&gt; ：该项目采用SpringAOP + 自定义注解@RoleRequire实现RBAC鉴权&lt;/p&gt;
+&lt;p&gt;现有的登录鉴权方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;SpringSecurity&lt;/strong&gt;+RBAC模型+JWT实现认证与授权&lt;/li&gt;
+&lt;li&gt;SpringBoot + &lt;strong&gt;Sa-Token&lt;/strong&gt; + MyBatis + MySQL + Redis 实现用户鉴权、角色管理、权限管理&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Apache Shiro&lt;/strong&gt; 是一个轻量级的安全框架，适合需要简单易用的权限管理的项目&lt;/li&gt;
+&lt;li&gt;自定义 定义用户、角色、权限三张表，设计合理的关联关系， 使用拦截器或 AOP 实现权限校验逻辑。根据业务需求设计动态权限分配机制。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;JWT实现无状态认证&lt;/strong&gt;（不需要服务器存储用户的会话状态），一个JWT包括头部，载荷，签名。&lt;/p&gt;
+&lt;p&gt;过程：用户登录认证时，服务端验证用户身份，成功的话，服务端生成JWT返回给客户端，客户端在之后的请求中将JWT放在请求的头部（Authorization）,然后服务端通过解析JWT从而确定用户的身份和权限&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;双token机制实现无感刷新&lt;/strong&gt;：分为两种token 一种是access token（访问令牌）短期有效 ，一种是 refresh token（刷新令牌），长期有效。&lt;/p&gt;
+&lt;p&gt;过程：客户端登录，认证成功，服务端签发access_token（返回给前端）和refresh token（存入cookie） 之后，客户端访问接口都带着access_token 当access_token过期之后 客户端发送给refresh token给服务端 验证通过则生成新的access token和refresh token，从而实现无感刷新&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://juejin.cn/post/7548268336417751055&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;双 Token 认证机制：从原理到实践的完整实现双 Token 认证机制：从原理到实践的完整实现 在现代 Web 应用中 - 掘金&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;登录模块展示：首先进入登录页面：
+&lt;img src=&#34;https://1parado.github.io/img/%e7%99%bb%e5%bd%95%e9%a1%b5%e9%9d%a2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;登录页面&#34;
+	
+	
+&gt;
+然后根据角色的不同，进入不同的主页，系统分为三种角色Admin,Teacher,Student
+&lt;img src=&#34;https://1parado.github.io/img/%e7%99%bb%e5%bd%95%e9%89%b4%e6%9d%83.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;登录鉴权&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;秒杀抢课模块&#34;&gt;秒杀抢课模块
+&lt;/h2&gt;&lt;p&gt;1.获取动态路径 使用UUID + MD5生成一个唯一标识符 结合前端URL生成动态路径 避免被脚本直接访问&lt;/p&gt;
+&lt;p&gt;2.实现限流保护 使用令牌桶实现限流保护（ &lt;strong&gt;Redis + 令牌桶算法&lt;/strong&gt;），这里创建一个工具类TokenBucket，里面的参数包括桶的最大容量，间隔几秒补充几个令牌，当前可用令牌数&amp;hellip;方法包括令牌补充refill和获取令牌逻辑try Acquire 从而实现限流。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;还可以利用redission实现分布式限流 &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/Mistiest/p/19082141&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;基于 Redisson 的分布式限流实战：令牌桶算法的优雅实现 - 你小志蒸不戳 - 博客园&lt;/a&gt;，比如保护AI访问的API&lt;/p&gt;
+&lt;p&gt;其他限流方式：&lt;strong&gt;固定窗口、滑动窗口、漏桶限流和令牌桶限流算法&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;检验动态路径（在获取动态path的时候会将动态path存入Redis，用于此时的动态路径校验）&lt;/li&gt;
+&lt;li&gt;检查当前用户是否重复秒杀 (幂等控制) 通过三级缓存实现 本地缓存采用Caffine/Guava 二级缓存采用Redis 三级缓存采用数据库 当发现任意一级的数据库中已经有选课记录了 就返回重复秒杀异常&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;幂等性指的是一个操作，无论执行多少次，都能得到相同的结果，即它不会因为执行多次而影响系统的状态。这在处理网络请求、数据库操作等场景中尤为重要，例如在订单支付、消息推送等操作中，即使因为网络延迟或其他原因导致多次请求，也应保证操作只执行一次，避免重复处理。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;进入秒杀的核心阶段  Redis + Lua脚本 + RocketMQ 实现 库存预减 + 异步入队&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.bytewaver.top/2025/02/14/project/seckill/%e4%bb%8e%e9%9b%b6%e5%bc%80%e5%a7%8b%e5%ae%9e%e7%8e%b0%e7%a7%92%e6%9d%80%e7%b3%bb%e7%bb%9f3/#%e7%a7%92%e6%9d%80%e6%8e%a5%e5%8f%a3%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;从零开始实现秒杀系统（三）：RocketMQ消息队列篇 - Xun&amp;rsquo;s Blog&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Lua脚本进行双重判断，首先判断是否售罄标志，然后再判断库存预减之后的库存数量，并且在脚本中实现库存减1的操作 如果成功返回1 失败返回 0.Lua脚本返回成功，系统发送消息到消息队列（RocketMQ）采用&lt;strong&gt;事务消息机制&lt;/strong&gt;保证数据的最终一致性。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;生产者发送半消息 本地事务创建选课记录（订单） 根据事务的执行结果通知Broker是投递该消息还是丢弃该消息  消费者异步从MQ中消费信息 完成后续业务。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%bc%82%e6%ad%a5%e7%a7%92%e6%9d%80.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;异步秒杀流程&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;页面展示：
+首先填写预选课信息（类似于商城系统的购物车），然后查看选课信息（普通选课和秒杀抢课）
+&lt;img src=&#34;https://1parado.github.io/img/%e9%99%90%e6%97%b6%e6%8a%a2%e8%af%be.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;限时抢课&#34;
+	
+	
+&gt;
+如果用户是首次抢课且库存充足，则显示抢课成功
+&lt;img src=&#34;https://1parado.github.io/img/%e6%8a%a2%e8%af%be%e6%88%90%e5%8a%9f.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;抢课成功&#34;
+	
+	
+&gt;
+如果用户重复抢课则提醒请勿重复秒杀
+&lt;img src=&#34;https://1parado.github.io/img/%e9%87%8d%e5%a4%8d%e6%8a%a2%e8%af%be%e6%8f%90%e9%86%92.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;重复抢课提醒&#34;
+	
+	
+&gt;
+Admin端新增抢课信息
+&lt;img src=&#34;https://1parado.github.io/img/%e6%96%b0%e5%a2%9e%e6%8a%a2%e8%af%be%e4%bf%a1%e6%81%af.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;新增抢课&#34;
+	
+	
+&gt;
+当学生张三选过课程之后，该课程已经“售罄”了 接下来用李四来选课会提醒库存不足 抢课失败
+&lt;img src=&#34;https://1parado.github.io/img/%e6%8a%a2%e8%af%be%e5%a4%b1%e8%b4%a5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;抢课失败&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;之后可以考虑用jmeter测试高并发场景下的抢课情况。&lt;/p&gt;
+&lt;h2 id=&#34;支付模块&#34;&gt;支付模块
+&lt;/h2&gt;&lt;p&gt;支付过程：&lt;/p&gt;
+&lt;p&gt;用户点击缴费 进入AliPayController 用请求头中的Authorization进行身份验证 用请求体中的PaymentPO来生成缴费信息【前端会收集页面信息 当用户点击缴费按钮就会构建PaymentPO写入请求体中传给后端】
+初始化订单信息 订单的状态初始化为0 标识未缴费 每个订单有一个唯一的订单号
+使用创建好的支付工具类PayUtil 调用支付宝接口完成支付流程&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;PayUtil中的核心方法即发起支付和查询支付结果方法：
+&lt;strong&gt;发起支付&lt;/strong&gt;：1.初始化支付宝客户端 2. 创建支付请求 3.设置业务参数 4.发起请求并且返回支付结果
+&lt;strong&gt;查询支付结果&lt;/strong&gt;：创建查询请求-执行查询-处理查询结果&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;结果展示：
+学生点击缴费之后，跳转到支付页面
+&lt;img src=&#34;https://1parado.github.io/img/%e6%94%af%e4%bb%98%e5%8c%85.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;支付宝&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;GitHub上面有一些支付服务的项目： &lt;a class=&#34;link&#34; href=&#34;https://github.com/search?q=%E6%94%AF%E4%BB%98&amp;amp;ref=opensearch&amp;amp;type=repositories&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/search?q=%E6%94%AF%E4%BB%98&amp;ref=opensearch&amp;type=repositories&lt;/a&gt; 可以支持支付服务的快速开发。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;ai选课助手模块&#34;&gt;AI选课助手模块
+&lt;/h2&gt;&lt;p&gt;chatClient介绍：https://springdoc.cn/spring-ai/api/chatclient.html&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;请求接收与路由&lt;/strong&gt;：用户通过Vue3前端界面提出问题，后端RESTful API接收请求。核心的&lt;strong&gt;智能路由&lt;/strong&gt;逻辑会根据预设关键词（如“选课”、“推荐”、“统计”等）判断问题类型。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;业务上下文构建&lt;/strong&gt;：对于选课相关问题，系统会调用 CourseSelectionService ，通过 JdbcTemplate 高效查询选课数据库，获取课程热度、名额、个人成绩倾向等&lt;strong&gt;实时统计数据&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Prompt工程与模型调用&lt;/strong&gt;：将查询到的业务数据作为上下文，与预先设计好的&lt;strong&gt;系统Prompt&lt;/strong&gt;（如“你是一名选课顾问…”）进行组装，形成完整的提示信息，然后通过Spring AI调用本地的Ollama (Qwen2:7b)模型。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;响应返回&lt;/strong&gt;：模型生成的个性化建议或通用回答最终通过统一的API返回给前端展示。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我总觉得&lt;strong&gt;代码生成器&lt;/strong&gt;（Mybatis-Plus，RuoYi代码生成器）的实现方式和这也差不多 首先创建模板（这里是提示词）然后查询表结构数据，再进行模板渲染得到生成的代码&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;过程：请求流程：chatClient.call(message) → 调用 OllamaChatClient → 向本地 Ollama 服务发送请求
+智能路由：isCourseSelectionQuestion 方法实现业务问题识别，将选课相关问题路由到 BusinessAIService&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;chatClient是SpringAi提供的聊天
+页面展示：
+&lt;img src=&#34;https://1parado.github.io/img/%e9%80%89%e8%af%be%e5%8a%a9%e6%89%8b.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;选课助手&#34;
+	
+	
+&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;2025.10.22&lt;/p&gt;
+&lt;h2 id=&#34;论坛模块&#34;&gt;论坛模块
+&lt;/h2&gt;&lt;p&gt;对于论坛模块，学生可以发帖评价课程，教师不能发帖，两者都可以进行评论回复交流
+论坛主页展示一些帖子和热门榜单（Redis缓存）【这都是些简单的增删改查】
+&lt;img src=&#34;https://1parado.github.io/img/%e8%ae%ba%e5%9d%9b%e4%b8%bb%e9%a1%b5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;论坛主页&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%ad%a6%e7%94%9f%e5%8f%91%e5%b8%96.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;学生发帖&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%80%81%e5%b8%88%e4%b8%8d%e8%83%bd%e5%8f%91%e8%b4%b4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;老师不能发帖&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%af%84%e8%ae%ba%e6%a8%a1%e5%9d%97.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;评论模块&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;想到了一个小玩意，在用户进行发布帖子和进行评论的时候，进行敏感词检查。如果内容中包含敏感词 就弹出提示。实现起来挺简单的，让Java后端负责业务逻辑，python负责机器学习，python运行在本地端口，两者通过http进行通信。
+详情请看这篇文章 &lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%8F%E6%84%9F%E8%AF%8D%E6%A3%80%E6%B5%8B/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;如何实现一个简单的敏感词检测&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;2025.11.08&lt;/p&gt;
+&lt;h2 id=&#34;集成调查问卷系统&#34;&gt;集成调查问卷系统
+&lt;/h2&gt;&lt;p&gt;在现有的项目基础上，集成一个调查问卷系统，用于收集学生对课程的反馈和建议。根据角色不同，展示不同页面，对于游客可以浏览系统主页和问卷信息。教师和管理员可以发布调查问卷，学生可以填写和查看调查问卷。今天先把大致的页面和模块写完，现在登录模块有点问题，等明天再看一下。
+&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b71.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b72.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;2025.11.09
+今天完成的进度挺快的，现在大致看了一下，除了新建调查问卷的接口有点小问题，其他接口基本上都可以正常运行了，所以将运行截图放在这，源码放在Github上。其实这个模块没有什么重难点，文件导入和上传算一个吗？其实也不是很难，总之开发这个模块还是挺简单的。首先是RBAC权限控制，管理员可以查看全部调查问卷列表，普通用户可以浏览，但是无其他权限，比如增删改查操作，用户只可以进行查看和填写。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b73.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+调查问卷列表支持条件筛选和分页查询，这个用mp的分页查询即可&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b74.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+管理员有增删改查的权限，问卷详情信息和问卷数据统计信息如下图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b75.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b76.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b77.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+开发这个模块的是时候，真的觉得不是很难，未来想着看看能不能与AI结合起来，或者在教务系统中添加一些其他的子模块。GitHub仓库放在这&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/survey-system/tree/master&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;郑州大学调查问卷子系统&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         <item>

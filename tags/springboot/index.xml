@@ -7,7 +7,124 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Fri, 13 Feb 2026 14:55:50 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/springboot/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 06 Aug 2026 17:50:23 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/springboot/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>PromptShare</title>
+        <link>https://1parado.github.io/p/promptshare/</link>
+        <pubDate>Fri, 13 Feb 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/promptshare/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;在编程中开源代码可以减少重复造轮子的情况，同理，在提示词工程中，开源提示词也可以减少一部分的工作量。在GitHub或一些技术社区中经常会看到一些共享的Prompt知识库。人们常说，一个人的力量是有限的，而人民群众的力量是无穷的。如果制作一个以提示词为主题的开源社区，全世界个地方人们都在社区中开源自己遇到的问题，以及如何使用提示词和AI智能体来解决这些问题，这也是很棒的一件事情。因此，以我微薄的知识和编程技术，制作了一个简易的RromptShare提示词共享社区，也算抛砖引玉，希望更多人能参与到提示词开源的过程中，能减少精力在写一些通用提示词上，将更大的精力放在更有挑战的事情上。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/213-1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;提示词&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/213-2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;提示词&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/213-3.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;提示词&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/213-4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;提示词&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/213-5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;提示词&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>杭州实习</title>
+        <link>https://1parado.github.io/p/%E6%9D%AD%E5%B7%9E%E5%AE%9E%E4%B9%A0/</link>
+        <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/%E6%9D%AD%E5%B7%9E%E5%AE%9E%E4%B9%A0/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;h2 id=&#34;2026127&#34;&gt;2026.1.27
+&lt;/h2&gt;&lt;p&gt;仔细想想，其实我还是很幸运的。很感谢一路上遇到的这么多帮助过我的朋友们，和我一起讨论论文的by哥，帮助我找到第一次实习的yh，以及一直给予我经济支持的父母，给我动力的May。说真的，换做之前，我真的没有勇气踏出这一步，独自一个人前往千里之外的杭州。本人向来胆小，熟悉我的人都知道。所以这次杭州实习，担心远远大于激动，担心火车卧铺，担心租房，担心公司等等，但是实际上，担心的事情还是一件件的发生了，而且结果还不错，卧铺睡的也挺好的，租房也不错，公司员工也是很友好的。所以，行胜于言。今天去公司跟带我的老师沟通了一下，感觉说的挺有道理的，感觉他就是在业界很厉害的大佬，应该是架构师那种级别的吧，总之就是讲的很通透的。一月29号就可以入职了，今天他还问我一个问题，说我这次实习的预期是什么，只是一段简历上的实习经历，还是真的想要学习业务，或者为了钱。我也支支吾吾说不明白，总觉得这些大佬的规划都是很宏观的，而且不是很肤浅的单纯为了钱而工作。要学习的东西还是有很多的，希望进步速度能快一点，更快的让自己的段位升级。最后，一直想感谢May，想告诉May，真的很谢谢你。让我暂时不是很迷茫，让我有一个清晰的目标，让我感受到一个人为我担心为我开心的感觉有多么美好。总之，我真的是很幸运的了。最后，也希望我们能够照顾好我自己的身体，做热爱的事，爱对的人。希望这次实习能够让我自己更好的掌控自己的生活和经济，更加独立。特别特别特别特别AI你，May，希望你能好好照顾自己。杭州杭州!Fighting！&lt;/p&gt;
+&lt;h2 id=&#34;2026129&#34;&gt;2026.1.29
+&lt;/h2&gt;&lt;p&gt;今天终于入职了，公司的人都很好的，我今天早上其实是八点多就到了的，但是体检报告迟迟不出来，所以九点半才办好入职手续，第一天打卡就显示缺勤0.37天，而且晚上离开的时候我明明在人脸识别上扫脸了，但是OA系统上面看到没有打卡数据，所以我回到住的地方之后，又往返回去打了一次卡，但是系统还是没更新，不知道会不会对我的薪资和全勤奖有影响，希望没有吧。今天在公司只是在电脑上面配置一些东西，把相关软件都配置好了，明天问一下公司员工看看有什么可以帮忙的，主要是真的好困，在公司用的是内网，而且也没办法玩手机，没办法偷偷和may聊天了。这公司的显示屏这么大，我离老远就能看到别人屏幕上面的内容，真的很搞笑，不过公司的人真的挺好的，也没有什么上下级的关系，我应该好好努力融入这个公司，上班就是上班，一下班就把公司的事情放下，因为只有加班到八点才会给10块钱还是20块钱加班费哦，记不得了。不过也还可以吧，我觉得肯定能攒下来一些钱的，实习主要还是靠自己，明天真的要好好的看一下其他实习生或者正式员工都在做什么。好好的学真本事，为将来的发展做打算。还是有点愧疚呀，不能和May实时聊天了，在公司无聊的时候真的很想和May说说话。明天中午可以点外卖在公司餐厅吃，这样就有时间打电话了，也可以抽空中午午休一下。明天加油！&lt;/p&gt;
+&lt;h2 id=&#34;202622&#34;&gt;2026.2.2
+&lt;/h2&gt;&lt;p&gt;这个公司也太棒了，虽然是刚入职，但是过年前也是会给实习生发年货的，甚至有些实习生已经请假回校了，还会记住他们的地址，给他们邮寄过去。公司这氛围真的好好。希望能在这个公司多学一些东西吧，现在只是拿到了一个项目的代码，让我看，我也不知道看什么，求人不得，反诸求己。只有自己多学一点吧，毕竟快过年了，大家都想早点回家，可能对于我来说，估计就是年后才给我分配任务吧。主要是我主要要任务做，也不知道会分配给我什么工作，现在给我的是python代码，爬虫之类的项目，我觉得我应该稍微了解一下就好，之后肯定要做微服务相关的，重心应该放在Java这边吧，总之多学一点对之后肯定还是有帮助的吧。战胜迷茫的好办法就是静下心来一步一步来，慢慢的攻克难关，要有优先级，经常总结回顾。总之，还是需要继续努力的，前几天歇几天，天天玩手机也觉得没意思，先设定一个学习方向吧。现在work and life banlance的很好呀（我这雷霆英文）。加油加油！&lt;/p&gt;
+&lt;h2 id=&#34;202623&#34;&gt;2026.2.3
+&lt;/h2&gt;&lt;p&gt;今天在公司接到了我的第一个任务：排查sql数据为什么不一致，应该插入四万条数据，为什么插入11万条数据。让我排查这个问题，然后将解决思路记录到语雀中，我觉得还好吧，本来下午刚上班其实就完成了这个任务，但是又出现了一个新问题，就是某明奇妙的两个字段不是NULL，而是Default，我现在看来其实还是很简单的一个东西，主要还是我不太了解流程吧。不过到下班之前其实也是搞好了，等到明天测试一下就好了。本来还以为要在那里加班，但是公司的正式员工们都说了可以明天，或者如果这个任务完不成就提给mentor，让他重新安排其他人做。我觉得我还是完成的不错的，哈哈哈。明天早上去把解决思路挪到语雀上就好了应该。还是提前去一下吧，估计半个小时能搞完。2月5号，我们小组要去聚餐，我在公司现在负责的数据库之类的工作，OMS+数字仓库，这和Java有关吗我还不太清楚，总之在公司多学一点经验吧。加油！昨天晚上跟May聊了好久，真的希望所有的烦恼都远离你哈。健健康康的，天天开开心心的就足够了，明天得把鼠标带回来，出租屋里没有鼠标玩电脑有点难受&amp;hellip; 希望明天我负责的任务不要出乱子.&lt;/p&gt;
+&lt;h2 id=&#34;2026210&#34;&gt;2026.2.10
+&lt;/h2&gt;&lt;p&gt;快过年了，公司任务也不是很多，今天做了一个网页然后部署到Vercel，然后关联到我的域名上面了，其实还挺好看的。主要是现在都是玻璃拟态IOS风，主要在这个页面放一些自己常用的链接，还有一些常用的工具。打算将之前的酒旅项目从单体改造成微服务，感觉可以水好几篇博客了。哈哈哈。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.paradox29.xyz/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.paradox29.xyz/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;页面展示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/02101.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/02102.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Diary&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2026213&#34;&gt;2026.2.13
+&lt;/h2&gt;&lt;p&gt;明天再上一天班就可以回家过年了，公司发钱好快，我已经收到一月份来上班的工资了，虽然不知道工资是怎么算的。不过薪资我很满意。公司真的很好了，氛围也好，福利待遇也挺好的吧，而且薪资其实对于我来说也挺好的。而且来到这个公司，我总觉得有很大的意愿想要做些东西，不止于只做一些公司分配给我的任务，想要年后给Mentor提一下要不要建立一个公司内部的提示词知识库，能不能让我参与年后AI相关的项目。今天在公司，毕竟是年前嘛没有什么工作了，所以手搓了一个提示词共享平台，然后部署到Vercle上面了，之前总觉得部署到网上是一件很困难的事情，现在有AI的帮助，真的只要愿意学，掌握的速度真的很快。项目用的Nuxt+Vite，数据库用的Vercel上面的免费Postgresql。不过我刚才问群友才发现市面上已经有类似的项目了，名字叫aishort，而且在Github上面已经有7.2k Stars了。不管怎么说，面向AI编程时代，掌握怎么写提示词是很重要的。 我的项目访问地址： &lt;a class=&#34;link&#34; href=&#34;https://www.paradox29.xyz/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PromptWiki&lt;/a&gt;。看到这里的人祝你新年快乐！&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Diary 一款多功能日记软件</title>
         <link>https://1parado.github.io/p/diary-%E4%B8%80%E6%AC%BE%E5%A4%9A%E5%8A%9F%E8%83%BD%E6%97%A5%E8%AE%B0%E8%BD%AF%E4%BB%B6/</link>
         <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
@@ -168,684 +285,6 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1WtqQB1Evr/?share_source=copy_web&amp;amp;vd_source=e51d3438543fd80d97a3f4ce11e7cdcb&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;哔哩哔哩项目介绍链接&lt;/a&gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>仿教务系统</title>
-        <link>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</link>
-        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</guid>
-        <description>&lt;style&gt;
-  body {
-    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-&lt;/style&gt;
-&lt;p&gt;2025.10.15
-这是创建的
-&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/1parado_repo.github.io/blob/main/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;思维导图&lt;/a&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;2025.10.21&lt;/p&gt;
-&lt;h2 id=&#34;登录模块&#34;&gt;登录模块
-&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;登录鉴权&lt;/strong&gt; ：该项目采用SpringAOP + 自定义注解@RoleRequire实现RBAC鉴权&lt;/p&gt;
-&lt;p&gt;现有的登录鉴权方式：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;SpringSecurity&lt;/strong&gt;+RBAC模型+JWT实现认证与授权&lt;/li&gt;
-&lt;li&gt;SpringBoot + &lt;strong&gt;Sa-Token&lt;/strong&gt; + MyBatis + MySQL + Redis 实现用户鉴权、角色管理、权限管理&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Apache Shiro&lt;/strong&gt; 是一个轻量级的安全框架，适合需要简单易用的权限管理的项目&lt;/li&gt;
-&lt;li&gt;自定义 定义用户、角色、权限三张表，设计合理的关联关系， 使用拦截器或 AOP 实现权限校验逻辑。根据业务需求设计动态权限分配机制。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;JWT实现无状态认证&lt;/strong&gt;（不需要服务器存储用户的会话状态），一个JWT包括头部，载荷，签名。&lt;/p&gt;
-&lt;p&gt;过程：用户登录认证时，服务端验证用户身份，成功的话，服务端生成JWT返回给客户端，客户端在之后的请求中将JWT放在请求的头部（Authorization）,然后服务端通过解析JWT从而确定用户的身份和权限&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;双token机制实现无感刷新&lt;/strong&gt;：分为两种token 一种是access token（访问令牌）短期有效 ，一种是 refresh token（刷新令牌），长期有效。&lt;/p&gt;
-&lt;p&gt;过程：客户端登录，认证成功，服务端签发access_token（返回给前端）和refresh token（存入cookie） 之后，客户端访问接口都带着access_token 当access_token过期之后 客户端发送给refresh token给服务端 验证通过则生成新的access token和refresh token，从而实现无感刷新&lt;/p&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://juejin.cn/post/7548268336417751055&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;双 Token 认证机制：从原理到实践的完整实现双 Token 认证机制：从原理到实践的完整实现 在现代 Web 应用中 - 掘金&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;登录模块展示：首先进入登录页面：
-&lt;img src=&#34;https://1parado.github.io/img/%e7%99%bb%e5%bd%95%e9%a1%b5%e9%9d%a2.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;登录页面&#34;
-	
-	
-&gt;
-然后根据角色的不同，进入不同的主页，系统分为三种角色Admin,Teacher,Student
-&lt;img src=&#34;https://1parado.github.io/img/%e7%99%bb%e5%bd%95%e9%89%b4%e6%9d%83.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;登录鉴权&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h2 id=&#34;秒杀抢课模块&#34;&gt;秒杀抢课模块
-&lt;/h2&gt;&lt;p&gt;1.获取动态路径 使用UUID + MD5生成一个唯一标识符 结合前端URL生成动态路径 避免被脚本直接访问&lt;/p&gt;
-&lt;p&gt;2.实现限流保护 使用令牌桶实现限流保护（ &lt;strong&gt;Redis + 令牌桶算法&lt;/strong&gt;），这里创建一个工具类TokenBucket，里面的参数包括桶的最大容量，间隔几秒补充几个令牌，当前可用令牌数&amp;hellip;方法包括令牌补充refill和获取令牌逻辑try Acquire 从而实现限流。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;还可以利用redission实现分布式限流 &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/Mistiest/p/19082141&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;基于 Redisson 的分布式限流实战：令牌桶算法的优雅实现 - 你小志蒸不戳 - 博客园&lt;/a&gt;，比如保护AI访问的API&lt;/p&gt;
-&lt;p&gt;其他限流方式：&lt;strong&gt;固定窗口、滑动窗口、漏桶限流和令牌桶限流算法&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;检验动态路径（在获取动态path的时候会将动态path存入Redis，用于此时的动态路径校验）&lt;/li&gt;
-&lt;li&gt;检查当前用户是否重复秒杀 (幂等控制) 通过三级缓存实现 本地缓存采用Caffine/Guava 二级缓存采用Redis 三级缓存采用数据库 当发现任意一级的数据库中已经有选课记录了 就返回重复秒杀异常&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;幂等性指的是一个操作，无论执行多少次，都能得到相同的结果，即它不会因为执行多次而影响系统的状态。这在处理网络请求、数据库操作等场景中尤为重要，例如在订单支付、消息推送等操作中，即使因为网络延迟或其他原因导致多次请求，也应保证操作只执行一次，避免重复处理。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;
-&lt;p&gt;进入秒杀的核心阶段  Redis + Lua脚本 + RocketMQ 实现 库存预减 + 异步入队&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.bytewaver.top/2025/02/14/project/seckill/%e4%bb%8e%e9%9b%b6%e5%bc%80%e5%a7%8b%e5%ae%9e%e7%8e%b0%e7%a7%92%e6%9d%80%e7%b3%bb%e7%bb%9f3/#%e7%a7%92%e6%9d%80%e6%8e%a5%e5%8f%a3%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;从零开始实现秒杀系统（三）：RocketMQ消息队列篇 - Xun&amp;rsquo;s Blog&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Lua脚本进行双重判断，首先判断是否售罄标志，然后再判断库存预减之后的库存数量，并且在脚本中实现库存减1的操作 如果成功返回1 失败返回 0.Lua脚本返回成功，系统发送消息到消息队列（RocketMQ）采用&lt;strong&gt;事务消息机制&lt;/strong&gt;保证数据的最终一致性。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;生产者发送半消息 本地事务创建选课记录（订单） 根据事务的执行结果通知Broker是投递该消息还是丢弃该消息  消费者异步从MQ中消费信息 完成后续业务。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%bc%82%e6%ad%a5%e7%a7%92%e6%9d%80.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;异步秒杀流程&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;页面展示：
-首先填写预选课信息（类似于商城系统的购物车），然后查看选课信息（普通选课和秒杀抢课）
-&lt;img src=&#34;https://1parado.github.io/img/%e9%99%90%e6%97%b6%e6%8a%a2%e8%af%be.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;限时抢课&#34;
-	
-	
-&gt;
-如果用户是首次抢课且库存充足，则显示抢课成功
-&lt;img src=&#34;https://1parado.github.io/img/%e6%8a%a2%e8%af%be%e6%88%90%e5%8a%9f.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;抢课成功&#34;
-	
-	
-&gt;
-如果用户重复抢课则提醒请勿重复秒杀
-&lt;img src=&#34;https://1parado.github.io/img/%e9%87%8d%e5%a4%8d%e6%8a%a2%e8%af%be%e6%8f%90%e9%86%92.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;重复抢课提醒&#34;
-	
-	
-&gt;
-Admin端新增抢课信息
-&lt;img src=&#34;https://1parado.github.io/img/%e6%96%b0%e5%a2%9e%e6%8a%a2%e8%af%be%e4%bf%a1%e6%81%af.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;新增抢课&#34;
-	
-	
-&gt;
-当学生张三选过课程之后，该课程已经“售罄”了 接下来用李四来选课会提醒库存不足 抢课失败
-&lt;img src=&#34;https://1parado.github.io/img/%e6%8a%a2%e8%af%be%e5%a4%b1%e8%b4%a5.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;抢课失败&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;之后可以考虑用jmeter测试高并发场景下的抢课情况。&lt;/p&gt;
-&lt;h2 id=&#34;支付模块&#34;&gt;支付模块
-&lt;/h2&gt;&lt;p&gt;支付过程：&lt;/p&gt;
-&lt;p&gt;用户点击缴费 进入AliPayController 用请求头中的Authorization进行身份验证 用请求体中的PaymentPO来生成缴费信息【前端会收集页面信息 当用户点击缴费按钮就会构建PaymentPO写入请求体中传给后端】
-初始化订单信息 订单的状态初始化为0 标识未缴费 每个订单有一个唯一的订单号
-使用创建好的支付工具类PayUtil 调用支付宝接口完成支付流程&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;PayUtil中的核心方法即发起支付和查询支付结果方法：
-&lt;strong&gt;发起支付&lt;/strong&gt;：1.初始化支付宝客户端 2. 创建支付请求 3.设置业务参数 4.发起请求并且返回支付结果
-&lt;strong&gt;查询支付结果&lt;/strong&gt;：创建查询请求-执行查询-处理查询结果&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;结果展示：
-学生点击缴费之后，跳转到支付页面
-&lt;img src=&#34;https://1parado.github.io/img/%e6%94%af%e4%bb%98%e5%8c%85.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;支付宝&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;GitHub上面有一些支付服务的项目： &lt;a class=&#34;link&#34; href=&#34;https://github.com/search?q=%E6%94%AF%E4%BB%98&amp;amp;ref=opensearch&amp;amp;type=repositories&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/search?q=%E6%94%AF%E4%BB%98&amp;ref=opensearch&amp;type=repositories&lt;/a&gt; 可以支持支付服务的快速开发。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;h2 id=&#34;ai选课助手模块&#34;&gt;AI选课助手模块
-&lt;/h2&gt;&lt;p&gt;chatClient介绍：https://springdoc.cn/spring-ai/api/chatclient.html&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;请求接收与路由&lt;/strong&gt;：用户通过Vue3前端界面提出问题，后端RESTful API接收请求。核心的&lt;strong&gt;智能路由&lt;/strong&gt;逻辑会根据预设关键词（如“选课”、“推荐”、“统计”等）判断问题类型。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;业务上下文构建&lt;/strong&gt;：对于选课相关问题，系统会调用 CourseSelectionService ，通过 JdbcTemplate 高效查询选课数据库，获取课程热度、名额、个人成绩倾向等&lt;strong&gt;实时统计数据&lt;/strong&gt;。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Prompt工程与模型调用&lt;/strong&gt;：将查询到的业务数据作为上下文，与预先设计好的&lt;strong&gt;系统Prompt&lt;/strong&gt;（如“你是一名选课顾问…”）进行组装，形成完整的提示信息，然后通过Spring AI调用本地的Ollama (Qwen2:7b)模型。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;响应返回&lt;/strong&gt;：模型生成的个性化建议或通用回答最终通过统一的API返回给前端展示。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;我总觉得&lt;strong&gt;代码生成器&lt;/strong&gt;（Mybatis-Plus，RuoYi代码生成器）的实现方式和这也差不多 首先创建模板（这里是提示词）然后查询表结构数据，再进行模板渲染得到生成的代码&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;过程：请求流程：chatClient.call(message) → 调用 OllamaChatClient → 向本地 Ollama 服务发送请求
-智能路由：isCourseSelectionQuestion 方法实现业务问题识别，将选课相关问题路由到 BusinessAIService&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;chatClient是SpringAi提供的聊天
-页面展示：
-&lt;img src=&#34;https://1parado.github.io/img/%e9%80%89%e8%af%be%e5%8a%a9%e6%89%8b.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;选课助手&#34;
-	
-	
-&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;2025.10.22&lt;/p&gt;
-&lt;h2 id=&#34;论坛模块&#34;&gt;论坛模块
-&lt;/h2&gt;&lt;p&gt;对于论坛模块，学生可以发帖评价课程，教师不能发帖，两者都可以进行评论回复交流
-论坛主页展示一些帖子和热门榜单（Redis缓存）【这都是些简单的增删改查】
-&lt;img src=&#34;https://1parado.github.io/img/%e8%ae%ba%e5%9d%9b%e4%b8%bb%e9%a1%b5.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;论坛主页&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%ad%a6%e7%94%9f%e5%8f%91%e5%b8%96.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;学生发帖&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%80%81%e5%b8%88%e4%b8%8d%e8%83%bd%e5%8f%91%e8%b4%b4.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;老师不能发帖&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%af%84%e8%ae%ba%e6%a8%a1%e5%9d%97.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;评论模块&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;想到了一个小玩意，在用户进行发布帖子和进行评论的时候，进行敏感词检查。如果内容中包含敏感词 就弹出提示。实现起来挺简单的，让Java后端负责业务逻辑，python负责机器学习，python运行在本地端口，两者通过http进行通信。
-详情请看这篇文章 &lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%8F%E6%84%9F%E8%AF%8D%E6%A3%80%E6%B5%8B/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;如何实现一个简单的敏感词检测&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;2025.11.08&lt;/p&gt;
-&lt;h2 id=&#34;集成调查问卷系统&#34;&gt;集成调查问卷系统
-&lt;/h2&gt;&lt;p&gt;在现有的项目基础上，集成一个调查问卷系统，用于收集学生对课程的反馈和建议。根据角色不同，展示不同页面，对于游客可以浏览系统主页和问卷信息。教师和管理员可以发布调查问卷，学生可以填写和查看调查问卷。今天先把大致的页面和模块写完，现在登录模块有点问题，等明天再看一下。
-&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b71.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;
-&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b72.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;2025.11.09
-今天完成的进度挺快的，现在大致看了一下，除了新建调查问卷的接口有点小问题，其他接口基本上都可以正常运行了，所以将运行截图放在这，源码放在Github上。其实这个模块没有什么重难点，文件导入和上传算一个吗？其实也不是很难，总之开发这个模块还是挺简单的。首先是RBAC权限控制，管理员可以查看全部调查问卷列表，普通用户可以浏览，但是无其他权限，比如增删改查操作，用户只可以进行查看和填写。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b73.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;
-调查问卷列表支持条件筛选和分页查询，这个用mp的分页查询即可&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b74.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;
-管理员有增删改查的权限，问卷详情信息和问卷数据统计信息如下图&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b75.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;
-&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b76.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;
-&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b77.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调查问卷&#34;
-	
-	
-&gt;
-开发这个模块的是时候，真的觉得不是很难，未来想着看看能不能与AI结合起来，或者在教务系统中添加一些其他的子模块。GitHub仓库放在这&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/survey-system/tree/master&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;郑州大学调查问卷子系统&lt;/a&gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>自然语言转SQL语句实现增删改查操作</title>
-        <link>https://1parado.github.io/p/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E8%BD%ACsql%E8%AF%AD%E5%8F%A5%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/</link>
-        <pubDate>Thu, 23 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/p/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E8%BD%ACsql%E8%AF%AD%E5%8F%A5%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/</guid>
-        <description>&lt;style&gt;
-  body {
-    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-&lt;/style&gt;
-&lt;p&gt;首先需要了解一下什么是ORM（对象关系映射）:简单来说就是在&lt;strong&gt;关系型数据库&lt;/strong&gt;和对象（Bean，Entity）之间作一个映射，通过这种映射 我们就可以用面向对象编程（OOP）概念喝语法来操作数据库 不需要直接写SQL语句 ORM设计可以实现数据存取与业务逻辑完全分离
-Java中现在主流的ORM框架包括：&lt;/p&gt;
-&lt;p&gt;1.Hibernate：最流行的Java ORM框架之一&lt;/p&gt;
-&lt;p&gt;2.MyBatis：一种&amp;quot;半自动&amp;quot;的ORM框架&lt;/p&gt;
-&lt;p&gt;3.MyBatis-plus：MyBatis增强版 自带 CRUD、分页、Wrapper 等&lt;/p&gt;
-&lt;p&gt;MyBatis和Hibernate的区别可以看这篇文章：&lt;a class=&#34;link&#34; href=&#34;https://juejin.cn/post/7342799429583323177&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;MyBatis和Hibernate到底哪个好&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;本文使用的是Hibernate框架 因为他是spring默认的ORM框架 且支持快速开发 实现起来比较方便 而且我现在实现的只是一些简单的增删改查 数据量也不是很大 所以选用Hinernate框架&lt;/p&gt;
-&lt;p&gt;在pom文件中添加下面依赖 即可使用&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework.boot&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-boot-starter-data-jpa&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Hibernate有两种映射方法  一种是基于xml文件进行映射 一种是基于注解映射
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;配置方法1 ：在hibernate.cfg.xml文件中配置数据库和映射文件&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;!DOCTYPE hibernate-configuration PUBLIC
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;        &amp;#34;-//Hibernate/Hibernate Configuration DTD 3.0//EN&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;        &amp;#34;http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd&amp;#34;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;hibernate-configuration&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;session-factory&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- 数据库连接配置 --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.connection.driver_class&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;com.mysql.cj.jdbc.Driver&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.connection.url&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;jdbc:mysql://localhost:3306/数据库名&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.connection.username&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;账号&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.connection.password&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;密码&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- SQL方言 --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.dialect&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;org.hibernate.dialect.MySQL8Dialect&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- 显示SQL语句 --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.show_sql&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- 自动创建表 --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.hbm2ddl.auto&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;update&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- 映射文件 --&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;mapping&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;resource=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;com/example/model/User.hbm.xml&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/session-factory&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/hibernate-configuration&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;配置方法2：即在yml文件中配置：然后在实体类上用注解的方式实现映射&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;spring&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;datasource&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;jdbc:mysql://localhost:3306/mydb&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;driver-class-name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;com.mysql.cj.jdbc.Driver&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;jpa&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;hibernate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;ddl-auto&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;update&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;show-sql&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;properties&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;hibernate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;dialect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;org.hibernate.dialect.MySQL8Dialect&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;在entity包创建实体 Hibernate可以通过实体类自动生成表结构
-&lt;img src=&#34;https://1parado.github.io/img/Hibernate%e6%a1%86%e6%9e%b6.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Hibernate框架&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;参考&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/unbelievevc/article/details/132096074&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Hibernate的执行过程&lt;/a&gt;，简单说明一下Hibernate的执行过程&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;创建configuration实例，加载配置文件和映射文件到实例中&amp;ndash;创建sessionFactory实例&amp;ndash;创建session实例（非线程安全，每次请求创建一个新实例）&amp;ndash;创建Transaction实例开启事务&amp;ndash;利用session接口进行持久化操作&amp;ndash;提交事务&amp;ndash;关闭session和sessionFactory断开连接&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;项目的实现过程：首先前端有两个按钮 测试连接和执行查询 前端将请求发送给后端 点击测试连接来测试是否连接到数据库  点击执行按钮会将输入的文本传入后端 后端通过调用本地大模型将其转换为SQL语句 并且执行SQL操作 实现自然语言操作数据库的功能&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;遇到的问题1：后端端口在8080 前端端口在63342 浏览器默认阻止不同源之间的请求 所以需要CORS配置（跨域资源共享）
-在WebConfig文件中加入下面代码实现跨域资源共享&lt;/p&gt;&lt;/blockquote&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//配置全局CORS&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Configuration&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;WebConfig&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;implements&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;WebMvcConfigurer&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Override&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;addCorsMappings&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CorsRegistry&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;registry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;registry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;addMapping&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/api/**&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;allowedOrigins&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://localhost:63342&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 根据实际前端端口调整&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;allowedMethods&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;GET&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;POST&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;PUT&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;DELETE&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;allowCredentials&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;遇到的问题2：调用的本地模型是qwen2:0.5b 他太逊了（其实是我prompt没给对）刚开始一直不能将文本语言转为正确的SQL语句 后面换了几次prompt才能正常运行。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;运行页面：
-第一次查询失败 因为我犯蠢了 没将ollama启动&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e6%9f%a5%e8%af%a2%e5%a4%b1%e8%b4%a51.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;nltodb查询失败1&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e6%9f%a5%e8%af%a2%e6%88%90%e5%8a%9f.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;nltodb查询成功&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e7%b2%be%e5%87%86%e6%9f%a5%e8%af%a2.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;nltodb精准查询&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;用英文操作其实也是阔以的 因为输入的文本都是传入给本地大模型了 他会给你正确的sql语句 正确的操作数据库&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e8%8b%b1%e6%96%87%e6%9f%a5%e8%af%a2.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;nltodb英文查询&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;现在这个系统只是实现了查询功能 其他增删改操作实现起来跟查询操作大同小异 所以通过自然语言操作数据库是可行的并且有益于降低数据操作的门槛 GitHub上有好多优秀的开源项目 这里我就不一一列举了 总之 这个系统只是一个简单的MCP数据库的基本实现。&lt;/p&gt;
-&lt;p&gt;项目源码地址：https://github.com/1parado/MCP-Database&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>PromptShare</title>
-        <link>https://1parado.github.io/p/promptshare/</link>
-        <pubDate>Fri, 13 Feb 2026 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/p/promptshare/</guid>
-        <description>&lt;style&gt;
-  body {
-    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-&lt;/style&gt;
-&lt;p&gt;在编程中开源代码可以减少重复造轮子的情况，同理，在提示词工程中，开源提示词也可以减少一部分的工作量。在GitHub或一些技术社区中经常会看到一些共享的Prompt知识库。人们常说，一个人的力量是有限的，而人民群众的力量是无穷的。如果制作一个以提示词为主题的开源社区，全世界个地方人们都在社区中开源自己遇到的问题，以及如何使用提示词和AI智能体来解决这些问题，这也是很棒的一件事情。因此，以我微薄的知识和编程技术，制作了一个简易的RromptShare提示词共享社区，也算抛砖引玉，希望更多人能参与到提示词开源的过程中，能减少精力在写一些通用提示词上，将更大的精力放在更有挑战的事情上。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/213-1.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;提示词&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/213-2.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;提示词&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/213-3.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;提示词&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/213-4.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;提示词&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/213-5.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;提示词&#34;
-	
-	
-&gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>杭州实习</title>
-        <link>https://1parado.github.io/p/%E6%9D%AD%E5%B7%9E%E5%AE%9E%E4%B9%A0/</link>
-        <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/p/%E6%9D%AD%E5%B7%9E%E5%AE%9E%E4%B9%A0/</guid>
-        <description>&lt;style&gt;
-  body {
-    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-&lt;/style&gt;
-&lt;h2 id=&#34;2026127&#34;&gt;2026.1.27
-&lt;/h2&gt;&lt;p&gt;仔细想想，其实我还是很幸运的。很感谢一路上遇到的这么多帮助过我的朋友们，和我一起讨论论文的by哥，帮助我找到第一次实习的yh，以及一直给予我经济支持的父母，给我动力的May。说真的，换做之前，我真的没有勇气踏出这一步，独自一个人前往千里之外的杭州。本人向来胆小，熟悉我的人都知道。所以这次杭州实习，担心远远大于激动，担心火车卧铺，担心租房，担心公司等等，但是实际上，担心的事情还是一件件的发生了，而且结果还不错，卧铺睡的也挺好的，租房也不错，公司员工也是很友好的。所以，行胜于言。今天去公司跟带我的老师沟通了一下，感觉说的挺有道理的，感觉他就是在业界很厉害的大佬，应该是架构师那种级别的吧，总之就是讲的很通透的。一月29号就可以入职了，今天他还问我一个问题，说我这次实习的预期是什么，只是一段简历上的实习经历，还是真的想要学习业务，或者为了钱。我也支支吾吾说不明白，总觉得这些大佬的规划都是很宏观的，而且不是很肤浅的单纯为了钱而工作。要学习的东西还是有很多的，希望进步速度能快一点，更快的让自己的段位升级。最后，一直想感谢May，想告诉May，真的很谢谢你。让我暂时不是很迷茫，让我有一个清晰的目标，让我感受到一个人为我担心为我开心的感觉有多么美好。总之，我真的是很幸运的了。最后，也希望我们能够照顾好我自己的身体，做热爱的事，爱对的人。希望这次实习能够让我自己更好的掌控自己的生活和经济，更加独立。特别特别特别特别AI你，May，希望你能好好照顾自己。杭州杭州!Fighting！&lt;/p&gt;
-&lt;h2 id=&#34;2026129&#34;&gt;2026.1.29
-&lt;/h2&gt;&lt;p&gt;今天终于入职了，公司的人都很好的，我今天早上其实是八点多就到了的，但是体检报告迟迟不出来，所以九点半才办好入职手续，第一天打卡就显示缺勤0.37天，而且晚上离开的时候我明明在人脸识别上扫脸了，但是OA系统上面看到没有打卡数据，所以我回到住的地方之后，又往返回去打了一次卡，但是系统还是没更新，不知道会不会对我的薪资和全勤奖有影响，希望没有吧。今天在公司只是在电脑上面配置一些东西，把相关软件都配置好了，明天问一下公司员工看看有什么可以帮忙的，主要是真的好困，在公司用的是内网，而且也没办法玩手机，没办法偷偷和may聊天了。这公司的显示屏这么大，我离老远就能看到别人屏幕上面的内容，真的很搞笑，不过公司的人真的挺好的，也没有什么上下级的关系，我应该好好努力融入这个公司，上班就是上班，一下班就把公司的事情放下，因为只有加班到八点才会给10块钱还是20块钱加班费哦，记不得了。不过也还可以吧，我觉得肯定能攒下来一些钱的，实习主要还是靠自己，明天真的要好好的看一下其他实习生或者正式员工都在做什么。好好的学真本事，为将来的发展做打算。还是有点愧疚呀，不能和May实时聊天了，在公司无聊的时候真的很想和May说说话。明天中午可以点外卖在公司餐厅吃，这样就有时间打电话了，也可以抽空中午午休一下。明天加油！&lt;/p&gt;
-&lt;h2 id=&#34;202622&#34;&gt;2026.2.2
-&lt;/h2&gt;&lt;p&gt;这个公司也太棒了，虽然是刚入职，但是过年前也是会给实习生发年货的，甚至有些实习生已经请假回校了，还会记住他们的地址，给他们邮寄过去。公司这氛围真的好好。希望能在这个公司多学一些东西吧，现在只是拿到了一个项目的代码，让我看，我也不知道看什么，求人不得，反诸求己。只有自己多学一点吧，毕竟快过年了，大家都想早点回家，可能对于我来说，估计就是年后才给我分配任务吧。主要是我主要要任务做，也不知道会分配给我什么工作，现在给我的是python代码，爬虫之类的项目，我觉得我应该稍微了解一下就好，之后肯定要做微服务相关的，重心应该放在Java这边吧，总之多学一点对之后肯定还是有帮助的吧。战胜迷茫的好办法就是静下心来一步一步来，慢慢的攻克难关，要有优先级，经常总结回顾。总之，还是需要继续努力的，前几天歇几天，天天玩手机也觉得没意思，先设定一个学习方向吧。现在work and life banlance的很好呀（我这雷霆英文）。加油加油！&lt;/p&gt;
-&lt;h2 id=&#34;202623&#34;&gt;2026.2.3
-&lt;/h2&gt;&lt;p&gt;今天在公司接到了我的第一个任务：排查sql数据为什么不一致，应该插入四万条数据，为什么插入11万条数据。让我排查这个问题，然后将解决思路记录到语雀中，我觉得还好吧，本来下午刚上班其实就完成了这个任务，但是又出现了一个新问题，就是某明奇妙的两个字段不是NULL，而是Default，我现在看来其实还是很简单的一个东西，主要还是我不太了解流程吧。不过到下班之前其实也是搞好了，等到明天测试一下就好了。本来还以为要在那里加班，但是公司的正式员工们都说了可以明天，或者如果这个任务完不成就提给mentor，让他重新安排其他人做。我觉得我还是完成的不错的，哈哈哈。明天早上去把解决思路挪到语雀上就好了应该。还是提前去一下吧，估计半个小时能搞完。2月5号，我们小组要去聚餐，我在公司现在负责的数据库之类的工作，OMS+数字仓库，这和Java有关吗我还不太清楚，总之在公司多学一点经验吧。加油！昨天晚上跟May聊了好久，真的希望所有的烦恼都远离你哈。健健康康的，天天开开心心的就足够了，明天得把鼠标带回来，出租屋里没有鼠标玩电脑有点难受&amp;hellip; 希望明天我负责的任务不要出乱子.&lt;/p&gt;
-&lt;h2 id=&#34;2026210&#34;&gt;2026.2.10
-&lt;/h2&gt;&lt;p&gt;快过年了，公司任务也不是很多，今天做了一个网页然后部署到Vercel，然后关联到我的域名上面了，其实还挺好看的。主要是现在都是玻璃拟态IOS风，主要在这个页面放一些自己常用的链接，还有一些常用的工具。打算将之前的酒旅项目从单体改造成微服务，感觉可以水好几篇博客了。哈哈哈。&lt;/p&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.paradox29.xyz/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://www.paradox29.xyz/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;页面展示：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/02101.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Diary&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/02102.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;Diary&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h2 id=&#34;2026213&#34;&gt;2026.2.13
-&lt;/h2&gt;&lt;p&gt;明天再上一天班就可以回家过年了，公司发钱好快，我已经收到一月份来上班的工资了，虽然不知道工资是怎么算的。不过薪资我很满意。公司真的很好了，氛围也好，福利待遇也挺好的吧，而且薪资其实对于我来说也挺好的。而且来到这个公司，我总觉得有很大的意愿想要做些东西，不止于只做一些公司分配给我的任务，想要年后给Mentor提一下要不要建立一个公司内部的提示词知识库，能不能让我参与年后AI相关的项目。今天在公司，毕竟是年前嘛没有什么工作了，所以手搓了一个提示词共享平台，然后部署到Vercle上面了，之前总觉得部署到网上是一件很困难的事情，现在有AI的帮助，真的只要愿意学，掌握的速度真的很快。项目用的Nuxt+Vite，数据库用的Vercel上面的免费Postgresql。不过我刚才问群友才发现市面上已经有类似的项目了，名字叫aishort，而且在Github上面已经有7.2k Stars了。不管怎么说，面向AI编程时代，掌握怎么写提示词是很重要的。 我的项目访问地址： &lt;a class=&#34;link&#34; href=&#34;https://www.paradox29.xyz/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;PromptWiki&lt;/a&gt;。看到这里的人祝你新年快乐！&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -1199,6 +638,234 @@ Java中现在主流的ORM框架包括：&lt;/p&gt;
 	
 	
 &gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>自然语言转SQL语句实现增删改查操作</title>
+        <link>https://1parado.github.io/p/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E8%BD%ACsql%E8%AF%AD%E5%8F%A5%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/</link>
+        <pubDate>Thu, 23 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E8%BD%ACsql%E8%AF%AD%E5%8F%A5%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;首先需要了解一下什么是ORM（对象关系映射）:简单来说就是在&lt;strong&gt;关系型数据库&lt;/strong&gt;和对象（Bean，Entity）之间作一个映射，通过这种映射 我们就可以用面向对象编程（OOP）概念喝语法来操作数据库 不需要直接写SQL语句 ORM设计可以实现数据存取与业务逻辑完全分离
+Java中现在主流的ORM框架包括：&lt;/p&gt;
+&lt;p&gt;1.Hibernate：最流行的Java ORM框架之一&lt;/p&gt;
+&lt;p&gt;2.MyBatis：一种&amp;quot;半自动&amp;quot;的ORM框架&lt;/p&gt;
+&lt;p&gt;3.MyBatis-plus：MyBatis增强版 自带 CRUD、分页、Wrapper 等&lt;/p&gt;
+&lt;p&gt;MyBatis和Hibernate的区别可以看这篇文章：&lt;a class=&#34;link&#34; href=&#34;https://juejin.cn/post/7342799429583323177&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;MyBatis和Hibernate到底哪个好&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;本文使用的是Hibernate框架 因为他是spring默认的ORM框架 且支持快速开发 实现起来比较方便 而且我现在实现的只是一些简单的增删改查 数据量也不是很大 所以选用Hinernate框架&lt;/p&gt;
+&lt;p&gt;在pom文件中添加下面依赖 即可使用&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework.boot&lt;span class=&#34;nt&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-boot-starter-data-jpa&lt;span class=&#34;nt&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Hibernate有两种映射方法  一种是基于xml文件进行映射 一种是基于注解映射
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;配置方法1 ：在hibernate.cfg.xml文件中配置数据库和映射文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;!DOCTYPE hibernate-configuration PUBLIC
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;        &amp;#34;-//Hibernate/Hibernate Configuration DTD 3.0//EN&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;        &amp;#34;http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd&amp;#34;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;hibernate-configuration&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;session-factory&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- 数据库连接配置 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.connection.driver_class&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;com.mysql.cj.jdbc.Driver&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.connection.url&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;jdbc:mysql://localhost:3306/数据库名&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.connection.username&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;账号&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.connection.password&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;密码&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- SQL方言 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.dialect&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;org.hibernate.dialect.MySQL8Dialect&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- 显示SQL语句 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.show_sql&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- 自动创建表 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;hibernate.hbm2ddl.auto&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;update&lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- 映射文件 --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;mapping&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;resource=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;com/example/model/User.hbm.xml&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/session-factory&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/hibernate-configuration&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;配置方法2：即在yml文件中配置：然后在实体类上用注解的方式实现映射&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;spring&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;datasource&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;jdbc:mysql://localhost:3306/mydb&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;driver-class-name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;com.mysql.cj.jdbc.Driver&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;jpa&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;hibernate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;ddl-auto&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;update&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;show-sql&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;properties&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;hibernate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;dialect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;org.hibernate.dialect.MySQL8Dialect&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在entity包创建实体 Hibernate可以通过实体类自动生成表结构
+&lt;img src=&#34;https://1parado.github.io/img/Hibernate%e6%a1%86%e6%9e%b6.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Hibernate框架&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;参考&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/unbelievevc/article/details/132096074&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hibernate的执行过程&lt;/a&gt;，简单说明一下Hibernate的执行过程&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;创建configuration实例，加载配置文件和映射文件到实例中&amp;ndash;创建sessionFactory实例&amp;ndash;创建session实例（非线程安全，每次请求创建一个新实例）&amp;ndash;创建Transaction实例开启事务&amp;ndash;利用session接口进行持久化操作&amp;ndash;提交事务&amp;ndash;关闭session和sessionFactory断开连接&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;项目的实现过程：首先前端有两个按钮 测试连接和执行查询 前端将请求发送给后端 点击测试连接来测试是否连接到数据库  点击执行按钮会将输入的文本传入后端 后端通过调用本地大模型将其转换为SQL语句 并且执行SQL操作 实现自然语言操作数据库的功能&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;遇到的问题1：后端端口在8080 前端端口在63342 浏览器默认阻止不同源之间的请求 所以需要CORS配置（跨域资源共享）
+在WebConfig文件中加入下面代码实现跨域资源共享&lt;/p&gt;&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//配置全局CORS&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Configuration&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;WebConfig&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;implements&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;WebMvcConfigurer&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nd&#34;&gt;@Override&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;addCorsMappings&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CorsRegistry&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;registry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;registry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;addMapping&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/api/**&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;allowedOrigins&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://localhost:63342&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 根据实际前端端口调整&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;allowedMethods&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;GET&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;POST&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;PUT&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;DELETE&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;                &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;allowCredentials&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;遇到的问题2：调用的本地模型是qwen2:0.5b 他太逊了（其实是我prompt没给对）刚开始一直不能将文本语言转为正确的SQL语句 后面换了几次prompt才能正常运行。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;运行页面：
+第一次查询失败 因为我犯蠢了 没将ollama启动&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e6%9f%a5%e8%af%a2%e5%a4%b1%e8%b4%a51.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;nltodb查询失败1&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e6%9f%a5%e8%af%a2%e6%88%90%e5%8a%9f.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;nltodb查询成功&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e7%b2%be%e5%87%86%e6%9f%a5%e8%af%a2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;nltodb精准查询&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;用英文操作其实也是阔以的 因为输入的文本都是传入给本地大模型了 他会给你正确的sql语句 正确的操作数据库&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/nltodb%e8%8b%b1%e6%96%87%e6%9f%a5%e8%af%a2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;nltodb英文查询&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;现在这个系统只是实现了查询功能 其他增删改操作实现起来跟查询操作大同小异 所以通过自然语言操作数据库是可行的并且有益于降低数据操作的门槛 GitHub上有好多优秀的开源项目 这里我就不一一列举了 总之 这个系统只是一个简单的MCP数据库的基本实现。&lt;/p&gt;
+&lt;p&gt;项目源码地址：https://github.com/1parado/MCP-Database&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -1649,6 +1316,339 @@ Java中现在主流的ORM框架包括：&lt;/p&gt;
 	
 	
 &gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>仿教务系统</title>
+        <link>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</link>
+        <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;2025.10.15
+这是创建的
+&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/1parado_repo.github.io/blob/main/%E4%BB%BF%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;思维导图&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;2025.10.21&lt;/p&gt;
+&lt;h2 id=&#34;登录模块&#34;&gt;登录模块
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;登录鉴权&lt;/strong&gt; ：该项目采用SpringAOP + 自定义注解@RoleRequire实现RBAC鉴权&lt;/p&gt;
+&lt;p&gt;现有的登录鉴权方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;SpringSecurity&lt;/strong&gt;+RBAC模型+JWT实现认证与授权&lt;/li&gt;
+&lt;li&gt;SpringBoot + &lt;strong&gt;Sa-Token&lt;/strong&gt; + MyBatis + MySQL + Redis 实现用户鉴权、角色管理、权限管理&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Apache Shiro&lt;/strong&gt; 是一个轻量级的安全框架，适合需要简单易用的权限管理的项目&lt;/li&gt;
+&lt;li&gt;自定义 定义用户、角色、权限三张表，设计合理的关联关系， 使用拦截器或 AOP 实现权限校验逻辑。根据业务需求设计动态权限分配机制。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;JWT实现无状态认证&lt;/strong&gt;（不需要服务器存储用户的会话状态），一个JWT包括头部，载荷，签名。&lt;/p&gt;
+&lt;p&gt;过程：用户登录认证时，服务端验证用户身份，成功的话，服务端生成JWT返回给客户端，客户端在之后的请求中将JWT放在请求的头部（Authorization）,然后服务端通过解析JWT从而确定用户的身份和权限&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;双token机制实现无感刷新&lt;/strong&gt;：分为两种token 一种是access token（访问令牌）短期有效 ，一种是 refresh token（刷新令牌），长期有效。&lt;/p&gt;
+&lt;p&gt;过程：客户端登录，认证成功，服务端签发access_token（返回给前端）和refresh token（存入cookie） 之后，客户端访问接口都带着access_token 当access_token过期之后 客户端发送给refresh token给服务端 验证通过则生成新的access token和refresh token，从而实现无感刷新&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://juejin.cn/post/7548268336417751055&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;双 Token 认证机制：从原理到实践的完整实现双 Token 认证机制：从原理到实践的完整实现 在现代 Web 应用中 - 掘金&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;登录模块展示：首先进入登录页面：
+&lt;img src=&#34;https://1parado.github.io/img/%e7%99%bb%e5%bd%95%e9%a1%b5%e9%9d%a2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;登录页面&#34;
+	
+	
+&gt;
+然后根据角色的不同，进入不同的主页，系统分为三种角色Admin,Teacher,Student
+&lt;img src=&#34;https://1parado.github.io/img/%e7%99%bb%e5%bd%95%e9%89%b4%e6%9d%83.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;登录鉴权&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;秒杀抢课模块&#34;&gt;秒杀抢课模块
+&lt;/h2&gt;&lt;p&gt;1.获取动态路径 使用UUID + MD5生成一个唯一标识符 结合前端URL生成动态路径 避免被脚本直接访问&lt;/p&gt;
+&lt;p&gt;2.实现限流保护 使用令牌桶实现限流保护（ &lt;strong&gt;Redis + 令牌桶算法&lt;/strong&gt;），这里创建一个工具类TokenBucket，里面的参数包括桶的最大容量，间隔几秒补充几个令牌，当前可用令牌数&amp;hellip;方法包括令牌补充refill和获取令牌逻辑try Acquire 从而实现限流。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;还可以利用redission实现分布式限流 &lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/Mistiest/p/19082141&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;基于 Redisson 的分布式限流实战：令牌桶算法的优雅实现 - 你小志蒸不戳 - 博客园&lt;/a&gt;，比如保护AI访问的API&lt;/p&gt;
+&lt;p&gt;其他限流方式：&lt;strong&gt;固定窗口、滑动窗口、漏桶限流和令牌桶限流算法&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;检验动态路径（在获取动态path的时候会将动态path存入Redis，用于此时的动态路径校验）&lt;/li&gt;
+&lt;li&gt;检查当前用户是否重复秒杀 (幂等控制) 通过三级缓存实现 本地缓存采用Caffine/Guava 二级缓存采用Redis 三级缓存采用数据库 当发现任意一级的数据库中已经有选课记录了 就返回重复秒杀异常&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;幂等性指的是一个操作，无论执行多少次，都能得到相同的结果，即它不会因为执行多次而影响系统的状态。这在处理网络请求、数据库操作等场景中尤为重要，例如在订单支付、消息推送等操作中，即使因为网络延迟或其他原因导致多次请求，也应保证操作只执行一次，避免重复处理。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;进入秒杀的核心阶段  Redis + Lua脚本 + RocketMQ 实现 库存预减 + 异步入队&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.bytewaver.top/2025/02/14/project/seckill/%e4%bb%8e%e9%9b%b6%e5%bc%80%e5%a7%8b%e5%ae%9e%e7%8e%b0%e7%a7%92%e6%9d%80%e7%b3%bb%e7%bb%9f3/#%e7%a7%92%e6%9d%80%e6%8e%a5%e5%8f%a3%e6%89%a7%e8%a1%8c%e6%b5%81%e7%a8%8b&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;从零开始实现秒杀系统（三）：RocketMQ消息队列篇 - Xun&amp;rsquo;s Blog&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Lua脚本进行双重判断，首先判断是否售罄标志，然后再判断库存预减之后的库存数量，并且在脚本中实现库存减1的操作 如果成功返回1 失败返回 0.Lua脚本返回成功，系统发送消息到消息队列（RocketMQ）采用&lt;strong&gt;事务消息机制&lt;/strong&gt;保证数据的最终一致性。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;生产者发送半消息 本地事务创建选课记录（订单） 根据事务的执行结果通知Broker是投递该消息还是丢弃该消息  消费者异步从MQ中消费信息 完成后续业务。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%bc%82%e6%ad%a5%e7%a7%92%e6%9d%80.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;异步秒杀流程&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;页面展示：
+首先填写预选课信息（类似于商城系统的购物车），然后查看选课信息（普通选课和秒杀抢课）
+&lt;img src=&#34;https://1parado.github.io/img/%e9%99%90%e6%97%b6%e6%8a%a2%e8%af%be.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;限时抢课&#34;
+	
+	
+&gt;
+如果用户是首次抢课且库存充足，则显示抢课成功
+&lt;img src=&#34;https://1parado.github.io/img/%e6%8a%a2%e8%af%be%e6%88%90%e5%8a%9f.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;抢课成功&#34;
+	
+	
+&gt;
+如果用户重复抢课则提醒请勿重复秒杀
+&lt;img src=&#34;https://1parado.github.io/img/%e9%87%8d%e5%a4%8d%e6%8a%a2%e8%af%be%e6%8f%90%e9%86%92.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;重复抢课提醒&#34;
+	
+	
+&gt;
+Admin端新增抢课信息
+&lt;img src=&#34;https://1parado.github.io/img/%e6%96%b0%e5%a2%9e%e6%8a%a2%e8%af%be%e4%bf%a1%e6%81%af.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;新增抢课&#34;
+	
+	
+&gt;
+当学生张三选过课程之后，该课程已经“售罄”了 接下来用李四来选课会提醒库存不足 抢课失败
+&lt;img src=&#34;https://1parado.github.io/img/%e6%8a%a2%e8%af%be%e5%a4%b1%e8%b4%a5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;抢课失败&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;之后可以考虑用jmeter测试高并发场景下的抢课情况。&lt;/p&gt;
+&lt;h2 id=&#34;支付模块&#34;&gt;支付模块
+&lt;/h2&gt;&lt;p&gt;支付过程：&lt;/p&gt;
+&lt;p&gt;用户点击缴费 进入AliPayController 用请求头中的Authorization进行身份验证 用请求体中的PaymentPO来生成缴费信息【前端会收集页面信息 当用户点击缴费按钮就会构建PaymentPO写入请求体中传给后端】
+初始化订单信息 订单的状态初始化为0 标识未缴费 每个订单有一个唯一的订单号
+使用创建好的支付工具类PayUtil 调用支付宝接口完成支付流程&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;PayUtil中的核心方法即发起支付和查询支付结果方法：
+&lt;strong&gt;发起支付&lt;/strong&gt;：1.初始化支付宝客户端 2. 创建支付请求 3.设置业务参数 4.发起请求并且返回支付结果
+&lt;strong&gt;查询支付结果&lt;/strong&gt;：创建查询请求-执行查询-处理查询结果&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;结果展示：
+学生点击缴费之后，跳转到支付页面
+&lt;img src=&#34;https://1parado.github.io/img/%e6%94%af%e4%bb%98%e5%8c%85.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;支付宝&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;GitHub上面有一些支付服务的项目： &lt;a class=&#34;link&#34; href=&#34;https://github.com/search?q=%E6%94%AF%E4%BB%98&amp;amp;ref=opensearch&amp;amp;type=repositories&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/search?q=%E6%94%AF%E4%BB%98&amp;ref=opensearch&amp;type=repositories&lt;/a&gt; 可以支持支付服务的快速开发。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;ai选课助手模块&#34;&gt;AI选课助手模块
+&lt;/h2&gt;&lt;p&gt;chatClient介绍：https://springdoc.cn/spring-ai/api/chatclient.html&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;请求接收与路由&lt;/strong&gt;：用户通过Vue3前端界面提出问题，后端RESTful API接收请求。核心的&lt;strong&gt;智能路由&lt;/strong&gt;逻辑会根据预设关键词（如“选课”、“推荐”、“统计”等）判断问题类型。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;业务上下文构建&lt;/strong&gt;：对于选课相关问题，系统会调用 CourseSelectionService ，通过 JdbcTemplate 高效查询选课数据库，获取课程热度、名额、个人成绩倾向等&lt;strong&gt;实时统计数据&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Prompt工程与模型调用&lt;/strong&gt;：将查询到的业务数据作为上下文，与预先设计好的&lt;strong&gt;系统Prompt&lt;/strong&gt;（如“你是一名选课顾问…”）进行组装，形成完整的提示信息，然后通过Spring AI调用本地的Ollama (Qwen2:7b)模型。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;响应返回&lt;/strong&gt;：模型生成的个性化建议或通用回答最终通过统一的API返回给前端展示。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我总觉得&lt;strong&gt;代码生成器&lt;/strong&gt;（Mybatis-Plus，RuoYi代码生成器）的实现方式和这也差不多 首先创建模板（这里是提示词）然后查询表结构数据，再进行模板渲染得到生成的代码&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;过程：请求流程：chatClient.call(message) → 调用 OllamaChatClient → 向本地 Ollama 服务发送请求
+智能路由：isCourseSelectionQuestion 方法实现业务问题识别，将选课相关问题路由到 BusinessAIService&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;chatClient是SpringAi提供的聊天
+页面展示：
+&lt;img src=&#34;https://1parado.github.io/img/%e9%80%89%e8%af%be%e5%8a%a9%e6%89%8b.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;选课助手&#34;
+	
+	
+&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;2025.10.22&lt;/p&gt;
+&lt;h2 id=&#34;论坛模块&#34;&gt;论坛模块
+&lt;/h2&gt;&lt;p&gt;对于论坛模块，学生可以发帖评价课程，教师不能发帖，两者都可以进行评论回复交流
+论坛主页展示一些帖子和热门榜单（Redis缓存）【这都是些简单的增删改查】
+&lt;img src=&#34;https://1parado.github.io/img/%e8%ae%ba%e5%9d%9b%e4%b8%bb%e9%a1%b5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;论坛主页&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e5%ad%a6%e7%94%9f%e5%8f%91%e5%b8%96.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;学生发帖&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%80%81%e5%b8%88%e4%b8%8d%e8%83%bd%e5%8f%91%e8%b4%b4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;老师不能发帖&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%af%84%e8%ae%ba%e6%a8%a1%e5%9d%97.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;评论模块&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;想到了一个小玩意，在用户进行发布帖子和进行评论的时候，进行敏感词检查。如果内容中包含敏感词 就弹出提示。实现起来挺简单的，让Java后端负责业务逻辑，python负责机器学习，python运行在本地端口，两者通过http进行通信。
+详情请看这篇文章 &lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%8F%E6%84%9F%E8%AF%8D%E6%A3%80%E6%B5%8B/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;如何实现一个简单的敏感词检测&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;2025.11.08&lt;/p&gt;
+&lt;h2 id=&#34;集成调查问卷系统&#34;&gt;集成调查问卷系统
+&lt;/h2&gt;&lt;p&gt;在现有的项目基础上，集成一个调查问卷系统，用于收集学生对课程的反馈和建议。根据角色不同，展示不同页面，对于游客可以浏览系统主页和问卷信息。教师和管理员可以发布调查问卷，学生可以填写和查看调查问卷。今天先把大致的页面和模块写完，现在登录模块有点问题，等明天再看一下。
+&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b71.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b72.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;2025.11.09
+今天完成的进度挺快的，现在大致看了一下，除了新建调查问卷的接口有点小问题，其他接口基本上都可以正常运行了，所以将运行截图放在这，源码放在Github上。其实这个模块没有什么重难点，文件导入和上传算一个吗？其实也不是很难，总之开发这个模块还是挺简单的。首先是RBAC权限控制，管理员可以查看全部调查问卷列表，普通用户可以浏览，但是无其他权限，比如增删改查操作，用户只可以进行查看和填写。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b73.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+调查问卷列表支持条件筛选和分页查询，这个用mp的分页查询即可&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b74.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+管理员有增删改查的权限，问卷详情信息和问卷数据统计信息如下图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b75.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b76.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://1parado.github.io/img/%e8%b0%83%e6%9f%a5%e9%97%ae%e5%8d%b77.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调查问卷&#34;
+	
+	
+&gt;
+开发这个模块的是时候，真的觉得不是很难，未来想着看看能不能与AI结合起来，或者在教务系统中添加一些其他的子模块。GitHub仓库放在这&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/survey-system/tree/master&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;郑州大学调查问卷子系统&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
