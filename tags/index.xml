@@ -7,12 +7,20 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Thu, 06 Aug 2026 17:50:23 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Redis</title>
-        <link>https://1parado.github.io/tags/redis/</link>
+        <lastBuildDate>Thu, 20 Aug 2026 19:18:24 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Go</title>
+        <link>https://1parado.github.io/tags/go/</link>
         <pubDate>Thu, 06 Aug 2026 00:00:00 +0000</pubDate>
         
-        <guid>https://1parado.github.io/tags/redis/</guid>
+        <guid>https://1parado.github.io/tags/go/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Golang</title>
+        <link>https://1parado.github.io/tags/golang/</link>
+        <pubDate>Thu, 06 Aug 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/golang/</guid>
         <description></description>
         </item>
         <item>
@@ -85,6 +93,14 @@
         <pubDate>Wed, 24 Dec 2025 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/tags/windows/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Redis</title>
+        <link>https://1parado.github.io/tags/redis/</link>
+        <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/redis/</guid>
         <description></description>
         </item>
         <item>

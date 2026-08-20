@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="开始学习Go">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="开始学习 Go">
 <title>Go 教程第一课</title>
 
 <link rel='canonical' href='https://1parado.github.io/p/go-%E6%95%99%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/'>
 
 <link rel="stylesheet" href="/scss/style.min.ec0275f9efc7477560607f9610e0eeb6ebb5e53a8dcbdd5591f1ea2ee0b3c273.css"><meta property='og:title' content="Go 教程第一课">
-<meta property='og:description' content="开始学习Go">
+<meta property='og:description' content="开始学习 Go">
 <meta property='og:url' content='https://1parado.github.io/p/go-%E6%95%99%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/'>
 <meta property='og:site_name' content='Paradox’s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Redis' /><meta property='article:published_time' content='2026-08-06T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-08-06T17:36:07&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Go' /><meta property='article:tag' content='Golang' /><meta property='article:published_time' content='2026-08-06T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-08-20T19:18:24&#43;08:00'/>
 <meta name="twitter:title" content="Go 教程第一课">
-<meta name="twitter:description" content="开始学习Go">
+<meta name="twitter:description" content="开始学习 Go">
     </head>
     <body class="
     article-page
@@ -270,30 +270,84 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#2026-08-06">2026-08-06</a></li>
-    <li><a href="#教程下载到本地">教程下载到本地</a></li>
-    <li><a href="#官方网站">官方网站</a></li>
+    <li><a href="#一教程下载与运行">一、教程下载与运行</a>
+      <ol>
+        <li><a href="#1-下载官方交互式教程">1. 下载官方交互式教程</a></li>
+      </ol>
+    </li>
   </ol>
 
   <ol>
-    <li><a href="#常见的包">常见的包</a></li>
-    <li><a href="#导入包">导入包</a></li>
-    <li><a href="#导出名称">导出名称</a></li>
-    <li><a href="#方法">方法</a></li>
-    <li><a href="#变量">变量</a></li>
-    <li><a href="#短变量声明">短变量声明</a></li>
-    <li><a href="#基本类型">基本类型</a></li>
-    <li><a href="#类型转换">类型转换</a></li>
-    <li><a href="#常量">常量</a></li>
-    <li><a href="#常见框架">常见框架</a>
+    <li><a href="#1-常见的包">1. 常见的包</a></li>
+    <li><a href="#2-导入包">2. 导入包</a>
       <ol>
-        <li><a href="#1-web-框架--http-路由最常用">1. Web 框架 / HTTP 路由（最常用）</a></li>
-        <li><a href="#2-数据库相关">2. 数据库相关</a></li>
-        <li><a href="#3-配置日志工具类">3. 配置、日志、工具类</a></li>
-        <li><a href="#4-微服务--rpc">4. 微服务 / RPC</a></li>
-        <li><a href="#5-其他常用实用包">5. 其他常用实用包</a></li>
+        <li><a href="#方式一逐个导入">方式一：逐个导入</a></li>
+        <li><a href="#方式二分组导入">方式二：分组导入</a></li>
       </ol>
     </li>
+    <li><a href="#3-导出名称">3. 导出名称</a>
+      <ol>
+        <li><a href="#首字母大写导出">首字母大写：导出</a></li>
+        <li><a href="#首字母小写未导出">首字母小写：未导出</a></li>
+      </ol>
+    </li>
+    <li><a href="#4-函数定义">4. 函数定义</a>
+      <ol>
+        <li><a href="#参数类型简写">参数类型简写</a></li>
+      </ol>
+    </li>
+    <li><a href="#5-变量">5. 变量</a></li>
+    <li><a href="#6-短变量声明">6. 短变量声明</a>
+      <ol>
+        <li><a href="#注意">注意</a></li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#byte-和-rune"><code>byte</code> 和 <code>rune</code></a></li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li><a href="#1-查看变量类型">1. 查看变量类型</a></li>
+  </ol>
+
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#常量不能使用-">常量不能使用 <code>:=</code></a></li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li><a href="#1-web-框架--http-路由">1. Web 框架 / HTTP 路由</a>
+      <ol>
+        <li><a href="#入门建议">入门建议</a></li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#学习建议">学习建议</a></li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li><a href="#1-grpc--protocol-buffers">1. gRPC + Protocol Buffers</a></li>
+    <li><a href="#2-常见-go-微服务框架">2. 常见 Go 微服务框架</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#十二一个完整示例">十二、一个完整示例</a></li>
+    <li><a href="#十三第一课总结">十三、第一课总结</a></li>
   </ol>
 </nav>
         </div>
@@ -312,8 +366,8 @@
     
     <header class="article-category">
         
-            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="background-color: #2a9d8f; color: #fff;">
-                数据库
+            <a href="/categories/go/" >
+                Go
             </a>
         
     </header>
@@ -326,7 +380,7 @@
     
         
         <h3 class="article-subtitle">
-            开始学习Go
+            开始学习 Go
         </h3>
         
     </div>
@@ -362,7 +416,7 @@
 
 
                 <time class="article-time--reading">
-                    3 minute read
+                    5 minute read
                 </time>
             </div>
         
@@ -378,27 +432,274 @@
     <section class="article-content">
     
     
-    <style>
+    <hr>
+<style>
   body {
     background: url('/img/background.jpg') no-repeat center top;
     background-size: cover;
     background-attachment: fixed;
   }
 </style>
-<h2 id="2026-08-06">2026-08-06
-</h2><h2 id="教程下载到本地">教程下载到本地
-</h2><p>go install golang.org/x/website/tour@latest</p>
-<p>下载后，在终端输入 tour 启动服务在浏览器看到教程</p>
-<h2 id="官方网站">官方网站
-</h2><p><a class="link" href="https://go.dev/tour/welcome/1"  target="_blank" rel="noopener"
+<h1 id="go-语言学习笔记">Go 语言学习笔记
+</h1><blockquote>
+<p>更新日期：2026-08-06</p></blockquote>
+<hr>
+<h2 id="一教程下载与运行">一、教程下载与运行
+</h2><h3 id="1-下载官方交互式教程">1. 下载官方交互式教程
+</h3><p>Go 官方提供了交互式学习教程 <strong>Tour of Go</strong>，可以下载到本地运行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">go install golang.org/x/website/tour@latest
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装完成后，在终端执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tour
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>启动本地教程服务，然后在浏览器访问终端提示的地址。</p>
+<p>官方在线教程：</p>
+<p><a class="link" href="https://go.dev/tour/welcome/1"  target="_blank" rel="noopener"
     >https://go.dev/tour/welcome/1</a></p>
-<h1 id=""><a class="link" href="https://go.dev/tour/basics"  target="_blank" rel="noopener"
-    ><font style="color:rgb(55, 94, 171);">包、变量和函数。</font></a>
-</h1><h2 id="常见的包">常见的包
-</h2><p>fmt （format）<font style="color:rgb(15, 17, 21);">格式化输入输出工具箱</font></p>
-<p><font style="color:rgb(15, 17, 21);">math 数学计算</font></p>
-<h2 id="导入包"><font style="color:rgb(15, 17, 21);">导入包</font>
-</h2><div class="highlight"><div class="chroma">
+<hr>
+<h1 id="二包变量和函数">二、包、变量和函数
+</h1><h2 id="1-常见的包">1. 常见的包
+</h2><p>Go 的标准库提供了大量开箱即用的功能。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>包名</th>
+          <th>用途</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>fmt</code></td>
+          <td>格式化输入输出</td>
+      </tr>
+      <tr>
+          <td><code>math</code></td>
+          <td>数学计算</td>
+      </tr>
+      <tr>
+          <td><code>strings</code></td>
+          <td>字符串处理</td>
+      </tr>
+      <tr>
+          <td><code>time</code></td>
+          <td>时间和日期处理</td>
+      </tr>
+      <tr>
+          <td><code>os</code></td>
+          <td>操作系统相关功能</td>
+      </tr>
+      <tr>
+          <td><code>net/http</code></td>
+          <td>HTTP 客户端和服务器</td>
+      </tr>
+      <tr>
+          <td><code>encoding/json</code></td>
+          <td>JSON 编解码</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h2 id="2-导入包">2. 导入包
+</h2><h3 id="方式一逐个导入">方式一：逐个导入
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="s">&#34;fmt&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="s">&#34;math&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="方式二分组导入">方式二：分组导入
+</h3><p>推荐使用分组导入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="s">&#34;fmt&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="s">&#34;math&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="3-导出名称">3. 导出名称
+</h2><p>Go 使用<strong>首字母大小写</strong>来控制标识符是否可以被其他包访问。</p>
+<h3 id="首字母大写导出">首字母大写：导出
+</h3><p>首字母大写的名称可以被其他包访问。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">math</span><span class="p">.</span><span class="nx">Pi</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">math</span><span class="p">.</span><span class="nx">Pi</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中 <code>Pi</code> 首字母大写，因此可以从 <code>math</code> 包外部访问。</p>
+<h3 id="首字母小写未导出">首字母小写：未导出
+</h3><p>首字母小写的名称只能在当前包内部使用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">math</span><span class="p">.</span><span class="nx">pi</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>外部无法访问。</p>
+<blockquote>
+<p><strong>核心规则：</strong></p>
+<ul>
+<li><code>大写开头</code> → 导出 → 其他包可以访问</li>
+<li><code>小写开头</code> → 未导出 → 仅当前包可以访问</li>
+</ul></blockquote>
+<hr>
+<h2 id="4-函数定义">4. 函数定义
+</h2><p>Go 函数的基本格式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nx">函数名</span><span class="p">(</span><span class="nx">参数名</span><span class="w"> </span><span class="nx">参数类型</span><span class="p">)</span><span class="w"> </span><span class="nx">返回类型</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 函数体</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">y</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="参数类型简写">参数类型简写
+</h3><p>如果连续多个参数类型相同，可以只写最后一个参数的类型：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">y</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这与下面的写法完全等价：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">y</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="5-变量">5. 变量
+</h2><p>Go 使用 <code>var</code> 声明变量。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="nx">age</span><span class="w"> </span><span class="kt">int</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果变量声明时没有进行初始化，Go 会自动赋予该变量对应类型的<strong>零值</strong>。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>类型</th>
+          <th>零值</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>整数类型</td>
+          <td><code>0</code></td>
+      </tr>
+      <tr>
+          <td>浮点类型</td>
+          <td><code>0</code></td>
+      </tr>
+      <tr>
+          <td><code>bool</code></td>
+          <td><code>false</code></td>
+      </tr>
+      <tr>
+          <td><code>string</code></td>
+          <td><code>&quot;&quot;</code></td>
+      </tr>
+      <tr>
+          <td>指针</td>
+          <td><code>nil</code></td>
+      </tr>
+      <tr>
+          <td>切片</td>
+          <td><code>nil</code></td>
+      </tr>
+      <tr>
+          <td>Map</td>
+          <td><code>nil</code></td>
+      </tr>
+      <tr>
+          <td>Channel</td>
+          <td><code>nil</code></td>
+      </tr>
+      <tr>
+          <td>Function</td>
+          <td><code>nil</code></td>
+      </tr>
+      <tr>
+          <td>Interface</td>
+          <td><code>nil</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -407,27 +708,486 @@
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
-</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#第一种导入方式
-</span></span><span class="line"><span class="cl">import &#34;fmt&#34;
-</span></span><span class="line"><span class="cl">import &#34;math&#34;
-</span></span><span class="line"><span class="cl"># 第二种导入方式 
-</span></span><span class="line"><span class="cl">import （
-</span></span><span class="line"><span class="cl">&#34;fmt&#34;
-</span></span><span class="line"><span class="cl">&#34;math&#34;
-</span></span><span class="line"><span class="cl">）
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="nx">age</span><span class="w"> </span><span class="kt">int</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="nx">active</span><span class="w"> </span><span class="kt">bool</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">age</span><span class="p">)</span><span class="w">    </span><span class="c1">// 0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span><span class="w">   </span><span class="c1">// &#34;&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">active</span><span class="p">)</span><span class="w"> </span><span class="c1">// false</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="6-短变量声明">6. 短变量声明
+</h2><p>在<strong>函数内部</strong>，可以使用 <code>:=</code> 进行短变量声明。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">name</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&#34;Go&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">age</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">20</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>:=</code> 会同时完成：</p>
+<ol>
+<li>创建变量</li>
+<li>推断变量类型</li>
+<li>赋值</li>
+</ol>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">swap</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;world&#34;</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="注意">注意
+</h3><p><code>:=</code> <strong>不能用于函数外部的包级变量声明</strong>。</p>
+<p>错误：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">name</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&#34;Go&#34;</span><span class="w"> </span><span class="c1">// 
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>正确：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#34;Go&#34;</span><span class="w"> </span><span class="c1">// 
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h1 id="三go-基本类型">三、Go 基本类型
+</h1><p>Go 的基本类型主要包括布尔、字符串、整数、浮点数和复数。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>类别</th>
+          <th>类型</th>
+          <th>别名 / 关联</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>布尔</td>
+          <td><code>bool</code></td>
+          <td>-</td>
+          <td><code>true</code> 或 <code>false</code></td>
+      </tr>
+      <tr>
+          <td>字符串</td>
+          <td><code>string</code></td>
+          <td>-</td>
+          <td>不可变字节序列，通常存储 UTF-8 编码文本</td>
+      </tr>
+      <tr>
+          <td>有符号整数</td>
+          <td><code>int</code></td>
+          <td>-</td>
+          <td>平台相关，通常为 32 位或 64 位</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>int8</code></td>
+          <td>-</td>
+          <td><code>-128 ~ 127</code></td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>int16</code></td>
+          <td>-</td>
+          <td><code>-32768 ~ 32767</code></td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>int32</code></td>
+          <td><code>rune</code></td>
+          <td>常用于表示 Unicode 码点</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>int64</code></td>
+          <td>-</td>
+          <td>64 位有符号整数</td>
+      </tr>
+      <tr>
+          <td>无符号整数</td>
+          <td><code>uint</code></td>
+          <td>-</td>
+          <td>平台相关，与 <code>int</code> 位宽通常相同</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>uint8</code></td>
+          <td><code>byte</code></td>
+          <td><code>0 ~ 255</code>，常用于表示原始字节</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>uint16</code></td>
+          <td>-</td>
+          <td><code>0 ~ 65535</code></td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>uint32</code></td>
+          <td>-</td>
+          <td>32 位无符号整数</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>uint64</code></td>
+          <td>-</td>
+          <td>64 位无符号整数</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>uintptr</code></td>
+          <td>-</td>
+          <td>足以存储指针地址的无符号整数</td>
+      </tr>
+      <tr>
+          <td>浮点数</td>
+          <td><code>float32</code></td>
+          <td>-</td>
+          <td>单精度浮点数</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>float64</code></td>
+          <td>-</td>
+          <td>双精度浮点数，通常优先使用</td>
+      </tr>
+      <tr>
+          <td>复数</td>
+          <td><code>complex64</code></td>
+          <td>-</td>
+          <td>实部和虚部均为 <code>float32</code></td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>complex128</code></td>
+          <td>-</td>
+          <td>实部和虚部均为 <code>float64</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="byte-和-rune"><code>byte</code> 和 <code>rune</code>
+</h3><p>这两个类型在 Go 中非常常见：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kt">uint8</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">type</span><span class="w"> </span><span class="kt">rune</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kt">int32</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>因此：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">byte</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="kt">rune</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>分别可以理解为：</p>
+<ul>
+<li><code>byte</code> → 一个字节，常用于处理二进制数据</li>
+<li><code>rune</code> → 一个 Unicode 码点，常用于处理字符</li>
+</ul>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="kt">rune</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="sc">&#39;中&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h1 id="四类型转换">四、类型转换
+</h1><p>Go 不会自动进行大多数数值类型之间的隐式转换。</p>
+<p>需要使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nf">T</span><span class="p">(</span><span class="nx">v</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中：</p>
+<ul>
+<li><code>T</code> 是目标类型</li>
+<li><code>v</code> 是需要转换的值</li>
+</ul>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">float64</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">y</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">10.5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="c1">// 10</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意：浮点数转换为整数时，小数部分会被截断。</p></blockquote>
+<hr>
+<h2 id="1-查看变量类型">1. 查看变量类型
+</h2><p>可以使用 <code>fmt.Printf</code> 的 <code>%T</code> 查看变量类型：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;v is of type %T\n&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">name</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&#34;Go&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;name is of type %T\n&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">name is of type string
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="导出名称">导出名称
-</h2><ul>
-<li><strong><font style="color:rgb(15, 17, 21);">首字母大写</font></strong><font style="color:rgb(15, 17, 21);"> = 导出（公开，供外部使用） 比如math.Pi 可以访问</font></li>
-<li><strong><font style="color:rgb(15, 17, 21);">首字母小写</font></strong><font style="color:rgb(15, 17, 21);"> = 未导出（私有，仅限包内使用） 比如math.pi不可以外部访问</font></li>
-</ul>
-<p><font style="color:rgb(15, 17, 21);"></font></p>
-<h2 id="方法"><font style="color:rgb(15, 17, 21);">方法</font>
-</h2><div class="highlight"><div class="chroma">
+</div><hr>
+<h1 id="五常量">五、常量
+</h1><p>Go 使用 <code>const</code> 定义常量：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">const</span><span class="w"> </span><span class="nx">Pi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">3.14</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>常量创建后不能重新赋值：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">const</span><span class="w"> </span><span class="nx">Pi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">3.14</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// Pi = 3.14159 // </span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="常量不能使用-">常量不能使用 <code>:=</code>
+</h3><p>错误：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">Pi</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">3.14</span><span class="w"> </span><span class="c1">// ❌</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>正确：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">const</span><span class="w"> </span><span class="nx">Pi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">3.14</span><span class="w"> </span><span class="c1">// 
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h1 id="六常见框架与库">六、常见框架与库
+</h1><h2 id="1-web-框架--http-路由">1. Web 框架 / HTTP 路由
+</h2><p>Go Web 开发中常见的选择：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>框架 / 库</th>
+          <th>特点</th>
+          <th>推荐场景</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Gin</td>
+          <td>高性能、简洁、生态成熟</td>
+          <td>REST API、微服务</td>
+      </tr>
+      <tr>
+          <td>Echo</td>
+          <td>API 简洁、中间件丰富</td>
+          <td>REST API</td>
+      </tr>
+      <tr>
+          <td>Fiber</td>
+          <td>类似 Express.js、基于 <code>fasthttp</code></td>
+          <td>Node.js 转 Go、性能敏感场景</td>
+      </tr>
+      <tr>
+          <td>Chi</td>
+          <td>轻量、兼容 <code>net/http</code></td>
+          <td>希望尽量使用标准库</td>
+      </tr>
+      <tr>
+          <td><code>net/http</code></td>
+          <td>Go 官方标准库</td>
+          <td>学习 HTTP、简单 Web 服务</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="入门建议">入门建议
+</h3><p>对于 Go 初学者，可以按照下面的顺序：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">net/http
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">Gin
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">Chi / Echo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>先理解 Go 标准库的 HTTP 工作方式，再使用 Web 框架，可以避免只会调用框架 API 而不了解底层原理。</p>
+<hr>
+<h1 id="七数据库相关">七、数据库相关
+</h1><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>包 / 工具</th>
+          <th>类型</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>GORM</td>
+          <td>ORM</td>
+          <td>功能完整、上手简单</td>
+      </tr>
+      <tr>
+          <td>sqlx</td>
+          <td>SQL 扩展</td>
+          <td>基于 <code>database/sql</code>，更接近原生 SQL</td>
+      </tr>
+      <tr>
+          <td>ent</td>
+          <td>ORM / 代码生成</td>
+          <td>类型安全，适合复杂数据模型</td>
+      </tr>
+      <tr>
+          <td>sqlc</td>
+          <td>SQL 代码生成</td>
+          <td>根据 SQL 自动生成类型安全的 Go 代码</td>
+      </tr>
+      <tr>
+          <td>go-redis</td>
+          <td>Redis 客户端</td>
+          <td>Go 生态中常用的 Redis 客户端</td>
+      </tr>
+      <tr>
+          <td>rueidis</td>
+          <td>Redis 客户端</td>
+          <td>高性能 Redis 客户端</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="学习建议">学习建议
+</h3><p>如果已经有 MySQL、MyBatis-Plus 等 Java 开发经验，可以重点理解 Go 中：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">database/sql
+</span></span><span class="line"><span class="cl">      ↓
+</span></span><span class="line"><span class="cl">sqlx
+</span></span><span class="line"><span class="cl">      ↓
+</span></span><span class="line"><span class="cl">GORM / ent
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>同时学习：</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -442,354 +1202,416 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">func关键字</span> <span class="err">方法名</span><span class="p">(</span><span class="err">参数类型</span> <span class="err">参数</span><span class="p">)</span> <span class="err">返回类型</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="err">方法体</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">比如：</span>
-</span></span><span class="line"><span class="cl"><span class="k">func</span> <span class="n">add</span><span class="p">(</span><span class="n">x</span> <span class="ne">int</span><span class="p">,</span> <span class="n">y</span> <span class="ne">int</span><span class="p">)</span> <span class="ne">int</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">当参数是同一类型</span> <span class="err">可以省略前面的类型，只需要保存最后一个类型即可</span>
-</span></span><span class="line"><span class="cl"><span class="k">func</span> <span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ne">int</span><span class="p">)</span> <span class="ne">int</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Go
+</span></span><span class="line"><span class="cl"> ↓
+</span></span><span class="line"><span class="cl">MySQL
+</span></span><span class="line"><span class="cl"> ↓
+</span></span><span class="line"><span class="cl">Redis
+</span></span><span class="line"><span class="cl"> ↓
+</span></span><span class="line"><span class="cl">事务
+</span></span><span class="line"><span class="cl"> ↓
+</span></span><span class="line"><span class="cl">连接池
+</span></span><span class="line"><span class="cl"> ↓
+</span></span><span class="line"><span class="cl">并发
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="变量">变量
-</h2><p>var 声明一个变量，如果初始化没有传值，会默认传递默认值（零值机制）</p>
-<ul>
-<li><font style="color:rgb(15, 17, 21);">数值类型（如</font><font style="color:rgb(15, 17, 21);"> </font><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;int&lt;/font&gt;</code><font style="color:rgb(15, 17, 21);">,</font><font style="color:rgb(15, 17, 21);"> </font><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;float&lt;/font&gt;</code><font style="color:rgb(15, 17, 21);">）：</font><code>**&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;0&lt;/font&gt;**</code></li>
-<li><font style="color:rgb(15, 17, 21);">布尔类型（</font><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;bool&lt;/font&gt;</code><font style="color:rgb(15, 17, 21);">）：</font><code>**&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;false&lt;/font&gt;**</code></li>
-<li><font style="color:rgb(15, 17, 21);">字符串（</font><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;string&lt;/font&gt;</code><font style="color:rgb(15, 17, 21);">）：</font><code>**&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;&quot;&quot;&lt;/font&gt;**</code><font style="color:rgb(15, 17, 21);">（空字符串）</font></li>
-<li><font style="color:rgb(15, 17, 21);">指针、切片、Map、通道、函数、接口：</font><code>**&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;nil&lt;/font&gt;**</code></li>
-</ul>
-<h2 id="短变量声明"><font style="color:rgb(15, 17, 21);">短变量声明</font>
-</h2><p><font style="color:rgb(15, 17, 21);">:= 叫做短变量声明 声明：创建新的变量 a 和 b 赋值：把函数的返回结果填进去.。在函数内部可用，函数外部不可用</font></p>
+</div><hr>
+<h1 id="八配置日志和工具">八、配置、日志和工具
+</h1><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>包</th>
+          <th>用途</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Viper</td>
+          <td>配置管理，支持 YAML、JSON、环境变量等</td>
+      </tr>
+      <tr>
+          <td>Cobra</td>
+          <td>CLI 命令行工具</td>
+      </tr>
+      <tr>
+          <td>Zap</td>
+          <td>高性能日志</td>
+      </tr>
+      <tr>
+          <td>Zerolog</td>
+          <td>高性能结构化日志</td>
+      </tr>
+      <tr>
+          <td>Logrus</td>
+          <td>常见日志库</td>
+      </tr>
+      <tr>
+          <td>Testify</td>
+          <td>测试断言、Mock</td>
+      </tr>
+      <tr>
+          <td>Validator</td>
+          <td>结构体参数校验</td>
+      </tr>
+      <tr>
+          <td>Google UUID</td>
+          <td>UUID 生成</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h1 id="九微服务与-rpc">九、微服务与 RPC
+</h1><h2 id="1-grpc--protocol-buffers">1. gRPC + Protocol Buffers
+</h2><p>Go 微服务中非常常见的 RPC 技术组合：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">a, b := swap(&#34;hello&#34;, &#34;world&#34;)
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">客户端
+</span></span><span class="line"><span class="cl">   │
+</span></span><span class="line"><span class="cl">   │ gRPC
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">服务端
+</span></span><span class="line"><span class="cl">   │
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">Protocol Buffers
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><font style="color:rgb(15, 17, 21);"></font></p>
-<h2 id="基本类型"><font style="color:rgb(15, 17, 21);">基本类型</font>
+</div><p>主要特点：</p>
+<ul>
+<li>高性能</li>
+<li>强类型</li>
+<li>自动生成客户端和服务端代码</li>
+<li>适合微服务内部通信</li>
+</ul>
+<hr>
+<h2 id="2-常见-go-微服务框架">2. 常见 Go 微服务框架
 </h2><div class="table-wrapper"><table>
   <thead>
       <tr>
-          <th><font style="color:rgb(15, 17, 21);">类别</font></th>
-          <th><font style="color:rgb(15, 17, 21);">类型</font></th>
-          <th><font style="color:rgb(15, 17, 21);">别名 / 关联</font></th>
-          <th><font style="color:rgb(15, 17, 21);">说明（大小/范围/用途）</font></th>
+          <th>框架 / 工具</th>
+          <th>特点</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td><strong><font style="color:rgb(15, 17, 21);">布尔</font></strong></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;bool&lt;/font&gt;</code></td>
-          <td><font style="color:rgb(15, 17, 21);">-</font></td>
-          <td><font style="color:rgb(15, 17, 21);">布尔值，只能是</font><font style="color:rgb(15, 17, 21);"> </font><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;true&lt;/font&gt;</code><br/><font style="color:rgb(15, 17, 21);"> </font><font style="color:rgb(15, 17, 21);">或</font><font style="color:rgb(15, 17, 21);"> </font><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;false&lt;/font&gt;</code></td>
+          <td>gRPC + Protobuf</td>
+          <td>主流 RPC 技术方案</td>
       </tr>
       <tr>
-          <td><strong><font style="color:rgb(15, 17, 21);">字符串</font></strong></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;string&lt;/font&gt;</code></td>
-          <td><font style="color:rgb(15, 17, 21);">-</font></td>
-          <td><font style="color:rgb(15, 17, 21);">字符串，底层为字节序列（UTF-8 编码）</font></td>
+          <td>go-zero</td>
+          <td>国内使用较多的微服务框架</td>
       </tr>
       <tr>
-          <td><strong><font style="color:rgb(15, 17, 21);">有符号整数</font></strong></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;int&lt;/font&gt;</code></td>
-          <td><font style="color:rgb(15, 17, 21);">-</font></td>
-          <td><font style="color:rgb(15, 17, 21);">平台相关，32位系统占4字节，64位系统占8字节</font></td>
+          <td>Kratos</td>
+          <td>微服务框架</td>
       </tr>
       <tr>
-          <td></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;int8&lt;/font&gt;</code></td>
-          <td><font style="color:rgb(15, 17, 21);">-</font></td>
-          <td><font style="color:rgb(15, 17, 21);">8位有符号整数，范围：-128 ~ 127</font></td>
-      </tr>
-      <tr>
-          <td></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;int16&lt;/font&gt;</code></td>
-          <td><font style="color:rgb(15, 17, 21);">-</font></td>
-          <td><font style="color:rgb(15, 17, 21);">16位有符号整数，范围：-32768 ~ 32767</font></td>
-      </tr>
-      <tr>
-          <td></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;int32&lt;/font&gt;</code></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;rune&lt;/font&gt;</code></td>
-          <td><font style="color:rgb(15, 17, 21);">32位有符号整数，常用于表示</font><strong><font style="color:rgb(15, 17, 21);">Unicode 码点</font></strong><font style="color:rgb(15, 17, 21);">（字符）</font></td>
-      </tr>
-      <tr>
-          <td></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;int64&lt;/font&gt;</code></td>
-          <td><font style="color:rgb(15, 17, 21);">-</font></td>
-          <td><font style="color:rgb(15, 17, 21);">64位有符号整数，范围极大</font></td>
-      </tr>
-      <tr>
-          <td><strong><font style="color:rgb(15, 17, 21);">无符号整数</font></strong></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;uint&lt;/font&gt;</code></td>
-          <td><font style="color:rgb(15, 17, 21);">-</font></td>
-          <td><font style="color:rgb(15, 17, 21);">平台相关，同</font><font style="color:rgb(15, 17, 21);"> </font><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;int&lt;/font&gt;</code><br/><font style="color:rgb(15, 17, 21);"> </font><font style="color:rgb(15, 17, 21);">位宽（32/64位）</font></td>
-      </tr>
-      <tr>
-          <td></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;uint8&lt;/font&gt;</code></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;byte&lt;/font&gt;</code></td>
-          <td><font style="color:rgb(15, 17, 21);">8位无符号整数，范围：0 ~ 255，常用于</font><strong><font style="color:rgb(15, 17, 21);">原始字节</font></strong></td>
-      </tr>
-      <tr>
-          <td></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;uint16&lt;/font&gt;</code></td>
-          <td><font style="color:rgb(15, 17, 21);">-</font></td>
-          <td><font style="color:rgb(15, 17, 21);">16位无符号整数，范围：0 ~ 65535</font></td>
-      </tr>
-      <tr>
-          <td></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;uint32&lt;/font&gt;</code></td>
-          <td><font style="color:rgb(15, 17, 21);">-</font></td>
-          <td><font style="color:rgb(15, 17, 21);">32位无符号整数</font></td>
-      </tr>
-      <tr>
-          <td></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;uint64&lt;/font&gt;</code></td>
-          <td><font style="color:rgb(15, 17, 21);">-</font></td>
-          <td><font style="color:rgb(15, 17, 21);">64位无符号整数</font></td>
-      </tr>
-      <tr>
-          <td></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;uintptr&lt;/font&gt;</code></td>
-          <td><font style="color:rgb(15, 17, 21);">-</font></td>
-          <td><font style="color:rgb(15, 17, 21);">无符号整型，</font><strong><font style="color:rgb(15, 17, 21);">大小足以存储指针地址</font></strong><font style="color:rgb(15, 17, 21);">（用于底层编程）</font></td>
-      </tr>
-      <tr>
-          <td><strong><font style="color:rgb(15, 17, 21);">浮点数</font></strong></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;float32&lt;/font&gt;</code></td>
-          <td><font style="color:rgb(15, 17, 21);">-</font></td>
-          <td><font style="color:rgb(15, 17, 21);">32位浮点数（IEEE-754 标准），约6位小数精度</font></td>
-      </tr>
-      <tr>
-          <td></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;float64&lt;/font&gt;</code></td>
-          <td><font style="color:rgb(15, 17, 21);">-</font></td>
-          <td><font style="color:rgb(15, 17, 21);">64位浮点数（IEEE-754 标准），约15位小数精度（</font><strong><font style="color:rgb(15, 17, 21);">推荐默认使用</font></strong><font style="color:rgb(15, 17, 21);">）</font></td>
-      </tr>
-      <tr>
-          <td><strong><font style="color:rgb(15, 17, 21);">复数</font></strong></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;complex64&lt;/font&gt;</code></td>
-          <td><font style="color:rgb(15, 17, 21);">-</font></td>
-          <td><font style="color:rgb(15, 17, 21);">实部和虚部均为</font><font style="color:rgb(15, 17, 21);"> </font><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;float32&lt;/font&gt;</code><br/><font style="color:rgb(15, 17, 21);"> </font><font style="color:rgb(15, 17, 21);">的复数</font></td>
-      </tr>
-      <tr>
-          <td></td>
-          <td><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;complex128&lt;/font&gt;</code></td>
-          <td><font style="color:rgb(15, 17, 21);">-</font></td>
-          <td><font style="color:rgb(15, 17, 21);">实部和虚部均为</font><font style="color:rgb(15, 17, 21);"> </font><code>&lt;font style=&quot;color:rgb(15, 17, 21);background-color:rgb(235, 238, 242);&quot;&gt;float64&lt;/font&gt;</code><br/><font style="color:rgb(15, 17, 21);"> </font><font style="color:rgb(15, 17, 21);">的复数</font></td>
+          <td>go-kit</td>
+          <td>微服务工具集，更偏底层库</td>
       </tr>
   </tbody>
 </table></div>
-<h2 id="类型转换">类型转换
-</h2><p><font style="color:rgb(0, 0, 0);"> </font><code>&lt;font style=&quot;color:rgb(51, 51, 51);background-color:rgb(250, 250, 250);&quot;&gt;T(v)&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);"> 将 </font><code>&lt;font style=&quot;color:rgb(51, 51, 51);background-color:rgb(250, 250, 250);&quot;&gt;v&lt;/font&gt;</code><font style="color:rgb(0, 0, 0);"> 转为 </font><code>&lt;font style=&quot;color:rgb(51, 51, 51);background-color:rgb(250, 250, 250);&quot;&gt;T&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);background-color:rgb(250, 250, 250);">类型.  输出 %T 可以看变量是何类型</font></p>
+<hr>
+<h1 id="十其他常用工具包">十、其他常用工具包
+</h1><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>包</th>
+          <th>用途</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>gorilla/websocket</code></td>
+          <td>WebSocket 通信</td>
+      </tr>
+      <tr>
+          <td><code>robfig/cron</code></td>
+          <td>定时任务</td>
+      </tr>
+      <tr>
+          <td><code>excelize</code></td>
+          <td>Excel 文件读写</td>
+      </tr>
+      <tr>
+          <td><code>golang-jwt/jwt</code></td>
+          <td>JWT 身份认证</td>
+      </tr>
+      <tr>
+          <td><code>bcrypt</code></td>
+          <td>密码哈希</td>
+      </tr>
+      <tr>
+          <td><code>argon2</code></td>
+          <td>密码哈希</td>
+      </tr>
+      <tr>
+          <td><code>samber/lo</code></td>
+          <td>类似 Lodash 的工具函数</td>
+      </tr>
+      <tr>
+          <td><code>resty</code></td>
+          <td>HTTP 客户端</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h1 id="十一第一课学习重点">十一、第一课学习重点
+</h1><p>第一课暂时不要急着记忆大量第三方框架，优先掌握 Go 语言基础。</p>
+<p>建议按照下面的顺序学习：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">	fmt.Printf(&#34;v is of type %T\n&#34;, v)
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">包 package
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">导入 import
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">导出名称
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">函数 func
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">变量 var
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">短变量声明 :=
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">基本类型
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">类型转换
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">常量 const
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">控制流程
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">数组 / 切片
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">Map
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">Struct
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">指针
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">方法
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">接口
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">Goroutine
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">Channel
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="常量">常量
-</h2><p>const 关键字来定义，常量不能用短变量声明</p>
-<h2 id="常见框架">常见框架
-</h2><h3 id="1-web-框架--http-路由最常用"><font style="color:rgb(15, 17, 21);">1. Web 框架 / HTTP 路由（最常用）</font>
-</h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><font style="color:rgb(15, 17, 21);">框架</font></th>
-          <th><font style="color:rgb(15, 17, 21);">特点</font></th>
-          <th><font style="color:rgb(15, 17, 21);">推荐场景</font></th>
-          <th><font style="color:rgb(15, 17, 21);">GitHub Stars（约）</font></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Gin</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">高性能、简洁、生态最大</font></td>
-          <td><font style="color:rgb(15, 17, 21);">REST API、微服务（首选）</font></td>
-          <td><font style="color:rgb(15, 17, 21);">89k+</font></td>
-      </tr>
-      <tr>
-          <td><strong>Echo</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">干净 API、中间件丰富</font></td>
-          <td><font style="color:rgb(15, 17, 21);">REST API、追求代码优雅</font></td>
-          <td><font style="color:rgb(15, 17, 21);">33k+</font></td>
-      </tr>
-      <tr>
-          <td><strong>Fiber</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">类 Express.js、基于 fasthttp</font></td>
-          <td><font style="color:rgb(15, 17, 21);">极致性能、Node 转 Go</font></td>
-          <td><font style="color:rgb(15, 17, 21);">40k+</font></td>
-      </tr>
-      <tr>
-          <td><strong>Chi</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">轻量、完全兼容 </font><font style="color:rgb(15, 17, 21);">net/http</font></td>
-          <td><font style="color:rgb(15, 17, 21);">想尽量用标准库</font></td>
-          <td><font style="color:rgb(15, 17, 21);">23k+</font></td>
-      </tr>
-      <tr>
-          <td><strong>net/http</strong><font style="color:rgb(15, 17, 21);">（标准库）</font></td>
-          <td><font style="color:rgb(15, 17, 21);">零依赖、官方支持</font></td>
-          <td><font style="color:rgb(15, 17, 21);">简单服务、学习基础</font></td>
-          <td><font style="color:rgb(15, 17, 21);">-</font></td>
-      </tr>
-  </tbody>
-</table></div>
-<p><strong>推荐入门</strong><font style="color:rgb(15, 17, 21);">：先学 </font><strong>Gin</strong><font style="color:rgb(15, 17, 21);">（资料最多），再尝试 </font><strong>Chi</strong><font style="color:rgb(15, 17, 21);"> 或直接用标准库。</font></p>
+</div><blockquote>
+<p><strong>第一课核心目标：</strong></p>
+<p>能够独立看懂一个简单 Go 程序，并理解 <code>package</code>、<code>import</code>、<code>func</code>、<code>var</code>、<code>:=</code>、<code>const</code> 以及 Go 基本类型的含义。</p></blockquote>
 <hr>
-<h3 id="2-数据库相关"><font style="color:rgb(15, 17, 21);">2. 数据库相关</font>
-</h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><font style="color:rgb(15, 17, 21);">包</font></th>
-          <th><font style="color:rgb(15, 17, 21);">类型</font></th>
-          <th><font style="color:rgb(15, 17, 21);">说明</font></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>GORM</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">ORM</font></td>
-          <td><font style="color:rgb(15, 17, 21);">最流行的 ORM，功能全、上手快</font></td>
-      </tr>
-      <tr>
-          <td><strong>sqlx</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">SQL 扩展</font></td>
-          <td><font style="color:rgb(15, 17, 21);">在 </font><font style="color:rgb(15, 17, 21);">database/sql</font><font style="color:rgb(15, 17, 21);"> 基础上增强，更接近原生 SQL</font></td>
-      </tr>
-      <tr>
-          <td><strong>ent</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">ORM（代码生成）</font></td>
-          <td><font style="color:rgb(15, 17, 21);">Facebook 开源，类型安全、适合复杂模型</font></td>
-      </tr>
-      <tr>
-          <td><strong>sqlc</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">SQL 代码生成</font></td>
-          <td><font style="color:rgb(15, 17, 21);">写 SQL 自动生成类型安全的 Go 代码（近年很火）</font></td>
-      </tr>
-      <tr>
-          <td><strong>go-redis / rueidis</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">Redis 客户端</font></td>
-          <td><font style="color:rgb(15, 17, 21);">官方推荐 + 高性能选择</font></td>
-      </tr>
-  </tbody>
-</table></div>
+<h2 id="十二一个完整示例">十二、一个完整示例
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="s">&#34;fmt&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">const</span><span class="w"> </span><span class="nx">Pi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">3.14</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">func</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">y</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">func</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">name</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&#34;Go&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">age</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">20</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Hello,&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Age:&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Result:&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Pi:&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">Pi</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;name type: %T\n&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;age type: %T\n&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个程序综合使用了：</p>
+<ul>
+<li><code>package</code></li>
+<li><code>import</code></li>
+<li><code>const</code></li>
+<li><code>func</code></li>
+<li><code>:=</code></li>
+<li><code>int</code></li>
+<li><code>string</code></li>
+<li>函数调用</li>
+<li><code>fmt.Println</code></li>
+<li><code>fmt.Printf</code></li>
+<li><code>%T</code> 类型格式化</li>
+</ul>
 <hr>
-<h3 id="3-配置日志工具类"><font style="color:rgb(15, 17, 21);">3. 配置、日志、工具类</font>
-</h3><div class="table-wrapper"><table>
+<h2 id="十三第一课总结">十三、第一课总结
+</h2><p>这一课主要认识 Go 的基础语法：</p>
+<div class="table-wrapper"><table>
   <thead>
       <tr>
-          <th><font style="color:rgb(15, 17, 21);">包</font></th>
-          <th><font style="color:rgb(15, 17, 21);">用途</font></th>
+          <th>知识点</th>
+          <th>关键语法</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td><strong>viper</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">配置管理（支持 YAML/JSON/环境变量等）</font></td>
+          <td>包</td>
+          <td><code>package</code></td>
       </tr>
       <tr>
-          <td><strong>cobra</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">CLI 命令行工具（几乎所有 Go CLI 都用它）</font></td>
+          <td>导入</td>
+          <td><code>import</code></td>
       </tr>
       <tr>
-          <td><strong>zap</strong><font style="color:rgb(15, 17, 21);"> / </font><strong>zerolog</strong><font style="color:rgb(15, 17, 21);"> / </font><strong>logrus</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">高性能日志（zap 和 zerolog 性能最好）</font></td>
+          <td>导出</td>
+          <td>首字母大写</td>
       </tr>
       <tr>
-          <td><strong>testify</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">测试断言 + Mock（几乎所有项目必备）</font></td>
+          <td>函数</td>
+          <td><code>func</code></td>
       </tr>
       <tr>
-          <td><strong>validator</strong><font style="color:rgb(15, 17, 21);"> (go-playground)</font></td>
-          <td><font style="color:rgb(15, 17, 21);">结构体参数校验</font></td>
+          <td>变量</td>
+          <td><code>var</code></td>
       </tr>
       <tr>
-          <td><strong>uuid</strong><font style="color:rgb(15, 17, 21);"> (google/uuid)</font></td>
-          <td><font style="color:rgb(15, 17, 21);">UUID 生成</font></td>
+          <td>短变量</td>
+          <td><code>:=</code></td>
+      </tr>
+      <tr>
+          <td>常量</td>
+          <td><code>const</code></td>
+      </tr>
+      <tr>
+          <td>类型转换</td>
+          <td><code>T(v)</code></td>
+      </tr>
+      <tr>
+          <td>查看类型</td>
+          <td><code>%T</code></td>
+      </tr>
+      <tr>
+          <td>输出</td>
+          <td><code>fmt.Println()</code> / <code>fmt.Printf()</code></td>
       </tr>
   </tbody>
 </table></div>
-<hr>
-<h3 id="4-微服务--rpc"><font style="color:rgb(15, 17, 21);">4. 微服务 / RPC</font>
-</h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><font style="color:rgb(15, 17, 21);">框架/包</font></th>
-          <th><font style="color:rgb(15, 17, 21);">说明</font></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>gRPC</strong><font style="color:rgb(15, 17, 21);"> + </font><strong>protobuf</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">官方标准 RPC 方案</font></td>
-      </tr>
-      <tr>
-          <td><strong>go-zero</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">国内流行的微服务全家桶（含代码生成）</font></td>
-      </tr>
-      <tr>
-          <td><strong>Kratos</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">字节系微服务框架</font></td>
-      </tr>
-      <tr>
-          <td><strong>go-kit</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">微服务工具集（偏库而非完整框架）</font></td>
-      </tr>
-  </tbody>
-</table></div>
-<hr>
-<h3 id="5-其他常用实用包"><font style="color:rgb(15, 17, 21);">5. 其他常用实用包</font>
-</h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><font style="color:rgb(15, 17, 21);">包</font></th>
-          <th><font style="color:rgb(15, 17, 21);">用途</font></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>gorilla/websocket</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">WebSocket</font></td>
-      </tr>
-      <tr>
-          <td><strong>cron</strong><font style="color:rgb(15, 17, 21);"> / </font><strong>robfig/cron</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">定时任务</font></td>
-      </tr>
-      <tr>
-          <td><strong>excelize</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">Excel 读写</font></td>
-      </tr>
-      <tr>
-          <td><strong>jwt-go</strong><font style="color:rgb(15, 17, 21);"> / </font><strong>golang-jwt</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">JWT 认证</font></td>
-      </tr>
-      <tr>
-          <td><strong>bcrypt</strong><font style="color:rgb(15, 17, 21);"> / </font><strong>argon2</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">密码哈希</font></td>
-      </tr>
-      <tr>
-          <td><strong>lo</strong><font style="color:rgb(15, 17, 21);"> (samber/lo)</font></td>
-          <td><font style="color:rgb(15, 17, 21);">类似 lodash 的工具函数库</font></td>
-      </tr>
-      <tr>
-          <td><strong>resty</strong></td>
-          <td><font style="color:rgb(15, 17, 21);">优雅的 HTTP 客户端</font></td>
-      </tr>
-  </tbody>
-</table></div>
-<p><strong><font style="color:rgb(15, 17, 21);"></font></strong></p>
-
+<p><strong>下一阶段重点：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">流程控制
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">for / if / switch
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">数组
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">切片 Slice
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">Map
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">Struct
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">指针
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">方法
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">接口
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 
@@ -797,7 +1619,9 @@
     
     <section class="article-tags">
         
-            <a href="/tags/redis/">Redis</a>
+            <a href="/tags/go/">Go</a>
+        
+            <a href="/tags/golang/">Golang</a>
         
     </section>
 
@@ -824,7 +1648,7 @@
 
 
         <span>
-            Last updated on Aug 06, 2026 17:36 CST
+            Last updated on Aug 20, 2026 19:18 CST
         </span>
     </section></footer>
 
@@ -835,54 +1659,6 @@
     
 
     
-
-<aside class="related-content--wrapper">
-    <h2 class="section-title">Related content</h2>
-    <div class="related-content">
-        <div class="flex article-list--tile">
-            
-                
-<article class="">
-    <a href="/p/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAredis/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">手写一个Redis</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/redis-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Redis 常见面试题</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/mysql-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Mysql 常见面试题</h2>
-        </div>
-    </a>
-</article>
-
-            
-        </div>
-    </div>
-</aside>
 
      
     
@@ -946,7 +1722,7 @@ function setGiscusTheme(theme) {
         2026 Paradox29
     </section>
 
-    <section class="wordcount">本站总字数：172.5k 字
+    <section class="wordcount">本站总字数：172.8k 字
 </section>
     <section class="powerby">
         
