@@ -13,8 +13,36 @@
         <pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/about/</guid>
-        <description>&lt;p&gt;My Github account： &lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;1parado&lt;/a&gt;.&lt;/p&gt;
+        <description>&lt;h1 id=&#34;hi-im-paradox-&#34;&gt;Hi, I&amp;rsquo;m Paradox 👋
+&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;Backend developer. I write to record and to share. 【One-line intro, e.g. studying CS at &amp;hellip; / backend engineer at &amp;hellip;】&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;about-this-blog&#34;&gt;About This Blog
+&lt;/h2&gt;&lt;p&gt;This blog is where I document what I learn and build: tutorials, project walkthroughs, pitfalls I stepped into, and occasional thoughts. Every post aims to solve a real problem end-to-end, so readers can follow along and learn something useful.&lt;/p&gt;
+&lt;h2 id=&#34;tech-stack&#34;&gt;Tech Stack
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Backend&lt;/strong&gt;: Java · Spring Boot · Spring Cloud · Go&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data&lt;/strong&gt;: MySQL · Redis&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Frontend&lt;/strong&gt;: HTML / CSS / JavaScript (enough to get things done)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tools&lt;/strong&gt;: Git · Maven · Docker · Linux&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Interests&lt;/strong&gt;: Microservices, AI tooling, productivity tools&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;selected-projects&#34;&gt;Selected Projects
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/%e5%8d%95%e4%bd%93%e8%bd%ac%e5%90%91%e5%be%ae%e6%9c%8d%e5%8a%a1%e7%9a%84%e4%b8%80%e6%ac%a1%e5%ae%9e%e8%b7%b5/&#34; &gt;Hotel booking system: from monolith to microservices&lt;/a&gt; — refactored a Spring Boot monolith into a Spring Cloud microservice architecture from scratch&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/%e5%ae%9e%e7%8e%b0%e4%b8%80%e4%b8%aa%e6%9c%ac%e5%9c%b0%e7%bf%bb%e8%af%91%e5%99%a8/&#34; &gt;Local LLM translator&lt;/a&gt; — a translator powered by local models&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/promptshare/&#34; &gt;PromptShare&lt;/a&gt; — an open-source prompt-sharing website&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/%e6%89%8b%e5%86%99%e4%b8%80%e4%b8%aaredis/&#34; &gt;Writing a Redis from scratch&lt;/a&gt; — understanding Redis internals by rebuilding the core&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/%e5%a6%82%e4%bd%95%e5%ae%9e%e7%8e%b0%e4%b8%80%e4%b8%aa%e7%ae%80%e5%8d%95%e7%9a%84%e6%95%8f%e6%84%9f%e8%af%8d%e6%a3%80%e6%b5%8b/&#34; &gt;Sensitive-word detection&lt;/a&gt; — a web-based sensitive-word filtering service&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Browse more via &lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/archives/&#34; &gt;Archives&lt;/a&gt; or &lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/categories/&#34; &gt;Categories&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;contact&#34;&gt;Contact
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;GitHub: &lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;1parado&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Email: 【your@email.com】← replace with yours&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;license&#34;&gt;License
+&lt;/h2&gt;&lt;p&gt;Content on this site is licensed under CC BY-NC-SA 4.0 unless noted otherwise.&lt;/p&gt;
 </description>
         </item>
         <item>

@@ -10,9 +10,11 @@
 <meta property='og:description' content="Welcome！">
 <meta property='og:url' content='https://1parado.github.io/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/'>
 <meta property='og:site_name' content='Paradox’s Blog'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-08-20T19:18:24&#43;08:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-08-23T17:59:49&#43;08:00 '/>
 <meta name="twitter:title" content="Tag: 编程工具 - Paradox’s Blog">
 <meta name="twitter:description" content="Welcome！"><link rel="alternate" type="application/rss&#43;xml" href="https://1parado.github.io/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/index.xml">
+    <link rel="shortcut icon" href="/img/avatar.png" />
+
     </head>
     <body class="">
     <script>
@@ -1506,6 +1508,527 @@
             
         
             
+                <section class="widget widget-github" data-github-heatmap
+         data-username="1parado"
+         data-lang="en"
+         data-api="https://github-contributions-api.jogruber.de/v4/1parado"
+         data-fallback-src="https://github-contributions.vercel.app/api/v1/1parado">
+
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">GitHub</h2>
+
+    <div class="gh-header">
+        <a class="gh-header__name" href="https://github.com/1parado" target="_blank" rel="noopener">@1parado</a>
+        <select class="gh-year" aria-label="GitHub"></select>
+    </div>
+    <div class="gh-header__total"></div>
+
+    <div class="gh-status">Loading contributions…<button class="gh-retry" type="button" hidden>Retry</button></div>
+
+    <div class="gh-layout" hidden>
+        <div class="gh-months"></div>
+        <div class="gh-body">
+            <div class="gh-weekdays"></div>
+            <div class="gh-scale"><div class="gh-grid"></div></div>
+        </div>
+        <div class="gh-legend">
+            <span class="gh-legend__less">Less</span>
+            <span class="gh-cell lvl-0"></span>
+            <span class="gh-cell lvl-1"></span>
+            <span class="gh-cell lvl-2"></span>
+            <span class="gh-cell lvl-3"></span>
+            <span class="gh-cell lvl-4"></span>
+            <span class="gh-legend__more">More</span>
+        </div>
+    </div>
+
+    <div class="gh-fallback" hidden></div>
+</section>
+
+<script>
+(function () {
+    'use strict';
+
+     
+    var widget = document.querySelector('[data-github-heatmap]');
+    if (!widget || typeof fetch !== 'function') { return; }
+
+    var username = widget.dataset.username;
+    var lang = widget.dataset.lang || 'en';
+    var apiUrl = widget.dataset.api;
+    var fallbackSrc = widget.dataset.fallbackSrc;
+
+    var statusEl = widget.querySelector('.gh-status');
+    var retryBtn = widget.querySelector('.gh-retry');
+    var layoutEl = widget.querySelector('.gh-layout');
+    var fallbackEl = widget.querySelector('.gh-fallback');
+
+    var nameEl = widget.querySelector('.gh-header__name');
+    var yearSel = widget.querySelector('.gh-year');
+    var totalEl = widget.querySelector('.gh-header__total');
+    var monthsEl = widget.querySelector('.gh-months');
+    var weekdaysEl = widget.querySelector('.gh-weekdays');
+    var bodyEl = widget.querySelector('.gh-body');
+    var scaleEl = widget.querySelector('.gh-scale');
+    var gridEl = widget.querySelector('.gh-grid');
+
+    var STEP = 11;           
+
+    var zh = lang.indexOf('zh') === 0;
+    var ar = lang.indexOf('ar') === 0;
+    var dateFmt = new Intl.DateTimeFormat(lang, { year: 'numeric', month: 'short', day: 'numeric' });
+    var monthFmt = new Intl.DateTimeFormat(lang, { month: 'short' });
+    var weekdayFmt = new Intl.DateTimeFormat(lang, { weekday: 'short' });
+    var gridWeekdayIdx = [1, 3, 5];  
+
+    var dropdownYears = [];
+    var yearCache = {};      
+    var currentYear = null;
+    var abortCtrl = null;
+    var currentWeeks = 0;
+
+     
+
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+    function iso(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+    function parseDate(s) {
+        var p = s.split('-');
+        return new Date(+p[0], +p[1] - 1, +p[2]);
+    }
+    function tooltipText(count, date) {
+        var when = dateFmt.format(date);
+        if (zh) { return count + ' 次贡献 · ' + when; }
+        if (ar) { return count + ' مساهمة في ' + when; }
+        return count + (count === 1 ? ' contribution on ' : ' contributions on ') + when;
+    }
+    function totalText(n, y) {
+        if (zh) { return y + ' 年共 <strong>' + n + '</strong> 次贡献'; }
+        if (ar) { return '<strong>' + n + '</strong> مساهمة في ' + y; }
+        return '<strong>' + n + '</strong> contributions in ' + y;
+    }
+
+    function setStatus(html, withRetry) {
+        statusEl.innerHTML = html;
+        retryBtn.hidden = !withRetry;
+        statusEl.hidden = false;
+    }
+    function setLoading() { setStatus('Loading contributions…', false); }
+
+     
+
+    function fetchUrl(url) {
+        if (abortCtrl) { abortCtrl.abort(); }
+        abortCtrl = new AbortController();
+        return fetch(url, { signal: abortCtrl.signal, headers: { 'Accept': 'application/json' } })
+            .then(function (res) {
+                if (!res.ok) { throw new Error('HTTP ' + res.status); }
+                return res.json();
+            });
+    }
+
+    
+
+    function buildYearCache(data) {
+        (data.contributions || []).forEach(function (c) {
+            var y = +c.date.slice(0, 4);
+            if (!yearCache[y]) { yearCache[y] = { total: (data.total || {})[y] || 0, contributions: [] }; }
+            yearCache[y].contributions.push(c);
+        });
+        Object.keys(yearCache).forEach(function (y) {
+            yearCache[y].contributions.sort(function (a, b) {
+                return a.date < b.date ? -1 : a.date > b.date ? 1 : 0;
+            });
+        });
+    }
+
+    function rememberDropdownYear(y) {
+        var n = +y;
+        if (dropdownYears.indexOf(n) === -1) { dropdownYears.push(n); }
+    }
+
+    function getYearData(year) {
+        if (yearCache[year]) { return Promise.resolve(yearCache[year]); }
+        return fetchUrl(apiUrl + '?y=' + encodeURIComponent(year)).then(function (d) {
+            yearCache[year] = d;
+            Object.keys(d.total || {}).forEach(rememberDropdownYear);
+            return d;
+        });
+    }
+
+     
+
+    function drawGraph(data, year) {
+        var contribs = data.contributions || [];
+        var total = data.total || 0;
+
+        totalEl.innerHTML = totalText(total, year);
+        nameEl.textContent = '@' + username;
+
+         
+        var byDate = {};
+        contribs.forEach(function (c) { byDate[c.date] = c; });
+
+        var first = contribs.length ? parseDate(contribs[0].date) : new Date();
+        var last = contribs.length ? parseDate(contribs[contribs.length - 1].date) : new Date();
+        var start = new Date(first.getFullYear(), first.getMonth(), first.getDate());
+        start.setDate(start.getDate() - start.getDay());
+        var lastIdx = Math.round((last - start) / 86400000);
+        if (lastIdx < 0) { lastIdx = 0; }
+        var weeks = Math.max(1, Math.min(53, Math.floor(lastIdx / 7) + 1));
+        currentWeeks = weeks;
+
+         
+        monthsEl.innerHTML = '';
+        var prevMonth = -1;
+        for (var w = 0; w < weeks; w++) {
+            var d0 = new Date(start.getTime() + w * 7 * 86400000);
+            var m = d0.getMonth();
+            if (w === 0 || m !== prevMonth) {
+                var lab = document.createElement('span');
+                lab.textContent = monthFmt.format(d0);
+                lab.style.left = (w * STEP / (weeks * STEP) * 100) + '%';
+                monthsEl.appendChild(lab);
+                prevMonth = m;
+            }
+        }
+
+         
+        weekdaysEl.innerHTML = '';
+        for (var r = 0; r < 7; r++) {
+            var sp = document.createElement('span');
+            if (gridWeekdayIdx.indexOf(r) !== -1) {
+                sp.textContent = weekdayFmt.format(new Date(start.getTime() + r * 86400000));
+            } else { sp.innerHTML = '&nbsp;'; }
+            weekdaysEl.appendChild(sp);
+        }
+
+         
+        var frag = document.createDocumentFragment();
+        for (var w2 = 0; w2 < weeks; w2++) {
+            for (var dow = 0; dow < 7; dow++) {
+                var day = new Date(start.getTime() + (w2 * 7 + dow) * 86400000);
+                var key = iso(day);
+                var info = byDate[key] || null;
+                var cell = document.createElement('span');
+                var lvl = info ? (info.level || 0) : 0;
+                cell.className = 'gh-cell lvl-' + lvl;
+                cell.style.gridColumn = (w2 + 1);
+                cell.style.gridRow = (dow + 1);
+                if (info && info.count > 0) {
+                    cell.dataset.date = key;
+                    cell.dataset.count = info.count;
+                    cell.setAttribute('aria-label', tooltipText(info.count, day));
+                }
+                frag.appendChild(cell);
+            }
+        }
+        gridEl.innerHTML = '';
+        gridEl.style.gridTemplateColumns = 'repeat(' + weeks + ', var(--gh-step))';
+        gridEl.appendChild(frag);
+
+        fit();
+    }
+
+     
+    function fit() {
+        if (!currentWeeks) { return; }
+        var naturalW = currentWeeks * STEP;
+        var avail = scaleEl.clientWidth;
+        if (!avail || !naturalW) { return; }
+        var s = Math.min(1, avail / naturalW);
+        gridEl.style.transform = 'scale(' + s + ')';
+        gridEl.style.transformOrigin = '0 0';
+        scaleEl.style.height = Math.ceil(7 * STEP * s) + 'px';
+    }
+
+     
+
+    function makeTooltip() {
+        var tip = document.createElement('div');
+        tip.className = 'gh-tooltip';
+        tip.hidden = true;
+        document.body.appendChild(tip);
+        return tip;
+    }
+    var tooltip = makeTooltip();
+
+    gridEl.addEventListener('pointerover', function (e) {
+        var cell = e.target.closest ? e.target.closest('.gh-cell') : null;
+        if (!cell || !cell.dataset.count) { tooltip.hidden = true; return; }
+        var date = parseDate(cell.dataset.date);
+        tooltip.textContent = tooltipText(+cell.dataset.count, date);
+        tooltip.hidden = false;
+    });
+    gridEl.addEventListener('pointermove', function (e) {
+        if (tooltip.hidden) { return; }
+        var x = e.clientX + 12;
+        var y = e.clientY + 14;
+        var rect = tooltip.getBoundingClientRect();
+        if (x + rect.width > window.innerWidth - 8) { x = e.clientX - rect.width - 12; }
+        if (y + rect.height > window.innerHeight - 8) { y = e.clientY - rect.height - 8; }
+        tooltip.style.left = x + 'px';
+        tooltip.style.top = y + 'px';
+    });
+    gridEl.addEventListener('pointerleave', function () { tooltip.hidden = true; });
+
+     
+
+    function fail(msg) {
+        layoutEl.hidden = true;
+        totalEl.innerHTML = '';
+        var html = msg + ' <a href="https://github.com/' + encodeURIComponent(username) + '" target="_blank" rel="noopener">@' + username + '</a>';
+        setStatus(html, true);
+        fallbackEl.innerHTML = '<img src="' + fallbackSrc + '" alt="' + username + ' GitHub contributions" loading="lazy" />';
+        fallbackEl.hidden = false;
+    }
+
+    function load(year) {
+        yearSel.disabled = true;
+        var p;
+        if (year == null) {
+             
+            p = fetchUrl(apiUrl).then(function (data) {
+                buildYearCache(data);
+                Object.keys(data.total || {}).forEach(rememberDropdownYear);
+                var nowY = new Date().getFullYear();
+                currentYear = yearCache[nowY] ? nowY : dropdownYears[0];
+                fillDropdown();
+                return yearCache[currentYear];
+            });
+        } else {
+            p = getYearData(year).then(function (data) {
+                fillDropdown();
+                return data;
+            });
+        }
+        p.then(function (data) {
+            statusEl.hidden = true;
+            fallbackEl.hidden = true;
+            layoutEl.hidden = false;
+            drawGraph(data, currentYear);
+        }).catch(function (err) {
+            if (err && err.name === 'AbortError') { return; }
+            fail('Failed to load contributions');
+        }).finally(function () { yearSel.disabled = false; });
+    }
+
+    function fillDropdown() {
+        dropdownYears.sort(function (a, b) { return b - a; });
+        yearSel.innerHTML = '';
+        dropdownYears.forEach(function (y) {
+            var opt = document.createElement('option');
+            opt.value = y;
+            opt.textContent = y;
+            if (y === currentYear) { opt.selected = true; }
+            yearSel.appendChild(opt);
+        });
+    }
+
+    retryBtn.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        setLoading();
+        fallbackEl.hidden = true;
+        load(currentYear);
+    });
+
+    yearSel.addEventListener('change', function () {
+        currentYear = +yearSel.value;
+        load(currentYear);
+    });
+
+    var resizeTimer = null;
+    window.addEventListener('resize', function () {
+        if (resizeTimer) { clearTimeout(resizeTimer); }
+        resizeTimer = setTimeout(fit, 150);
+    });
+
+    setLoading();
+    load(null);
+})();
+</script>
+
+<style>
+.widget-github {
+    background-color: var(--card-background);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow-l1);
+    padding: var(--small-card-padding);
+    color: var(--card-text-color-secondary);
+    font-size: 1.4rem;
+
+    --gh-step: 11px;
+    --gh-c0: #ebedf0;
+    --gh-c1: #9be9a8;
+    --gh-c2: #40c463;
+    --gh-c3: #30a14e;
+    --gh-c4: #216e39;
+}
+[data-scheme="dark"] .widget-github {
+    --gh-c0: #2d333b;
+    --gh-c1: #0e4429;
+    --gh-c2: #006d32;
+    --gh-c3: #26a641;
+    --gh-c4: #39d353;
+}
+
+.widget-github .widget-icon svg {
+    color: var(--body-text-color);
+}
+
+.gh-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 12px;
+}
+.gh-header__name {
+    color: var(--card-text-color-main);
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.gh-header__name:hover { text-decoration: underline; }
+.gh-year {
+    border: 1px solid var(--card-separator-color);
+    border-radius: 5px;
+    background-color: var(--card-background);
+    color: var(--card-text-color-main);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 3px 6px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+.gh-year option {
+    color: var(--card-text-color-main);
+    background-color: var(--card-background);
+}
+.gh-header__total {
+    margin: 6px 0 10px;
+    font-size: 1.25rem;
+    color: var(--card-text-color-secondary);
+}
+.gh-header__total strong { color: var(--card-text-color-main); }
+
+.gh-status {
+    margin: 14px 0;
+    font-size: 1.3rem;
+    color: var(--card-text-color-tertiary);
+}
+.gh-status .gh-retry {
+    border: 0;
+    background: none;
+    margin-left: 8px;
+    color: var(--accent-color);
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 1.3rem;
+}
+.gh-status a { color: var(--accent-color); }
+
+.gh-months {
+    position: relative;
+    height: 15px;
+    margin: 0 0 2px 21px;
+    font-size: 9px;
+    line-height: 15px;
+    color: var(--card-text-color-tertiary);
+    overflow: hidden;
+}
+.gh-months span {
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+}
+.gh-body { display: flex; gap: 0; }
+.gh-weekdays {
+    width: 21px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    font-size: 9px;
+    color: var(--card-text-color-tertiary);
+    text-align: right;
+    padding-top: 2px;
+    box-sizing: border-box;
+}
+.gh-weekdays span {
+    height: var(--gh-step);
+    line-height: var(--gh-step);
+}
+.gh-scale {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+.gh-grid {
+    display: grid;
+    gap: 2px;
+    transform-origin: 0 0;
+}
+.gh-cell {
+    width: calc(var(--gh-step) - 2px);
+    height: calc(var(--gh-step) - 2px);
+    border-radius: 2px;
+    background-color: var(--gh-c0);
+}
+.gh-cell.lvl-1 { background-color: var(--gh-c1); }
+.gh-cell.lvl-2 { background-color: var(--gh-c2); }
+.gh-cell.lvl-3 { background-color: var(--gh-c3); }
+.gh-cell.lvl-4 { background-color: var(--gh-c4); }
+
+.gh-legend {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-top: 10px;
+    font-size: 9px;
+    color: var(--card-text-color-tertiary);
+}
+.gh-legend .gh-cell {
+    width: 9px;
+    height: 9px;
+}
+.gh-legend__less { margin-right: 2px; }
+.gh-legend__more { margin-left: 2px; }
+
+.gh-fallback { margin-top: 12px; }
+.gh-fallback img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.gh-tooltip {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    max-width: 260px;
+    background: #24292f;
+    color: #fff;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    padding: 4px 9px;
+    border-radius: 5px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+</style>
+            
+        
+            
                 <form action="/search/" class="search-form widget" >
         <p>
             <label>Search</label>
@@ -1731,7 +2254,7 @@
         2026 Paradox29
     </section>
 
-    <section class="wordcount">本站总字数：172.8k 字
+    <section class="wordcount">本站总字数：174.2k 字
 </section>
     <section class="powerby">
         

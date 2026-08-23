@@ -12,7 +12,36 @@
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/zh-cn/%E5%85%B3%E4%BA%8E/</guid>
-        <description>&lt;p&gt;This is a test page for i18n support.&lt;/p&gt;
+        <description>&lt;h1 id=&#34;你好我是-paradox-&#34;&gt;你好，我是 Paradox 👋
+&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;后端开发方向，写博客是为了记录，也为了分享。【这里放一句话简介，例如：某大学计算机专业在读 / 某公司后端开发】&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;关于这个博客&#34;&gt;关于这个博客
+&lt;/h2&gt;&lt;p&gt;这个博客主要记录我学习与工作中的沉淀：技术教程、项目实践、踩坑记录，以及一些思考。希望每篇文章都能「完整地解决一个问题」，让路过的朋友真的能学到东西。&lt;/p&gt;
+&lt;h2 id=&#34;技术栈&#34;&gt;技术栈
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;后端&lt;/strong&gt;：Java · Spring Boot · Spring Cloud · Go&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据&lt;/strong&gt;：MySQL · Redis&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;前端&lt;/strong&gt;：HTML / CSS / JavaScript（够用）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;工具&lt;/strong&gt;：Git · Maven · Docker · Linux&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;兴趣&lt;/strong&gt;：微服务架构、AI 工具、效率工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;部分项目&#34;&gt;部分项目
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/%e5%8d%95%e4%bd%93%e8%bd%ac%e5%90%91%e5%be%ae%e6%9c%8d%e5%8a%a1%e7%9a%84%e4%b8%80%e6%ac%a1%e5%ae%9e%e8%b7%b5/&#34; &gt;酒旅系统：单体转向微服务的一次实践&lt;/a&gt; —— 从零把单体 Spring Boot 项目改造为 Spring Cloud 微服务架构&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/%e5%ae%9e%e7%8e%b0%e4%b8%80%e4%b8%aa%e6%9c%ac%e5%9c%b0%e7%bf%bb%e8%af%91%e5%99%a8/&#34; &gt;本地大模型翻译器&lt;/a&gt; —— 用本地模型实现的翻译工具&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/promptshare/&#34; &gt;PromptShare&lt;/a&gt; —— 开源的提示词共享网站&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/%e6%89%8b%e5%86%99%e4%b8%80%e4%b8%aaredis/&#34; &gt;手写一个 Redis&lt;/a&gt; —— 以重建核心的方式理解 Redis 原理&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/p/%e5%a6%82%e4%bd%95%e5%ae%9e%e7%8e%b0%e4%b8%80%e4%b8%aa%e7%ae%80%e5%8d%95%e7%9a%84%e6%95%8f%e6%84%9f%e8%af%8d%e6%a3%80%e6%b5%8b/&#34; &gt;敏感词检测&lt;/a&gt; —— 带 Web 界面的敏感词检测服务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;更多内容可以逛 &lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/archives/&#34; &gt;归档&lt;/a&gt; 或按 &lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/categories/&#34; &gt;分类&lt;/a&gt; 浏览。&lt;/p&gt;
+&lt;h2 id=&#34;联系我&#34;&gt;联系我
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;GitHub：&lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;1parado&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;邮箱：【你的邮箱】← 记得替换成你自己的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;版权说明&#34;&gt;版权说明
+&lt;/h2&gt;&lt;p&gt;本站内容除特别注明外均采用 CC BY-NC-SA 4.0 协议，转载注明出处即可。&lt;/p&gt;
 </description>
         </item>
         
