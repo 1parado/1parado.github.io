@@ -7,6 +7,136 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright><atom:link href="https://1parado.github.io/categories/ai/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Grok网页 &#43; Github MCP实现科研论文收集</title>
+        <link>https://1parado.github.io/p/grok-web-github-mcp-paper-collection/</link>
+        <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/grok-web-github-mcp-paper-collection/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;做科研最耗时间的往往不是读论文，而是找论文。以我的第二篇论文研究方向为例，研究方向是multi-agent（无人机方向）。&lt;/p&gt;
+&lt;p&gt;做了一个自动化流程：让 &lt;strong&gt;Grok 网页端负责「查和筛」，让 GitHub MCP 负责「存和发」&lt;/strong&gt;，最后通过部署到GitHub Pages上，拿到一个可以直接部署的论文合集站。全程在浏览器里完成，本地不用装任何环境。&lt;/p&gt;
+&lt;h2 id=&#34;grok-网页端--github-mcp&#34;&gt;Grok 网页端 + GitHub MCP
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;环节&lt;/th&gt;
+          &lt;th&gt;本来怎么做&lt;/th&gt;
+          &lt;th&gt;现在交给谁&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;检索筛选&lt;/td&gt;
+          &lt;td&gt;手动翻 arXiv / Google Scholar，逐个点开看摘要&lt;/td&gt;
+          &lt;td&gt;Grok 网页端联网检索&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;归档发布&lt;/td&gt;
+          &lt;td&gt;下载 PDF、复制摘要、本地排版，再推仓库&lt;/td&gt;
+          &lt;td&gt;GitHub MCP 直接读写仓库&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Grok 网页版本身就能联网检索，接上 MCP 连接器之后，它从「会说」变成「能动手」——可以直接在我自己的 GitHub 仓库里建文件、提交改动。原本要在本地来回复制粘贴的那一段路，就省掉了。&lt;/p&gt;
+&lt;h2 id=&#34;给-grok-接上-github-mcp&#34;&gt;给 Grok 接上 GitHub MCP
+&lt;/h2&gt;&lt;p&gt;第一步是把 GitHub 的 MCP server 挂到 Grok 网页端上：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在 Grok 网页端打开&lt;strong&gt;连接器 / MCP 设置&lt;/strong&gt;，新增一个 MCP server，地址填 GitHub 官方的 MCP server；&lt;/li&gt;
+&lt;li&gt;走一遍 GitHub 授权，&lt;strong&gt;仓库权限只勾要用的那一个&lt;/strong&gt;，不要图省事全选；&lt;/li&gt;
+&lt;li&gt;授权完成后能在连接器里看到这个 server 提供的工具，一般是「读仓库文件」「创建 / 更新文件」「提交」这几类。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;接好之后先在对话里试一句「列出我 xxx 仓库根目录有哪些文件」。能正常返回，说明工具链路通了，再往下做正文。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/grok-mcp-1.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Grok 网页端 &amp;#43; GitHub MCP 的整体流程&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/grok-mcp-2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;在 Grok 网页端添加 GitHub MCP 连接器&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/grok-mcp-3.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;授权完成后可以看到 MCP 提供的工具列表&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;让它去-arxiv-收论文&#34;&gt;让它去 arXiv 收论文
+&lt;/h2&gt;&lt;p&gt;这一步的关键是&lt;strong&gt;把要求说死&lt;/strong&gt;，否则很容易收回来一堆不相关的。我提的要求大概是这几条：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;方向&lt;/strong&gt;：multi-agent framework / agent harness，以及自生成与安全；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;时间窗&lt;/strong&gt;：arXiv 2025-09 ~ 2026-09，只要这个区间的新工作；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数量&lt;/strong&gt;：先要十来篇有代表性的，不要贪多；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;统一模板&lt;/strong&gt;：每篇按「解决什么问题 → 创新点 → 关键结果 → 局限」整理；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;必须带原文链接&lt;/strong&gt;：arXiv 编号和 PDF 地址都要留下，防止它凭印象编。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;另外一个很实用的点：&lt;strong&gt;让它分批写、分批提交&lt;/strong&gt;，不要一口气把十几篇全生成完再提交。分批的好处是中途能看、能纠偏，真出问题也只丢一小段。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/grok-mcp-4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;让 Grok 按指定方向和模板筛选论文&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/grok-mcp-5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Grok 通过 MCP 把整理好的内容提交到仓库&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/grok-mcp-6.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;部署后的论文导读站&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;成果multi-agent-article&#34;&gt;成果：multi-agent-article
+&lt;/h2&gt;&lt;p&gt;最后收出来 11 篇，每篇一个独立的中文编译页，另外还有术语表、目录页和原文 PDF / arXiv 链接。仓库开启 GitHub Pages 之后，直接就是一个线上站点：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在线阅读：&lt;/strong&gt; &lt;a class=&#34;link&#34; href=&#34;https://1parado.github.io/multi-agent-article/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://1parado.github.io/multi-agent-article/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;仓库地址：&lt;/strong&gt; &lt;a class=&#34;link&#34; href=&#34;https://github.com/1parado/multi-agent-article&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/1parado/multi-agent-article&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;几个坑&#34;&gt;几个坑
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;AI 整理的内容一定要回原文核对&lt;/strong&gt;。它给的「关键结果」偶尔会把数字记串，尤其是跨论文对比的时候；引用一律以英文原文为准。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;权限别给大&lt;/strong&gt;。MCP 是能真写仓库的，只授权需要的那一个仓库，别用一把全量 token 图省事。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;时间窗要写清楚&lt;/strong&gt;。不限定年份的话，它很容易把几年前的经典工作也一起收进来，跟「看最新进展」的目的就偏了。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>PromptShare</title>
         <link>https://1parado.github.io/p/promptshare/</link>
         <pubDate>Fri, 13 Feb 2026 00:00:00 +0000</pubDate>

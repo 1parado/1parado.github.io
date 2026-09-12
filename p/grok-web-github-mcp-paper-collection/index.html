@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="用 Grok 网页端接上 GitHub MCP，把 arXiv 上散落的 multi-agent 论文收集、编译成一个能直接部署的中文导读站">
+<title>Grok网页 &#43; Github MCP实现科研论文收集</title>
+
+<link rel='canonical' href='https://1parado.github.io/p/grok-web-github-mcp-paper-collection/'>
+
+<link rel="stylesheet" href="/scss/style.min.ec0275f9efc7477560607f9610e0eeb6ebb5e53a8dcbdd5591f1ea2ee0b3c273.css"><meta property='og:title' content="Grok网页 + Github MCP实现科研论文收集">
+<meta property='og:description' content="用 Grok 网页端接上 GitHub MCP，把 arXiv 上散落的 multi-agent 论文收集、编译成一个能直接部署的中文导读站">
+<meta property='og:url' content='https://1parado.github.io/p/grok-web-github-mcp-paper-collection/'>
+<meta property='og:site_name' content='Paradox’s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Grok' /><meta property='article:tag' content='MCP' /><meta property='article:tag' content='GitHub' /><meta property='article:tag' content='arXiv' /><meta property='article:published_time' content='2026-09-12T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-09-12T11:30:26&#43;08:00'/>
+<meta name="twitter:title" content="Grok网页 + Github MCP实现科研论文收集">
+<meta name="twitter:description" content="用 Grok 网页端接上 GitHub MCP，把 arXiv 上散落的 multi-agent 论文收集、编译成一个能直接部署的中文导读站">
+    <link rel="shortcut icon" href="/img/avatar.png" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_704d6f3f7ea7c980.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Paradox’s Blog</a></h1>
+            <h2 class="site-description">Welcome！</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/1parado'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://1parado.github.io/" selected>English</option>
+                                
+                                    <option value="https://1parado.github.io/zh-cn/" >中文</option>
+                                
+                                    <option value="https://1parado.github.io/ar/" >عربي</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#grok-网页端--github-mcp">Grok 网页端 + GitHub MCP</a></li>
+    <li><a href="#给-grok-接上-github-mcp">给 Grok 接上 GitHub MCP</a></li>
+    <li><a href="#让它去-arxiv-收论文">让它去 arXiv 收论文</a></li>
+    <li><a href="#成果multi-agent-article">成果：multi-agent-article</a></li>
+    <li><a href="#几个坑">几个坑</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/ai/" style="background-color: #2a9d8f; color: #fff;">
+                AI
+            </a>
+        
+            <a href="/categories/%E7%A7%91%E7%A0%94/" style="background-color: #2a9d8f; color: #fff;">
+                科研
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/grok-web-github-mcp-paper-collection/">Grok网页 &#43; Github MCP实现科研论文收集</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            用 Grok 网页端接上 GitHub MCP，把 arXiv 上散落的 multi-agent 论文收集、编译成一个能直接部署的中文导读站
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Sep 12, 2026</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    1 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <style>
+  body {
+    background: url('/img/background.jpg') no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+</style>
+<p>做科研最耗时间的往往不是读论文，而是找论文。以我的第二篇论文研究方向为例，研究方向是multi-agent（无人机方向）。</p>
+<p>做了一个自动化流程：让 <strong>Grok 网页端负责「查和筛」，让 GitHub MCP 负责「存和发」</strong>，最后通过部署到GitHub Pages上，拿到一个可以直接部署的论文合集站。全程在浏览器里完成，本地不用装任何环境。</p>
+<h2 id="grok-网页端--github-mcp">Grok 网页端 + GitHub MCP
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>环节</th>
+          <th>本来怎么做</th>
+          <th>现在交给谁</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>检索筛选</td>
+          <td>手动翻 arXiv / Google Scholar，逐个点开看摘要</td>
+          <td>Grok 网页端联网检索</td>
+      </tr>
+      <tr>
+          <td>归档发布</td>
+          <td>下载 PDF、复制摘要、本地排版，再推仓库</td>
+          <td>GitHub MCP 直接读写仓库</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>Grok 网页版本身就能联网检索，接上 MCP 连接器之后，它从「会说」变成「能动手」——可以直接在我自己的 GitHub 仓库里建文件、提交改动。原本要在本地来回复制粘贴的那一段路，就省掉了。</p>
+<h2 id="给-grok-接上-github-mcp">给 Grok 接上 GitHub MCP
+</h2><p>第一步是把 GitHub 的 MCP server 挂到 Grok 网页端上：</p>
+<ol>
+<li>在 Grok 网页端打开<strong>连接器 / MCP 设置</strong>，新增一个 MCP server，地址填 GitHub 官方的 MCP server；</li>
+<li>走一遍 GitHub 授权，<strong>仓库权限只勾要用的那一个</strong>，不要图省事全选；</li>
+<li>授权完成后能在连接器里看到这个 server 提供的工具，一般是「读仓库文件」「创建 / 更新文件」「提交」这几类。</li>
+</ol>
+<p>接好之后先在对话里试一句「列出我 xxx 仓库根目录有哪些文件」。能正常返回，说明工具链路通了，再往下做正文。</p>
+<p><img src="/img/grok-mcp-1.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Grok 网页端 &#43; GitHub MCP 的整体流程"
+	
+	
+></p>
+<p><img src="/img/grok-mcp-2.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="在 Grok 网页端添加 GitHub MCP 连接器"
+	
+	
+></p>
+<p><img src="/img/grok-mcp-3.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="授权完成后可以看到 MCP 提供的工具列表"
+	
+	
+></p>
+<h2 id="让它去-arxiv-收论文">让它去 arXiv 收论文
+</h2><p>这一步的关键是<strong>把要求说死</strong>，否则很容易收回来一堆不相关的。我提的要求大概是这几条：</p>
+<ul>
+<li><strong>方向</strong>：multi-agent framework / agent harness，以及自生成与安全；</li>
+<li><strong>时间窗</strong>：arXiv 2025-09 ~ 2026-09，只要这个区间的新工作；</li>
+<li><strong>数量</strong>：先要十来篇有代表性的，不要贪多；</li>
+<li><strong>统一模板</strong>：每篇按「解决什么问题 → 创新点 → 关键结果 → 局限」整理；</li>
+<li><strong>必须带原文链接</strong>：arXiv 编号和 PDF 地址都要留下，防止它凭印象编。</li>
+</ul>
+<p>另外一个很实用的点：<strong>让它分批写、分批提交</strong>，不要一口气把十几篇全生成完再提交。分批的好处是中途能看、能纠偏，真出问题也只丢一小段。</p>
+<p><img src="/img/grok-mcp-4.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="让 Grok 按指定方向和模板筛选论文"
+	
+	
+></p>
+<p><img src="/img/grok-mcp-5.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Grok 通过 MCP 把整理好的内容提交到仓库"
+	
+	
+></p>
+<p><img src="/img/grok-mcp-6.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="部署后的论文导读站"
+	
+	
+></p>
+<h2 id="成果multi-agent-article">成果：multi-agent-article
+</h2><p>最后收出来 11 篇，每篇一个独立的中文编译页，另外还有术语表、目录页和原文 PDF / arXiv 链接。仓库开启 GitHub Pages 之后，直接就是一个线上站点：</p>
+<p><strong>在线阅读：</strong> <a class="link" href="https://1parado.github.io/multi-agent-article/"  target="_blank" rel="noopener"
+    >https://1parado.github.io/multi-agent-article/</a></p>
+<p><strong>仓库地址：</strong> <a class="link" href="https://github.com/1parado/multi-agent-article"  target="_blank" rel="noopener"
+    >https://github.com/1parado/multi-agent-article</a></p>
+<h2 id="几个坑">几个坑
+</h2><ul>
+<li><strong>AI 整理的内容一定要回原文核对</strong>。它给的「关键结果」偶尔会把数字记串，尤其是跨论文对比的时候；引用一律以英文原文为准。</li>
+<li><strong>权限别给大</strong>。MCP 是能真写仓库的，只授权需要的那一个仓库，别用一把全量 token 图省事。</li>
+<li><strong>时间窗要写清楚</strong>。不限定年份的话，它很容易把几年前的经典工作也一起收进来，跟「看最新进展」的目的就偏了。</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/grok/">Grok</a>
+        
+            <a href="/tags/mcp/">MCP</a>
+        
+            <a href="/tags/github/">GitHub</a>
+        
+            <a href="/tags/arxiv/">ArXiv</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            Last updated on Sep 12, 2026 11:30 CST
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/promptshare/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PromptShare</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%8D%95%E4%BD%93%E8%BD%AC%E5%90%91%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E4%B8%80%E6%AC%A1%E5%AE%9E%E8%B7%B5/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">单体转向微服务的一次实践</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/todolist/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Todolist</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/diary-%E4%B8%80%E6%AC%BE%E5%A4%9A%E5%8A%9F%E8%83%BD%E6%97%A5%E8%AE%B0%E8%BD%AF%E4%BB%B6/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Diary 一款多功能日记软件</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/bookblog/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">BookBlog</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div id="giscus_thread"></div>
+<script
+    src="https://giscus.app/client.js"
+    data-repo="1parado/1parado.github.io"
+    data-repo-id="R_kgDOQCGqvQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOQCGqvc4DEAOS"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+</script>
+
+<script>
+function setGiscusTheme(theme) {
+    const giscus = document.querySelector("iframe.giscus-frame");
+    if (giscus) {
+        giscus.contentWindow.postMessage(
+            { giscus: { setConfig: { theme: theme } } },
+            "https://giscus.app"
+        );
+    }
+}
+
+(function () {
+    function handler() {
+        if (document.documentElement.dataset.scheme === "light") {
+            setGiscusTheme('preferred_color_scheme');
+        } else {
+            setGiscusTheme('preferred_color_scheme');
+        }
+    }
+
+    window.addEventListener("message", (e) => {
+        if (e.origin !== "https://giscus.app") return;
+        handler();
+    });
+
+    window.addEventListener("onColorSchemeChange", handler);
+})();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2026 Paradox29
+    </section>
+
+    <section class="wordcount">本站总字数：177.3k 字
+</section>
+    <section class="powerby">
+        
+    </section>
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+    <span id="busuanzi_container_site_pv" style='display:none'> 本站总访问量 <span id="busuanzi_value_site_pv"></span> 次 </span>·
+    <span id="busuanzi_container_site_uv" style='display:none'> 总访客数 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+<script language="javascript"> 
+    var now = new Date();
+    function createtime(){
+        now.setTime(now.getTime()+250); 
+        var grt= new Date("2025/10/15 00:00:00"); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+        minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+
+        document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"
+    }
+    setInterval("createtime()",250); 
+</script> 
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+  body {
+    background: url(https://1parado.github.io/background/background.jpg) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+</style>
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        z-index: 99;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-image: url(https://1parado.github.io/icons/backTop.svg);
+    }
+</style>
+
+<script>
+    
+
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop
+        rightSideBar.appendChild(btn)
+        
+        window.onscroll = function() {
+            
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    }
+
+    
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+
+    initScrollTop();
+</script>
+
+<style>
+    #TableOfContents > ul, ol {
+        ul, ol {
+            display: none;
+        }
+        .open {
+            display: block;
+        }
+    }
+</style>
+
+<script>
+    function initTocHide() {
+        
+        let toc = document.querySelector(".widget--toc");
+        if (!toc) {
+            return;
+        }
+        
+        window.addEventListener('scroll', function() {
+            
+            let openUl = document.querySelectorAll(".open");
+            if (openUl.length > 0) {
+              openUl.forEach((ul) => {
+                ul.classList.remove("open")
+              })
+            }
+            
+            let currentLi = document.querySelector(".active-class");
+            if (!currentLi) {
+                return
+            }
+            
+            if (currentLi.children.length > 1) {
+                currentLi.children[1].classList.add("open")
+            }
+            
+            let ul = currentLi.parentElement;
+            do {
+                ul.classList.add("open");
+                ul = ul.parentElement.parentElement
+            } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'))
+        });
+    }
+    initTocHide()
+</script>
+
+    </body>
+</html>
