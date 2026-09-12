@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Sat, 12 Sep 2026 11:35:44 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 12 Sep 2026 11:47:17 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>AI编程</title>
         <link>https://1parado.github.io/tags/ai%E7%BC%96%E7%A8%8B/</link>
         <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
@@ -32,6 +32,14 @@
         <description></description>
         </item>
         <item>
+        <title>CPA</title>
+        <link>https://1parado.github.io/tags/cpa/</link>
+        <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/cpa/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>GitHub</title>
         <link>https://1parado.github.io/tags/github/</link>
         <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
@@ -45,6 +53,14 @@
         <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/tags/grok/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Grok Build</title>
+        <link>https://1parado.github.io/tags/grok-build/</link>
+        <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/grok-build/</guid>
         <description></description>
         </item>
         <item>
