@@ -2,11 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://1parado.github.io/tags/ai%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2026-09-12T11:35:44+08:00</lastmod>
+  </url><url>
     <loc>https://1parado.github.io/tags/arxiv/</loc>
     <lastmod>2026-09-12T11:30:26+08:00</lastmod>
   </url><url>
     <loc>https://1parado.github.io/categories/</loc>
-    <lastmod>2026-09-12T11:30:26+08:00</lastmod>
+    <lastmod>2026-09-12T11:35:44+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -23,6 +26,9 @@
                 href="https://1parado.github.io/categories/"
                 />
   </url><url>
+    <loc>https://1parado.github.io/tags/cli/</loc>
+    <lastmod>2026-09-12T11:35:44+08:00</lastmod>
+  </url><url>
     <loc>https://1parado.github.io/tags/github/</loc>
     <lastmod>2026-09-12T11:30:26+08:00</lastmod>
   </url><url>
@@ -32,11 +38,14 @@
     <loc>https://1parado.github.io/p/grok-web-github-mcp-paper-collection/</loc>
     <lastmod>2026-09-12T11:30:26+08:00</lastmod>
   </url><url>
+    <loc>https://1parado.github.io/tags/gui/</loc>
+    <lastmod>2026-09-12T11:35:44+08:00</lastmod>
+  </url><url>
     <loc>https://1parado.github.io/tags/mcp/</loc>
     <lastmod>2026-09-12T11:30:26+08:00</lastmod>
   </url><url>
     <loc>https://1parado.github.io/post/</loc>
-    <lastmod>2026-09-12T11:30:26+08:00</lastmod>
+    <lastmod>2026-09-12T11:35:44+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -49,7 +58,7 @@
                 />
   </url><url>
     <loc>https://1parado.github.io/tags/</loc>
-    <lastmod>2026-09-12T11:30:26+08:00</lastmod>
+    <lastmod>2026-09-12T11:35:44+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -65,6 +74,12 @@
                 hreflang="en"
                 href="https://1parado.github.io/tags/"
                 />
+  </url><url>
+    <loc>https://1parado.github.io/tags/tui/</loc>
+    <lastmod>2026-09-12T11:35:44+08:00</lastmod>
+  </url><url>
+    <loc>https://1parado.github.io/p/gui-tui-cli/</loc>
+    <lastmod>2026-09-12T11:35:44+08:00</lastmod>
   </url><url>
     <loc>https://1parado.github.io/categories/go/</loc>
     <lastmod>2026-08-23T17:59:49+08:00</lastmod>

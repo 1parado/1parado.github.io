@@ -137,6 +137,115 @@
 </description>
         </item>
         <item>
+        <title>一图区分GUI、TUI、CLI</title>
+        <link>https://1parado.github.io/p/gui-tui-cli/</link>
+        <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/gui-tui-cli/</guid>
+        <description>&lt;style&gt;
+  body {
+    background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+&lt;/style&gt;
+&lt;p&gt;GUI、CLI、TUI 这三个词经常被混着用，其实三者的区别很简单：&lt;strong&gt;GUI 用鼠标点，CLI 敲命令，TUI 是在终端里用文本「画」出来的界面&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;一三者的区别&#34;&gt;一、三者的区别
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GUI（图形用户界面）&lt;/strong&gt;：只要有鼠标、触控板或触摸屏能操作的，都算 GUI。桌面环境、浏览器、文件管理器、IDE 都是这一类。它把功能摊开成菜单和按钮，代价是层级多、点得深。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CLI（命令行界面）&lt;/strong&gt;：在终端里敲命令执行特定功能。命令的参数比图形界面暴露得更细，所以&lt;strong&gt;涉及系统底层和配置时 CLI 往往更直接&lt;/strong&gt;——防火墙、网络、包管理都是典型场景。缺点是得记命令。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TUI（终端用户界面 / 文本用户界面）&lt;/strong&gt;：文章里说它是「一半 GUI 一半 CLI」。在终端里用文本画出面板、边框、列表，能用键盘（有些还支持鼠标）操作，比如终端里的音乐播放器 CMUS、终端浏览器、装系统时的选择界面。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/gui-tui-cli.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;一图区分 GUI、TUI、CLI&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;二ai-编程工具归属&#34;&gt;二、AI 编程工具归属
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;类型&lt;/th&gt;
+          &lt;th&gt;工具&lt;/th&gt;
+          &lt;th&gt;特点&lt;/th&gt;
+          &lt;th&gt;最佳使用场景&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TUI&lt;/td&gt;
+          &lt;td&gt;Grok Build&lt;/td&gt;
+          &lt;td&gt;多面板 TUI + Plan Mode + Todo 管理 + 并行子代理，终端原生&lt;/td&gt;
+          &lt;td&gt;复杂工程任务、重构、大型代码库&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TUI&lt;/td&gt;
+          &lt;td&gt;OpenCode&lt;/td&gt;
+          &lt;td&gt;主题化 TUI、分割面板、LSP 支持，接近 IDE 体验&lt;/td&gt;
+          &lt;td&gt;可视化交互和多模型切换&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TUI&lt;/td&gt;
+          &lt;td&gt;Crush&lt;/td&gt;
+          &lt;td&gt;美观直观 TUI，响应快，支持 LSP 代码理解&lt;/td&gt;
+          &lt;td&gt;日常编码建议、快速迭代&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TUI&lt;/td&gt;
+          &lt;td&gt;Crustly / Ralph-tui / Sidecar&lt;/td&gt;
+          &lt;td&gt;Rust 实现或专用仪表盘 TUI&lt;/td&gt;
+          &lt;td&gt;本地优先、代理编排、监控&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;CLI&lt;/td&gt;
+          &lt;td&gt;Aider&lt;/td&gt;
+          &lt;td&gt;Git 原生、diff 编辑、简单可靠&lt;/td&gt;
+          &lt;td&gt;Git 工作流、重构、开源项目&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;CLI + TUI&lt;/td&gt;
+          &lt;td&gt;Claude Code&lt;/td&gt;
+          &lt;td&gt;强推理、大上下文、终端代理&lt;/td&gt;
+          &lt;td&gt;深度复杂代码库、知识工作&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;CLI + TUI&lt;/td&gt;
+          &lt;td&gt;Codex CLI / Gemini CLI&lt;/td&gt;
+          &lt;td&gt;轻量、快速、集成各自模型&lt;/td&gt;
+          &lt;td&gt;简单生成、脚本任务、多模态&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;GUI&lt;/td&gt;
+          &lt;td&gt;Cursor&lt;/td&gt;
+          &lt;td&gt;完整 IDE + AI 深度集成&lt;/td&gt;
+          &lt;td&gt;大规模开发、视觉化编程&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;GUI&lt;/td&gt;
+          &lt;td&gt;VS Code + Copilot/Continue.dev、JetBrains AI&lt;/td&gt;
+          &lt;td&gt;插件式图形界面&lt;/td&gt;
+          &lt;td&gt;熟悉 IDE 的开发者&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;三怎么选&#34;&gt;三、怎么选
+&lt;/h2&gt;&lt;p&gt;盯着一列看不如盯着自己的操作习惯看：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;想要看得到、点得动&lt;/strong&gt;：GUI。初次上手、需要可视化看 diff、或者本来就在 IDE 里写代码，没必要为了「显得专业」去用终端。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;想要能脚本化、可回滚&lt;/strong&gt;：CLI。像 Aider 这种 Git 原生的，每一步改动都落在 commit 上，出问题直接回退，也更容易塞进 CI。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;想要终端里的「界面感」&lt;/strong&gt;：TUI。既有面板和状态显示，又留在终端里，适合长时间跑的任务和并行子代理的场景。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;三者不是替代关系。实际用下来常见的组合是：&lt;strong&gt;在 GUI 里看和审，在 TUI 里跑，把 CLI 留给自己写脚本和自动化&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;参考链接：&lt;a class=&#34;link&#34; href=&#34;https://itsfoss.com/gui-cli-tui/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GUI vs CLI vs TUI – What&amp;rsquo;s the Difference?&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>PromptShare</title>
         <link>https://1parado.github.io/p/promptshare/</link>
         <pubDate>Fri, 13 Feb 2026 00:00:00 +0000</pubDate>

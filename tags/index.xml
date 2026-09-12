@@ -7,12 +7,28 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Sat, 12 Sep 2026 11:30:26 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 12 Sep 2026 11:35:44 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>AI编程</title>
+        <link>https://1parado.github.io/tags/ai%E7%BC%96%E7%A8%8B/</link>
+        <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/ai%E7%BC%96%E7%A8%8B/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>ArXiv</title>
         <link>https://1parado.github.io/tags/arxiv/</link>
         <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/tags/arxiv/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>CLI</title>
+        <link>https://1parado.github.io/tags/cli/</link>
+        <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/cli/</guid>
         <description></description>
         </item>
         <item>
@@ -32,11 +48,27 @@
         <description></description>
         </item>
         <item>
+        <title>GUI</title>
+        <link>https://1parado.github.io/tags/gui/</link>
+        <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/gui/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>MCP</title>
         <link>https://1parado.github.io/tags/mcp/</link>
         <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/tags/mcp/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>TUI</title>
+        <link>https://1parado.github.io/tags/tui/</link>
+        <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/tui/</guid>
         <description></description>
         </item>
         <item>
