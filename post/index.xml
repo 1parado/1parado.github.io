@@ -7,13 +7,235 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Sat, 12 Sep 2026 11:47:17 +0800</lastBuildDate><atom:link href="https://1parado.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 14 Sep 2026 23:36:40 +0800</lastBuildDate><atom:link href="https://1parado.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>mini-vedio：一个 12MB 的单文件加密视频通话应用</title>
+        <link>https://1parado.github.io/p/mini-vedio/</link>
+        <pubDate>Mon, 14 Sep 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/p/mini-vedio/</guid>
+        <description>&lt;img src="https://1parado.github.io/img/minivedio-home.png" alt="Featured image of post mini-vedio：一个 12MB 的单文件加密视频通话应用" /&gt;&lt;h2 id=&#34;为什么再做一个视频通话软件&#34;&gt;为什么再做一个视频通话软件
+&lt;/h2&gt;&lt;p&gt;先承认：这个赛道已经非常拥挤了。腾讯会议、Zoom、飞书……但每次我只是想让&lt;strong&gt;两台设备临时通个话&lt;/strong&gt;——比如帮远程的父母看看电脑出了什么问题、和另一台机器联调个东西——我面对的永远是同一套流程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;双方都去下载几百 MB 的安装包，注册登录；&lt;/li&gt;
+&lt;li&gt;建会议、发链接、等对方进房；&lt;/li&gt;
+&lt;li&gt;接受&amp;quot;本次通话内容将被收集处理&amp;quot;的隐私条款；&lt;/li&gt;
+&lt;li&gt;一个会议软件常驻后台，占掉大几百 MB 内存。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;而真正本质的需求只有一句话：&lt;strong&gt;两台设备之间，建一条加密的音视频通道&lt;/strong&gt;。这件事在 WebRTC 时代本不该这么重。&lt;/p&gt;
+&lt;p&gt;于是有了 mini-vedio——一个 &lt;strong&gt;约 12MB 的单个 exe，双击即用，无安装、无注册、无服务器、媒体全程端到端加密&lt;/strong&gt; 的点对点音视频通话应用。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/minivedio-home.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;应用首页&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;三种连接方式覆盖从局域网到完全离线&#34;&gt;三种连接方式，覆盖从局域网到完全离线
+&lt;/h2&gt;&lt;p&gt;视频通话最难的部分从来不是媒体传输（WebRTC 已经解决了），而是&lt;strong&gt;信令&lt;/strong&gt;——双方如何交换建连所需的 SDP/ICE 信息。mini-vedio 用三级模式覆盖了几乎所有网络场景，且三种模式共用同一套 &lt;code&gt;SignalMessage&lt;/code&gt; JSON 格式：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;模式&lt;/th&gt;
+          &lt;th&gt;场景&lt;/th&gt;
+          &lt;th&gt;机制&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;局域网发现&lt;/td&gt;
+          &lt;td&gt;同一 WiFi/路由器&lt;/td&gt;
+          &lt;td&gt;UDP 逐网卡定向广播心跳，自动列出&amp;quot;附近的设备&amp;quot;，点击即呼，零配置&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;6 位房间码（默认）&lt;/td&gt;
+          &lt;td&gt;双方可上公共互联网&lt;/td&gt;
+          &lt;td&gt;「创建新通话」生成房间码，微信发给对方，对方输入即通——走免注册的公共 MQTT 中继，&lt;strong&gt;不需要自己的服务器&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;邀请码（备用）&lt;/td&gt;
+          &lt;td&gt;公共中继不可达 / 完全离线&lt;/td&gt;
+          &lt;td&gt;整包 SDP 压缩成一段文本，双方像换微信一样人工互换，纯带外传递&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/minivedio-connect.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;建立连接&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这个分层设计的关键在于&lt;strong&gt;优雅降级&lt;/strong&gt;：公共中继建连失败时自动切换到邀请码模式；路由器开了 AP 隔离导致局域网发现失败时，会明确提示改用房间码或邀请码，而不是让用户面对一个含糊的&amp;quot;连接失败&amp;quot;。&lt;/p&gt;
+&lt;p&gt;对隐私敏感的场景，同一个 exe 还能一键变身为自建信令服务器（&lt;code&gt;mini-vedio.exe signal&lt;/code&gt;），配合 cloudflared 隧道即可获得自己的公网信令地址——房间码照用，但中继完全自主可控。&lt;/p&gt;
+&lt;h2 id=&#34;架构核心决策只有一个媒体引擎不在-go-里实现&#34;&gt;架构：核心决策只有一个——媒体引擎不在 Go 里实现
+&lt;/h2&gt;&lt;p&gt;先看整体架构：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-gdscript3&#34; data-lang=&#34;gdscript3&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;┌──────────────────&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;单个&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;exe&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;（&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Go&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Wails&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;v3&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;）──────────────────┐&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;   &lt;span class=&#34;n&#34;&gt;WebView2&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;窗口&lt;/span&gt;                     &lt;span class=&#34;n&#34;&gt;Go&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;内核&lt;/span&gt;                   &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;┌──────────────────────────┐&lt;/span&gt;      &lt;span class=&#34;err&#34;&gt;┌──────────────────────┐&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;前端（&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Vue3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;内嵌打包产物）&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;      &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;LAN&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;发现&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;internal&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lan&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;getUserMedia&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;采集&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;预览&lt;/span&gt;   &lt;span class=&#34;err&#34;&gt;│◄────►│&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;信令中继&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;事件推送&lt;/span&gt;    &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;RTCPeerConnection&lt;/span&gt;       &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;绑定&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;设备身份&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SAS&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;码&lt;/span&gt;     &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;房间码&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;邀请码&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;聊天&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;共享&lt;/span&gt;   &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;      &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;serve&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;signal&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;子命令&lt;/span&gt;   &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;└────────────┬─────────────┘&lt;/span&gt;      &lt;span class=&#34;err&#34;&gt;└──────────┬───────────┘&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;               &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;                               &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;              &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;        &lt;span class=&#34;err&#34;&gt;媒体：&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DTLS&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SRTP&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;端到端&lt;/span&gt;          &lt;span class=&#34;err&#34;&gt;信令：只搬运&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SDP&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;文本&lt;/span&gt;    &lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;└───────────────┼───────────────────────────────┼──────────────┘&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;err&#34;&gt;▼&lt;/span&gt;                               &lt;span class=&#34;err&#34;&gt;▼&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         &lt;span class=&#34;err&#34;&gt;对端&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;WebView2&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;◄────&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;P2P&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;媒体直连&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;────►&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;对端（信令通道）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;技术栈：&lt;strong&gt;Go 1.26 + Wails v3 + Vue 3 + TypeScript + Vite + Tailwind CSS v4&lt;/strong&gt;。前端构建产物 &lt;code&gt;go:embed&lt;/code&gt; 内嵌进 exe，最终交付物就是那一个文件。&lt;/p&gt;
+&lt;p&gt;这个架构里最重要的一行字是：&lt;strong&gt;Go 不碰任何媒体数据&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;摄像头/麦克风采集、H.264/VP8/Opus 编解码、回声消除（AEC3）、降噪、DTLS-SRTP 加密、ICE 穿透——全部直接使用 WebView2（Chromium）内置的 WebRTC 栈。Go 侧只承担窗口壳、局域网发现、信令转发和设置存储这些&amp;quot;控制面&amp;quot;工作。&lt;/p&gt;
+&lt;p&gt;这个决策带来一连串的收益：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;不引入 Pion、不引入 FFmpeg、不引入任何编解码库&lt;/strong&gt;，代码量和体积直接压到底；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;白拿 Chromium 的回声消除与硬件编解码&lt;/strong&gt;——自己用 Go 写媒体处理，很难追平 AEC3 的质量；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;媒体加密由 WebRTC 规范强制保证&lt;/strong&gt;（DTLS-SRTP 不可关闭），安全基线天生就在；&lt;/li&gt;
+&lt;li&gt;唯一的代价是依赖系统 WebView2 运行时——而 Win10/11 基本预装，启动时检测缺失会引导安装。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;作为对照，一个常见的 Go WebRTC 思路是 &lt;code&gt;Go + Pion 自管媒体&lt;/code&gt;，但 Pion 只管传输不管采集和编码，采集与编码需要 CGO/FFmpeg，体积与构建复杂度双双爆炸，还会丢掉系统级回声消除。这就是&amp;quot;不自己造媒体引擎&amp;quot;的论证过程。&lt;/p&gt;
+&lt;h3 id=&#34;目录结构&#34;&gt;目录结构
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-gdscript3&#34; data-lang=&#34;gdscript3&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;mini&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;vedio&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;go&lt;/span&gt;              &lt;span class=&#34;c1&#34;&gt;# Wails 入口：窗口、权限、serve 子命令分发&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lanservice&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;go&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;# 绑定服务：Peers/SendOffer/AcceptCall + 事件转发&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;signal&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;go&lt;/span&gt;            &lt;span class=&#34;c1&#34;&gt;# signal 子命令：WSS 房间码中继（自建信令）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;serve&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;go&lt;/span&gt;             &lt;span class=&#34;c1&#34;&gt;# serve 子命令：自签 HTTPS，手机浏览器入口&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;diagnostics&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;go&lt;/span&gt;       &lt;span class=&#34;c1&#34;&gt;# 结构化诊断日志（JSONL，2MB 轮转）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;device&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;go&lt;/span&gt;            &lt;span class=&#34;c1&#34;&gt;# 设备标识持久化&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;internal&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lan&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;# UDP 广播发现 + 信令中继（纯标准库）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;frontend&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;   &lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;components&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;# VideoRoom / ChatPanel / IncomingCall …&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;   &lt;span class=&#34;err&#34;&gt;└──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;services&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;# call.ts 状态机 / relay.ts / signal.ts / sas.ts&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;bindings&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;            &lt;span class=&#34;c1&#34;&gt;# wails3 generate bindings 产物&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;└──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;scripts&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ps1&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;# 一键构建 + 体积断言&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;前后端的边界非常干净：前端 &lt;code&gt;call.ts&lt;/code&gt; 维护一个 &lt;code&gt;idle → connecting → connected → failed&lt;/code&gt; 的通话状态机，所有 &lt;code&gt;RTCPeerConnection&lt;/code&gt; 的生命周期都在这里；Go 通过 Wails bindings 暴露 &lt;code&gt;Peers&lt;/code&gt;/&lt;code&gt;SendOffer&lt;/code&gt;/&lt;code&gt;AcceptCall&lt;/code&gt; 等方法，用事件把局域网发现结果推回前端。&lt;/p&gt;
+&lt;h2 id=&#34;解决的痛点&#34;&gt;解决的痛点
+&lt;/h2&gt;&lt;h3 id=&#34;痛点一安装与注册的摩擦&#34;&gt;痛点一：安装与注册的摩擦
+&lt;/h3&gt;&lt;p&gt;单文件 exe、双击即用、系统自带 WebView2 即可运行。跨网通话的默认路径（房间码）走免注册的公共 MQTT 中继，前端 &lt;code&gt;relay.ts&lt;/code&gt; &lt;strong&gt;手写了 MQTT 3.1.1 报文 over WSS&lt;/strong&gt;——不引任何 WebSocket/MQTT 库，为一个功能省下一整个依赖树。房间的设计上还有个细节：6 位房间码的首字符编码了所选 broker（A=emqx、B=hivemq），保证双方确定性落到同一台中继上，不会出现&amp;quot;都输入了房间码却在等对方&amp;quot;的分叉。&lt;/p&gt;
+&lt;h3 id=&#34;痛点二electron-式的体积臃肿&#34;&gt;痛点二：Electron 式的体积臃肿
+&lt;/h3&gt;&lt;p&gt;桌面应用 + Web 前端的常规答案是 Electron，代价是 150–200MB 的产物和数 GB 的 node_modules。mini-vedio 给自己定下硬约束：&lt;strong&gt;exe ≤ 13MB&lt;/strong&gt;，并在构建脚本里内置体积断言，超了直接构建失败。每次发布的体积都有记录可查，防止悄悄膨胀：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;里程碑&lt;/th&gt;
+          &lt;th&gt;exe 大小&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;基础版本（Wails + 前端 + LAN + 诊断日志）&lt;/td&gt;
+          &lt;td&gt;12.29 MB&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;PWA 化（manifest/SW/图标）&lt;/td&gt;
+          &lt;td&gt;12.31 MB&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;房间码默认化（公共 MQTT 中继 + ICE 缓冲 + bye）&lt;/td&gt;
+          &lt;td&gt;12.46 MB&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;体积控制没有黑科技，靠的是几条纪律：纯 Go 零 CGO、&lt;code&gt;-ldflags &amp;quot;-s -w&amp;quot; -trimpath&lt;/code&gt;、能用标准库就不引库、前端依赖保持最小集。&lt;/p&gt;
+&lt;h3 id=&#34;痛点三隐私我的通话到底被谁听到&#34;&gt;痛点三：隐私——&amp;ldquo;我的通话到底被谁听到&amp;rdquo;
+&lt;/h3&gt;&lt;p&gt;这是设计里最值得展开的部分。mini-vedio 的信任模型分两层：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;媒体层&lt;/strong&gt;：DTLS-SRTP 端到端加密，WebRTC 规范强制，媒体数据从一台设备直达另一台设备，任何中继都接触不到内容。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;信令层&lt;/strong&gt;：信令即使经过第三方（公共 MQTT broker）转发，也只是搬运 SDP/ICE 文本，被窃听也不破坏媒体机密性。但信令通道理论上存在中间人风险——于是在此之上加了一道 &lt;strong&gt;SAS 核对码&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sha256(字典序拼接的双方 DTLS 证书指纹) → 前 3 字节 → 显示为 ABC-123
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;通话界面常显 6 位核对码，双方口头比对一致后点&amp;quot;已核实&amp;quot;。如果信令被中间人劫持、双方各自与攻击者建立了连接，两边的指纹拼接结果必然不同，核对码对不上，阴谋当场败露。这和 Signal 通话的安全号码（safety numbers）是同一原理，但做到了 6 位字符的极简形态。&lt;strong&gt;加密由机器保证，身份由人眼保证&lt;/strong&gt;——这是无服务器架构下很优雅的信任闭环。&lt;/p&gt;
+&lt;p&gt;另外一些硬规矩：CSP 严格限制页面只能加载内嵌资源、远程脚本一律禁止；发布版禁用 devtools；零遥测零统计；诊断日志结构化 JSONL 存本地且轮转，&lt;strong&gt;永不记录 SDP 正文、邀请码、密码或令牌&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;痛点四偶尔需要手机参与&#34;&gt;痛点四：偶尔需要手机参与
+&lt;/h3&gt;&lt;p&gt;电脑运行 &lt;code&gt;mini-vedio.exe serve&lt;/code&gt;，同一 WiFi 下手机浏览器打开打印出的地址，加载后切到蜂窝流量即可跨网通话。前端已 PWA 化，手机浏览器&amp;quot;添加到主屏幕&amp;quot;即可全屏使用，也可以用 PWABuilder 打包成 APK 安装——一份前端代码，桌面/网页/安卓三端通用。&lt;/p&gt;
+&lt;h2 id=&#34;使用中的样子&#34;&gt;使用中的样子
+&lt;/h2&gt;&lt;p&gt;进入通话后，除了音视频，还有两个高频能力：&lt;strong&gt;屏幕共享&lt;/strong&gt;（给别人演示或排障的利器）和&lt;strong&gt;文字聊天&lt;/strong&gt;（经 DataChannel 点对点传输，同样不经过任何服务器）。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/minivedio-screenshare.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;屏幕共享&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://1parado.github.io/img/minivedio-chat.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;聊天消息&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;通话界面里常显 SAS 核对码；通话布局支持大小画面互换、双击全屏；右侧聊天面板可拖拽调宽；摄像头关闭时显示占位头像而不是一屏黑帧——这些细节都来自真实使用中的不适。&lt;/p&gt;
+&lt;h2 id=&#34;写在最后&#34;&gt;写在最后
+&lt;/h2&gt;&lt;p&gt;mini-vedio 不打算替代会议软件。它瞄准的是另一件事：&lt;strong&gt;让&amp;quot;临时通个话&amp;quot;回归它本来的复杂度&lt;/strong&gt;——双击、给码、连接，三个动作，然后是一条端到端加密的通道。&lt;/p&gt;
+&lt;p&gt;回顾整个项目，最想分享的其实是两个决策方法论：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;站在生态的肩膀上，别重复造轮子&lt;/strong&gt;。Chromium 的 WebRTC 栈是地球上被锤炼得最狠的媒体引擎之一，白拿比自研划算得多。判断标准很简单：这个能力是否已经存在于系统/运行时里？在的话，别打包第二份。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;给约束建账本&lt;/strong&gt;。体积预算、依赖白名单、被否决的方案（Electron/Tauri/Pion……连同否决理由）全部写在项目的 AGENTS.md 里，每次改动前对照自检。约束不写下来，就一定会被慢慢稀释——体积记录表和构建断言就是防回归的堤坝。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;项目完全开源，推送 &lt;code&gt;v*&lt;/code&gt; 标签即触发 CI 自动构建发布。如果你也偶尔需要在两台设备之间&amp;quot;就通个话&amp;quot;，欢迎试试。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Grok switch</title>
         <link>https://1parado.github.io/p/grok-switch/</link>
         <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/p/grok-switch/</guid>
-        <description>&lt;style&gt;
+        <description>&lt;img src="https://1parado.github.io/img/grok-switch-1.png" alt="Featured image of post Grok switch" /&gt;&lt;style&gt;
   body {
     background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
     background-size: cover;
@@ -305,7 +527,7 @@
         <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/p/gui-tui-cli/</guid>
-        <description>&lt;style&gt;
+        <description>&lt;img src="https://1parado.github.io/img/gui-tui-cli.png" alt="Featured image of post 一图区分GUI、TUI、CLI" /&gt;&lt;style&gt;
   body {
     background: url(&#39;/img/background.jpg&#39;) no-repeat center top;
     background-size: cover;

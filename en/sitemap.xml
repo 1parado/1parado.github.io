@@ -2,14 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://1parado.github.io/tags/ai%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2026-09-12T11:35:44+08:00</lastmod>
-  </url><url>
-    <loc>https://1parado.github.io/tags/arxiv/</loc>
-    <lastmod>2026-09-12T11:30:26+08:00</lastmod>
-  </url><url>
     <loc>https://1parado.github.io/categories/</loc>
-    <lastmod>2026-09-12T11:47:17+08:00</lastmod>
+    <lastmod>2026-09-14T23:36:40+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -26,35 +20,14 @@
                 href="https://1parado.github.io/categories/"
                 />
   </url><url>
-    <loc>https://1parado.github.io/tags/cli/</loc>
-    <lastmod>2026-09-12T11:47:17+08:00</lastmod>
+    <loc>https://1parado.github.io/tags/go/</loc>
+    <lastmod>2026-09-14T23:28:35+08:00</lastmod>
   </url><url>
-    <loc>https://1parado.github.io/tags/cpa/</loc>
-    <lastmod>2026-09-12T11:47:17+08:00</lastmod>
-  </url><url>
-    <loc>https://1parado.github.io/tags/github/</loc>
-    <lastmod>2026-09-12T11:30:26+08:00</lastmod>
-  </url><url>
-    <loc>https://1parado.github.io/tags/grok/</loc>
-    <lastmod>2026-09-12T11:47:17+08:00</lastmod>
-  </url><url>
-    <loc>https://1parado.github.io/tags/grok-build/</loc>
-    <lastmod>2026-09-12T11:47:17+08:00</lastmod>
-  </url><url>
-    <loc>https://1parado.github.io/p/grok-switch/</loc>
-    <lastmod>2026-09-12T11:47:17+08:00</lastmod>
-  </url><url>
-    <loc>https://1parado.github.io/p/grok-web-github-mcp-paper-collection/</loc>
-    <lastmod>2026-09-12T11:30:26+08:00</lastmod>
-  </url><url>
-    <loc>https://1parado.github.io/tags/gui/</loc>
-    <lastmod>2026-09-12T11:35:44+08:00</lastmod>
-  </url><url>
-    <loc>https://1parado.github.io/tags/mcp/</loc>
-    <lastmod>2026-09-12T11:30:26+08:00</lastmod>
+    <loc>https://1parado.github.io/p/mini-vedio/</loc>
+    <lastmod>2026-09-14T23:28:35+08:00</lastmod>
   </url><url>
     <loc>https://1parado.github.io/post/</loc>
-    <lastmod>2026-09-12T11:47:17+08:00</lastmod>
+    <lastmod>2026-09-14T23:36:40+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -67,7 +40,7 @@
                 />
   </url><url>
     <loc>https://1parado.github.io/tags/</loc>
-    <lastmod>2026-09-12T11:47:17+08:00</lastmod>
+    <lastmod>2026-09-14T23:36:40+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -84,16 +57,58 @@
                 href="https://1parado.github.io/tags/"
                 />
   </url><url>
+    <loc>https://1parado.github.io/tags/vue/</loc>
+    <lastmod>2026-09-14T23:28:35+08:00</lastmod>
+  </url><url>
+    <loc>https://1parado.github.io/tags/wails/</loc>
+    <lastmod>2026-09-14T23:28:35+08:00</lastmod>
+  </url><url>
+    <loc>https://1parado.github.io/tags/webrtc/</loc>
+    <lastmod>2026-09-14T23:28:35+08:00</lastmod>
+  </url><url>
+    <loc>https://1parado.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/</loc>
+    <lastmod>2026-09-14T23:28:35+08:00</lastmod>
+  </url><url>
+    <loc>https://1parado.github.io/tags/ai%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2026-09-14T23:34:41+08:00</lastmod>
+  </url><url>
+    <loc>https://1parado.github.io/tags/arxiv/</loc>
+    <lastmod>2026-09-12T11:30:26+08:00</lastmod>
+  </url><url>
+    <loc>https://1parado.github.io/tags/cli/</loc>
+    <lastmod>2026-09-14T23:36:40+08:00</lastmod>
+  </url><url>
+    <loc>https://1parado.github.io/tags/cpa/</loc>
+    <lastmod>2026-09-14T23:36:40+08:00</lastmod>
+  </url><url>
+    <loc>https://1parado.github.io/tags/github/</loc>
+    <lastmod>2026-09-12T11:30:26+08:00</lastmod>
+  </url><url>
+    <loc>https://1parado.github.io/tags/grok/</loc>
+    <lastmod>2026-09-14T23:36:40+08:00</lastmod>
+  </url><url>
+    <loc>https://1parado.github.io/tags/grok-build/</loc>
+    <lastmod>2026-09-14T23:36:40+08:00</lastmod>
+  </url><url>
+    <loc>https://1parado.github.io/p/grok-switch/</loc>
+    <lastmod>2026-09-14T23:36:40+08:00</lastmod>
+  </url><url>
+    <loc>https://1parado.github.io/p/grok-web-github-mcp-paper-collection/</loc>
+    <lastmod>2026-09-12T11:30:26+08:00</lastmod>
+  </url><url>
+    <loc>https://1parado.github.io/tags/gui/</loc>
+    <lastmod>2026-09-14T23:34:41+08:00</lastmod>
+  </url><url>
+    <loc>https://1parado.github.io/tags/mcp/</loc>
+    <lastmod>2026-09-12T11:30:26+08:00</lastmod>
+  </url><url>
     <loc>https://1parado.github.io/tags/tui/</loc>
-    <lastmod>2026-09-12T11:35:44+08:00</lastmod>
+    <lastmod>2026-09-14T23:34:41+08:00</lastmod>
   </url><url>
     <loc>https://1parado.github.io/p/gui-tui-cli/</loc>
-    <lastmod>2026-09-12T11:35:44+08:00</lastmod>
+    <lastmod>2026-09-14T23:34:41+08:00</lastmod>
   </url><url>
     <loc>https://1parado.github.io/categories/go/</loc>
-    <lastmod>2026-08-23T17:59:49+08:00</lastmod>
-  </url><url>
-    <loc>https://1parado.github.io/tags/go/</loc>
     <lastmod>2026-08-23T17:59:49+08:00</lastmod>
   </url><url>
     <loc>https://1parado.github.io/p/go-%E6%95%99%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/</loc>

@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1314&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="用 Go + Wails v3 + Vue3 打造双击即用的 WebRTC 端到端加密音视频通话：局域网自动发现、6 位房间码跨网直连、SAS 防中间人——全程不需要自己的服务器。">
+<title>mini-vedio：一个 12MB 的单文件加密视频通话应用</title>
+
+<link rel='canonical' href='http://localhost:1314/p/mini-vedio%E4%B8%80%E4%B8%AA-12mb-%E7%9A%84%E5%8D%95%E6%96%87%E4%BB%B6%E5%8A%A0%E5%AF%86%E8%A7%86%E9%A2%91%E9%80%9A%E8%AF%9D%E5%BA%94%E7%94%A8/'>
+
+<link rel="stylesheet" href="/scss/style.min.ec0275f9efc7477560607f9610e0eeb6ebb5e53a8dcbdd5591f1ea2ee0b3c273.css"><meta property='og:title' content="mini-vedio：一个 12MB 的单文件加密视频通话应用">
+<meta property='og:description' content="用 Go + Wails v3 + Vue3 打造双击即用的 WebRTC 端到端加密音视频通话：局域网自动发现、6 位房间码跨网直连、SAS 防中间人——全程不需要自己的服务器。">
+<meta property='og:url' content='http://localhost:1314/p/mini-vedio%E4%B8%80%E4%B8%AA-12mb-%E7%9A%84%E5%8D%95%E6%96%87%E4%BB%B6%E5%8A%A0%E5%AF%86%E8%A7%86%E9%A2%91%E9%80%9A%E8%AF%9D%E5%BA%94%E7%94%A8/'>
+<meta property='og:site_name' content='Paradox’s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='WebRTC' /><meta property='article:tag' content='Go' /><meta property='article:tag' content='Wails' /><meta property='article:tag' content='Vue' /><meta property='article:published_time' content='2026-09-14T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-09-14T23:26:46&#43;08:00'/><meta property='og:image' content='http://localhost:1314/img/minivedio-home.png' />
+<meta name="twitter:title" content="mini-vedio：一个 12MB 的单文件加密视频通话应用">
+<meta name="twitter:description" content="用 Go + Wails v3 + Vue3 打造双击即用的 WebRTC 端到端加密音视频通话：局域网自动发现、6 位房间码跨网直连、SAS 防中间人——全程不需要自己的服务器。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1314/img/minivedio-home.png' />
+    <link rel="shortcut icon" href="/img/avatar.png" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_704d6f3f7ea7c980.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Paradox’s Blog</a></h1>
+            <h2 class="site-description">Welcome！</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/1parado'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1314/" selected>English</option>
+                                
+                                    <option value="http://localhost:1314/zh-cn/" >中文</option>
+                                
+                                    <option value="http://localhost:1314/ar/" >عربي</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#为什么再做一个视频通话软件">为什么再做一个视频通话软件</a></li>
+    <li><a href="#三种连接方式覆盖从局域网到完全离线">三种连接方式，覆盖从局域网到完全离线</a></li>
+    <li><a href="#架构核心决策只有一个媒体引擎不在-go-里实现">架构：核心决策只有一个——媒体引擎不在 Go 里实现</a>
+      <ol>
+        <li><a href="#目录结构">目录结构</a></li>
+      </ol>
+    </li>
+    <li><a href="#解决的痛点">解决的痛点</a>
+      <ol>
+        <li><a href="#痛点一安装与注册的摩擦">痛点一：安装与注册的摩擦</a></li>
+        <li><a href="#痛点二electron-式的体积臃肿">痛点二：Electron 式的体积臃肿</a></li>
+        <li><a href="#痛点三隐私我的通话到底被谁听到">痛点三：隐私——&ldquo;我的通话到底被谁听到&rdquo;</a></li>
+        <li><a href="#痛点四偶尔需要手机参与">痛点四：偶尔需要手机参与</a></li>
+      </ol>
+    </li>
+    <li><a href="#使用中的样子">使用中的样子</a></li>
+    <li><a href="#写在最后">写在最后</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/mini-vedio%E4%B8%80%E4%B8%AA-12mb-%E7%9A%84%E5%8D%95%E6%96%87%E4%BB%B6%E5%8A%A0%E5%AF%86%E8%A7%86%E9%A2%91%E9%80%9A%E8%AF%9D%E5%BA%94%E7%94%A8/">
+                
+                    <img src="/img/minivedio-home.png" loading="lazy" alt="Featured image of post mini-vedio：一个 12MB 的单文件加密视频通话应用" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" >
+                项目实战
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/mini-vedio%E4%B8%80%E4%B8%AA-12mb-%E7%9A%84%E5%8D%95%E6%96%87%E4%BB%B6%E5%8A%A0%E5%AF%86%E8%A7%86%E9%A2%91%E9%80%9A%E8%AF%9D%E5%BA%94%E7%94%A8/">mini-vedio：一个 12MB 的单文件加密视频通话应用</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            用 Go &#43; Wails v3 &#43; Vue3 打造双击即用的 WebRTC 端到端加密音视频通话：局域网自动发现、6 位房间码跨网直连、SAS 防中间人——全程不需要自己的服务器。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Sep 14, 2026</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="为什么再做一个视频通话软件">为什么再做一个视频通话软件
+</h2><p>先承认：这个赛道已经非常拥挤了。腾讯会议、Zoom、飞书……但每次我只是想让<strong>两台设备临时通个话</strong>——比如帮远程的父母看看电脑出了什么问题、和另一台机器联调个东西——我面对的永远是同一套流程：</p>
+<ol>
+<li>双方都去下载几百 MB 的安装包，注册登录；</li>
+<li>建会议、发链接、等对方进房；</li>
+<li>接受&quot;本次通话内容将被收集处理&quot;的隐私条款；</li>
+<li>一个会议软件常驻后台，占掉大几百 MB 内存。</li>
+</ol>
+<p>而真正本质的需求只有一句话：<strong>两台设备之间，建一条加密的音视频通道</strong>。这件事在 WebRTC 时代本不该这么重。</p>
+<p>于是有了 mini-vedio——一个 <strong>约 12MB 的单个 exe，双击即用，无安装、无注册、无服务器、媒体全程端到端加密</strong> 的点对点音视频通话应用。</p>
+<p><img src="/img/minivedio-home.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="应用首页"
+	
+	
+></p>
+<h2 id="三种连接方式覆盖从局域网到完全离线">三种连接方式，覆盖从局域网到完全离线
+</h2><p>视频通话最难的部分从来不是媒体传输（WebRTC 已经解决了），而是<strong>信令</strong>——双方如何交换建连所需的 SDP/ICE 信息。mini-vedio 用三级模式覆盖了几乎所有网络场景，且三种模式共用同一套 <code>SignalMessage</code> JSON 格式：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>模式</th>
+          <th>场景</th>
+          <th>机制</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>局域网发现</td>
+          <td>同一 WiFi/路由器</td>
+          <td>UDP 逐网卡定向广播心跳，自动列出&quot;附近的设备&quot;，点击即呼，零配置</td>
+      </tr>
+      <tr>
+          <td>6 位房间码（默认）</td>
+          <td>双方可上公共互联网</td>
+          <td>「创建新通话」生成房间码，微信发给对方，对方输入即通——走免注册的公共 MQTT 中继，<strong>不需要自己的服务器</strong></td>
+      </tr>
+      <tr>
+          <td>邀请码（备用）</td>
+          <td>公共中继不可达 / 完全离线</td>
+          <td>整包 SDP 压缩成一段文本，双方像换微信一样人工互换，纯带外传递</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><img src="/img/minivedio-connect.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="建立连接"
+	
+	
+></p>
+<p>这个分层设计的关键在于<strong>优雅降级</strong>：公共中继建连失败时自动切换到邀请码模式；路由器开了 AP 隔离导致局域网发现失败时，会明确提示改用房间码或邀请码，而不是让用户面对一个含糊的&quot;连接失败&quot;。</p>
+<p>对隐私敏感的场景，同一个 exe 还能一键变身为自建信令服务器（<code>mini-vedio.exe signal</code>），配合 cloudflared 隧道即可获得自己的公网信令地址——房间码照用，但中继完全自主可控。</p>
+<h2 id="架构核心决策只有一个媒体引擎不在-go-里实现">架构：核心决策只有一个——媒体引擎不在 Go 里实现
+</h2><p>先看整体架构：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="err">┌──────────────────</span> <span class="err">单个</span> <span class="n">exe</span><span class="err">（</span><span class="n">Go</span> <span class="o">+</span> <span class="n">Wails</span> <span class="n">v3</span><span class="err">）──────────────────┐</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="n">WebView2</span> <span class="err">窗口</span>                     <span class="n">Go</span> <span class="err">内核</span>                   <span class="err">│</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>  <span class="err">┌──────────────────────────┐</span>      <span class="err">┌──────────────────────┐</span>  <span class="err">│</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>  <span class="err">│</span> <span class="err">前端（</span><span class="n">Vue3</span><span class="p">,</span> <span class="err">内嵌打包产物）</span> <span class="err">│</span>      <span class="err">│</span> <span class="n">LAN</span> <span class="err">发现</span><span class="p">(</span><span class="n">internal</span><span class="o">/</span><span class="n">lan</span><span class="p">)</span><span class="err">│</span>  <span class="err">│</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>  <span class="err">│</span>  <span class="n">getUserMedia</span> <span class="err">采集</span><span class="o">/</span><span class="err">预览</span>   <span class="err">│◄────►│</span> <span class="err">信令中继</span> <span class="o">+</span> <span class="err">事件推送</span>    <span class="err">│</span>  <span class="err">│</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>  <span class="err">│</span>  <span class="n">RTCPeerConnection</span>       <span class="err">│</span> <span class="err">绑定</span> <span class="err">│</span> <span class="err">设备身份</span> <span class="o">/</span> <span class="n">SAS</span> <span class="err">码</span>     <span class="err">│</span>  <span class="err">│</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>  <span class="err">│</span>  <span class="err">房间码</span><span class="o">/</span><span class="err">邀请码</span><span class="o">/</span><span class="err">聊天</span><span class="o">/</span><span class="err">共享</span>   <span class="err">│</span>      <span class="err">│</span> <span class="n">serve</span><span class="o">/</span><span class="k">signal</span> <span class="err">子命令</span>   <span class="err">│</span>  <span class="err">│</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>  <span class="err">└────────────┬─────────────┘</span>      <span class="err">└──────────┬───────────┘</span>  <span class="err">│</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>               <span class="err">│</span>                               <span class="err">│</span>              <span class="err">│</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>        <span class="err">媒体：</span><span class="n">DTLS</span><span class="o">-</span><span class="n">SRTP</span> <span class="err">端到端</span>          <span class="err">信令：只搬运</span> <span class="n">SDP</span> <span class="err">文本</span>    <span class="err">│</span>
+</span></span><span class="line"><span class="cl"><span class="err">└───────────────┼───────────────────────────────┼──────────────┘</span>
+</span></span><span class="line"><span class="cl">                <span class="err">▼</span>                               <span class="err">▼</span>
+</span></span><span class="line"><span class="cl">         <span class="err">对端</span> <span class="n">WebView2</span> <span class="err">◄────</span> <span class="n">P2P</span> <span class="err">媒体直连</span> <span class="err">────►</span> <span class="err">对端（信令通道）</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>技术栈：<strong>Go 1.26 + Wails v3 + Vue 3 + TypeScript + Vite + Tailwind CSS v4</strong>。前端构建产物 <code>go:embed</code> 内嵌进 exe，最终交付物就是那一个文件。</p>
+<p>这个架构里最重要的一行字是：<strong>Go 不碰任何媒体数据</strong>。</p>
+<p>摄像头/麦克风采集、H.264/VP8/Opus 编解码、回声消除（AEC3）、降噪、DTLS-SRTP 加密、ICE 穿透——全部直接使用 WebView2（Chromium）内置的 WebRTC 栈。Go 侧只承担窗口壳、局域网发现、信令转发和设置存储这些&quot;控制面&quot;工作。</p>
+<p>这个决策带来一连串的收益：</p>
+<ul>
+<li><strong>不引入 Pion、不引入 FFmpeg、不引入任何编解码库</strong>，代码量和体积直接压到底；</li>
+<li><strong>白拿 Chromium 的回声消除与硬件编解码</strong>——自己用 Go 写媒体处理，很难追平 AEC3 的质量；</li>
+<li><strong>媒体加密由 WebRTC 规范强制保证</strong>（DTLS-SRTP 不可关闭），安全基线天生就在；</li>
+<li>唯一的代价是依赖系统 WebView2 运行时——而 Win10/11 基本预装，启动时检测缺失会引导安装。</li>
+</ul>
+<p>作为对照，一个常见的 Go WebRTC 思路是 <code>Go + Pion 自管媒体</code>，但 Pion 只管传输不管采集和编码，采集与编码需要 CGO/FFmpeg，体积与构建复杂度双双爆炸，还会丢掉系统级回声消除。这就是&quot;不自己造媒体引擎&quot;的论证过程。</p>
+<h3 id="目录结构">目录结构
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">mini</span><span class="o">-</span><span class="n">vedio</span><span class="o">/</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">main</span><span class="o">.</span><span class="n">go</span>              <span class="c1"># Wails 入口：窗口、权限、serve 子命令分发</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">lanservice</span><span class="o">.</span><span class="n">go</span>        <span class="c1"># 绑定服务：Peers/SendOffer/AcceptCall + 事件转发</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="k">signal</span><span class="o">.</span><span class="n">go</span>            <span class="c1"># signal 子命令：WSS 房间码中继（自建信令）</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">serve</span><span class="o">.</span><span class="n">go</span>             <span class="c1"># serve 子命令：自签 HTTPS，手机浏览器入口</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">diagnostics</span><span class="o">.</span><span class="n">go</span>       <span class="c1"># 结构化诊断日志（JSONL，2MB 轮转）</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">device</span><span class="o">.</span><span class="n">go</span>            <span class="c1"># 设备标识持久化</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">internal</span><span class="o">/</span><span class="n">lan</span><span class="o">/</span>        <span class="c1"># UDP 广播发现 + 信令中继（纯标准库）</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">frontend</span><span class="o">/</span><span class="n">src</span><span class="o">/</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">components</span><span class="o">/</span>      <span class="c1"># VideoRoom / ChatPanel / IncomingCall …</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">└──</span> <span class="n">services</span><span class="o">/</span>        <span class="c1"># call.ts 状态机 / relay.ts / signal.ts / sas.ts</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">bindings</span><span class="o">/</span>            <span class="c1"># wails3 generate bindings 产物</span>
+</span></span><span class="line"><span class="cl"><span class="err">└──</span> <span class="n">scripts</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">ps1</span>    <span class="c1"># 一键构建 + 体积断言</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>前后端的边界非常干净：前端 <code>call.ts</code> 维护一个 <code>idle → connecting → connected → failed</code> 的通话状态机，所有 <code>RTCPeerConnection</code> 的生命周期都在这里；Go 通过 Wails bindings 暴露 <code>Peers</code>/<code>SendOffer</code>/<code>AcceptCall</code> 等方法，用事件把局域网发现结果推回前端。</p>
+<h2 id="解决的痛点">解决的痛点
+</h2><h3 id="痛点一安装与注册的摩擦">痛点一：安装与注册的摩擦
+</h3><p>单文件 exe、双击即用、系统自带 WebView2 即可运行。跨网通话的默认路径（房间码）走免注册的公共 MQTT 中继，前端 <code>relay.ts</code> <strong>手写了 MQTT 3.1.1 报文 over WSS</strong>——不引任何 WebSocket/MQTT 库，为一个功能省下一整个依赖树。房间的设计上还有个细节：6 位房间码的首字符编码了所选 broker（A=emqx、B=hivemq），保证双方确定性落到同一台中继上，不会出现&quot;都输入了房间码却在等对方&quot;的分叉。</p>
+<h3 id="痛点二electron-式的体积臃肿">痛点二：Electron 式的体积臃肿
+</h3><p>桌面应用 + Web 前端的常规答案是 Electron，代价是 150–200MB 的产物和数 GB 的 node_modules。mini-vedio 给自己定下硬约束：<strong>exe ≤ 13MB</strong>，并在构建脚本里内置体积断言，超了直接构建失败。每次发布的体积都有记录可查，防止悄悄膨胀：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>里程碑</th>
+          <th>exe 大小</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>基础版本（Wails + 前端 + LAN + 诊断日志）</td>
+          <td>12.29 MB</td>
+      </tr>
+      <tr>
+          <td>PWA 化（manifest/SW/图标）</td>
+          <td>12.31 MB</td>
+      </tr>
+      <tr>
+          <td>房间码默认化（公共 MQTT 中继 + ICE 缓冲 + bye）</td>
+          <td>12.46 MB</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>体积控制没有黑科技，靠的是几条纪律：纯 Go 零 CGO、<code>-ldflags &quot;-s -w&quot; -trimpath</code>、能用标准库就不引库、前端依赖保持最小集。</p>
+<h3 id="痛点三隐私我的通话到底被谁听到">痛点三：隐私——&ldquo;我的通话到底被谁听到&rdquo;
+</h3><p>这是设计里最值得展开的部分。mini-vedio 的信任模型分两层：</p>
+<p><strong>媒体层</strong>：DTLS-SRTP 端到端加密，WebRTC 规范强制，媒体数据从一台设备直达另一台设备，任何中继都接触不到内容。</p>
+<p><strong>信令层</strong>：信令即使经过第三方（公共 MQTT broker）转发，也只是搬运 SDP/ICE 文本，被窃听也不破坏媒体机密性。但信令通道理论上存在中间人风险——于是在此之上加了一道 <strong>SAS 核对码</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sha256(字典序拼接的双方 DTLS 证书指纹) → 前 3 字节 → 显示为 ABC-123
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通话界面常显 6 位核对码，双方口头比对一致后点&quot;已核实&quot;。如果信令被中间人劫持、双方各自与攻击者建立了连接，两边的指纹拼接结果必然不同，核对码对不上，阴谋当场败露。这和 Signal 通话的安全号码（safety numbers）是同一原理，但做到了 6 位字符的极简形态。<strong>加密由机器保证，身份由人眼保证</strong>——这是无服务器架构下很优雅的信任闭环。</p>
+<p>另外一些硬规矩：CSP 严格限制页面只能加载内嵌资源、远程脚本一律禁止；发布版禁用 devtools；零遥测零统计；诊断日志结构化 JSONL 存本地且轮转，<strong>永不记录 SDP 正文、邀请码、密码或令牌</strong>。</p>
+<h3 id="痛点四偶尔需要手机参与">痛点四：偶尔需要手机参与
+</h3><p>电脑运行 <code>mini-vedio.exe serve</code>，同一 WiFi 下手机浏览器打开打印出的地址，加载后切到蜂窝流量即可跨网通话。前端已 PWA 化，手机浏览器&quot;添加到主屏幕&quot;即可全屏使用，也可以用 PWABuilder 打包成 APK 安装——一份前端代码，桌面/网页/安卓三端通用。</p>
+<h2 id="使用中的样子">使用中的样子
+</h2><p>进入通话后，除了音视频，还有两个高频能力：<strong>屏幕共享</strong>（给别人演示或排障的利器）和<strong>文字聊天</strong>（经 DataChannel 点对点传输，同样不经过任何服务器）。</p>
+<p><img src="/img/minivedio-screenshare.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="屏幕共享"
+	
+	
+></p>
+<p><img src="/img/minivedio-chat.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="聊天消息"
+	
+	
+></p>
+<p>通话界面里常显 SAS 核对码；通话布局支持大小画面互换、双击全屏；右侧聊天面板可拖拽调宽；摄像头关闭时显示占位头像而不是一屏黑帧——这些细节都来自真实使用中的不适。</p>
+<h2 id="写在最后">写在最后
+</h2><p>mini-vedio 不打算替代会议软件。它瞄准的是另一件事：<strong>让&quot;临时通个话&quot;回归它本来的复杂度</strong>——双击、给码、连接，三个动作，然后是一条端到端加密的通道。</p>
+<p>回顾整个项目，最想分享的其实是两个决策方法论：</p>
+<ol>
+<li><strong>站在生态的肩膀上，别重复造轮子</strong>。Chromium 的 WebRTC 栈是地球上被锤炼得最狠的媒体引擎之一，白拿比自研划算得多。判断标准很简单：这个能力是否已经存在于系统/运行时里？在的话，别打包第二份。</li>
+<li><strong>给约束建账本</strong>。体积预算、依赖白名单、被否决的方案（Electron/Tauri/Pion……连同否决理由）全部写在项目的 AGENTS.md 里，每次改动前对照自检。约束不写下来，就一定会被慢慢稀释——体积记录表和构建断言就是防回归的堤坝。</li>
+</ol>
+<p>项目完全开源，推送 <code>v*</code> 标签即触发 CI 自动构建发布。如果你也偶尔需要在两台设备之间&quot;就通个话&quot;，欢迎试试。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/webrtc/">WebRTC</a>
+        
+            <a href="/tags/go/">Go</a>
+        
+            <a href="/tags/wails/">Wails</a>
+        
+            <a href="/tags/vue/">Vue</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            Last updated on Sep 14, 2026 23:26 CST
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="giscus_thread"></div>
+<script
+    src="https://giscus.app/client.js"
+    data-repo="1parado/1parado.github.io"
+    data-repo-id="R_kgDOQCGqvQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOQCGqvc4DEAOS"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+</script>
+
+<script>
+function setGiscusTheme(theme) {
+    const giscus = document.querySelector("iframe.giscus-frame");
+    if (giscus) {
+        giscus.contentWindow.postMessage(
+            { giscus: { setConfig: { theme: theme } } },
+            "https://giscus.app"
+        );
+    }
+}
+
+(function () {
+    function handler() {
+        if (document.documentElement.dataset.scheme === "light") {
+            setGiscusTheme('preferred_color_scheme');
+        } else {
+            setGiscusTheme('preferred_color_scheme');
+        }
+    }
+
+    window.addEventListener("message", (e) => {
+        if (e.origin !== "https://giscus.app") return;
+        handler();
+    });
+
+    window.addEventListener("onColorSchemeChange", handler);
+})();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2026 Paradox29
+    </section>
+
+    <section class="wordcount">本站总字数：193.5k 字
+</section>
+    <section class="powerby">
+        
+    </section>
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+    <span id="busuanzi_container_site_pv" style='display:none'> 本站总访问量 <span id="busuanzi_value_site_pv"></span> 次 </span>·
+    <span id="busuanzi_container_site_uv" style='display:none'> 总访客数 <span id="busuanzi_value_site_uv"></span> 人</span>
+
+<script language="javascript"> 
+    var now = new Date();
+    function createtime(){
+        now.setTime(now.getTime()+250); 
+        var grt= new Date("2025/10/15 00:00:00"); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+        minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+
+        document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"
+    }
+    setInterval("createtime()",250); 
+</script> 
+
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.d786ec1aec5ee31b2bdc9530dac1c548566ba695299b055d7eb937d0bd02c872.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+  body {
+    background: url(http://localhost:1314/background/background.jpg) no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+</style>
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        z-index: 99;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-image: url(http://localhost:1314/icons/backTop.svg);
+    }
+</style>
+
+<script>
+    
+
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop
+        rightSideBar.appendChild(btn)
+        
+        window.onscroll = function() {
+            
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    }
+
+    
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+
+    initScrollTop();
+</script>
+
+<style>
+    #TableOfContents > ul, ol {
+        ul, ol {
+            display: none;
+        }
+        .open {
+            display: block;
+        }
+    }
+</style>
+
+<script>
+    function initTocHide() {
+        
+        let toc = document.querySelector(".widget--toc");
+        if (!toc) {
+            return;
+        }
+        
+        window.addEventListener('scroll', function() {
+            
+            let openUl = document.querySelectorAll(".open");
+            if (openUl.length > 0) {
+              openUl.forEach((ul) => {
+                ul.classList.remove("open")
+              })
+            }
+            
+            let currentLi = document.querySelector(".active-class");
+            if (!currentLi) {
+                return
+            }
+            
+            if (currentLi.children.length > 1) {
+                currentLi.children[1].classList.add("open")
+            }
+            
+            let ul = currentLi.parentElement;
+            do {
+                ul.classList.add("open");
+                ul = ul.parentElement.parentElement
+            } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'))
+        });
+    }
+    initTocHide()
+</script>
+
+    </body>
+</html>

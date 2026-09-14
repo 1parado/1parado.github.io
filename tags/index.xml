@@ -7,7 +7,39 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Paradox29</copyright>
-        <lastBuildDate>Sat, 12 Sep 2026 11:47:17 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 14 Sep 2026 23:36:40 +0800</lastBuildDate><atom:link href="https://1parado.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Go</title>
+        <link>https://1parado.github.io/tags/go/</link>
+        <pubDate>Mon, 14 Sep 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/go/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Vue</title>
+        <link>https://1parado.github.io/tags/vue/</link>
+        <pubDate>Mon, 14 Sep 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/vue/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Wails</title>
+        <link>https://1parado.github.io/tags/wails/</link>
+        <pubDate>Mon, 14 Sep 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/wails/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>WebRTC</title>
+        <link>https://1parado.github.io/tags/webrtc/</link>
+        <pubDate>Mon, 14 Sep 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1parado.github.io/tags/webrtc/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>AI编程</title>
         <link>https://1parado.github.io/tags/ai%E7%BC%96%E7%A8%8B/</link>
         <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
@@ -85,14 +117,6 @@
         <pubDate>Sat, 12 Sep 2026 00:00:00 +0000</pubDate>
         
         <guid>https://1parado.github.io/tags/tui/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Go</title>
-        <link>https://1parado.github.io/tags/go/</link>
-        <pubDate>Thu, 06 Aug 2026 00:00:00 +0000</pubDate>
-        
-        <guid>https://1parado.github.io/tags/go/</guid>
         <description></description>
         </item>
         <item>
